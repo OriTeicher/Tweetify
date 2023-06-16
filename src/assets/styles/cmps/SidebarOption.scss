@@ -1,0 +1,15 @@
+.sidebar-option {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+    cursor: pointer;
+    h2 {
+        font-size: 20px;
+        font-weight: 800px;
+        // margin-right: 20px;
+    }
+    &:hover {
+        background-color: $hoverClr1;
+    }
+}

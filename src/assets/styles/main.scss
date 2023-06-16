@@ -6,15 +6,10 @@
 
 // Basics
 @import "basics/helpers";
-@import "basics/layout";
 @import "basics/base";
-@import "basics/links";
-@import "basics/forms";
 
 // Components
-@import "cmps/AppHeader";
-@import "cmps/UserMsg";
-@import "cmps/ReviewList";
-@import "cmps/CarList";
+@import "cmps/SidebarOption";
+@import "cmps/Sidebar";
 
 
