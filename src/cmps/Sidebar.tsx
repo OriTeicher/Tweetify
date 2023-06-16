@@ -43,7 +43,7 @@ const Sidebar: React.FC = () => {
     return (
         <div className="sidebar-container">
             {renderSidebarOptions()}
-            <button className='tweet-btn'>Tweet</button>
+            <button className='tweet-btn'>Squeak</button>
         </div>
     )
 }

@@ -6,7 +6,7 @@
     width: 250px;
     transform: translate(10%);
     position: fixed;
-    border-right: 1px solid $hoverClr1;
+    box-shadow: 1px 1px 0px rgb(113, 113, 113);
 }
 
 .tweet-btn {
@@ -19,7 +19,7 @@
     text-transform: inherit;
     height: 52px;
     border-radius: 30px;
-    font-size: 1.1em;
+    font-size: 1.2em;
     min-width: 167px;
     max-width: 232px;
     &:hover {
@@ -27,4 +27,3 @@
         filter: brightness(90%);
     }
 }
-

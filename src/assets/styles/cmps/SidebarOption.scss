@@ -1,20 +1,19 @@
 .sidebar-option {
     display: flex;
     align-items: center;
-    padding: 10px;
     margin: 10px 0px;
+    padding: 10px;
     gap: 20px;
     width: fit-content;
     cursor: pointer;
     h2 {
-        font-size: 20px;
-        font-weight: 800px;
+        font-size: 1.3em;
+        font-weight: 400;
     }
     &:hover {
         border-radius: 30px;
         transition: color 100ms ease-in-out;
-        background-color: $hoverClr1;
-        color: black;
+        background-color: $hoverClr2;
     }
 
 }
@@ -22,7 +21,4 @@
     color: $logoColor;
 }
 
-.sidebar-option-icon{
-    font-size: 300px;
-}
 
