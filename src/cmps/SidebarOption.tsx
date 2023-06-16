@@ -13,7 +13,7 @@ function SidebarOption({ Icon, txt, isActive, onClick }: SidebarOptionProps) {
             className={`sidebar-option ${isActive ? 'active' : ''}`}
             onClick={onClick}
         >
-            <Icon />
+            <Icon className="siderbar-option-icon"/>
             <h2>{txt}</h2>
         </div>
     )

@@ -1,7 +1,8 @@
 .sidebar-option {
     display: flex;
     align-items: center;
-    padding: 20px;
+    padding: 10px;
+    margin: 10px 0px;
     gap: 20px;
     width: fit-content;
     cursor: pointer;
@@ -20,3 +21,8 @@
 .active {
     color: $logoColor;
 }
+
+.sidebar-option-icon{
+    font-size: 300px;
+}
+

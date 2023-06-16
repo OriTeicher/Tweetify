@@ -1,19 +1,22 @@
 .sidebar-container {
     display: flex;
     flex-direction: column;
+    margin-left: 20px;
 }
 
 .tweet-btn {
+    padding: 0;
+    margin: 0;
     background-color: $logoColor;
     color: white;
     border: none !important;
-    font-weight: 900;
+    font-weight: 600;
     text-transform: inherit;
-    height: 50px;
+    height: 52px;
     border-radius: 30px;
+    font-size: 1.1em;
     min-width: 167px;
-    max-width: 167px;
-    margin-left: 20px;
+    max-width: 232px;
     &:hover {
         cursor: pointer;
         filter: brightness(90%);
