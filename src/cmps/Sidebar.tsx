@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Twitter as TwitterIcon } from '@mui/icons-material'
 import { Home as HomeIcon } from '@mui/icons-material'
 import { Search as SearchIcon } from '@mui/icons-material'
@@ -8,17 +8,38 @@ import { Bookmarks as BookmarkIcon } from '@mui/icons-material'
 import { ListSharp as ListsIcon } from '@mui/icons-material'
 import { MoreHoriz as MoreIcon } from '@mui/icons-material'
 import SidebarOption from './SidebarOption'
-export default function Sidebar() {
-    return (
-        <div className="sidebar-container">
-            <TwitterIcon />
-            <SidebarOption Icon={HomeIcon} txt={'Home'} />
-            <SidebarOption Icon={SearchIcon} txt={'Search'} />
-            <SidebarOption Icon={NotificationIcon} txt={'Notifications'} />
-            <SidebarOption Icon={MsgIcon} txt={'Messages'} />
-            <SidebarOption Icon={BookmarkIcon} txt={'Bookmarks'} />
-            <SidebarOption Icon={ListsIcon} txt={'Lists'} />
-            <SidebarOption Icon={MoreIcon} txt={'More'} />
-        </div>
-    )
+
+const Sidebar: React.FC = () => {
+    const [selectedOption, setSelectedOption] = useState('Home')
+
+    const handleOptionClick = (option: string) => {
+        setSelectedOption(option)
+    }
+
+    const renderSidebarOptions = () => {
+        const optionsData = [
+            { Icon: TwitterIcon, txt: '' },
+            { Icon: HomeIcon, txt: 'Home' },
+            { Icon: SearchIcon, txt: 'Search' },
+            { Icon: NotificationIcon, txt: 'Notifications' },
+            { Icon: MsgIcon, txt: 'Messages' },
+            { Icon: BookmarkIcon, txt: 'Bookmarks' },
+            { Icon: ListsIcon, txt: 'Lists' },
+            { Icon: MoreIcon, txt: 'More' }
+        ]
+
+        return optionsData.map(({ Icon, txt }) => (
+            <SidebarOption
+                key={txt}
+                Icon={Icon}
+                txt={txt}
+                isActive={selectedOption === txt}
+                onClick={() => handleOptionClick(txt)}
+            />
+        ))
+    }
+
+    return <div className="sidebar-container">{renderSidebarOptions()}</div>
 }
+
+export default Sidebar

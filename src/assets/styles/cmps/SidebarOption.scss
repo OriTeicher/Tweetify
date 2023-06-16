@@ -3,13 +3,20 @@
     align-items: center;
     padding: 20px;
     gap: 20px;
+    width: fit-content;
     cursor: pointer;
     h2 {
         font-size: 20px;
         font-weight: 800px;
-        // margin-right: 20px;
     }
     &:hover {
+        border-radius: 30px;
+        transition: color 100ms ease-in-out;
         background-color: $hoverClr1;
+        color: $logoColor;
     }
+
+}
+.active {
+    color: $logoColor;
 }
