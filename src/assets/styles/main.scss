@@ -1,15 +1,16 @@
 // Setup
-@import "setup/variables";
-@import "setup/functions";
-@import "setup/mixins";
-@import "setup/typography";
+@import 'setup/variables';
+@import 'setup/functions';
+@import 'setup/mixins';
+@import 'setup/typography';
 
 // Basics
-@import "basics/helpers";
-@import "basics/base";
+@import 'basics/helpers';
+@import 'basics/base';
 
 // Components
-@import "cmps/SidebarOption";
-@import "cmps/Sidebar";
-
-
+@import 'cmps/sidebar/SidebarOption';
+@import 'cmps/sidebar/Sidebar';
+@import 'cmps/feed/FeedIndex';
+@import 'cmps/feed/PostPreview';
+@import 'cmps/feed/PostsList';

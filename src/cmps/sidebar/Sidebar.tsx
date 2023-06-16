@@ -7,7 +7,6 @@ import { Mail as MsgIcon } from '@mui/icons-material'
 import { Bookmarks as BookmarkIcon } from '@mui/icons-material'
 import { ListSharp as ListsIcon } from '@mui/icons-material'
 import { MoreHoriz as MoreIcon } from '@mui/icons-material'
-import { Button as TweetBtn } from '@mui/material'
 import SidebarOption from './SidebarOption'
 
 const Sidebar: React.FC = () => {

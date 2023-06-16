@@ -5,7 +5,7 @@ interface SidebarOptionProps {
     txt: string
     isActive: boolean
     onClick: () => void
-    iconSize?: number // Add an optional prop for the icon size
+    iconSize?: number 
 }
 
 function SidebarOption({
@@ -21,7 +21,9 @@ function SidebarOption({
 
     return (
         <div
-            className={`sidebar-option ${isActive ? 'active' : ''}`}
+            className={`sidebar-option ${isActive ? 'active' : ''} ${
+                txt === '' ? 'logo' : ''
+            }`}
             onClick={onClick}
         >
             <Icon className="siderbar-option-icon" style={iconStyle} />

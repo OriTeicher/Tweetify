@@ -1,6 +1,14 @@
 // main colors
 $logoColor: #50b7f5;
 
+// background color
+$mainColor1: #333;
+$mainColor2: rgb(113, 113, 113);
 // hover colors
 $hoverClr1: #e8f5fe;
 $hoverClr2: #e8f5fe0b;
+
+// box-shadows & outlines
+$boxShadow1: 1px 1px 0px $mainColor2;
+$boxShadow2: 1px 0px 0px 0px $mainColor2;
+$outline1: 1px solid $mainColor2;
