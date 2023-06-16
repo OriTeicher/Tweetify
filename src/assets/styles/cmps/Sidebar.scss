@@ -1,4 +1,21 @@
-.sidebar-container{
+.sidebar-container {
     display: flex;
     flex-direction: column;
+}
+
+.tweet-btn {
+    background-color: $logoColor;
+    color: white;
+    border: none !important;
+    font-weight: 900;
+    text-transform: inherit;
+    height: 50px;
+    border-radius: 30px;
+    min-width: 167px;
+    max-width: 167px;
+    margin-left: 20px;
+    &:hover {
+        cursor: pointer;
+        filter: brightness(90%);
+    }
 }

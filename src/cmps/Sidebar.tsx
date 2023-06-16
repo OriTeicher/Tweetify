@@ -7,6 +7,7 @@ import { Mail as MsgIcon } from '@mui/icons-material'
 import { Bookmarks as BookmarkIcon } from '@mui/icons-material'
 import { ListSharp as ListsIcon } from '@mui/icons-material'
 import { MoreHoriz as MoreIcon } from '@mui/icons-material'
+import { Button as TweetBtn } from '@mui/material'
 import SidebarOption from './SidebarOption'
 
 const Sidebar: React.FC = () => {
@@ -39,7 +40,12 @@ const Sidebar: React.FC = () => {
         ))
     }
 
-    return <div className="sidebar-container">{renderSidebarOptions()}</div>
+    return (
+        <div className="sidebar-container">
+            {renderSidebarOptions()}
+            <button className='tweet-btn'>Tweet</button>
+        </div>
+    )
 }
 
 export default Sidebar
