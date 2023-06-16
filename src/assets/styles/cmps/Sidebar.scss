@@ -1,7 +1,11 @@
 .sidebar-container {
     display: flex;
     flex-direction: column;
-    margin-left: 20px;
+    margin-left: 100px;
+    height: 100vh;
+    width: 300px;
+    transform: translate(10%);
+    position: fixed;
 }
 
 .tweet-btn {
@@ -22,3 +26,4 @@
         filter: brightness(90%);
     }
 }
+
