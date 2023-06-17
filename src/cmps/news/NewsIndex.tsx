@@ -5,7 +5,7 @@ export default function NewsIndex() {
     return (
         <section className="news-index">
             <Searchbar />
-            <h2>News Index</h2>
+            {/* <h2>News Index</h2> */}
             <NewsList />
         </section>
     )
