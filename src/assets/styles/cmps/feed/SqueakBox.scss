@@ -45,6 +45,10 @@
             gap: 10px;
             .icon {
                 font-size: 20px;
+                cursor: pointer;
+                &:hover{
+                    opacity: 0.9;
+                }
             }
         }
     }

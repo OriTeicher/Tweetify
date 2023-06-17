@@ -1,11 +1,15 @@
 .topbar-container {
     position: sticky;
+    top: 0;
+    background-color: $mainColor1;
+    z-index: 100;
     border-bottom: 1px solid $mainColor2;
-    margin: 10px 0px 0px 1px;
+    width: 100%;
+    margin: 1px 0px 0px 1px;
     z-index: 100;
     h1 {
-        padding: 0px 10px;
-        margin-bottom: 10px;
+        padding-left: 10px;
+        padding-top: 10px;
     }
     .topbar-btns {
         display: flex;
@@ -20,6 +24,7 @@
             &:hover {
                 background-color: $hoverClr2;
             }
+            font-size: 16px;
         }
         .selected {
             box-shadow: 0px 5px 0px 0px $logoColor;
