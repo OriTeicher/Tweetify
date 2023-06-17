@@ -1,0 +1,37 @@
+.logged-acount-container {
+    cursor: pointer;
+    display: flex;
+    position: absolute;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin-bottom: 20px;
+    border-radius: 30px;
+    bottom: 0;
+    .left-cred{
+        display: flex;
+        gap: 10px;
+        padding: 10px 10px ;
+    }
+    .user-cred {
+        h1 {
+            font-weight: 600;
+            font-size: 15px;
+        }
+        h2 {
+            font-weight: 100;
+            font-size: 15px;
+            color: $mainColor2;
+        }
+    }
+    
+    &:hover{
+        background-color: $hoverClr2;
+    }
+}
+
+@media (max-width: 768px) {
+    .logged-acount-container {
+        display: none;
+    }
+}

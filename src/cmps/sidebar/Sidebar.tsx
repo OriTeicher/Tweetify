@@ -8,7 +8,7 @@ import { Bookmarks as BookmarkIcon } from '@mui/icons-material'
 import { ListSharp as ListsIcon } from '@mui/icons-material'
 import { MoreHoriz as MoreIcon } from '@mui/icons-material'
 import SidebarOption from './SidebarOption'
-
+import LoggedAcount from './LoggedAcount'
 interface SidebarProps {
     onOptionChange: (option: string) => void
 }
@@ -57,16 +57,22 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
     }
 
     return (
-        <div className={`sidebar-container  ${isSmallScreen ? 'mobile' : ''}`}>
-            {renderSidebarOptions()}
-            
-            <button
-                className={`squeak-btn ${isSmallScreen ? 'mobile' : ''}`}
-                onClick={() => console.log('check')}
+        <section className="left-menu">
+            <div
+                className={`sidebar-container  ${
+                    isSmallScreen ? 'mobile' : ''
+                }`}
             >
-                {isSmallScreen ? '+' : 'Squeak'}
-            </button>
-        </div>
+                {renderSidebarOptions()}
+                <button
+                    className={`squeak-btn ${isSmallScreen ? 'mobile' : ''}`}
+                    onClick={() => console.log('check')}
+                >
+                    {isSmallScreen ? '+' : 'Squeak'}
+                </button>
+                <LoggedAcount displayName='Pukki Blinders' username='oriteicher' />
+            </div>
+        </section>
     )
 }
 

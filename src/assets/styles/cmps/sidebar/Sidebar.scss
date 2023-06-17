@@ -3,7 +3,7 @@
     position: sticky;
     flex-direction: column;
     width: 250px;
-    height: fit-content;
+    height: 100vh;
     top: 0;
     color: white;
     .squeak-btn {
@@ -36,7 +36,7 @@
 .sidebar-container.mobile {
     background-color: #333;
     width: 100vw;
-
+    height: auto;
     position: fixed;
     bottom: 0;
     left: 0;
