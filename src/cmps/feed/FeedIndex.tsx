@@ -3,6 +3,7 @@ import { feedService } from '../../services/feed.service'
 import FeedTopbar from './FeedTopbar'
 import FeedList from './FeedList'
 import SqueakBox from './SqueakBox'
+import MobileTopbar from './MobileTopbar'
 interface FeedIndexProps {
     selectedOption: string
 }
@@ -12,7 +13,7 @@ export default class FeedIndex extends Component<FeedIndexProps> {
         feedPosts: []
     }
     componentDidMount(): void {
-        const demoData = feedService.getRandomPosts(5)
+        const demoData = feedService.getRandomPosts(20)
         this.setState({ feedPosts: demoData })
     }
     render() {
@@ -20,6 +21,7 @@ export default class FeedIndex extends Component<FeedIndexProps> {
         const { feedPosts } = this.state
         return (
             <section className="feed-index">
+                <MobileTopbar />
                 <FeedTopbar selectedOption={selectedOption} />
                 <SqueakBox />
                 <FeedList feedPosts={feedPosts} />

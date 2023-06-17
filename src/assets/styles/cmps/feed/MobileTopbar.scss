@@ -1,0 +1,14 @@
+.mobile-topbar-container {
+    display: flex;
+    align-items: center;
+    border-bottom: $outline1;
+    padding: 10px;
+    justify-content: space-between;
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-topbar-container {
+        display: flex;
+    }
+}

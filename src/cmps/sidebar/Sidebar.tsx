@@ -59,7 +59,10 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
     return (
         <div className={`sidebar-container  ${isSmallScreen ? 'mobile' : ''}`}>
             {renderSidebarOptions()}
-            <button className={`squeak-btn ${isSmallScreen ? 'mobile' : ''}`}>
+            <button
+                className={`squeak-btn ${isSmallScreen ? 'mobile' : ''}`}
+                onClick={() => console.log('check')}
+            >
                 {isSmallScreen ? '+' : 'Squeak'}
             </button>
         </div>

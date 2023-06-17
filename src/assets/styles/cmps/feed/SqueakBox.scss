@@ -1,5 +1,6 @@
 .squeak-box {
     padding: 20px;
+    border-bottom: $outline1;
     .squeak-input-container {
         margin-bottom: 15px;
         display: flex;
@@ -46,10 +47,19 @@
             .icon {
                 font-size: 20px;
                 cursor: pointer;
-                &:hover{
+                &:hover {
                     opacity: 0.9;
                 }
             }
         }
+    }
+}
+
+@media (max-width: 768px) {
+    .squeak-box{
+        display: none;
+    }
+    .squeak-box.active{
+        display: block;
     }
 }
