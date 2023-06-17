@@ -9,11 +9,16 @@ import { ListSharp as ListsIcon } from '@mui/icons-material'
 import { MoreHoriz as MoreIcon } from '@mui/icons-material'
 import SidebarOption from './SidebarOption'
 
-const Sidebar: React.FC = () => {
+interface SidebarProps {
+    onOptionChange: (option: string) => void
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
     const [selectedOption, setSelectedOption] = useState('Home')
 
     const handleOptionClick = (option: string) => {
         setSelectedOption(option)
+        onOptionChange(option)
     }
 
     const renderSidebarOptions = () => {
