@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 
 interface FeedTopbarProps {
-    selectedOption: string
+    selectedOption?: string
 }
 
 export default class FeedTopbar extends Component<FeedTopbarProps> {
     render() {
-        const { selectedOption } = this.props
+        let { selectedOption } = this.props
+        if (!selectedOption) selectedOption = 'Home'
         return (
             <section className="topbar-container">
                 <h1>{selectedOption}</h1>

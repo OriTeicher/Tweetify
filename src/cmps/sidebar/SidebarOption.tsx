@@ -5,7 +5,7 @@ interface SidebarOptionProps {
     txt: string
     isActive: boolean
     onClick: () => void
-    iconSize?: number 
+    iconSize?: number
 }
 
 function SidebarOption({

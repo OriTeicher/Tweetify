@@ -23,7 +23,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
 
     const renderSidebarOptions = () => {
         const optionsData = [
-            { Icon: TwitterIcon, txt: '' },
+            { Icon: TwitterIcon, txt: '', },
             { Icon: HomeIcon, txt: 'Home' },
             { Icon: SearchIcon, txt: 'Explore' },
             { Icon: NotificationIcon, txt: 'Notifications' },
