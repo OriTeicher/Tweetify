@@ -1,8 +1,9 @@
 .post-preview {
     border-bottom: $outline1;
-    padding: 10px;
+    padding: 17px;
     font-size: 18px;
     font-weight: 200;
+    position: relative;
     .top-cred {
         display: flex;
         gap: 10px;
@@ -17,14 +18,15 @@
         color: $mainColor2;
         font-weight: 400;
     }
-    .post-txt{
-        width: 95%;
+    .post-txt {
+        width: 90%;
+        text-align: justify;
     }
     .verified-logo {
         color: $logoColor;
     }
     .post-txt {
-        padding-left: 50px;
+        padding-left: 48px;
         text-align: left;
     }
     .post-date {
@@ -32,4 +34,11 @@
         color: $mainColor2;
         font-weight: 400;
     }
+}
+
+.more-icon {
+    position: absolute;
+    right: 0;
+    margin-inline-end: 10px;
+    color: $mainColor2;
 }
