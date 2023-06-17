@@ -24,9 +24,9 @@ export default function SqueakBox() {
             <div className="squeak-box-btns">
                 <button className="squeak-btn">Squeak</button>
                 <div className="left-icons">
-                    <InsertPhoto className='icon'/>
-                    <GifBoxRounded className='icon'/>
-                    <EmojiEmotions className='icon'/>
+                    <InsertPhoto className="icon" />
+                    <GifBoxRounded className="icon" />
+                    <EmojiEmotions className="icon" />
                 </div>
             </div>
         </section>

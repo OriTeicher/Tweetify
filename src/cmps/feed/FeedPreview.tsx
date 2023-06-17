@@ -1,5 +1,7 @@
 import React from 'react'
-
+import { Avatar } from '@mui/material'
+import { Verified } from '@mui/icons-material'
+import { getRandomColor } from '../../services/util.service'
 interface FeedPreviewProps {
     displayName: string
     username: string
@@ -21,13 +23,17 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
 }) => {
     return (
         <section className="post-preview">
-            <p>Display Name: {displayName}</p>
-            <p>Username: {username}</p>
-            <p>Text: {txt}</p>
-            <p>Image: {image}</p>
-            <p>Avatar: {avatar}</p>
-            <p>Verified: {verified ? 'Yes' : 'No'}</p>
-            <p>Created At: {createdAt}</p>
+            <div className="top-cred">
+                <Avatar sx={{ bgcolor: getRandomColor, textShadow: '1px 1px 1px black' }}>
+                    {displayName.charAt(0) +
+                        displayName.charAt(1).toLocaleUpperCase()}
+                </Avatar>
+                <h1>{displayName}</h1>
+                {verified && <Verified className='verified-logo'/>}
+                <h2>@{username}</h2>
+                <p className="post-date">{createdAt}</p>
+            </div>
+            <p className="post-txt">{txt}</p>
         </section>
     )
 }

@@ -1,6 +1,35 @@
-.post-preview{
+.post-preview {
     border-bottom: $outline1;
     padding: 10px;
     font-size: 18px;
     font-weight: 200;
+    .top-cred {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+    h1 {
+        font-size: 15px;
+        font-weight: 500;
+    }
+    h2 {
+        font-size: 15px;
+        color: $mainColor2;
+        font-weight: 400;
+    }
+    .post-txt{
+        width: 95%;
+    }
+    .verified-logo {
+        color: $logoColor;
+    }
+    .post-txt {
+        padding-left: 50px;
+        text-align: left;
+    }
+    .post-date {
+        font-size: 15px;
+        color: $mainColor2;
+        font-weight: 400;
+    }
 }

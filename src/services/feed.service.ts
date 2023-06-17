@@ -1,4 +1,4 @@
-import { getRandomIntInclusive } from './util.service'
+import { getCurrentDate, getRandomIntInclusive } from './util.service'
 
 export const feedService = {
     getEmptyPost() {
@@ -21,12 +21,12 @@ export const feedService = {
                 names[getRandomIntInclusive(0, names.length - 1)]
             const username = displayName.toLowerCase().replace(/\s/g, '')
             const txt = this.generateRandomSentences(
-                getRandomIntInclusive(10, 50)
+                getRandomIntInclusive(20, 80)
             )
             const image = `https://example.com/image${i + 1}.jpg`
             const avatar = `https://example.com/avatar${i + 1}.jpg`
             const verified = Math.random() < 0.5
-            const createdAt = new Date().toISOString()
+            const createdAt = getCurrentDate()
 
             const post = {
                 displayName,
