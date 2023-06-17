@@ -14,12 +14,14 @@
             color: white;
             outline: 1px solid $logoColor;
         }
-        
     }
 
     .search-icon {
         color: $mainColor2;
         position: absolute;
         margin-left: 10px;
+    }
+    #focused {
+        color: $logoColor;
     }
 }
