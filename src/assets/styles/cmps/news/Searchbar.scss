@@ -1,0 +1,13 @@
+.searchbar {
+    padding: 10px;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    min-width: 300px;
+    font-size: 13px;
+    background-color: $hoverClr2;
+    &:focus {
+        outline: 2px solid $logoColor;
+    }
+    
+}

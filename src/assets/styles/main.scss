@@ -9,8 +9,18 @@
 @import 'basics/base';
 
 // Components
+
+// sidebar
 @import 'cmps/sidebar/SidebarOption';
 @import 'cmps/sidebar/Sidebar';
+
+// feed
 @import 'cmps/feed/FeedIndex';
 @import 'cmps/feed/PostPreview';
 @import 'cmps/feed/PostsList';
+
+// news
+@import 'cmps/news/NewsIndex';
+@import 'cmps/news/NewsList';
+@import 'cmps/news/NewsPreview';
+@import 'cmps/news/Searchbar';
