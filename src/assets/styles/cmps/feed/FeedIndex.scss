@@ -1,7 +1,10 @@
 .feed-index {
     box-shadow: $boxShadow1;
     flex: 0.65;
-    overflow: auto;
+    border: 1px solid $mainColor2;
+    border-top: none;
+    border-collapse: collapse;
+    height: fit-content;
 }
 
 @media (max-width: 768px) {

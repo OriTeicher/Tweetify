@@ -1,8 +1,10 @@
 .sidebar-container {
     display: flex;
+    position: sticky;
     flex-direction: column;
     width: 250px;
-    box-shadow: $boxShadow1;
+    height: fit-content;
+    top: 0;
     color: white;
     .squeak-btn {
         padding: 0;
@@ -19,7 +21,7 @@
         margin-top: 20px;
         &:hover {
             cursor: pointer;
-            k: brightness(90%);
+            filter: brightness(90%);
         }
     }
     .squeak-btn.mobile {
@@ -27,7 +29,7 @@
         right: 0;
         bottom: 0;
         width: 50px;
-        transform: translateY(-100%) translateX(-10%)
+        transform: translateY(-100%) translateX(-10%);
     }
 }
 

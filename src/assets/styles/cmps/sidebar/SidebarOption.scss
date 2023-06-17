@@ -15,18 +15,15 @@
         transition: color 100ms ease-in-out;
         background-color: $hoverClr2;
     }
-
 }
 
-.mobile .sidebar-option{
+.mobile .sidebar-option {
     padding: 10px;
 }
 
-.logo{
+.logo {
     gap: 0px;
 }
 .active {
     color: $logoColor;
 }
-
-
