@@ -20,7 +20,7 @@ const Sidebar: React.FC = () => {
         const optionsData = [
             { Icon: TwitterIcon, txt: '' },
             { Icon: HomeIcon, txt: 'Home' },
-            { Icon: SearchIcon, txt: 'Search' },
+            { Icon: SearchIcon, txt: 'Explore' },
             { Icon: NotificationIcon, txt: 'Notifications' },
             { Icon: MsgIcon, txt: 'Messages' },
             { Icon: BookmarkIcon, txt: 'Bookmarks' },

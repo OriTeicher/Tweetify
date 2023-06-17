@@ -1,0 +1,23 @@
+.topbar-container {
+    position: sticky;
+    margin: 10px 0px 0px 1px;
+    h1{
+        padding: 0px 10px;
+        margin-bottom: 10px;
+    }
+    .topbar-btns {
+        display: flex;
+        button {
+            color: $mainColor2;
+            width: 100%;
+            padding: 20px;
+            background-color: $mainColor1;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            &:hover {
+                background-color: $hoverClr2;
+            }
+        }
+    }
+}

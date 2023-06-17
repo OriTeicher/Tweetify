@@ -1,13 +1,24 @@
-.searchbar {
-    padding: 10px;
-    border-radius: 30px;
-    border: none;
-    outline: none;
-    min-width: 300px;
-    font-size: 13px;
-    background-color: $hoverClr2;
-    &:focus {
-        outline: 2px solid $logoColor;
+.search-container {
+    display: flex;
+    align-items: center;
+    .searchbar {
+        text-align: center;
+        padding: 14px;
+        border-radius: 30px;
+        border: none;
+        outline: none;
+        min-width: 320px;
+        font-size: 13px;
+        background-color: $hoverClr2;
+        &:focus {
+            outline: 1px solid $logoColor;
+        }
+        
     }
-    
+
+    .search-icon {
+        color: $mainColor2;
+        position: absolute;
+        margin-left: 10px;
+    }
 }
