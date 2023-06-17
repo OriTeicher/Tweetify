@@ -4,25 +4,31 @@
     width: 250px;
     box-shadow: $boxShadow1;
     color: white;
-}
-
-.tweet-btn {
-    padding: 0;
-    margin: 0;
-    background-color: $logoColor;
-    color: white;
-    border: none !important;
-    font-weight: 600;
-    text-transform: inherit;
-    height: 52px;
-    border-radius: 30px;
-    font-size: 1.2em;
-    min-width: 167px;
-    max-width: 232px;
-    margin-top: 20px;
-    &:hover {
-        cursor: pointer;
-        filter: brightness(90%);
+    .squeak-btn {
+        padding: 0;
+        margin: 0;
+        background-color: $logoColor;
+        color: white;
+        border: none !important;
+        font-weight: 600;
+        text-transform: inherit;
+        height: 52px;
+        border-radius: 30px;
+        font-size: 1.2em;
+        min-width: 167px;
+        max-width: 232px;
+        margin-top: 20px;
+        &:hover {
+            cursor: pointer;
+            filter: brightness(90%);
+        }
+    }
+    .squeak-btn.mobile {
+        min-width: fit-content;
+        border-radius: 50%;
     }
 }
 
+.sidebar-container.mobile {
+    width: 10vw;
+}

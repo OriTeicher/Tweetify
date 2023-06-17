@@ -1,12 +1,11 @@
 import React, { useState, ChangeEvent } from 'react'
-import { Button, Avatar } from '@mui/material'
-
+import { Avatar } from '@mui/material'
+import { InsertPhoto, GifBoxRounded, EmojiEmotions } from '@mui/icons-material'
 export default function SqueakBox() {
     const [message, setMessage] = useState('')
 
-    const handleMessageChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const inputText = event.target.innerText.trim()
-        setMessage(inputText)
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setMessage(event.target.value)
     }
 
     return (
@@ -14,10 +13,22 @@ export default function SqueakBox() {
             <form>
                 <div className="squeak-input-container">
                     <Avatar />
-                    <input className='squeak-input' placeholder='What is hapenning?!'></input>
+                    <input
+                        className="squeak-input"
+                        placeholder="What is happening?!"
+                        value={message}
+                        onChange={handleInputChange}
+                    />
                 </div>
-                <Button>Squeak</Button>
             </form>
+            <div className="squeak-box-btns">
+                <button className="squeak-btn">Squeak</button>
+                <div className="left-icons">
+                    <InsertPhoto className='icon'/>
+                    <GifBoxRounded className='icon'/>
+                    <EmojiEmotions className='icon'/>
+                </div>
+            </div>
         </section>
     )
 }
