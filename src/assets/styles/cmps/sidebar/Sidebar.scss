@@ -36,6 +36,7 @@
 .sidebar-container.mobile {
     background-color: #333;
     width: 100vw;
+
     position: fixed;
     bottom: 0;
     left: 0;
@@ -50,5 +51,15 @@
     .sidebar-option {
         font-size: 15px;
         margin: 0px;
+        &:nth-child(1) {
+            display: none;
+        }
+        &:nth-child(6) {
+            display: none;
+        }
+        &:nth-child(7) {
+            display: none;
+        }
+
     }
 }

@@ -19,6 +19,9 @@
 
 .mobile .sidebar-option {
     padding: 10px;
+    &:hover {
+        background-color: #333;
+    }
 }
 
 .logo {

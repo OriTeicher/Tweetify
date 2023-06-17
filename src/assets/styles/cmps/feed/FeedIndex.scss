@@ -11,5 +11,7 @@
 @media (max-width: 768px) {
     .feed-index {
         flex: 1;
+        border-right: none;
+        border-left: none;
     }
 }
