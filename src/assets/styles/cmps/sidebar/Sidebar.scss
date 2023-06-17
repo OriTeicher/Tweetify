@@ -15,8 +15,7 @@
         height: 52px;
         border-radius: 30px;
         font-size: 1.2em;
-        min-width: 167px;
-        max-width: 232px;
+        width: 232px;
         margin-top: 20px;
         &:hover {
             cursor: pointer;
@@ -24,11 +23,22 @@
         }
     }
     .squeak-btn.mobile {
-        min-width: fit-content;
-        border-radius: 50%;
+        margin-bottom: 10px;
     }
 }
 
 .sidebar-container.mobile {
-    width: 10vw;
+    background-color: #333;
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+    flex-direction: row;
+    left: 0;
+    box-shadow: none;
+    padding: 0px;
+    margin: 0px;
+    .sidebar-option {
+        font-size: 15px;
+        margin: 0px;
+    }
 }

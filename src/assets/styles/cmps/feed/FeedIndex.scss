@@ -1,5 +1,10 @@
 .feed-index {
     box-shadow: $boxShadow1;
-    width: 40vw;
-    min-width: 450px;
+    flex: 0.65;
+}
+
+@media (max-width: 768px) {
+    .feed-index{
+        flex: 1;
+    }
 }

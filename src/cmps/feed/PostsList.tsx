@@ -7,6 +7,7 @@ export default class PostsList extends Component {
                 <ul>
                     <PostPreview />
                     <PostPreview />
+                    <PostPreview />
                 </ul>
             </section>
         )
