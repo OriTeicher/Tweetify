@@ -25,20 +25,65 @@
     .verified-logo {
         color: $logoColor;
     }
-    .post-txt {
-        padding-left: 48px;
-        text-align: left;
-    }
     .post-date {
         font-size: 15px;
         color: $mainColor2;
         font-weight: 400;
     }
+    .post-txt {
+        padding-left: 48px;
+        text-align: left;
+    }
+    .more-icon {
+        position: absolute;
+        right: 0;
+        margin-inline-end: 10px;
+        color: $mainColor2;
+        &:hover {
+            cursor: pointer;
+            color: white;
+        }
+    }
 }
 
-.more-icon {
-    position: absolute;
-    right: 0;
-    margin-inline-end: 10px;
+.post-icons {
+    display: flex;
+    justify-content: start;
+    padding-left: 48px;
+    justify-content: space-between;
+    width: 90%;
+    margin: 20px 0px 0px;
     color: $mainColor2;
+    svg {
+        cursor: pointer;
+        &:hover {
+            color: white;
+            &:nth-child(1) {
+                color: rgb(222, 83, 83);
+            }
+        }
+    }
+    svg.liked {
+        color: rgb(222, 83, 83);
+    }
+}
+
+.liked {
+    animation: pop 0.3s;
+}
+
+.unliked{
+    animation: pop 0.3s;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
