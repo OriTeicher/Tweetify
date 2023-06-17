@@ -1,0 +1,20 @@
+.squeak-box{
+    padding: 20px;
+    .squeak-input-container{
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        .squeak-input{
+            width: 100%;
+            padding-left: 5px;
+            background-color: $mainColor1;
+            font-size: 18px;
+            outline: none;
+            border: none;
+            word-break: break-all;
+        }
+        .squeak-input:focus{
+            color: white;
+        }
+    }
+}
