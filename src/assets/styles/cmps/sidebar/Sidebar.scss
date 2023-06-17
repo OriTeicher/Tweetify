@@ -29,18 +29,7 @@
         right: 0;
         bottom: 0;
         width: 50px;
-        transform: translateY(-100%) translateX(-10%);
-    }
-}
-
-.mobile {
-    .logo:nth-child(1) {
-        display: none;
-    }
-    .logo:nth-child(4) {
-    }
-    .logo:nth-child(5) {
-        display: none;
+        transform: translateY(-140%) translateX(-20%);
     }
 }
 
@@ -49,13 +38,15 @@
     width: 100vw;
     position: fixed;
     bottom: 0;
-    flex-direction: row;
     left: 0;
-    box-shadow: none;
-    padding: 0px;
+    flex-direction: row;
+    border-top: 1px solid $mainColor2;
+    padding: 5px;
     margin: 0px;
     justify-content: space-around;
     gap: 20px;
+    top: unset;
+
     .sidebar-option {
         font-size: 15px;
         margin: 0px;
