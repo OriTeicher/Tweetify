@@ -1,13 +1,25 @@
 .post-preview {
+    display: flex;
+    flex-direction: column;
     border-bottom: $outline1;
     padding: 17px;
     font-size: 18px;
-    font-weight: 200;
+    font-weight: 100;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     position: relative;
+    .top-preview {
+        display: flex;
+    }
+    .post-info-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
     .top-cred {
         display: flex;
-        gap: 5px;
+        gap: 8px;
         align-items: center;
+        padding-left: 10px;
     }
     .user-avatar {
         &:hover {
@@ -32,7 +44,8 @@
         font-weight: 400;
     }
     h3 {
-        font-size: 5px;
+        font-size: 10px;
+        color: $mainColor2;
     }
     .post-txt {
         width: 90%;
@@ -48,7 +61,7 @@
         font-weight: 400;
     }
     .post-txt {
-        padding-left: 48px;
+        padding-left: 10px;
         text-align: left;
     }
     .more-icon {
@@ -102,5 +115,11 @@
     }
     100% {
         transform: scale(1);
+    }
+}
+
+@media (max-width: 768px) {
+    .post-preview {
+        padding: 10px;
     }
 }

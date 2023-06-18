@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent } from 'react'
 import { Avatar } from '@mui/material'
 import { InsertPhoto, GifBoxRounded, EmojiEmotions } from '@mui/icons-material'
+import { getRandomColor } from '../../services/util.service'
 export default function SqueakBox() {
     const [message, setMessage] = useState('')
 
@@ -12,7 +13,15 @@ export default function SqueakBox() {
         <section className="squeak-box">
             <form>
                 <div className="squeak-input-container">
-                    <Avatar />
+                    <Avatar
+                        className="user-avatar"
+                        sx={{
+                            bgcolor: 'lightskyblue',
+                            textShadow: '1px 1px 1px black'
+                        }}
+                    >
+                        {'OR'}
+                    </Avatar>
                     <input
                         className="squeak-input"
                         placeholder="What is happening?!"

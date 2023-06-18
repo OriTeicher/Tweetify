@@ -5,6 +5,8 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ShareIcon from '@mui/icons-material/Share'
 import FeedCredentials from './FeedCredentials'
+import { Avatar } from '@mui/material'
+import { getRandomColor } from '../../services/util.service'
 
 interface FeedPreviewProps {
     displayName: string
@@ -31,14 +33,28 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
 
     return (
         <section className="post-preview">
-            <FeedCredentials
-                displayName={displayName}
-                username={username}
-                verified={verified}
-                createdAt={createdAt}
-            />
-            <p className="post-txt">{txt}</p>
+            <div className="top-preview">
+                <Avatar
+                    className="user-avatar"
+                    sx={{
+                        bgcolor: getRandomColor,
+                        textShadow: '1px 1px 1px black'
+                    }}
+                >
+                    {displayName.charAt(0) +
+                        displayName.charAt(1).toLocaleUpperCase()}
+                </Avatar>
+                <FeedCredentials
+                    displayName={displayName}
+                    username={username}
+                    verified={verified}
+                    createdAt={createdAt}
+                    txt={txt}
+                />
+            </div>
+
             <div className="post-icons">
+                <ChatBubbleOutlineIcon fontSize="small" />
                 {liked ? (
                     <FavoriteIcon
                         fontSize="small"
@@ -52,7 +68,6 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                         className="unliked"
                     />
                 )}
-                <ChatBubbleOutlineIcon fontSize="small" />
                 <Loop fontSize="small" />
                 <ShareIcon fontSize="small" />
             </div>

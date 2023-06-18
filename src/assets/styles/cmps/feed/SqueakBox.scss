@@ -1,5 +1,5 @@
 .squeak-box {
-    padding: 10px;
+    padding: 15px 17px;
     border-bottom: $outline1;
     .squeak-input-container {
         margin-bottom: 15px;
@@ -21,6 +21,7 @@
     }
     .squeak-box-btns {
         width: 100%;
+        padding-left: 64px;
         display: flex;
         align-items: end;
         flex-direction: row-reverse;
@@ -56,10 +57,10 @@
 }
 
 @media (max-width: 768px) {
-    .squeak-box{
+    .squeak-box {
         display: none;
     }
-    .squeak-box.active{
+    .squeak-box.active {
         display: block;
     }
 }

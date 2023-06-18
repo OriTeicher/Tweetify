@@ -8,31 +8,27 @@ interface FeedCredentialsProps {
     username: string
     verified: boolean
     createdAt: string
+    txt?: string
 }
 
 const FeedCredentials: React.FC<FeedCredentialsProps> = ({
     displayName,
     username,
     verified,
-    createdAt
+    createdAt,
+    txt
 }) => {
     return (
-        <section className="top-cred">
-            <Avatar className='user-avatar'
-                sx={{
-                    bgcolor: getRandomColor,
-                    textShadow: '1px 1px 1px black'
-                }}
-            >
-                {displayName.charAt(0) +
-                    displayName.charAt(1).toLocaleUpperCase()}
-            </Avatar>
-            <h1>{displayName}</h1>
-            {verified && <Verified className="verified-logo" />}
-            <h2>@{username}</h2>
-            <h3>.</h3>
-            <p className="post-date">{createdAt}</p>
-            <MoreHoriz className="more-icon" />
+        <section className='post-info-container'>
+            <div className="top-cred">
+                <h1>{displayName}</h1>
+                {verified && <Verified className="verified-logo" />}
+                <h2>@{username}</h2>
+                <h3>.</h3>
+                <p className="post-date">{createdAt}</p>
+                <MoreHoriz className="more-icon" />
+            </div>
+            <p className="post-txt">{txt}</p>
         </section>
     )
 }

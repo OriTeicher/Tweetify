@@ -13,7 +13,15 @@ export default class LoggedAcount extends Component<UserProps> {
         return (
             <section className="logged-acount-container">
                 <div className="left-cred">
-                    <Avatar />
+                    <Avatar
+                        className="user-avatar"
+                        sx={{
+                            bgcolor: 'lightskyblue',
+                            textShadow: '1px 1px 1px black'
+                        }}
+                    >
+                        {'OR'}
+                    </Avatar>
                     <div className="user-cred">
                         <h1>{displayName}</h1>
                         <h2>@{username}</h2>
