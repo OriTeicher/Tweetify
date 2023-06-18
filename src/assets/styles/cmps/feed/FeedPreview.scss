@@ -6,17 +6,33 @@
     position: relative;
     .top-cred {
         display: flex;
-        gap: 10px;
+        gap: 5px;
         align-items: center;
+    }
+    .user-avatar {
+        &:hover {
+            filter: brightness(95%);
+        }
+    }
+    .user-avatar,
+    h1,
+    h2 {
+        cursor: pointer;
     }
     h1 {
         font-size: 15px;
         font-weight: 500;
+        &:hover {
+            text-decoration: underline;
+        }
     }
     h2 {
         font-size: 15px;
         color: $mainColor2;
         font-weight: 400;
+    }
+    h3 {
+        font-size: 5px;
     }
     .post-txt {
         width: 90%;
@@ -24,6 +40,7 @@
     }
     .verified-logo {
         color: $logoColor;
+        font-size: 18px;
     }
     .post-date {
         font-size: 15px;
@@ -72,7 +89,7 @@
     animation: pop 0.3s;
 }
 
-.unliked{
+.unliked {
     animation: pop 0.3s;
 }
 

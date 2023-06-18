@@ -5,7 +5,7 @@ export default function MobileTopbar() {
     return (
         <section className="mobile-topbar-container">
             <Avatar />
-            <TwitterIcon />
+            <TwitterIcon className='twitter-icon'/>
         </section>
     )
 }

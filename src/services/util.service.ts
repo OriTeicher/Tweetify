@@ -17,11 +17,23 @@ export function getRandomColor(): string {
 }
 
 export function getCurrentDate(): string {
+    const months = [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Sep',
+        'Oct',
+        'Nov',
+        'December'
+    ]
     const date = new Date()
     const day = date.getDate().toString().padStart(2, '0')
-    const month = (date.getMonth() + 1).toString().padStart(2, '0')
-    const year = date.getFullYear().toString()
+    const month = date.getMonth()
 
-    const formattedDate = `${day}/${month}/${year}`
+    const formattedDate = `${months[month - 1]} ${day}`
     return formattedDate
 }

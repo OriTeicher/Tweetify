@@ -5,6 +5,11 @@
     padding: 10px;
     justify-content: space-between;
     display: none;
+    .twitter-icon{
+        position: absolute;
+        left: 50%;
+        color: $logoColor;
+    }
 }
 
 @media (max-width: 768px) {
