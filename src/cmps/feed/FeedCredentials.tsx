@@ -9,6 +9,7 @@ interface FeedCredentialsProps {
     verified: boolean
     createdAt: string
     txt?: string
+    imgUrl?: string
 }
 
 const FeedCredentials: React.FC<FeedCredentialsProps> = ({
@@ -16,10 +17,11 @@ const FeedCredentials: React.FC<FeedCredentialsProps> = ({
     username,
     verified,
     createdAt,
-    txt
+    txt,
+    imgUrl
 }) => {
     return (
-        <section className='post-info-container'>
+        <section className="post-info-container">
             <div className="top-cred">
                 <h1>{displayName}</h1>
                 {verified && <Verified className="verified-logo" />}
@@ -29,6 +31,7 @@ const FeedCredentials: React.FC<FeedCredentialsProps> = ({
                 <MoreHoriz className="more-icon" />
             </div>
             <p className="post-txt">{txt}</p>
+            {imgUrl && <img src={imgUrl} className="post-photo"></img>}
         </section>
     )
 }

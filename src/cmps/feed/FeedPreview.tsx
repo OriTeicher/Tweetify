@@ -12,7 +12,7 @@ interface FeedPreviewProps {
     displayName: string
     username: string
     txt: string
-    image: string
+    imgUrl: string
     avatar: string
     verified: boolean
     createdAt: string
@@ -22,7 +22,7 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
     displayName,
     username,
     txt,
-    image,
+    imgUrl,
     avatar,
     verified,
     createdAt
@@ -50,6 +50,7 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                     verified={verified}
                     createdAt={createdAt}
                     txt={txt}
+                    imgUrl={imgUrl}
                 />
             </div>
 

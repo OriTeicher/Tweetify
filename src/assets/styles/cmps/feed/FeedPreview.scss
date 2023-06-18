@@ -74,6 +74,14 @@
             color: white;
         }
     }
+    img{
+        height: 288px;
+        width: 90%;
+        border-radius: 20px;
+        margin-left: 5px;
+        margin-top: 20px;
+        outline: $outline1;
+    }
 }
 
 .post-icons {

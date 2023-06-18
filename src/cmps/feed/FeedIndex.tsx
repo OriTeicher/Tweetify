@@ -13,7 +13,8 @@ export default class FeedIndex extends Component<FeedIndexProps> {
         feedPosts: []
     }
     componentDidMount(): void {
-        const demoData = feedService.getRandomPosts(20)
+        const demoData = feedService.getRandomPosts(5)
+        console.log(demoData)
         this.setState({ feedPosts: demoData })
     }
     render() {

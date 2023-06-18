@@ -5,7 +5,7 @@ interface FeedPostsProps {
     displayName: string
     username: string
     txt: string
-    image: string
+    imgUrl: string
     avatar: string
     verified: boolean
     createdAt: string
@@ -24,7 +24,7 @@ const FeedList: React.FC<FeedListProps> = ({ feedPosts }) => {
                     displayName={post.displayName}
                     username={post.username}
                     txt={post.txt}
-                    image={post.image}
+                    imgUrl={post.imgUrl}
                     avatar={post.avatar}
                     verified={post.verified}
                     createdAt={post.createdAt}

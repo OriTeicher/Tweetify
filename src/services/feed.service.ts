@@ -6,7 +6,7 @@ export const feedService = {
             displayName: '',
             username: '',
             txt: '',
-            image: '',
+            imgUrl: '',
             avatar: '',
             verified: false,
             createdAt: ''
@@ -23,7 +23,7 @@ export const feedService = {
             const txt = this.generateRandomSentences(
                 getRandomIntInclusive(20, 80)
             )
-            const image = `https://example.com/image${i + 1}.jpg`
+            const imgUrl = demoPhotos[getRandomIntInclusive(0, 9)]
             const avatar = `https://example.com/avatar${i + 1}.jpg`
             const verified = Math.random() < 0.5
             const createdAt = getCurrentDate()
@@ -32,7 +32,7 @@ export const feedService = {
                 displayName,
                 username,
                 txt,
-                image,
+                imgUrl,
                 avatar,
                 verified,
                 createdAt
@@ -88,3 +88,16 @@ export const feedService = {
         return sentence + '.'
     }
 }
+
+const demoPhotos = [
+    'https://fastly.picsum.photos/id/981/200/300.jpg?hmac=H3LDLzNJiLGQYdx_Q7g_Us-x8VxR-aK5TglLyGlQHDk',
+    'https://fastly.picsum.photos/id/794/200/300.jpg?hmac=uZge4lPPf2bQz7AS6pyH7_nwhFp9IQ3OPKOpQ33Zypk',
+    'https://fastly.picsum.photos/id/894/200/200.jpg?hmac=h3PvihhxRrUznPuW-OPbq7zxa0On5jLsyYbWwI6nW6w',
+    'https://fastly.picsum.photos/id/504/200/300.jpg?hmac=mycti8qYrnGcag5zUhsVOq7hQwb__R-Zf--aBJAH_ec',
+    '',
+    '',
+    '',
+    '',
+    '',
+    ''
+]
