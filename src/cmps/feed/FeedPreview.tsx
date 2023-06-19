@@ -36,14 +36,11 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
         <section className="post-preview">
             <div className="top-preview">
                 <Avatar
+                    src={avatar ? avatar : ''}
                     className="user-avatar"
-                    sx={{
-                        bgcolor: getRandomColor,
-                        textShadow: '1px 1px 1px black'
-                    }}
                 >
-                    {displayName.charAt(0) +
-                        displayName.charAt(1).toLocaleUpperCase()}
+                    {/* {displayName.charAt(0) +
+                        displayName.charAt(1).toLocaleUpperCase()} */}
                 </Avatar>
                 <FeedCredentials
                     displayName={displayName}
