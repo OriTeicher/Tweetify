@@ -1,17 +1,27 @@
-import React, { useState, ChangeEvent } from 'react'
+import React, { useState, ChangeEvent, FormEvent } from 'react'
 import { Avatar } from '@mui/material'
 import { InsertPhoto, GifBoxRounded, EmojiEmotions } from '@mui/icons-material'
-import { getRandomColor } from '../../services/util.service'
-export default function SqueakBox() {
+
+interface SqueakBoxProps {
+    addPost: (post: string) => void
+}
+
+export default function SqueakBox({ addPost }: SqueakBoxProps) {
     const [message, setMessage] = useState('')
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setMessage(event.target.value)
     }
 
+    const handleSqueak = (event: FormEvent) => {
+        event.preventDefault()
+        addPost(message)
+        setMessage('')
+    }
+
     return (
         <section className="squeak-box">
-            <form>
+            <form onSubmit={handleSqueak}>
                 <div className="squeak-input-container">
                     <Avatar
                         className="user-avatar"
@@ -29,15 +39,17 @@ export default function SqueakBox() {
                         onChange={handleInputChange}
                     />
                 </div>
-            </form>
-            <div className="squeak-box-btns">
-                <button className="squeak-btn">Squeak</button>
-                <div className="left-icons">
-                    <InsertPhoto className="icon" />
-                    <GifBoxRounded className="icon" />
-                    <EmojiEmotions className="icon" />
+                <div className="squeak-box-btns">
+                    <button type="submit" className="squeak-btn">
+                        Squeak
+                    </button>
+                    <div className="left-icons">
+                        <InsertPhoto className="icon" />
+                        <GifBoxRounded className="icon" />
+                        <EmojiEmotions className="icon" />
+                    </div>
                 </div>
-            </div>
+            </form>
         </section>
     )
 }

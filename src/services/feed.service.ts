@@ -1,11 +1,15 @@
 import { getCurrentDate, getRandomIntInclusive } from './util.service'
 
 export const feedService = {
-    getEmptyPost() {
+    getEmptyPost(
+        displayName: string = 'Guest',
+        username: string = 'guestUser01',
+        txt: string = '...'
+    ) {
         return {
-            displayName: '',
-            username: '',
-            txt: '',
+            displayName,
+            username,
+            txt,
             imgUrl: '',
             avatar: '',
             verified: false,

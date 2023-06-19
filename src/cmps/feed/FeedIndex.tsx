@@ -4,6 +4,8 @@ import FeedList from './FeedList'
 import SqueakBox from './SqueakBox'
 import MobileTopbar from './MobileTopbar'
 import { getCollectionFromDB, addItemToCollection } from '../../firsebase'
+import { POSTS_DB_COLLECTION } from '../../services/db.service'
+import { feedService } from '../../services/feed.service'
 interface FeedIndexProps {
     selectedOption: string
 }
@@ -13,17 +15,23 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ selectedOption }) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            let postsToDisplay = await getCollectionFromDB('posts')
+            let postsToDisplay = await getCollectionFromDB(POSTS_DB_COLLECTION)
             setFeedPosts(postsToDisplay)
         }
         fetchData()
     }, [])
 
+    const addPost = async (postContent: string) => {
+        const newPost = feedService.getEmptyPost('Guest', 'guest', postContent)
+        await addItemToCollection(newPost, POSTS_DB_COLLECTION)
+        setFeedPosts([...feedPosts, newPost])
+    }
+
     return (
         <section className="feed-index">
             <MobileTopbar />
             <FeedTopbar selectedOption={selectedOption} />
-            <SqueakBox />
+            <SqueakBox addPost={addPost} />
             <FeedList feedPosts={feedPosts} />
         </section>
     )
