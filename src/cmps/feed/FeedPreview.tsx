@@ -5,9 +5,9 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ShareIcon from '@mui/icons-material/Share'
 import FeedCredentials from './FeedCredentials'
-import { FeaturedVideo } from '@mui/icons-material'
 import { Avatar } from '@mui/material'
-import { getRandomColor } from '../../services/util.service'
+import { getInitials } from '../../services/util.service'
+// import { getRandomColor } from '../../services/util.service'
 
 interface FeedPreviewProps {
     displayName: string
@@ -17,6 +17,7 @@ interface FeedPreviewProps {
     avatar: string
     verified: boolean
     createdAt: string
+    likes: number
 }
 
 const FeedPreview: React.FC<FeedPreviewProps> = ({
@@ -26,7 +27,8 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
     imgUrl,
     avatar,
     verified,
-    createdAt
+    createdAt,
+    likes,
 }) => {
     const [liked, setLiked] = useState(false)
 
@@ -35,12 +37,8 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
     return (
         <section className="post-preview">
             <div className="top-preview">
-                <Avatar
-                    src={avatar ? avatar : ''}
-                    className="user-avatar"
-                >
-                    {/* {displayName.charAt(0) +
-                        displayName.charAt(1).toLocaleUpperCase()} */}
+                <Avatar src={avatar ? avatar : ''} className="user-avatar">
+                    {avatar ? '' : getInitials(displayName)}
                 </Avatar>
                 <FeedCredentials
                     displayName={displayName}

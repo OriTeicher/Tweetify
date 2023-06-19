@@ -9,6 +9,7 @@ interface FeedPostsProps {
     avatar: string
     verified: boolean
     createdAt: string
+    likes: number
 }
 
 interface FeedListProps {
@@ -28,6 +29,7 @@ const FeedList: React.FC<FeedListProps> = ({ feedPosts }) => {
                     avatar={post.avatar}
                     verified={post.verified}
                     createdAt={post.createdAt}
+                    likes={post.likes}
                 />
             ))}
         </section>

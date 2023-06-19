@@ -27,6 +27,8 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ selectedOption }) => {
         setFeedPosts([...feedPosts, newPost])
     }
 
+    // const removePost = async (postId: string) => {}
+
     return (
         <section className="feed-index">
             <MobileTopbar />

@@ -6,6 +6,8 @@
     padding-bottom: 20px;
     border-right: $outline1;
     border-left: $outline1;
+    min-height: 100vh;
+    max-height: fit-content;
 }
 
 @media (max-width: 768px) {

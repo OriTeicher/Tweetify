@@ -7,13 +7,15 @@ export const feedService = {
         txt: string = '...'
     ) {
         return {
+            _id: '',
             displayName,
             username,
             txt,
             imgUrl: '',
             avatar: '',
             verified: false,
-            createdAt: ''
+            createdAt: getCurrentDate(),
+            likes: 0,
         }
     },
     getRandomPosts(postsCount: number) {

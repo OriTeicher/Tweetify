@@ -1,5 +1,12 @@
 import { initializeApp } from 'firebase/app'
-import { getFirestore, collection, addDoc, getDocs } from 'firebase/firestore'
+import {
+    getFirestore,
+    collection,
+    doc,
+    addDoc,
+    getDocs,
+    deleteDoc
+} from 'firebase/firestore'
 
 const firebaseConfig = {
     apiKey: 'AIzaSyDVbyExXQOFMdZDnOjk1FDRrJpvpxo-ctc',
@@ -13,7 +20,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
-
 
 export async function addItemToCollection(item: object, col: string) {
     try {
@@ -34,6 +40,15 @@ export async function getCollectionFromDB(col: string) {
             ...doc.data()
         }))
         return collectionArr
+    } catch (e) {
+        console.error('Error getting collection: ', e)
+        return []
+    }
+}
+
+export async function removeItemFromDB(itemId: string, col: string) {
+    try {
+        await deleteDoc(doc(db, col, itemId))
     } catch (e) {
         console.error('Error getting collection: ', e)
         return []
