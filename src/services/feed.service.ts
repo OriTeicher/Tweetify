@@ -23,7 +23,8 @@ export const feedService = {
             const txt = this.generateRandomSentences(
                 getRandomIntInclusive(20, 80)
             )
-            const imgUrl = demoPhotos[getRandomIntInclusive(0, 10)]
+            const imgUrl =
+                demoPhotos[getRandomIntInclusive(0, demoPhotos.length - 1)]
             const avatar = `https://example.com/avatar${i + 1}.jpg`
             const verified = Math.random() < 0.5
             const createdAt = getCurrentDate()
@@ -94,8 +95,10 @@ const demoPhotos = [
     'https://picsum.photos/522/292',
     'https://picsum.photos/516/298',
     'https://picsum.photos/516/258',
-    'https://picsum.photos/516/268',
-    'https://picsum.photos/516/278',
+    'http://i.stack.imgur.com/SBv4T.gif',
+    'https://static.scientificamerican.com/sciam/assets/Image/2019/spinningblackhole.gif',
+    'https://media1.giphy.com/media/3oEjI4sFlp73fvEYgw/giphy.gif',
+    '',
     '',
     '',
     '',

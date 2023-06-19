@@ -5,6 +5,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ShareIcon from '@mui/icons-material/Share'
 import FeedCredentials from './FeedCredentials'
+import { FeaturedVideo } from '@mui/icons-material'
 import { Avatar } from '@mui/material'
 import { getRandomColor } from '../../services/util.service'
 
