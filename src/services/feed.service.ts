@@ -1,6 +1,7 @@
 import {
     generateId,
     getCurrentDate,
+    getRandomColor,
     getRandomIntInclusive
 } from './util.service'
 
@@ -16,10 +17,12 @@ export const feedService = {
             username,
             txt,
             imgUrl: '',
-            avatar: '',
+            avatar: {},
             verified: false,
             createdAt: getCurrentDate(),
-            likes: 0
+            likes: 0,
+            resqueaks: 0,
+            comments: []
         }
     },
     getRandomPosts(postsCount: number) {
@@ -31,11 +34,11 @@ export const feedService = {
                 names[getRandomIntInclusive(0, names.length - 1)]
             const username = displayName.toLowerCase().replace(/\s/g, '')
             const txt = this.generateRandomSentences(
-                getRandomIntInclusive(20, 80)
+                getRandomIntInclusive(10, 80)
             )
             const imgUrl =
                 demoPhotos[getRandomIntInclusive(0, demoPhotos.length - 1)]
-            const avatar = `https://example.com/avatar${i + 1}.jpg`
+            const avatar = { bgColor: getRandomColor(), imgUrl: '' }
             const verified = Math.random() < 0.5
             const createdAt = getCurrentDate()
 
@@ -46,13 +49,43 @@ export const feedService = {
                 imgUrl,
                 avatar,
                 verified,
-                createdAt
+                createdAt,
+                likes: getRandomIntInclusive(0, 500),
+                comments: this.getRandomComments(getRandomIntInclusive(0, 3)),
+                resqueaks: getRandomIntInclusive(0, 50)
             }
-
             posts.push(post)
         }
 
         return posts
+    },
+
+    getRandomComments(length: number) {
+        let comments = []
+        debugger
+        for (let i = 0; i < length; i++) {
+            let randomComment: object = this.getRandomComment()
+            comments.push(randomComment)
+        }
+        return comments
+    },
+
+    getRandomComment(displayName: string = 'Guest'): object {
+        const names = ['John Doe', 'Jane Smith', 'Mike Johnson', 'Emily Brown']
+        const comment = {
+            _id: generateId(),
+            displayName: names[getRandomIntInclusive(0, names.length - 1)],
+            username: displayName.toLowerCase().replace(/\s/g, ''),
+            txt: this.generateRandomSentences(getRandomIntInclusive(10, 35)),
+            imgUrl: '',
+            avatar: '',
+            verified: false,
+            createdAt: getCurrentDate(),
+            likes: 0,
+            resqueaks: 0,
+            comments: []
+        }
+        return comment
     },
 
     generateRandomSentences(wordsCount: number) {
@@ -108,6 +141,9 @@ const demoPhotos = [
     'http://i.stack.imgur.com/SBv4T.gif',
     'https://static.scientificamerican.com/sciam/assets/Image/2019/spinningblackhole.gif',
     'https://media1.giphy.com/media/3oEjI4sFlp73fvEYgw/giphy.gif',
+    '',
+    '',
+    '',
     '',
     '',
     '',

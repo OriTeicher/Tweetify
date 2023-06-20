@@ -14,10 +14,15 @@ interface FeedPreviewProps {
     username: string
     txt: string
     imgUrl: string
-    avatar: string
+    avatar: {
+        imgUrl: string
+        bgColor: string
+    }
     verified: boolean
     createdAt: string
     likes: number
+    comments: object[]
+    resqueaks: number
     onLikeToggle: Function
 }
 
@@ -30,10 +35,14 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
     verified,
     createdAt,
     likes,
+    comments,
+    resqueaks,
     onLikeToggle
 }) => {
     const [isLiked, toggleIsLiked] = useState(false)
     const [likesNum, changeLikes] = useState(likes)
+    const [commentsNum, changeComments] = useState(comments?.length || 0)
+    const [resqueaksNum, changeResqueaks] = useState(resqueaks)
 
     const onToggleLike = (isLikedPost: boolean) => {
         toggleIsLiked(!isLiked)
@@ -49,8 +58,12 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
     return (
         <section className="post-preview">
             <div className="top-preview">
-                <Avatar src={avatar ? avatar : ''} className="user-avatar">
-                    {avatar ? '' : getInitials(displayName)}
+                <Avatar
+                    src={avatar.imgUrl}
+                    className="user-avatar"
+                    sx={{ bgcolor: avatar.bgColor }}
+                >
+                    {getInitials(displayName)}
                 </Avatar>
                 <FeedCredentials
                     displayName={displayName}
@@ -63,7 +76,10 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
             </div>
 
             <div className="post-icons">
-                <ChatBubbleOutlineIcon fontSize="small" />
+                <div className="comments-container">
+                    <ChatBubbleOutlineIcon fontSize="small" />
+                    <p>{comments.length !== 0 && commentsNum}</p>
+                </div>
                 <div className="likes-container">
                     {isLiked ? (
                         <FavoriteIcon
@@ -80,7 +96,10 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                     )}
                     <p>{likes !== 0 && likesNum}</p>
                 </div>
-                <Loop fontSize="small" />
+                <div className="resqueaks-container">
+                    <Loop fontSize="small" />
+                    <p>{resqueaks !== 0 && resqueaksNum}</p>
+                </div>
                 <ShareIcon fontSize="small" />
             </div>
         </section>

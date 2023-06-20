@@ -7,6 +7,8 @@ import {
     getDocs,
     deleteDoc
 } from 'firebase/firestore'
+import { feedService } from './services/feed.service'
+import { POSTS_DB_COLLECTION } from './services/db.service'
 
 const firebaseConfig = {
     apiKey: 'AIzaSyDVbyExXQOFMdZDnOjk1FDRrJpvpxo-ctc',
@@ -52,5 +54,12 @@ export async function removeItemFromDB(itemId: string, col: string) {
     } catch (e) {
         console.error('Error getting collection: ', e)
         return []
+    }
+}
+
+async function setDemoDB(postsNum: number) {
+    const randomPosts = feedService.getRandomPosts(postsNum)
+    for (let i = 0; i < postsNum; i++) {
+        await addItemToCollection(randomPosts[i], POSTS_DB_COLLECTION)
     }
 }

@@ -16,15 +16,16 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ selectedOption }) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            let postsToDisplay = await getCollectionFromDB(POSTS_DB_COLLECTION)
-            setFeedPosts(postsToDisplay)
+            let testposts = feedService.getRandomPosts(20)
+            // let postsToDisplay = await getCollectionFromDB(POSTS_DB_COLLECTION)
+            // setFeedPosts(postsToDisplay)
+            setFeedPosts(testposts)
         }
         fetchData()
     }, [])
 
     const handleLikeToggle = (isLiked: boolean, idx: number) => {
         isLiked ? feedPosts[idx].likes++ : feedPosts[idx].likes--
-
     }
 
     const addPost = async (postContent: string) => {
@@ -33,9 +34,7 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ selectedOption }) => {
         setFeedPosts([...feedPosts, newPost])
     }
 
-    const removePost = async (postId: string) => {
-        
-    }
+    const removePost = async (postId: string) => {}
 
     return (
         <section className="feed-index">

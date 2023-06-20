@@ -6,10 +6,15 @@ interface FeedPostsProps {
     username: string
     txt: string
     imgUrl: string
-    avatar: string
+    avatar: {
+        bgColor: string
+        imgUrl: string
+    }
     verified: boolean
     createdAt: string
     likes: number
+    comments: object[]
+    resqueaks: number
     onLikeToggle: Function
 }
 
@@ -32,6 +37,8 @@ const FeedList: React.FC<FeedListProps> = ({ feedPosts, onLikeToggle }) => {
                     verified={post.verified}
                     createdAt={post.createdAt}
                     likes={post.likes}
+                    comments={post.comments}
+                    resqueaks={post.resqueaks}
                     onLikeToggle={(isLiked: boolean) =>
                         onLikeToggle(isLiked, idx)
                     }

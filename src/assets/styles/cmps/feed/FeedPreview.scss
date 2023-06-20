@@ -74,7 +74,7 @@
             color: white;
         }
     }
-    img{
+    img {
         height: 288px;
         width: 90%;
         border-radius: 20px;
@@ -96,24 +96,24 @@
         cursor: pointer;
         &:hover {
             color: white;
-            &:nth-child(2) {
-                color: rgb(222, 83, 83);
-            }
         }
     }
     svg.liked {
         color: rgb(222, 83, 83);
     }
-
-}
-
-.likes-container{
-    display: flex;
-    justify-content: center;
-   p{
-    font-size: 15px;
-   } 
-   gap: 2px;
+    svg.unliked{
+        &:hover {
+            color: rgb(222, 83, 83);
+        }
+    }
+    div {
+        display: flex;
+        justify-content: center;
+        p {
+            font-size: 15px;
+        }
+        gap: 2px;
+    }
 }
 
 .liked {
@@ -139,9 +139,8 @@
 @media (max-width: 768px) {
     .post-preview {
         padding: 15px 10px;
-        img{
+        img {
             width: 96%;
         }
     }
-
 }
