@@ -1,6 +1,6 @@
 // main colors
 $logoColor: #50b7f5;
-
+$squeakIconsColor1: #1d9bf0;
 // background color
 $mainColor1: #101010;
 $mainColor2: rgb(113, 113, 113);
@@ -13,3 +13,15 @@ $hoverClr2: #e8f5fe0b;
 $boxShadow1: 1px 1px 0px $mainColor3;
 $boxShadow2: 1px 0px 0px 0px $mainColor3;
 $outline1: 1px solid $mainColor3;
+
+@keyframes pop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}

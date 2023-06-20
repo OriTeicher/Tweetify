@@ -43,14 +43,21 @@
         }
         .left-icons {
             display: flex;
+            align-items: center;
             font-size: 10px;
             gap: 10px;
+            color: $squeakIconsColor1;
             .icon {
                 font-size: 20px;
                 cursor: pointer;
                 &:hover {
                     opacity: 0.9;
                 }
+            }
+            .gif {
+                outline: 1px solid $squeakIconsColor1;
+                border-radius: 2px;
+                font-size: 15px;
             }
         }
     }

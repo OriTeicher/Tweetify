@@ -1,9 +1,16 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
+import { createRoot } from 'react-dom/client'
+import { Provider } from 'react-redux'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
+import feedStore from './app/feedStore'
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
-root.render(<App />)
+const rootElement = document.getElementById('root') as Element
+
+createRoot(rootElement).render(
+    <Provider store={feedStore}>
+        <App />
+    </Provider>
+)
 
 reportWebVitals()

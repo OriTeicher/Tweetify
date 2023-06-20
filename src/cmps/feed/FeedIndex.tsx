@@ -1,40 +1,33 @@
-import React, { useState, useEffect } from 'react'
 import FeedTopbar from './FeedTopbar'
 import FeedList from './FeedList'
 import SqueakBox from './SqueakBox'
 import MobileTopbar from './MobileTopbar'
-import { getCollectionFromDB, addItemToCollection } from '../../firsebase'
-import { POSTS_DB_COLLECTION } from '../../services/db.service'
-import { feedService } from '../../services/feed.service'
-
+import { RootState } from '../../app/feedStore'
+import { useEffect } from 'react'
+import { queryFeedPosts } from '../../app/reducers/feedSlice'
+import { useSelector, useDispatch } from 'react-redux'
 interface FeedIndexProps {
     selectedOption: string
 }
 
 const FeedIndex: React.FC<FeedIndexProps> = ({ selectedOption }) => {
-    const [feedPosts, setFeedPosts] = useState<any[]>([])
+    const { feedPosts } = useSelector((state: RootState) => state.feed)
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        const fetchData = async () => {
-            let testposts = feedService.getRandomPosts(20)
-            // let postsToDisplay = await getCollectionFromDB(POSTS_DB_COLLECTION)
-            // setFeedPosts(postsToDisplay)
-            setFeedPosts(testposts)
-        }
-        fetchData()
-    }, [])
+        dispatch(queryFeedPosts())
+    }, [dispatch])
 
     const handleLikeToggle = (isLiked: boolean, idx: number) => {
-        isLiked ? feedPosts[idx].likes++ : feedPosts[idx].likes--
+        // isLiked ? feedPosts[idx].likes++ : feedPosts[idx].likes--
     }
 
     const addPost = async (postContent: string) => {
-        const newPost = feedService.getEmptyPost('Guest', 'guest', postContent)
-        await addItemToCollection(newPost, POSTS_DB_COLLECTION)
-        setFeedPosts([...feedPosts, newPost])
+        // const newPost = feedService.getEmptyPost('Guest', 'guest', postContent)
+        // await addItemToCollection(newPost, POSTS_DB_COLLECTION)
+        // setFeedPosts([...feedPosts, newPost])
     }
-
-    const removePost = async (postId: string) => {}
 
     return (
         <section className="feed-index">
@@ -43,9 +36,9 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ selectedOption }) => {
             <SqueakBox addPost={addPost} />
             <FeedList
                 feedPosts={feedPosts}
-                onLikeToggle={(isLiked: boolean, idx: number) =>
-                    handleLikeToggle(isLiked, idx)
-                }
+                // onLikeToggle={(isLiked: boolean, idx: number) =>
+                //     handleLikeToggle(isLiked, idx)
+                // }
             />
         </section>
     )

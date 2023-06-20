@@ -13,7 +13,7 @@ interface FeedPreviewProps {
     displayName: string
     username: string
     txt: string
-    imgUrl: string
+    imgUrl?: string
     avatar: {
         imgUrl: string
         bgColor: string
@@ -23,7 +23,7 @@ interface FeedPreviewProps {
     likes: number
     comments: object[]
     resqueaks: number
-    onLikeToggle: Function
+    // onLikeToggle: Function
 }
 
 const FeedPreview: React.FC<FeedPreviewProps> = ({
@@ -37,23 +37,23 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
     likes,
     comments,
     resqueaks,
-    onLikeToggle
+    // onLikeToggle
 }) => {
     const [isLiked, toggleIsLiked] = useState(false)
     const [likesNum, changeLikes] = useState(likes)
     const [commentsNum, changeComments] = useState(comments?.length || 0)
     const [resqueaksNum, changeResqueaks] = useState(resqueaks)
 
-    const onToggleLike = (isLikedPost: boolean) => {
-        toggleIsLiked(!isLiked)
-        if (isLikedPost) {
-            changeLikes(likesNum + 1)
-            onLikeToggle(true)
-        } else {
-            changeLikes(likesNum - 1)
-            onLikeToggle(false)
-        }
-    }
+    // const onToggleLike = (isLikedPost: boolean) => {
+    //     toggleIsLiked(!isLiked)
+    //     if (isLikedPost) {
+    //         changeLikes(likesNum + 1)
+    //         onLikeToggle(true)
+    //     } else {
+    //         changeLikes(likesNum - 1)
+    //         onLikeToggle(false)
+    //     }
+    // }
 
     return (
         <section className="post-preview">
@@ -84,13 +84,13 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                     {isLiked ? (
                         <FavoriteIcon
                             fontSize="small"
-                            onClick={() => onToggleLike(false)}
+                            // onClick={() => onToggleLike(false)}
                             className="liked"
                         />
                     ) : (
                         <FavoriteBorderIcon
                             fontSize="small"
-                            onClick={() => onToggleLike(true)}
+                            // onClick={() => onToggleLike(true)}
                             className="unliked"
                         />
                     )}
