@@ -107,6 +107,15 @@
 
 }
 
+.likes-container{
+    display: flex;
+    justify-content: center;
+   p{
+    font-size: 15px;
+   } 
+   gap: 2px;
+}
+
 .liked {
     animation: pop 0.3s;
 }

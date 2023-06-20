@@ -6,6 +6,7 @@ import MobileTopbar from './MobileTopbar'
 import { getCollectionFromDB, addItemToCollection } from '../../firsebase'
 import { POSTS_DB_COLLECTION } from '../../services/db.service'
 import { feedService } from '../../services/feed.service'
+
 interface FeedIndexProps {
     selectedOption: string
 }
@@ -21,20 +22,32 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ selectedOption }) => {
         fetchData()
     }, [])
 
+    const handleLikeToggle = (isLiked: boolean, idx: number) => {
+        isLiked ? feedPosts[idx].likes++ : feedPosts[idx].likes--
+
+    }
+
     const addPost = async (postContent: string) => {
         const newPost = feedService.getEmptyPost('Guest', 'guest', postContent)
         await addItemToCollection(newPost, POSTS_DB_COLLECTION)
         setFeedPosts([...feedPosts, newPost])
     }
 
-    // const removePost = async (postId: string) => {}
+    const removePost = async (postId: string) => {
+        
+    }
 
     return (
         <section className="feed-index">
             <MobileTopbar />
             <FeedTopbar selectedOption={selectedOption} />
             <SqueakBox addPost={addPost} />
-            <FeedList feedPosts={feedPosts} />
+            <FeedList
+                feedPosts={feedPosts}
+                onLikeToggle={(isLiked: boolean, idx: number) =>
+                    handleLikeToggle(isLiked, idx)
+                }
+            />
         </section>
     )
 }

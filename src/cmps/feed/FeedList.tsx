@@ -10,18 +10,20 @@ interface FeedPostsProps {
     verified: boolean
     createdAt: string
     likes: number
+    onLikeToggle: Function
 }
 
 interface FeedListProps {
     feedPosts: FeedPostsProps[]
+    onLikeToggle: Function
 }
 
-const FeedList: React.FC<FeedListProps> = ({ feedPosts }) => {
+const FeedList: React.FC<FeedListProps> = ({ feedPosts, onLikeToggle }) => {
     return (
         <section className="posts-list">
-            {feedPosts.map((post, index) => (
+            {feedPosts.map((post, idx) => (
                 <FeedPreview
-                    key={index}
+                    key={idx}
                     displayName={post.displayName}
                     username={post.username}
                     txt={post.txt}
@@ -30,6 +32,9 @@ const FeedList: React.FC<FeedListProps> = ({ feedPosts }) => {
                     verified={post.verified}
                     createdAt={post.createdAt}
                     likes={post.likes}
+                    onLikeToggle={(isLiked: boolean) =>
+                        onLikeToggle(isLiked, idx)
+                    }
                 />
             ))}
         </section>

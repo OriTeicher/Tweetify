@@ -18,6 +18,7 @@ interface FeedPreviewProps {
     verified: boolean
     createdAt: string
     likes: number
+    onLikeToggle: Function
 }
 
 const FeedPreview: React.FC<FeedPreviewProps> = ({
@@ -29,10 +30,21 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
     verified,
     createdAt,
     likes,
+    onLikeToggle
 }) => {
-    const [liked, setLiked] = useState(false)
+    const [isLiked, toggleIsLiked] = useState(false)
+    const [likesNum, changeLikes] = useState(likes)
 
-    const handleLikeToggle = () => setLiked(!liked)
+    const onToggleLike = (isLikedPost: boolean) => {
+        toggleIsLiked(!isLiked)
+        if (isLikedPost) {
+            changeLikes(likesNum + 1)
+            onLikeToggle(true)
+        } else {
+            changeLikes(likesNum - 1)
+            onLikeToggle(false)
+        }
+    }
 
     return (
         <section className="post-preview">
@@ -52,19 +64,22 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
 
             <div className="post-icons">
                 <ChatBubbleOutlineIcon fontSize="small" />
-                {liked ? (
-                    <FavoriteIcon
-                        fontSize="small"
-                        onClick={handleLikeToggle}
-                        className="liked"
-                    />
-                ) : (
-                    <FavoriteBorderIcon
-                        fontSize="small"
-                        onClick={handleLikeToggle}
-                        className="unliked"
-                    />
-                )}
+                <div className="likes-container">
+                    {isLiked ? (
+                        <FavoriteIcon
+                            fontSize="small"
+                            onClick={() => onToggleLike(false)}
+                            className="liked"
+                        />
+                    ) : (
+                        <FavoriteBorderIcon
+                            fontSize="small"
+                            onClick={() => onToggleLike(true)}
+                            className="unliked"
+                        />
+                    )}
+                    <p>{likes !== 0 && likesNum}</p>
+                </div>
                 <Loop fontSize="small" />
                 <ShareIcon fontSize="small" />
             </div>

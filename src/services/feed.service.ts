@@ -1,4 +1,8 @@
-import { getCurrentDate, getRandomIntInclusive } from './util.service'
+import {
+    generateId,
+    getCurrentDate,
+    getRandomIntInclusive
+} from './util.service'
 
 export const feedService = {
     getEmptyPost(
@@ -7,7 +11,7 @@ export const feedService = {
         txt: string = '...'
     ) {
         return {
-            _id: '',
+            _id: generateId(),
             displayName,
             username,
             txt,
@@ -15,7 +19,7 @@ export const feedService = {
             avatar: '',
             verified: false,
             createdAt: getCurrentDate(),
-            likes: 0,
+            likes: 0
         }
     },
     getRandomPosts(postsCount: number) {

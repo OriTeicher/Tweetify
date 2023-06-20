@@ -70,7 +70,10 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
                 >
                     {isSmallScreen ? '+' : 'Squeak'}
                 </button>
-                <LoggedAcount displayName='Pukki Blinders' username='oriteicher' />
+                <LoggedAcount
+                    displayName="Pukki Blinders"
+                    username="oriteicher"
+                />
             </div>
         </section>
     )
