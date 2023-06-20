@@ -1,14 +1,19 @@
 .mobile-topbar-container {
     display: flex;
     align-items: center;
-    border-bottom: $outline1;
-    padding: 10px;
+    padding: 9px;
     justify-content: space-between;
     display: none;
-    .twitter-icon{
+    .twitter-icon {
         position: absolute;
         left: 48%;
         color: $logoColor;
+    }
+    .MuiAvatar-root {
+        font-size: 12px;
+        width: 30px;
+        height: 30px;
+        margin-left: 6px;
     }
 }
 

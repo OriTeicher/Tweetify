@@ -5,7 +5,6 @@
     padding: 17px;
     font-size: 18px;
     font-weight: 100;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     position: relative;
     .top-preview {
         display: flex;
@@ -48,8 +47,10 @@
         color: $mainColor2;
     }
     .post-txt {
-        width: 90%;
-        text-align: justify;
+        width: 95%;
+        padding-left: 10px;
+        text-align: left;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     .verified-logo {
         color: $logoColor;
@@ -60,10 +61,7 @@
         color: $mainColor2;
         font-weight: 400;
     }
-    .post-txt {
-        padding-left: 10px;
-        text-align: left;
-    }
+
     .more-icon {
         position: absolute;
         right: 0;
@@ -101,7 +99,7 @@
     svg.liked {
         color: rgb(222, 83, 83);
     }
-    svg.unliked{
+    svg.unliked {
         &:hover {
             color: rgb(222, 83, 83);
         }
@@ -141,6 +139,9 @@
         padding: 15px 10px;
         img {
             width: 96%;
+        }
+        .post-txt {
+            font-family: 'Outfit', sans-serif;
         }
     }
 }

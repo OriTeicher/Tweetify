@@ -10,7 +10,15 @@
     max-height: fit-content;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1700px) {
+    .feed-index 
+    {
+        flex: 0.7;
+    }
+}
+
+
+@media (max-width: 850px) {
     .feed-index {
         flex: 1;
         border-right: none;

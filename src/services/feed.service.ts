@@ -62,7 +62,6 @@ export const feedService = {
 
     getRandomComments(length: number) {
         let comments = []
-        debugger
         for (let i = 0; i < length; i++) {
             let randomComment: object = this.getRandomComment()
             comments.push(randomComment)
