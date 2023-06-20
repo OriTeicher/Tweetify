@@ -5,3 +5,4 @@ export default class CommentsIndex extends Component {
         return <div>CommentsIndex</div>
     }
 }
+// TODO : build the comments index
