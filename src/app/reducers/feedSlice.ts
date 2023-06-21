@@ -1,12 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { feedService } from '../../services/feed.service'
 import { generateId } from '../../services/util.service'
-import {
-    setDemoDB,
-    addItemsToCollection,
-    getCollectionFromDB
-} from '../../firsebase'
-import { POSTS_DB_COLLECTION } from '../../services/db.service'
+import { dbService } from '../../services/db.service'
 import { AppThunk } from '../feedStore'
 
 interface FeedState {
@@ -37,8 +32,15 @@ const initialState: FeedState = {
 
 export const queryFeedPosts = (): AppThunk => async (dispatch) => {
     try {
-        const feedPostsDB = await getCollectionFromDB(POSTS_DB_COLLECTION)
-        console.log('feedPostsDB', feedPostsDB)
+        let feedPostsDB = await dbService.getCollectionFromDB(
+            dbService.POSTS_DB_COLLECTION
+        )
+        if (feedPostsDB.length < dbService.MIN_POST_NUM) {
+            await dbService.setDemoDB(dbService.MIN_POST_NUM)
+            feedPostsDB = await dbService.getCollectionFromDB(
+                dbService.POSTS_DB_COLLECTION
+            )
+        }
         dispatch(feedReducers.queryFeedPostsSuccess(feedPostsDB))
     } catch (error) {
         console.log(error)
@@ -58,7 +60,6 @@ const feedSlice = createSlice({
             state.isLoading = false
             const demoPosts = feedService.getRandomPosts(2)
             state.feedPosts = demoPosts
-            console.log(state.feedPosts)
         },
         addFeedPost: (state, action: PayloadAction<string>) => {
             state.isLoading = true

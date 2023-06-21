@@ -1,10 +1,8 @@
 import {
-    generateId,
     getCurrentDate,
     getRandomColor,
     getRandomIntInclusive
 } from './util.service'
-import { addItemToCollection } from '../firsebase'
 
 export const feedService = {
     getEmptyPost(
