@@ -28,7 +28,6 @@ const FeedList: React.FC<FeedListProps> = ({
     handleIconClicked
 }) => {
     const onIconClicked = (action: object) => {
-        console.log('feedlist', action)
         handleIconClicked(action)
     }
 

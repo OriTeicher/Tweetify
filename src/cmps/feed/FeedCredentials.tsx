@@ -23,7 +23,6 @@ const FeedCredentials: React.FC<FeedCredentialsProps> = ({
     handleRemovePost
 }) => {
     const onRemovePostClick = (postId: string) => {
-        console.log(postId)
         handleRemovePost(postId)
     }
 

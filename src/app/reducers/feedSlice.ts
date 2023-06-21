@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { feedService } from '../../services/feed.service'
 
 interface FeedState {
     feedPosts: FeedPost[]
@@ -34,15 +33,18 @@ const feedSlice = createSlice({
     reducers: {
         queryFeedPostsSuccess: (state, action: PayloadAction<FeedPost[]>) => {
             state.feedPosts = action.payload
+            state.isLoading = false
         },
-        queryFeedPostsFailure: (state) => {},
         addFeedPostSuccess: (state, action: PayloadAction<FeedPost>) => {
             state.feedPosts = [action.payload, ...state.feedPosts]
+            state.isLoading = false
+            console.log(state.feedPosts)
         },
         removeFeedPostSuccess: (state, action: PayloadAction<string>) => {
             state.feedPosts = state.feedPosts.filter(
                 (post) => post.id !== action.payload
             )
+            state.isLoading = false
         },
         toggleLikes: (
             state,
@@ -51,6 +53,9 @@ const feedSlice = createSlice({
             const { postId, isLiked } = action.payload
             const post = state.feedPosts.find((post) => post.txt === postId)
             if (post) post.likes += isLiked ? 1 : -1
+        },
+        setLoaderActive: (state) => {
+            state.isLoading = true
         }
     }
 })

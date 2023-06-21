@@ -64,7 +64,6 @@ function getInitials(fullName: string) {
     return initials
 }
 
-
 function generateRandomSentences(sentencesCount: number) {
     const sentences = [
         'The Premier League has been won by six different clubs: Manchester United, Manchester City, Chelsea, Arsenal, Blackburn Rovers, and Leicester City. ',

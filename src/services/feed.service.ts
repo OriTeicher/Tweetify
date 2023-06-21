@@ -43,7 +43,7 @@ export const feedService = {
                 names[utilService.getRandomIntInclusive(0, names.length - 1)]
             const username = displayName.toLowerCase().replace(/\s/g, '')
             const txt = utilService.generateRandomSentences(
-                utilService.getRandomIntInclusive(1, 10)
+                utilService.getRandomIntInclusive(1, 4)
             )
             const imgUrl =
                 demoPhotos[

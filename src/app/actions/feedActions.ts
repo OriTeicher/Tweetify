@@ -12,6 +12,8 @@ export const feedActions = {
 function queryFeedPosts(): AppThunk {
     return async (dispatch) => {
         try {
+            dispatch(feedReducers.setLoaderActive())
+            debugger
             let feedPostsDB = await dbService.getCollectionFromDB(
                 dbService.POSTS_DB_COLLECTION
             )
@@ -26,7 +28,6 @@ function queryFeedPosts(): AppThunk {
             dispatch(feedReducers.queryFeedPostsSuccess(feedPostsDB))
         } catch (error) {
             console.log(error)
-            dispatch(feedReducers.queryFeedPostsFailure())
         }
     }
 }
@@ -44,7 +45,6 @@ function addFeedPost(postContent: string): AppThunk {
                 dbService.POSTS_DB_COLLECTION
             )
             dispatch(feedReducers.addFeedPostSuccess(newPost))
-            console.log('success')
         } catch (error) {
             console.log('Cannot add post. ', error)
         }
