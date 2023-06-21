@@ -46,7 +46,6 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
     const [resqueaksNum, changeResqueaks] = useState(resqueaks)
 
     const onPostIconClicked = (action: { type: string; postId: string }) => {
-        console.log('feed preview')
         handleIconClicked(action)
     }
     return (

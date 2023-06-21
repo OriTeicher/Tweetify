@@ -4,6 +4,7 @@ import {
     getRandomColor,
     getRandomIntInclusive
 } from './util.service'
+import { addItemToCollection } from '../firsebase'
 
 export const feedService = {
     getEmptyPost(
@@ -57,11 +58,11 @@ export const feedService = {
                 createdAt,
                 likes: getRandomIntInclusive(0, 500),
                 comments: this.getRandomComments(getRandomIntInclusive(0, 3)),
-                resqueaks: getRandomIntInclusive(0, 50)
+                resqueaks: getRandomIntInclusive(0, 50),
+                handleIconClicked: () => {}
             }
             posts.push(post)
         }
-
         return posts
     },
 

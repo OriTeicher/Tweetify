@@ -1,8 +1,9 @@
-// feedSlice.ts
-
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { feedService } from '../../services/feed.service'
 import { generateId } from '../../services/util.service'
+import { addItemsToCollection, getCollectionFromDB } from '../../firsebase'
+import { POSTS_DB_COLLECTION } from '../../services/db.service'
+import { AppThunk } from '../feedStore'
 
 interface FeedState {
     feedPosts: FeedPost[]
@@ -24,7 +25,7 @@ interface FeedPost {
     likes: number
     comments: object[]
     resqueaks: number
-    handleIconClicked: Function
+    handleIconClicked: () => void
 }
 
 const initialState: FeedState = {
@@ -32,14 +33,29 @@ const initialState: FeedState = {
     isLoading: true
 }
 
+export const queryFeedPosts = (): AppThunk => async (dispatch) => {
+    try {
+        const feedPostsDB = await getCollectionFromDB(POSTS_DB_COLLECTION)
+        console.log('feedPostsDB', feedPostsDB)
+    } catch (error) {
+        console.log(error)
+        dispatch(feedReducers.queryFeedPostsFailure())
+    }
+}
+
 const feedSlice = createSlice({
     name: 'feed',
     initialState,
     reducers: {
-        queryFeedPosts: (state) => {
-            const feedPosts = feedService.getRandomPosts(5)
-            state.feedPosts = feedPosts.map((post) => post as FeedPost)
+        queryFeedPostsSuccess: (state, action: PayloadAction<FeedPost[]>) => {
+            state.feedPosts = action.payload
             state.isLoading = false
+        },
+        queryFeedPostsFailure: (state) => {
+            state.isLoading = false
+            const demoPosts = feedService.getRandomPosts(2)
+            state.feedPosts = demoPosts
+            console.log(state.feedPosts)
         },
         addFeedPost: (state, action: PayloadAction<string>) => {
             state.isLoading = true
@@ -53,7 +69,6 @@ const feedSlice = createSlice({
         },
         removeFeedPost: (state, action: PayloadAction<string>) => {
             state.isLoading = true
-            console.log(action.payload)
             state.feedPosts = state.feedPosts.filter(
                 (post) => post._id !== action.payload
             )
@@ -67,7 +82,6 @@ const feedSlice = createSlice({
             const post = state.feedPosts.find((post) => post._id === postId)
             if (post) post.likes += isLiked ? 1 : -1
         }
-
     }
 })
 

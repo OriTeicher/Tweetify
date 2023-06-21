@@ -1,10 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import feedReducer from './reducers/feedSlice'
+export type AppThunk<ReturnType = void> = ThunkAction<
+    ReturnType,
+    RootState,
+    unknown,
+    Action<string>
+>
 
-// Define RootState type
 export type RootState = ReturnType<typeof store.getState>
 
-// Create the Redux store using configureStore
 const store = configureStore({
     reducer: {
         feed: feedReducer

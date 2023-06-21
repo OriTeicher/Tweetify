@@ -9,6 +9,7 @@ import { ListSharp as ListsIcon } from '@mui/icons-material'
 import { MoreHoriz as MoreIcon } from '@mui/icons-material'
 import SidebarOption from './SidebarOption'
 import LoggedAcount from './LoggedAcount'
+
 interface SidebarProps {
     onOptionChange: (option: string) => void
 }
@@ -66,7 +67,6 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
                 {renderSidebarOptions()}
                 <button
                     className={`squeak-btn ${isSmallScreen ? 'mobile' : ''}`}
-                    onClick={() => console.log('check')}
                 >
                     {isSmallScreen ? '+' : 'Squeak'}
                 </button>

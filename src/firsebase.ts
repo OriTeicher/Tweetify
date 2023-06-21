@@ -25,12 +25,21 @@ const db = getFirestore(app)
 
 export async function addItemToCollection(item: object, col: string) {
     try {
-        const docRef = await addDoc(collection(db, col), {
+        await addDoc(collection(db, col), {
             ...item
         })
-        console.log('Document written with ID: ', docRef.id)
-    } catch (e) {
-        console.error('Error adding document: ', e)
+    } catch (error) {
+        console.error('Error adding document: ', error)
+    }
+}
+
+export async function addItemsToCollection(items: object[], col: string) {
+    try {
+        for (let i = 0; i < items.length; i++) {
+            await addItemToCollection(items[i], col)
+        }
+    } catch (error) {
+        console.error('Error adding document: ', error)
     }
 }
 
@@ -42,8 +51,8 @@ export async function getCollectionFromDB(col: string) {
             ...doc.data()
         }))
         return collectionArr
-    } catch (e) {
-        console.error('Error getting collection: ', e)
+    } catch (error) {
+        console.error('Error getting collection: ', error)
         return []
     }
 }
@@ -51,8 +60,8 @@ export async function getCollectionFromDB(col: string) {
 export async function removeItemFromDB(itemId: string, col: string) {
     try {
         await deleteDoc(doc(db, col, itemId))
-    } catch (e) {
-        console.error('Error getting collection: ', e)
+    } catch (error) {
+        console.error('Error getting collection: ', error)
         return []
     }
 }
