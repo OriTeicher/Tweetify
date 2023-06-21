@@ -1,13 +1,13 @@
-import { RootState } from '../../app/feedStore'
+import { RootState } from '../app/feedStore'
 import { Action } from '@reduxjs/toolkit'
-import { feedActions } from '../../app/actions/feedActions'
+import { feedActions } from '../app/actions/feedActions'
 import { useSelector, useDispatch } from 'react-redux'
 import { ThunkDispatch } from 'redux-thunk'
 import { useEffect } from 'react'
-import FeedTopbar from './FeedTopbar'
-import FeedList from './FeedList'
-import SqueakBox from './SqueakBox'
-import MobileTopbar from './MobileTopbar'
+import FeedTopbar from '../cmps/feed/FeedTopbar'
+import FeedList from '../cmps/feed/FeedList'
+import SqueakBox from '../cmps/feed/SqueakBox'
+import MobileTopbar from '../cmps/feed/MobileTopbar'
 
 interface FeedIndexProps {
     topBarOption: string

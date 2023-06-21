@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import './assets/styles/main.scss'
 import Sidebar from './cmps/sidebar/Sidebar'
-import FeedIndex from './cmps/feed/FeedIndex'
-import NewsIndex from './cmps/news/NewsIndex'
+import FeedIndex from './views/FeedIndex'
+import NewsIndex from './views/NewsIndex'
 
 function App() {
     const [topBarOption, settopBarOption] = useState('Home')
