@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 interface FeedTopbarProps {
-    selectedOption?: string
+    topBarOption?: string
 }
 
 interface FeedTopbarState {
@@ -19,17 +19,17 @@ export default class FeedTopbar extends Component<
         }
     }
 
-    setSelectedBtn = (selectedOption: string) => {
-        this.setState({ selectedBtn: selectedOption })
+    setSelectedBtn = (topBarOption: string) => {
+        this.setState({ selectedBtn: topBarOption })
     }
 
     render() {
-        let { selectedOption } = this.props
+        let { topBarOption } = this.props
         const { selectedBtn } = this.state
-        if (!selectedOption) selectedOption = 'Home'
+        if (!topBarOption) topBarOption = 'Home'
         return (
             <section className="topbar-container">
-                <h1>{selectedOption}</h1>
+                <h1>{topBarOption}</h1>
                 <div className="topbar-btns">
                     <button
                         onClick={() => this.setSelectedBtn('For you')}

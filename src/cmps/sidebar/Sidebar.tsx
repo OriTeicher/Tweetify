@@ -15,7 +15,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
-    const [selectedOption, setSelectedOption] = useState('Home')
+    const [selectedSidebarOption, setSelectedSidebarOption] = useState('Home')
     const [isSmallScreen, setIsSmallScreen] = useState(false)
 
     useEffect(() => {
@@ -30,7 +30,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
     }, [])
 
     const handleOptionClick = (option: string) => {
-        setSelectedOption(option)
+        setSelectedSidebarOption(option)
         onOptionChange(option)
     }
 
@@ -51,7 +51,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
                 key={txt}
                 Icon={Icon}
                 txt={isSmallScreen ? '' : txt}
-                isActive={selectedOption === txt}
+                isActive={selectedSidebarOption === txt}
                 onClick={() => handleOptionClick(txt)}
             />
         ))

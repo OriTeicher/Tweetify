@@ -5,16 +5,16 @@ import FeedIndex from './cmps/feed/FeedIndex'
 import NewsIndex from './cmps/news/NewsIndex'
 
 function App() {
-    const [selectedOption, setSelectedOption] = useState('Home')
+    const [topBarOption, settopBarOption] = useState('Home')
 
-    const handleSidebarOptionClick = (selectedOption: string) => {
-        setSelectedOption(selectedOption)
+    const handleSidebarOptionClick = (topBarOption: string) => {
+        settopBarOption(topBarOption)
     }
 
     return (
         <div className="app-container">
             <Sidebar onOptionChange={handleSidebarOptionClick} />
-            <FeedIndex selectedOption={selectedOption} />
+            <FeedIndex topBarOption={topBarOption} />
             <NewsIndex />
         </div>
     )

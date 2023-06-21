@@ -1,6 +1,7 @@
 import { RootState } from '../../app/feedStore'
 import { Action } from '@reduxjs/toolkit'
-import { queryFeedPosts, feedReducers } from '../../app/reducers/feedSlice'
+import { feedReducers } from '../../app/reducers/feedSlice'
+import { queryFeedPosts } from '../../app/actions/feedActions'
 import { useSelector, useDispatch } from 'react-redux'
 import { ThunkDispatch } from 'redux-thunk'
 import { useEffect } from 'react'
@@ -10,12 +11,11 @@ import SqueakBox from './SqueakBox'
 import MobileTopbar from './MobileTopbar'
 
 interface FeedIndexProps {
-    selectedOption: string
+    topBarOption: string
 }
 
-const FeedIndex: React.FC<FeedIndexProps> = ({ selectedOption }) => {
+const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
     const { feedPosts } = useSelector((state: RootState) => {
-        console.log(state.feed)
         return state.feed
     })
 
@@ -41,7 +41,7 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ selectedOption }) => {
     return (
         <section className="feed-index">
             <MobileTopbar />
-            <FeedTopbar selectedOption={selectedOption} />
+            <FeedTopbar topBarOption={topBarOption} />
             <SqueakBox addPost={addPost} />
             {feedPosts && (
                 <FeedList
