@@ -1,3 +1,4 @@
+import { Avatar } from '@mui/material'
 import React, { useState } from 'react'
 import Loop from '@mui/icons-material/Loop'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
@@ -5,10 +6,10 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ShareIcon from '@mui/icons-material/Share'
 import FeedCredentials from './FeedCredentials'
-import { Avatar } from '@mui/material'
 import { getInitials } from '../../services/util.service'
 
 interface FeedPreviewProps {
+    _id: string
     displayName: string
     username: string
     txt: string
@@ -26,6 +27,7 @@ interface FeedPreviewProps {
 }
 
 const FeedPreview: React.FC<FeedPreviewProps> = ({
+    _id,
     displayName,
     username,
     txt,
@@ -43,7 +45,7 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
     const [commentsNum, changeComments] = useState(comments?.length || 0)
     const [resqueaksNum, changeResqueaks] = useState(resqueaks)
 
-    const onIconClicked = (action: string) => {
+    const onPostIconClicked = (action: { type: string; postId: string }) => {
         console.log('feed preview')
         handleIconClicked(action)
     }
@@ -58,12 +60,19 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                     {getInitials(displayName)}
                 </Avatar>
                 <FeedCredentials
+                    _id={_id}
                     displayName={displayName}
                     username={username}
                     verified={verified}
                     createdAt={createdAt}
                     txt={txt}
                     imgUrl={imgUrl}
+                    handleRemovePost={(postId: string) =>
+                        onPostIconClicked({
+                            type: 'removeFeedPost',
+                            postId: postId
+                        })
+                    }
                 />
             </div>
 
@@ -76,13 +85,13 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                     {isLiked ? (
                         <FavoriteIcon
                             fontSize="small"
-                            onClick={() => onIconClicked('decreaseLikes')}
+                            // onClick={() => onPostIconClicked('decreaseLikes')}
                             className="liked"
                         />
                     ) : (
                         <FavoriteBorderIcon
                             fontSize="small"
-                            onClick={() => onIconClicked('increaseLikes')}
+                            // onClick={() => onPostIconClicked('increaseLikes')}
                             className="unliked"
                         />
                     )}

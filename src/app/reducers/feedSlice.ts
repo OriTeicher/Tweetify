@@ -39,12 +39,25 @@ const feedSlice = createSlice({
         queryFeedPosts: (state) => {
             const feedPosts = feedService.getRandomPosts(5)
             state.feedPosts = feedPosts.map((post) => post as FeedPost)
-            console.log(feedPosts, ' + + ++ + ++ + + +')
-            console.log(state.feedPosts)
             state.isLoading = false
         },
-        addFeedPost: (state, action: PayloadAction<FeedPost>) => {
-            state.feedPosts = [...state.feedPosts, action.payload]
+        addFeedPost: (state, action: PayloadAction<string>) => {
+            state.isLoading = true
+            const newPost = feedService.getEmptyPost(
+                'Pukki Blinders',
+                'oriteicher',
+                action.payload
+            )
+            state.feedPosts = [newPost, ...state.feedPosts]
+            state.isLoading = false
+        },
+        removeFeedPost: (state, action: PayloadAction<string>) => {
+            state.isLoading = true
+            console.log(action.payload)
+            state.feedPosts = state.feedPosts.filter(
+                (post) => post._id !== action.payload
+            )
+            state.isLoading = false
         },
         toggleLikes: (
             state,
@@ -54,14 +67,7 @@ const feedSlice = createSlice({
             const post = state.feedPosts.find((post) => post._id === postId)
             if (post) post.likes += isLiked ? 1 : -1
         }
-        // addFeedComment: (
-        //     state,
-        //     action: PayloadAction<{ postId: string; comment: Comment }>
-        // ) => {
-        //     const { postId, comment } = action.payload
-        //     const post = state.feedPosts.find((post) => post._id === postId)
-        //     if (post) post.comments.push(comment)
-        // }
+
     }
 })
 

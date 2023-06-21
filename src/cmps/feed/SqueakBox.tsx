@@ -1,11 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react'
 import { Avatar } from '@mui/material'
-import {
-    InsertPhoto,
-    Gif,
-    EmojiEmotions,
-    TagFacesOutlined
-} from '@mui/icons-material'
+import { InsertPhoto, Gif, TagFacesOutlined } from '@mui/icons-material'
 
 interface SqueakBoxProps {
     addPost: (post: string) => void

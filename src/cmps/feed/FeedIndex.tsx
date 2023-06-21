@@ -11,8 +11,6 @@ interface FeedIndexProps {
     selectedOption: string
 }
 
-const onIconClicked = (action: string) => {}
-
 const FeedIndex: React.FC<FeedIndexProps> = ({ selectedOption }) => {
     const { feedPosts } = useSelector((state: RootState) => state.feed)
 
@@ -20,12 +18,16 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ selectedOption }) => {
 
     useEffect(() => {
         dispatch(feedReducers.queryFeedPosts())
+        console.log(feedPosts)
     }, [dispatch])
 
     const addPost = async (postContent: string) => {
-        // const newPost = feedService.getEmptyPost('Guest', 'guest', postContent)
-        // await addItemToCollection(newPost, POSTS_DB_COLLECTION)
-        // setFeedPosts([...feedPosts, newPost])
+        dispatch(feedReducers.addFeedPost(postContent))
+    }
+
+    const onPostIconClicked = (action: { type: string; postId: string }) => {
+        console.log(action)
+        dispatch(feedReducers.removeFeedPost(action.postId))
     }
 
     return (
@@ -33,7 +35,10 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ selectedOption }) => {
             <MobileTopbar />
             <FeedTopbar selectedOption={selectedOption} />
             <SqueakBox addPost={addPost} />
-            <FeedList feedPosts={feedPosts} handleIconClicked={onIconClicked} />
+            <FeedList
+                feedPosts={feedPosts}
+                handleIconClicked={onPostIconClicked}
+            />
         </section>
     )
 }

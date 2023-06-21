@@ -46,10 +46,10 @@ export function getInitials(fullName: string) {
     return initials
 }
 
-export function generateId() {
+export function generateId(length: number = 5) {
     const keys = 'ABCDEFGHIJQLMNOP1234567890'
     let resId = ''
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < length; i++) {
         resId += keys[getRandomIntInclusive(0, keys.length - 1)]
     }
     return resId

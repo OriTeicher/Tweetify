@@ -7,6 +7,7 @@ interface FeedListProps {
 }
 
 interface FeedPost {
+    _id: string
     displayName: string
     username: string
     txt: string
@@ -32,6 +33,7 @@ const FeedList: React.FC<FeedListProps> = ({
             {feedPosts.map((post, idx) => (
                 <FeedPreview
                     key={idx}
+                    _id={post._id}
                     displayName={post.displayName}
                     username={post.username}
                     txt={post.txt}

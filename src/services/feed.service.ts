@@ -17,12 +17,16 @@ export const feedService = {
             username,
             txt,
             imgUrl: '',
-            avatar: {},
+            avatar: {
+                imgUrl: '',
+                bgColor: ''
+            },
             verified: false,
             createdAt: getCurrentDate(),
             likes: 0,
             resqueaks: 0,
-            comments: []
+            comments: [],
+            handleIconClicked: () => {}
         }
     },
     getRandomPosts(postsCount: number) {
@@ -43,6 +47,7 @@ export const feedService = {
             const createdAt = getCurrentDate()
 
             const post = {
+                _id: generateId(),
                 displayName,
                 username,
                 txt,

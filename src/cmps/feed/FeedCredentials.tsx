@@ -1,25 +1,32 @@
 import React from 'react'
-import { Avatar } from '@mui/material'
 import { Verified, MoreHoriz } from '@mui/icons-material'
-import { getRandomColor } from '../../services/util.service'
 
 interface FeedCredentialsProps {
+    _id: string
     displayName: string
     username: string
     verified: boolean
     createdAt: string
     txt?: string
     imgUrl?: string
+    handleRemovePost: Function
 }
 
 const FeedCredentials: React.FC<FeedCredentialsProps> = ({
+    _id,
     displayName,
     username,
     verified,
     createdAt,
     txt,
-    imgUrl
+    imgUrl,
+    handleRemovePost
 }) => {
+    const onRemovePostClick = (postId: string) => {
+        console.log(postId)
+        handleRemovePost(postId)
+    }
+
     return (
         <section className="post-info-container">
             <div className="top-cred">
@@ -28,7 +35,10 @@ const FeedCredentials: React.FC<FeedCredentialsProps> = ({
                 <h2>@{username}</h2>
                 <h3>.</h3>
                 <p className="post-date">{createdAt}</p>
-                <MoreHoriz className="more-icon" />
+                <MoreHoriz
+                    className="more-icon"
+                    onClick={() => onRemovePostClick(_id)}
+                />
             </div>
             <p className="post-txt">{txt}</p>
             {imgUrl && <img src={imgUrl} className="post-photo"></img>}
