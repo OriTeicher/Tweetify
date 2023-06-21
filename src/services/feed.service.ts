@@ -13,7 +13,6 @@ export const feedService = {
         txt: string = '...'
     ) {
         return {
-            _id: generateId(),
             displayName,
             username,
             txt,
@@ -26,8 +25,7 @@ export const feedService = {
             createdAt: getCurrentDate(),
             likes: 0,
             resqueaks: 0,
-            comments: [],
-            handleIconClicked: () => {}
+            comments: []
         }
     },
     getRandomPosts(postsCount: number) {
@@ -48,7 +46,6 @@ export const feedService = {
             const createdAt = getCurrentDate()
 
             const post = {
-                _id: generateId(),
                 displayName,
                 username,
                 txt,
@@ -58,8 +55,7 @@ export const feedService = {
                 createdAt,
                 likes: getRandomIntInclusive(0, 500),
                 comments: this.getRandomComments(getRandomIntInclusive(0, 3)),
-                resqueaks: getRandomIntInclusive(0, 50),
-                handleIconClicked: () => {}
+                resqueaks: getRandomIntInclusive(0, 50)
             }
             posts.push(post)
         }
@@ -78,7 +74,6 @@ export const feedService = {
     getRandomComment(displayName: string = 'Guest'): object {
         const names = ['John Doe', 'Jane Smith', 'Mike Johnson', 'Emily Brown']
         const comment = {
-            _id: generateId(),
             displayName: names[getRandomIntInclusive(0, names.length - 1)],
             username: displayName.toLowerCase().replace(/\s/g, ''),
             txt: this.generateRandomSentences(getRandomIntInclusive(10, 35)),

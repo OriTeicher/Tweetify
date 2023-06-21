@@ -2,7 +2,6 @@ import React from 'react'
 import { Verified, MoreHoriz } from '@mui/icons-material'
 
 interface FeedCredentialsProps {
-    _id: string
     displayName: string
     username: string
     verified: boolean
@@ -13,7 +12,6 @@ interface FeedCredentialsProps {
 }
 
 const FeedCredentials: React.FC<FeedCredentialsProps> = ({
-    _id,
     displayName,
     username,
     verified,
@@ -36,7 +34,7 @@ const FeedCredentials: React.FC<FeedCredentialsProps> = ({
                 <p className="post-date">{createdAt}</p>
                 <MoreHoriz
                     className="more-icon"
-                    onClick={() => onRemovePostClick(_id)}
+                    // onClick={() => onRemovePostClick(id)}
                 />
             </div>
             <p className="post-txt">{txt}</p>

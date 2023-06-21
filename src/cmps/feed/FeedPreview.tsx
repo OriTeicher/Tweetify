@@ -9,13 +9,12 @@ import FeedCredentials from './FeedCredentials'
 import { getInitials } from '../../services/util.service'
 
 interface FeedPreviewProps {
-    _id: string
     displayName: string
     username: string
     txt: string
     imgUrl?: string
     avatar: {
-        imgUrl: string
+        imgUrl?: string
         bgColor: string
     }
     verified: boolean
@@ -27,7 +26,6 @@ interface FeedPreviewProps {
 }
 
 const FeedPreview: React.FC<FeedPreviewProps> = ({
-    _id,
     displayName,
     username,
     txt,
@@ -59,7 +57,6 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                     {getInitials(displayName)}
                 </Avatar>
                 <FeedCredentials
-                    _id={_id}
                     displayName={displayName}
                     username={username}
                     verified={verified}

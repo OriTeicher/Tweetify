@@ -14,7 +14,10 @@ interface FeedIndexProps {
 }
 
 const FeedIndex: React.FC<FeedIndexProps> = ({ selectedOption }) => {
-    const { feedPosts } = useSelector((state: RootState) => state.feed)
+    const { feedPosts } = useSelector((state: RootState) => {
+        console.log(state.feed)
+        return state.feed
+    })
 
     const dispatch: ThunkDispatch<
         RootState,
@@ -40,10 +43,12 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ selectedOption }) => {
             <MobileTopbar />
             <FeedTopbar selectedOption={selectedOption} />
             <SqueakBox addPost={addPost} />
-            <FeedList
-                feedPosts={feedPosts}
-                handleIconClicked={onPostIconClicked}
-            />
+            {feedPosts && (
+                <FeedList
+                    feedPosts={feedPosts}
+                    handleIconClicked={onPostIconClicked}
+                />
+            )}
         </section>
     )
 }

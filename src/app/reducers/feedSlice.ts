@@ -1,7 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { feedService } from '../../services/feed.service'
 import { generateId } from '../../services/util.service'
-import { addItemsToCollection, getCollectionFromDB } from '../../firsebase'
+import {
+    setDemoDB,
+    addItemsToCollection,
+    getCollectionFromDB
+} from '../../firsebase'
 import { POSTS_DB_COLLECTION } from '../../services/db.service'
 import { AppThunk } from '../feedStore'
 
@@ -11,7 +15,6 @@ interface FeedState {
 }
 
 interface FeedPost {
-    _id: string
     displayName: string
     username: string
     txt: string
@@ -25,7 +28,6 @@ interface FeedPost {
     likes: number
     comments: object[]
     resqueaks: number
-    handleIconClicked: () => void
 }
 
 const initialState: FeedState = {
@@ -37,6 +39,7 @@ export const queryFeedPosts = (): AppThunk => async (dispatch) => {
     try {
         const feedPostsDB = await getCollectionFromDB(POSTS_DB_COLLECTION)
         console.log('feedPostsDB', feedPostsDB)
+        dispatch(feedReducers.queryFeedPostsSuccess(feedPostsDB))
     } catch (error) {
         console.log(error)
         dispatch(feedReducers.queryFeedPostsFailure())
@@ -70,7 +73,7 @@ const feedSlice = createSlice({
         removeFeedPost: (state, action: PayloadAction<string>) => {
             state.isLoading = true
             state.feedPosts = state.feedPosts.filter(
-                (post) => post._id !== action.payload
+                (post) => post.txt !== action.payload
             )
             state.isLoading = false
         },
@@ -79,7 +82,7 @@ const feedSlice = createSlice({
             action: PayloadAction<{ postId: string; isLiked: boolean }>
         ) => {
             const { postId, isLiked } = action.payload
-            const post = state.feedPosts.find((post) => post._id === postId)
+            const post = state.feedPosts.find((post) => post.txt === postId)
             if (post) post.likes += isLiked ? 1 : -1
         }
     }

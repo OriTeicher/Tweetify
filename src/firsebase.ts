@@ -5,7 +5,8 @@ import {
     doc,
     addDoc,
     getDocs,
-    deleteDoc
+    deleteDoc,
+    setDoc
 } from 'firebase/firestore'
 import { feedService } from './services/feed.service'
 import { POSTS_DB_COLLECTION } from './services/db.service'
@@ -25,7 +26,7 @@ const db = getFirestore(app)
 
 export async function addItemToCollection(item: object, col: string) {
     try {
-        await addDoc(collection(db, col), {
+        await addDoc(collection(db, POSTS_DB_COLLECTION), {
             ...item
         })
     } catch (error) {
@@ -48,7 +49,16 @@ export async function getCollectionFromDB(col: string) {
         const querySnapshot = await getDocs(collection(db, col))
         const collectionArr = querySnapshot.docs.map((doc) => ({
             id: doc.id,
-            ...doc.data()
+            displayName: doc.data().displayName,
+            username: doc.data().username,
+            txt: doc.data().txt,
+            avatar: doc.data().avatar,
+            imgUrl: doc.data().imgUrl || '',
+            verified: doc.data().verified || false,
+            createdAt: doc.data().createdAt || '',
+            likes: doc.data().likes || 0,
+            comments: doc.data().comments || [],
+            resqueaks: doc.data().resqueaks || 0
         }))
         return collectionArr
     } catch (error) {
@@ -66,7 +76,7 @@ export async function removeItemFromDB(itemId: string, col: string) {
     }
 }
 
-async function setDemoDB(postsNum: number) {
+export async function setDemoDB(postsNum: number) {
     const randomPosts = feedService.getRandomPosts(postsNum)
     for (let i = 0; i < postsNum; i++) {
         await addItemToCollection(randomPosts[i], POSTS_DB_COLLECTION)
