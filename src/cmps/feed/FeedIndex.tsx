@@ -1,7 +1,6 @@
 import { RootState } from '../../app/feedStore'
 import { Action } from '@reduxjs/toolkit'
-import { feedReducers } from '../../app/reducers/feedSlice'
-import { queryFeedPosts } from '../../app/actions/feedActions'
+import { feedActions } from '../../app/actions/feedActions'
 import { useSelector, useDispatch } from 'react-redux'
 import { ThunkDispatch } from 'redux-thunk'
 import { useEffect } from 'react'
@@ -27,15 +26,19 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
     useDispatch()
 
     useEffect(() => {
-        dispatch(queryFeedPosts())
+        dispatch(feedActions.queryFeedPosts())
     }, [dispatch])
 
     const addPost = async (postContent: string) => {
-        dispatch(feedReducers.addFeedPost(postContent))
+        dispatch(feedActions.addFeedPost(postContent))
     }
 
     const onPostIconClicked = (action: { type: string; postId: string }) => {
-        dispatch(feedReducers.removeFeedPost(action.postId))
+        console.log(action, 'feedindex')
+        switch (action.type) {
+            case 'removeFeedPost':
+                dispatch(feedActions.removeFeedPost(action.postId))
+        }
     }
 
     return (
@@ -46,7 +49,10 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
             {feedPosts && (
                 <FeedList
                     feedPosts={feedPosts}
-                    handleIconClicked={onPostIconClicked}
+                    handleIconClicked={(action: {
+                        type: string
+                        postId: string
+                    }) => onPostIconClicked(action)}
                 />
             )}
         </section>

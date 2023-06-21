@@ -7,6 +7,7 @@ interface FeedListProps {
 }
 
 interface FeedPost {
+    id: string
     displayName: string
     username: string
     txt: string
@@ -26,12 +27,17 @@ const FeedList: React.FC<FeedListProps> = ({
     feedPosts,
     handleIconClicked
 }) => {
+    const onIconClicked = (action: object) => {
+        console.log('feedlist', action)
+        handleIconClicked(action)
+    }
+
     return (
         <section className="posts-list">
             {feedPosts.map((post, idx) => (
                 <FeedPreview
                     key={idx}
-                    // id={post.id}
+                    id={post.id}
                     displayName={post.displayName}
                     username={post.username}
                     txt={post.txt}
@@ -42,7 +48,9 @@ const FeedList: React.FC<FeedListProps> = ({
                     likes={post.likes}
                     comments={post.comments}
                     resqueaks={post.resqueaks}
-                    handleIconClicked={handleIconClicked}
+                    handleIconClicked={(action: object) =>
+                        onIconClicked(action)
+                    }
                 />
             ))}
         </section>

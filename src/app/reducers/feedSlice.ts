@@ -7,6 +7,7 @@ interface FeedState {
 }
 
 interface FeedPost {
+    id: string
     displayName: string
     username: string
     txt: string
@@ -33,29 +34,15 @@ const feedSlice = createSlice({
     reducers: {
         queryFeedPostsSuccess: (state, action: PayloadAction<FeedPost[]>) => {
             state.feedPosts = action.payload
-            state.isLoading = false
         },
-        queryFeedPostsFailure: (state) => {
-            state.isLoading = false
-            const demoPosts = feedService.getRandomPosts(2)
-            state.feedPosts = demoPosts
+        queryFeedPostsFailure: (state) => {},
+        addFeedPostSuccess: (state, action: PayloadAction<FeedPost>) => {
+            state.feedPosts = [action.payload, ...state.feedPosts]
         },
-        addFeedPost: (state, action: PayloadAction<string>) => {
-            state.isLoading = true
-            const newPost = feedService.getEmptyPost(
-                'Pukki Blinders',
-                'oriteicher',
-                action.payload
-            )
-            state.feedPosts = [newPost, ...state.feedPosts]
-            state.isLoading = false
-        },
-        removeFeedPost: (state, action: PayloadAction<string>) => {
-            state.isLoading = true
+        removeFeedPostSuccess: (state, action: PayloadAction<string>) => {
             state.feedPosts = state.feedPosts.filter(
-                (post) => post.txt !== action.payload
+                (post) => post.id !== action.payload
             )
-            state.isLoading = false
         },
         toggleLikes: (
             state,

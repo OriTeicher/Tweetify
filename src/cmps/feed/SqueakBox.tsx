@@ -1,6 +1,11 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react'
 import { Avatar } from '@mui/material'
-import { InsertPhoto, Gif, TagFacesOutlined } from '@mui/icons-material'
+import {
+    ImageOutlined,
+    Gif,
+    TagFacesOutlined,
+    GifBoxOutlined
+} from '@mui/icons-material'
 
 interface SqueakBoxProps {
     addPost: (post: string) => void
@@ -30,7 +35,7 @@ export default function SqueakBox({ addPost }: SqueakBoxProps) {
                             textShadow: '1px 1px 1px black'
                         }}
                     >
-                        {'OR'}
+                        {'PK'}
                     </Avatar>
                     <input
                         className="squeak-input"
@@ -44,8 +49,8 @@ export default function SqueakBox({ addPost }: SqueakBoxProps) {
                         Squeak
                     </button>
                     <div className="left-icons">
-                        <InsertPhoto className="icon" />
-                        <Gif className="icon gif" />
+                        <ImageOutlined className="icon" />
+                        <GifBoxOutlined className="icon" />
                         <TagFacesOutlined className="icon" />
                     </div>
                 </div>

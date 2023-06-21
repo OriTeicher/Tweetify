@@ -6,9 +6,10 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ShareIcon from '@mui/icons-material/Share'
 import FeedCredentials from './FeedCredentials'
-import { getInitials } from '../../services/util.service'
+import { utilService } from '../../services/util.service'
 
 interface FeedPreviewProps {
+    id: string
     displayName: string
     username: string
     txt: string
@@ -26,6 +27,7 @@ interface FeedPreviewProps {
 }
 
 const FeedPreview: React.FC<FeedPreviewProps> = ({
+    id,
     displayName,
     username,
     txt,
@@ -54,9 +56,10 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                     className="user-avatar"
                     sx={{ bgcolor: avatar.bgColor }}
                 >
-                    {getInitials(displayName)}
+                    {utilService.getInitials(displayName)}
                 </Avatar>
                 <FeedCredentials
+                    id={id}
                     displayName={displayName}
                     username={username}
                     verified={verified}

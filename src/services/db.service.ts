@@ -25,7 +25,7 @@ export const dbService = {
 
 async function addItemToCollection(item: object, col: string) {
     try {
-        await addDoc(collection(db, dbService.POSTS_DB_COLLECTION), {
+        await addDoc(collection(db, col), {
             ...item
         })
     } catch (error) {
@@ -70,7 +70,7 @@ async function removeItemFromDB(itemId: string, col: string) {
     try {
         await deleteDoc(doc(db, col, itemId))
     } catch (error) {
-        console.error('Error getting collection: ', error)
+        console.error('Error removing item from collection: ', error)
         return []
     }
 }

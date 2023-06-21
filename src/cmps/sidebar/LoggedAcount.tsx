@@ -20,7 +20,7 @@ export default class LoggedAcount extends Component<UserProps> {
                             textShadow: '1px 1px 1px black'
                         }}
                     >
-                        {'OR'}
+                        {'PK'}
                     </Avatar>
                     <div className="user-cred">
                         <h1>{displayName}</h1>
