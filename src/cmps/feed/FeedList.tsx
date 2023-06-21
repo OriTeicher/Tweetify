@@ -2,14 +2,15 @@ import React from 'react'
 import FeedPreview from './FeedPreview'
 
 interface FeedListProps {
-    feedPosts: FeedPostsProps[]
-    // onLikeToggle: (isLiked: boolean, idx: number) => void
+    feedPosts: FeedPost[]
+    handleIconClicked: Function
 }
-interface FeedPostsProps {
+
+interface FeedPost {
     displayName: string
     username: string
     txt: string
-    imgUrl?: string 
+    imgUrl?: string
     avatar: {
         bgColor: string
         imgUrl: string
@@ -19,10 +20,13 @@ interface FeedPostsProps {
     likes: number
     comments: object[]
     resqueaks: number
-    // onLikeToggle: (isLiked: boolean, idx: number) => void
+    handleIconClicked: Function
 }
 
-const FeedList: React.FC<FeedListProps> = ({ feedPosts }) => {
+const FeedList: React.FC<FeedListProps> = ({
+    feedPosts,
+    handleIconClicked
+}) => {
     return (
         <section className="posts-list">
             {feedPosts.map((post, idx) => (
@@ -38,9 +42,7 @@ const FeedList: React.FC<FeedListProps> = ({ feedPosts }) => {
                     likes={post.likes}
                     comments={post.comments}
                     resqueaks={post.resqueaks}
-                    // onLikeToggle={(isLiked: boolean) =>
-                        // onLikeToggle(isLiked, idx)
-                    // }
+                    handleIconClicked={handleIconClicked}
                 />
             ))}
         </section>

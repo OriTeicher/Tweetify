@@ -4,11 +4,14 @@ import SqueakBox from './SqueakBox'
 import MobileTopbar from './MobileTopbar'
 import { RootState } from '../../app/feedStore'
 import { useEffect } from 'react'
-import { queryFeedPosts } from '../../app/reducers/feedSlice'
+import { feedReducers } from '../../app/reducers/feedSlice'
 import { useSelector, useDispatch } from 'react-redux'
+
 interface FeedIndexProps {
     selectedOption: string
 }
+
+const onIconClicked = (action: string) => {}
 
 const FeedIndex: React.FC<FeedIndexProps> = ({ selectedOption }) => {
     const { feedPosts } = useSelector((state: RootState) => state.feed)
@@ -16,12 +19,8 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ selectedOption }) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(queryFeedPosts())
+        dispatch(feedReducers.queryFeedPosts())
     }, [dispatch])
-
-    const handleLikeToggle = (isLiked: boolean, idx: number) => {
-        // isLiked ? feedPosts[idx].likes++ : feedPosts[idx].likes--
-    }
 
     const addPost = async (postContent: string) => {
         // const newPost = feedService.getEmptyPost('Guest', 'guest', postContent)
@@ -34,12 +33,7 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ selectedOption }) => {
             <MobileTopbar />
             <FeedTopbar selectedOption={selectedOption} />
             <SqueakBox addPost={addPost} />
-            <FeedList
-                feedPosts={feedPosts}
-                // onLikeToggle={(isLiked: boolean, idx: number) =>
-                //     handleLikeToggle(isLiked, idx)
-                // }
-            />
+            <FeedList feedPosts={feedPosts} handleIconClicked={onIconClicked} />
         </section>
     )
 }

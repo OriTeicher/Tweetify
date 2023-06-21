@@ -6,6 +6,7 @@ import { generateId } from '../../services/util.service'
 
 interface FeedState {
     feedPosts: FeedPost[]
+    isLoading: boolean
 }
 
 interface FeedPost {
@@ -21,45 +22,26 @@ interface FeedPost {
     verified: boolean
     createdAt: string
     likes: number
+    comments: object[]
     resqueaks: number
-    comments: Comment[]
-}
-
-interface Comment {
-    _id: string
-    displayName: string
-    username: string
-    txt: string
-    avatar: {
-        bgColor: string
-        imgUrl: string
-    }
-    verified: boolean
-    createdAt: string
+    handleIconClicked: Function
 }
 
 const initialState: FeedState = {
-    feedPosts: []
+    feedPosts: [],
+    isLoading: true
 }
 
 const feedSlice = createSlice({
     name: 'feed',
     initialState,
     reducers: {
-        helloWorld: (state) => {
-            console.log(state)
-            console.log('hello world')
-        },
         queryFeedPosts: (state) => {
-            debugger
-            const randomPosts: FeedPost[] = feedService
-                .getRandomPosts(5)
-                .map((post) => ({
-                    ...post,
-                    _id: generateId(),
-                    comments: [] as Comment[]
-                }))
-            state.feedPosts = randomPosts
+            const feedPosts = feedService.getRandomPosts(5)
+            state.feedPosts = feedPosts.map((post) => post as FeedPost)
+            console.log(feedPosts, ' + + ++ + ++ + + +')
+            console.log(state.feedPosts)
+            state.isLoading = false
         },
         addFeedPost: (state, action: PayloadAction<FeedPost>) => {
             state.feedPosts = [...state.feedPosts, action.payload]
@@ -71,18 +53,17 @@ const feedSlice = createSlice({
             const { postId, isLiked } = action.payload
             const post = state.feedPosts.find((post) => post._id === postId)
             if (post) post.likes += isLiked ? 1 : -1
-        },
-        addFeedComment: (
-            state,
-            action: PayloadAction<{ postId: string; comment: Comment }>
-        ) => {
-            const { postId, comment } = action.payload
-            const post = state.feedPosts.find((post) => post._id === postId)
-            if (post) post.comments.push(comment)
         }
+        // addFeedComment: (
+        //     state,
+        //     action: PayloadAction<{ postId: string; comment: Comment }>
+        // ) => {
+        //     const { postId, comment } = action.payload
+        //     const post = state.feedPosts.find((post) => post._id === postId)
+        //     if (post) post.comments.push(comment)
+        // }
     }
 })
 
-export const { addFeedPost, toggleLikes, addFeedComment, queryFeedPosts, helloWorld } =
-    feedSlice.actions
+export const feedReducers = feedSlice.actions
 export default feedSlice.reducer

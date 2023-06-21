@@ -26,7 +26,7 @@ export default class FeedTopbar extends Component<
     render() {
         let { selectedOption } = this.props
         const { selectedBtn } = this.state
-        if(!selectedOption) selectedOption = 'Home'
+        if (!selectedOption) selectedOption = 'Home'
         return (
             <section className="topbar-container">
                 <h1>{selectedOption}</h1>

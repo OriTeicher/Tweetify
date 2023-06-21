@@ -7,7 +7,6 @@ import ShareIcon from '@mui/icons-material/Share'
 import FeedCredentials from './FeedCredentials'
 import { Avatar } from '@mui/material'
 import { getInitials } from '../../services/util.service'
-// import { getRandomColor } from '../../services/util.service'
 
 interface FeedPreviewProps {
     displayName: string
@@ -23,7 +22,7 @@ interface FeedPreviewProps {
     likes: number
     comments: object[]
     resqueaks: number
-    // onLikeToggle: Function
+    handleIconClicked: Function
 }
 
 const FeedPreview: React.FC<FeedPreviewProps> = ({
@@ -37,24 +36,17 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
     likes,
     comments,
     resqueaks,
-    // onLikeToggle
+    handleIconClicked
 }) => {
     const [isLiked, toggleIsLiked] = useState(false)
     const [likesNum, changeLikes] = useState(likes)
     const [commentsNum, changeComments] = useState(comments?.length || 0)
     const [resqueaksNum, changeResqueaks] = useState(resqueaks)
 
-    // const onToggleLike = (isLikedPost: boolean) => {
-    //     toggleIsLiked(!isLiked)
-    //     if (isLikedPost) {
-    //         changeLikes(likesNum + 1)
-    //         onLikeToggle(true)
-    //     } else {
-    //         changeLikes(likesNum - 1)
-    //         onLikeToggle(false)
-    //     }
-    // }
-
+    const onIconClicked = (action: string) => {
+        console.log('feed preview')
+        handleIconClicked(action)
+    }
     return (
         <section className="post-preview">
             <div className="top-preview">
@@ -84,13 +76,13 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                     {isLiked ? (
                         <FavoriteIcon
                             fontSize="small"
-                            // onClick={() => onToggleLike(false)}
+                            onClick={() => onIconClicked('decreaseLikes')}
                             className="liked"
                         />
                     ) : (
                         <FavoriteBorderIcon
                             fontSize="small"
-                            // onClick={() => onToggleLike(true)}
+                            onClick={() => onIconClicked('increaseLikes')}
                             className="unliked"
                         />
                     )}
