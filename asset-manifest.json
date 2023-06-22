@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Squeaker-Twitter-clone/static/css/main.f9b4c043.css",
-    "main.js": "/Squeaker-Twitter-clone/static/js/main.d60275fb.js",
+    "main.css": "/Squeaker-Twitter-clone/static/css/main.e63c00c8.css",
+    "main.js": "/Squeaker-Twitter-clone/static/js/main.5a92f6f4.js",
     "static/js/787.324a46fa.chunk.js": "/Squeaker-Twitter-clone/static/js/787.324a46fa.chunk.js",
     "index.html": "/Squeaker-Twitter-clone/index.html",
-    "main.f9b4c043.css.map": "/Squeaker-Twitter-clone/static/css/main.f9b4c043.css.map",
-    "main.d60275fb.js.map": "/Squeaker-Twitter-clone/static/js/main.d60275fb.js.map",
+    "main.e63c00c8.css.map": "/Squeaker-Twitter-clone/static/css/main.e63c00c8.css.map",
+    "main.5a92f6f4.js.map": "/Squeaker-Twitter-clone/static/js/main.5a92f6f4.js.map",
     "787.324a46fa.chunk.js.map": "/Squeaker-Twitter-clone/static/js/787.324a46fa.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f9b4c043.css",
-    "static/js/main.d60275fb.js"
+    "static/css/main.e63c00c8.css",
+    "static/js/main.5a92f6f4.js"
   ]
 }
