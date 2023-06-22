@@ -1,3 +1,5 @@
+import { time } from 'console'
+
 export const utilService = {
     getRandomIntInclusive,
     getRandomColor,
@@ -36,7 +38,7 @@ function getRandomColor(): string {
     return color
 }
 
-function getCurrentDate(): string {
+function getCurrentDate(timeStamp: number): string {
     const months = [
         'Jan',
         'Feb',
@@ -45,16 +47,18 @@ function getCurrentDate(): string {
         'May',
         'Jun',
         'Jul',
+        'Aug',
         'Sep',
         'Oct',
         'Nov',
-        'December'
+        'Dec'
     ]
-    const date = new Date()
-    const day = date.getDate().toString().padStart(2, '0')
-    const month = date.getMonth()
 
-    const formattedDate = `${months[month - 1]} ${day}`
+    const date = new Date(timeStamp)
+    const day = date.getDate().toString().padStart(2, '0')
+    const month = months[date.getMonth()]
+
+    const formattedDate = `${month} ${day}`
     return formattedDate
 }
 

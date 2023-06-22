@@ -18,7 +18,7 @@ interface FeedPost {
         imgUrl?: string
     }
     verified: boolean
-    createdAt: string
+    createdAt: number
     likes: number
     comments: object[]
     resqueaks: number

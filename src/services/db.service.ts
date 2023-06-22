@@ -54,7 +54,7 @@ async function getCollectionFromDB(col: string) {
             avatar: doc.data().avatar,
             imgUrl: doc.data().imgUrl || '',
             verified: doc.data().verified || false,
-            createdAt: doc.data().createdAt || '',
+            createdAt: doc.data().createdAt || Date.now(),
             likes: doc.data().likes || 0,
             comments: doc.data().comments || [],
             resqueaks: doc.data().resqueaks || 0

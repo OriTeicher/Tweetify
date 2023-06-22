@@ -18,7 +18,7 @@ export const feedService = {
                 bgColor: ''
             },
             verified: false,
-            createdAt: utilService.getCurrentDate(),
+            createdAt: Date.now(),
             likes: 0,
             resqueaks: 0,
             comments: []
@@ -52,7 +52,7 @@ export const feedService = {
                 ]
             const avatar = { bgColor: utilService.getRandomColor(), imgUrl: '' }
             const verified = Math.random() < 0.5
-            const createdAt = utilService.getCurrentDate()
+            const createdAt = Date.now()
 
             const post = {
                 displayName,
@@ -94,7 +94,7 @@ export const feedService = {
             imgUrl: '',
             avatar: '',
             verified: false,
-            createdAt: utilService.getCurrentDate(),
+            createdAt: Date.now(),
             likes: 0,
             resqueaks: 0,
             comments: []
