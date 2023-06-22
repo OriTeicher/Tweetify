@@ -1,3 +1,4 @@
+import { generateKey } from 'crypto'
 import { utilService } from './util.service'
 
 export const feedService = {
@@ -7,7 +8,7 @@ export const feedService = {
         txt: string = '...'
     ) {
         return {
-            id: utilService.generateId(10),
+            id: utilService.generateId(5),
             displayName,
             username,
             txt,

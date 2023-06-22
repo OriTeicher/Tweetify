@@ -13,7 +13,7 @@ interface FeedCredentialsProps {
 }
 
 const FeedCredentials: React.FC<FeedCredentialsProps> = ({
-    id,
+    id: id,
     displayName,
     username,
     verified,

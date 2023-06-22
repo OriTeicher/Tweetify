@@ -8,6 +8,7 @@ import {
 } from 'firebase/firestore'
 import { feedService } from './feed.service'
 import { db } from '../firsebase'
+import { utilService } from './util.service'
 
 export const dbService = {
     // functions
@@ -25,9 +26,8 @@ export const dbService = {
 
 async function addItemToCollection(item: object, col: string) {
     try {
-        await addDoc(collection(db, col), {
-            ...item
-        })
+        const id = 'P-' + utilService.generateId(5)
+        await setDoc(doc(db, col, id), item)
     } catch (error) {
         console.error('Error adding document: ', error)
     }

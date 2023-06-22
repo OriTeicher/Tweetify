@@ -29,7 +29,7 @@ interface FeedPreviewProps {
 }
 
 const FeedPreview: React.FC<FeedPreviewProps> = ({
-    id,
+    id: id,
     displayName,
     username,
     txt,

@@ -4,15 +4,17 @@ export const utilService = {
     getCurrentDate,
     getInitials,
     generateRandomSentences,
-    generateId,
+    generateId
 }
 
-function generateId(idLength: number){
-    const letters = ['abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890']
+function generateId(idLength: number = 5) {
+    const letters =
+        'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
     let id = ''
-    for(let i = 0; i < idLength; i++){
-        id += letters[getRandomIntInclusive(0,letters.length-1)]
+    for (let i = 0; i < idLength; i++) {
+        id += letters.charAt(getRandomIntInclusive(0, letters.length))
     }
+    console.log(id)
     return id
 }
 

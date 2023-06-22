@@ -33,6 +33,7 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
     }, [dispatch])
 
     const addPost = async (postContent: string) => {
+        console.log('postContent', postContent)
         dispatch(feedActions.addFeedPost(postContent))
     }
 
