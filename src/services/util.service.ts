@@ -1,5 +1,3 @@
-import { time } from 'console'
-
 export const utilService = {
     getRandomIntInclusive,
     getRandomColor,
@@ -16,7 +14,6 @@ function generateId(idLength: number = 5) {
     for (let i = 0; i < idLength; i++) {
         id += letters.charAt(getRandomIntInclusive(0, letters.length))
     }
-    console.log(id)
     return id
 }
 

@@ -37,10 +37,23 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
         dispatch(feedActions.addFeedPost(postContent))
     }
 
-    const onPostIconClicked = (action: { type: string; postId: string }) => {
+    const onPostIconClicked = (action: {
+        type: string
+        postId: string
+        isStatIncrease: boolean
+    }) => {
         switch (action.type) {
             case 'removeFeedPost':
                 dispatch(feedActions.removeFeedPost(action.postId))
+                break
+            case 'toggleLikes':
+                dispatch(
+                    feedActions.toggleLikes(
+                        action.postId,
+                        action.isStatIncrease
+                    )
+                )
+                break
         }
     }
 
@@ -57,6 +70,7 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
                     handleIconClicked={(action: {
                         type: string
                         postId: string
+                        isStatIncrease: boolean
                     }) => onPostIconClicked(action)}
                     isPostLoading={isPostLoading}
                 />

@@ -1,5 +1,6 @@
 import React from 'react'
 import FeedPreview from './FeedPreview'
+import { log } from 'console'
 
 interface FeedListProps {
     feedPosts: FeedPost[]
@@ -29,7 +30,11 @@ const FeedList: React.FC<FeedListProps> = ({
     handleIconClicked,
     isPostLoading
 }) => {
-    const onIconClicked = (action: object) => {
+    const onIconClicked = (action: {
+        type: string
+        postId: string
+        isStatIncrease: boolean
+    }) => {
         handleIconClicked(action)
     }
 
@@ -49,10 +54,12 @@ const FeedList: React.FC<FeedListProps> = ({
                     likes={post.likes}
                     comments={post.comments}
                     resqueaks={post.resqueaks}
-                    handleIconClicked={(action: object) =>
-                        onIconClicked(action)
-                    }
                     isPostLoading={isPostLoading}
+                    handleIconClicked={(action: {
+                        type: string
+                        postId: string
+                        isStatIncrease: boolean
+                    }) => onIconClicked(action)}
                 />
             ))}
         </section>

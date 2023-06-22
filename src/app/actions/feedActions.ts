@@ -6,14 +6,14 @@ import { feedService } from '../../services/feed.service'
 export const feedActions = {
     queryFeedPosts,
     addFeedPost,
-    removeFeedPost
+    removeFeedPost,
+    toggleLikes
 }
 
 function queryFeedPosts(): AppThunk {
     return async (dispatch) => {
         try {
             dispatch(feedReducers.setAppLoaderActive())
-            debugger
             let feedPostsDB = await dbService.getCollectionFromDB(
                 dbService.POSTS_DB_COLLECTION
             )
@@ -43,8 +43,10 @@ function addFeedPost(postContent: string): AppThunk {
             newPost.txt = postContent
             await dbService.addItemToCollection(
                 newPost,
-                dbService.POSTS_DB_COLLECTION
+                dbService.POSTS_DB_COLLECTION,
+                newPost.id
             )
+            console.log('newPost',newPost)
             dispatch(feedReducers.addFeedPostSuccess(newPost))
         } catch (error) {
             console.log('Cannot add post. ', error)
@@ -63,6 +65,16 @@ function removeFeedPost(postId: string): AppThunk {
             dispatch(feedReducers.removeFeedPostSuccess(postId))
         } catch (error) {
             console.log('Cannot remove post. ', error)
+        }
+    }
+}
+
+function toggleLikes(postId: string, isLiked: boolean): AppThunk {
+    return async (dispatch) => {
+        try {
+            dispatch(feedReducers.toggleLikesSuccess({ postId, isLiked }))
+        } catch (error) {
+            console.log('Cannot toggle likes. ', error)
         }
     }
 }

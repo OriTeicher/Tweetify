@@ -1,4 +1,3 @@
-import { generateKey } from 'crypto'
 import { utilService } from './util.service'
 
 export const feedService = {
@@ -8,7 +7,7 @@ export const feedService = {
         txt: string = '...'
     ) {
         return {
-            id: utilService.generateId(5),
+            id: 'P-' + utilService.generateId(5),
             displayName,
             username,
             txt,
@@ -40,6 +39,7 @@ export const feedService = {
         const posts = []
 
         for (let i = 0; i < postsCount; i++) {
+            const id = 'P-' + utilService.generateId(5)
             const displayName =
                 names[utilService.getRandomIntInclusive(0, names.length - 1)]
             const username = displayName.toLowerCase().replace(/\s/g, '')
@@ -55,6 +55,7 @@ export const feedService = {
             const createdAt = Date.now()
 
             const post = {
+                id,
                 displayName,
                 username,
                 txt,

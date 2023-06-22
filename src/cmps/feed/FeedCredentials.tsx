@@ -14,7 +14,7 @@ interface FeedCredentialsProps {
 }
 
 const FeedCredentials: React.FC<FeedCredentialsProps> = ({
-    id: id,
+    id,
     displayName,
     username,
     verified,
@@ -46,7 +46,7 @@ const FeedCredentials: React.FC<FeedCredentialsProps> = ({
                 />
             </div>
             <p className="post-txt">{txt}</p>
-            {imgUrl && <img src={imgUrl} className="post-photo"></img>}
+            {imgUrl && <img src={imgUrl} className="post-photo" alt='NOTHING TO SEE HERE.'></img>}
         </section>
     )
 }

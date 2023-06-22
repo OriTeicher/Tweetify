@@ -29,7 +29,7 @@ interface FeedPreviewProps {
 }
 
 const FeedPreview: React.FC<FeedPreviewProps> = ({
-    id: id,
+    id,
     displayName,
     username,
     txt,
@@ -43,14 +43,18 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
     handleIconClicked,
     isPostLoading
 }) => {
-    const [isLiked, toggleIsLiked] = useState(false)
-    const [likesNum, changeLikes] = useState(likes)
-    const [commentsNum, changeComments] = useState(comments?.length || 0)
-    const [resqueaksNum, changeResqueaks] = useState(resqueaks)
-    const [selectedPostId, changeSelectedPostId] = useState('')
+    const [isLiked] = useState(false)
+    const [likesNum] = useState(likes)
+    const [commentsNum] = useState(comments?.length || 0)
+    const [resqueaksNum] = useState(resqueaks)
+    const [selectedPostId, setSelectedPostId] = useState('')
 
-    const onPostIconClicked = (action: { type: string; postId: string }) => {
-        changeSelectedPostId(action.postId)
+    const onPostIconClicked = (action: {
+        type: string
+        postId: string
+        isStatIncrease: boolean
+    }) => {
+        setSelectedPostId(action.postId)
         handleIconClicked(action)
     }
 
@@ -79,7 +83,8 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                         handleRemovePost={(postId: string) =>
                             onPostIconClicked({
                                 type: 'removeFeedPost',
-                                postId: postId
+                                postId,
+                                isStatIncrease: false
                             })
                         }
                     />
@@ -95,13 +100,25 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                     {isLiked ? (
                         <FavoriteIcon
                             fontSize="small"
-                            // onClick={() => onPostIconClicked('decreaseLikes')}
+                            onClick={() =>
+                                onPostIconClicked({
+                                    type: 'toggleLikes',
+                                    postId: id,
+                                    isStatIncrease: false
+                                })
+                            }
                             className="liked"
                         />
                     ) : (
                         <FavoriteBorderIcon
                             fontSize="small"
-                            // onClick={() => onPostIconClicked('increaseLikes')}
+                            onClick={() =>
+                                onPostIconClicked({
+                                    type: 'toggleLikes',
+                                    postId: id,
+                                    isStatIncrease: true
+                                })
+                            }
                             className="unliked"
                         />
                     )}

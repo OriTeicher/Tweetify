@@ -13,9 +13,9 @@ import { utilService } from './util.service'
 export const dbService = {
     // functions
     addItemToCollection,
-    addItemsArrToCollection,
     getCollectionFromDB,
     removeItemFromDB,
+    updateItemInCollection,
     setDemoDB,
 
     // consts
@@ -24,20 +24,9 @@ export const dbService = {
     MIN_POST_NUM: 10
 }
 
-async function addItemToCollection(item: object, col: string) {
+async function addItemToCollection(item: object, itemId: string, col: string) {
     try {
-        const id = 'P-' + utilService.generateId(5)
-        await setDoc(doc(db, col, id), item)
-    } catch (error) {
-        console.error('Error adding document: ', error)
-    }
-}
-
-async function addItemsArrToCollection(items: object[], col: string) {
-    try {
-        for (let i = 0; i < items.length; i++) {
-            await addItemToCollection(items[i], col)
-        }
+        await setDoc(doc(db, itemId, col), item)
     } catch (error) {
         console.error('Error adding document: ', error)
     }
@@ -78,6 +67,22 @@ async function removeItemFromDB(itemId: string, col: string) {
 async function setDemoDB(postsNum: number) {
     const randomPosts = feedService.getRandomPosts(postsNum)
     for (let i = 0; i < postsNum; i++) {
-        await addItemToCollection(randomPosts[i], dbService.POSTS_DB_COLLECTION)
+        await addItemToCollection(
+            randomPosts[i],
+            randomPosts[i].id,
+            dbService.POSTS_DB_COLLECTION
+        )
+    }
+}
+
+async function updateItemInCollection(
+    updatedItem: object,
+    itemId: string,
+    col: string
+) {
+    try {
+        await setDoc(doc(db, col, itemId), { ...updatedItem })
+    } catch (error) {
+        console.log('Cannot update item - ', error)
     }
 }

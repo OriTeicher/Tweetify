@@ -48,13 +48,16 @@ const feedSlice = createSlice({
             )
             state.isPostLoading = false
         },
-        toggleLikes: (
+        toggleLikesSuccess: (
             state,
             action: PayloadAction<{ postId: string; isLiked: boolean }>
         ) => {
+            debugger
             const { postId, isLiked } = action.payload
-            const post = state.feedPosts.find((post) => post.txt === postId)
-            if (post) post.likes += isLiked ? 1 : -1
+            const postIdx = state.feedPosts.findIndex(
+                (post) => post.id === postId
+            )
+            if (postIdx) state.feedPosts[postIdx].likes += isLiked ? 1 : -1
         },
         setAppLoaderActive: (state) => {
             state.isAppLoading = true
