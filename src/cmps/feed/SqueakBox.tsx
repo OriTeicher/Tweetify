@@ -1,4 +1,10 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react'
+import React, {
+    useState,
+    useEffect,
+    ChangeEvent,
+    KeyboardEvent,
+    useRef
+} from 'react'
 import { Avatar } from '@mui/material'
 import {
     ImageOutlined,
@@ -6,23 +12,44 @@ import {
     TagFacesOutlined,
     GifBoxOutlined
 } from '@mui/icons-material'
+import Loader from '../utils/Loader'
 
 interface SqueakBoxProps {
     addPost: (post: string) => void
+    isPostLoading: boolean
 }
 
-export default function SqueakBox({ addPost }: SqueakBoxProps) {
-    const [message, setMessage] = useState('')
+export default function SqueakBox({ addPost, isPostLoading }: SqueakBoxProps) {
+    const textareaRef = useRef<HTMLTextAreaElement>(null)
+    const [msg, setMsg] = useState('')
 
-    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setMessage(event.target.value)
+    const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        setMsg(event.target.value)
     }
 
-    const handleSqueak = (event: FormEvent) => {
+    const handleKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault()
+            setMsg((prevMsg) => prevMsg + '\n')
+        }
+    }
+
+    const handleSqueak = (event: React.FormEvent) => {
         event.preventDefault()
-        addPost(message)
-        setMessage('')
+        addPost(msg)
+        setMsg('')
     }
+
+    const resizeTextarea = () => {
+        if (textareaRef.current) {
+            textareaRef.current.style.height = 'auto'
+            textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`
+        }
+    }
+
+    useEffect(() => {
+        resizeTextarea()
+    }, [msg])
 
     return (
         <section className="squeak-box">
@@ -37,12 +64,18 @@ export default function SqueakBox({ addPost }: SqueakBoxProps) {
                     >
                         {'PK'}
                     </Avatar>
-                    <input
-                        className="squeak-input"
-                        placeholder="What is happening?!"
-                        value={message}
-                        onChange={handleInputChange}
-                    />
+                    {isPostLoading ? (
+                        <Loader />
+                    ) : (
+                        <textarea
+                            ref={textareaRef}
+                            className="squeak-textarea"
+                            placeholder="What is happening?!"
+                            value={msg}
+                            onChange={handleInputChange}
+                            onKeyDown={handleKeyDown}
+                        />
+                    )}
                 </div>
                 <div className="squeak-box-btns">
                     <button type="submit" className="squeak-btn">

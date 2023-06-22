@@ -15,9 +15,11 @@ interface FeedIndexProps {
 }
 
 const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
-    const { feedPosts, isLoading } = useSelector((state: RootState) => {
-        return state.feed
-    })
+    const { feedPosts, isAppLoading, isPostLoading } = useSelector(
+        (state: RootState) => {
+            return state.feed
+        }
+    )
 
     const dispatch: ThunkDispatch<
         RootState,
@@ -35,7 +37,6 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
     }
 
     const onPostIconClicked = (action: { type: string; postId: string }) => {
-        console.log(action, 'feedindex')
         switch (action.type) {
             case 'removeFeedPost':
                 dispatch(feedActions.removeFeedPost(action.postId))
@@ -46,19 +47,18 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
         <section className="feed-index">
             <MobileTopbar />
             <FeedTopbar topBarOption={topBarOption} />
-            <SqueakBox addPost={addPost} />
-            {isLoading ? (
+            <SqueakBox addPost={addPost} isPostLoading={isPostLoading} />
+            {isAppLoading ? (
                 <Loader />
             ) : (
-                feedPosts && (
-                    <FeedList
-                        feedPosts={feedPosts}
-                        handleIconClicked={(action: {
-                            type: string
-                            postId: string
-                        }) => onPostIconClicked(action)}
-                    />
-                )
+                <FeedList
+                    feedPosts={feedPosts}
+                    handleIconClicked={(action: {
+                        type: string
+                        postId: string
+                    }) => onPostIconClicked(action)}
+                    isPostLoading={isPostLoading}
+                />
             )}
         </section>
     )

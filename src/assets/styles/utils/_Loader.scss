@@ -9,3 +9,19 @@
     animation: spin 0.7s linear infinite;
     margin-top: 50px;
 }
+
+.post-preview {
+    .loader {
+        position: relative;
+        margin-top: 0px;
+    }
+}
+
+.squeak-box {
+    .loader {
+        padding: 0px;
+        padding: 0px;
+        margin-top: 20px;
+        left: -5%;
+    }
+}

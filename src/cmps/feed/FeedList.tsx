@@ -4,6 +4,7 @@ import FeedPreview from './FeedPreview'
 interface FeedListProps {
     feedPosts: FeedPost[]
     handleIconClicked: Function
+    isPostLoading: boolean
 }
 
 interface FeedPost {
@@ -25,7 +26,8 @@ interface FeedPost {
 
 const FeedList: React.FC<FeedListProps> = ({
     feedPosts,
-    handleIconClicked
+    handleIconClicked,
+    isPostLoading
 }) => {
     const onIconClicked = (action: object) => {
         handleIconClicked(action)
@@ -50,6 +52,7 @@ const FeedList: React.FC<FeedListProps> = ({
                     handleIconClicked={(action: object) =>
                         onIconClicked(action)
                     }
+                    isPostLoading={isPostLoading}
                 />
             ))}
         </section>

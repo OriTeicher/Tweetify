@@ -12,7 +12,7 @@ export const feedActions = {
 function queryFeedPosts(): AppThunk {
     return async (dispatch) => {
         try {
-            dispatch(feedReducers.setLoaderActive())
+            dispatch(feedReducers.setAppLoaderActive())
             debugger
             let feedPostsDB = await dbService.getCollectionFromDB(
                 dbService.POSTS_DB_COLLECTION
@@ -35,6 +35,7 @@ function queryFeedPosts(): AppThunk {
 function addFeedPost(postContent: string): AppThunk {
     return async (dispatch) => {
         try {
+            dispatch(feedReducers.setPostLoaderActive())
             const newPost = feedService.getEmptyPost(
                 'Pukki Blinders',
                 'oriteicher'
@@ -53,6 +54,7 @@ function addFeedPost(postContent: string): AppThunk {
 
 function removeFeedPost(postId: string): AppThunk {
     return async (dispatch) => {
+        dispatch(feedReducers.setPostLoaderActive())
         try {
             await dbService.removeItemFromDB(
                 postId,

@@ -5,15 +5,19 @@
         margin-bottom: 15px;
         display: flex;
         gap: 20px;
-        align-items: center;
-        .squeak-input {
+        align-items: start;
+        .squeak-textarea {
             width: 100%;
             padding-left: 5px;
-            background-color: $mainColor1;
+            resize: none;
+            overflow: hidden;
             font-size: 18px;
             outline: none;
             border: none;
             word-break: break-all;
+            background-color: $mainColor1;
+            color: white;
+            font-family: 'Jost', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         .squeak-input:focus {
             color: white;

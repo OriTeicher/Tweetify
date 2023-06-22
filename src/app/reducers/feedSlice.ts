@@ -2,7 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface FeedState {
     feedPosts: FeedPost[]
-    isLoading: boolean
+    isAppLoading: boolean
+    isPostLoading: boolean
 }
 
 interface FeedPost {
@@ -24,7 +25,8 @@ interface FeedPost {
 
 const initialState: FeedState = {
     feedPosts: [],
-    isLoading: true
+    isAppLoading: true,
+    isPostLoading: false
 }
 
 const feedSlice = createSlice({
@@ -33,18 +35,18 @@ const feedSlice = createSlice({
     reducers: {
         queryFeedPostsSuccess: (state, action: PayloadAction<FeedPost[]>) => {
             state.feedPosts = action.payload
-            state.isLoading = false
+            state.isAppLoading = false
         },
         addFeedPostSuccess: (state, action: PayloadAction<FeedPost>) => {
             state.feedPosts = [action.payload, ...state.feedPosts]
-            state.isLoading = false
+            state.isPostLoading = false
             console.log(state.feedPosts)
         },
         removeFeedPostSuccess: (state, action: PayloadAction<string>) => {
             state.feedPosts = state.feedPosts.filter(
                 (post) => post.id !== action.payload
             )
-            state.isLoading = false
+            state.isPostLoading = false
         },
         toggleLikes: (
             state,
@@ -54,8 +56,11 @@ const feedSlice = createSlice({
             const post = state.feedPosts.find((post) => post.txt === postId)
             if (post) post.likes += isLiked ? 1 : -1
         },
-        setLoaderActive: (state) => {
-            state.isLoading = true
+        setAppLoaderActive: (state) => {
+            state.isAppLoading = true
+        },
+        setPostLoaderActive: (state) => {
+            state.isPostLoading = true
         }
     }
 })
