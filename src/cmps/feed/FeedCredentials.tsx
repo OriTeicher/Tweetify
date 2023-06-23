@@ -1,5 +1,5 @@
 import React from 'react'
-import { Verified, MoreHoriz } from '@mui/icons-material'
+import { Verified, MoreHoriz, MoreVert } from '@mui/icons-material'
 import { utilService } from '../../services/util.service'
 
 interface FeedCredentialsProps {
@@ -44,6 +44,11 @@ const FeedCredentials: React.FC<FeedCredentialsProps> = ({
                     className="more-icon"
                     onClick={() => onRemovePostClick(id)}
                 />
+                <MoreVert
+                    className="more-icon mobile"
+                    onClick={() => onRemovePostClick(id)}
+                />
+                
             </div>
             <p className="post-txt">{txt}</p>
             {imgUrl && <img src={imgUrl} className="post-photo" alt='NOTHING TO SEE HERE.'></img>}

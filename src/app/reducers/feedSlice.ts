@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { increment } from 'firebase/firestore'
 
 interface FeedState {
     feedPosts: FeedPost[]
@@ -50,16 +51,22 @@ const feedSlice = createSlice({
             )
             state.isPostLoading = false
         },
-        toggleLikesSuccess: (
+        toggleStatsSuccess: (
             state,
-            action: PayloadAction<{ postId: string; isLiked: boolean }>
+            action: PayloadAction<{
+                postId: string
+                stat: string
+                isIncrease: boolean
+            }>
         ) => {
-            debugger
-            const { postId, isLiked } = action.payload
-            const postIdx = state.feedPosts.findIndex(
-                (post) => post.id === postId
+            const idx = state.feedPosts.findIndex(
+                (post) => post.id === action.payload.postId
             )
-            if (postIdx) state.feedPosts[postIdx].likes += isLiked ? 1 : -1
+            const updatedPost = state.feedPosts[idx]
+            action.payload.isIncrease
+                ? updatedPost.likes++
+                : updatedPost.likes--
+            console.log(updatedPost.likes)
         },
         setAppLoaderActive: (state) => {
             state.isAppLoading = true

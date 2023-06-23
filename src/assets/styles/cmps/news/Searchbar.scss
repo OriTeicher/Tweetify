@@ -1,13 +1,15 @@
 .search-container {
     display: flex;
     align-items: center;
+    margin-top: 20px;
     .searchbar {
+        position: absolute;
         padding: 14px;
         padding-left: 50px;
         border-radius: 30px;
         border: none;
         outline: none;
-        width: 30vw;
+        width: 300px;
         min-width: 200px;
         font-size: 13px;
         background-color: $hoverClr2;

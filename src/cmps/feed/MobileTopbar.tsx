@@ -10,7 +10,7 @@ export default function MobileTopbar() {
                     textShadow: '1px 1px 1px black'
                 }}
             >
-                OR
+                PK
             </Avatar>
             <TwitterIcon className="twitter-icon" />
         </section>

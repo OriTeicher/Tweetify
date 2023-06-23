@@ -76,6 +76,9 @@
             color: white;
         }
     }
+    .more-icon.mobile {
+        display: none;
+    }
     img {
         height: 288px;
         width: 90%;
@@ -126,6 +129,9 @@
         }
         gap: 2px;
     }
+    .more-icon.mobile {
+        display: none;
+    }
 }
 
 .liked {
@@ -144,6 +150,12 @@
         }
         .post-txt {
             font-family: 'Outfit', sans-serif;
+        }
+        .more-icon {
+            display: none;
+        }
+        .more-icon.mobile {
+            display: block;
         }
     }
 }

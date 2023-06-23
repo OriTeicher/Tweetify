@@ -1,13 +1,16 @@
 .news-index {
-    width: 20vw;
+    width: 250px;
     padding: 20px;
     position: sticky;
     top: 0;
     height: fit-content;
+    div {
+        background-color: $mainColor4;
+    }
 }
 
-@media (max-width:768px) {
-    .news-index{
+@media (max-width: 768px) {
+    .news-index {
         display: none;
     }
 }

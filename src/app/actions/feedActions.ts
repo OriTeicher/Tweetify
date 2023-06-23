@@ -7,7 +7,7 @@ export const feedActions = {
     queryFeedPosts,
     addFeedPost,
     removeFeedPost,
-    toggleLikes
+    toggleStats
 }
 
 function queryFeedPosts(): AppThunk {
@@ -17,7 +17,7 @@ function queryFeedPosts(): AppThunk {
             let feedPostsDB = await dbService.getCollectionFromDB(
                 dbService.POSTS_DB_COLLECTION
             )
-            debugger
+
             if (feedPostsDB.length < dbService.MIN_POST_NUM) {
                 await dbService.setDemoDB(
                     dbService.MIN_POST_NUM - feedPostsDB.length
@@ -44,10 +44,10 @@ function addFeedPost(postContent: string): AppThunk {
             newPost.txt = postContent
             await dbService.addItemToCollection(
                 newPost,
-                dbService.POSTS_DB_COLLECTION,
-                newPost.id
+                newPost.id,
+                dbService.POSTS_DB_COLLECTION
             )
-            console.log('newPost',newPost)
+            console.log('newPost', newPost)
             dispatch(feedReducers.addFeedPostSuccess(newPost))
         } catch (error) {
             console.log('Cannot add post. ', error)
@@ -70,10 +70,22 @@ function removeFeedPost(postId: string): AppThunk {
     }
 }
 
-function toggleLikes(postId: string, isLiked: boolean): AppThunk {
+function toggleStats(postId: string, isIncrease: boolean): AppThunk {
     return async (dispatch) => {
         try {
-            dispatch(feedReducers.toggleLikesSuccess({ postId, isLiked }))
+            dispatch(
+                feedReducers.toggleStatsSuccess({
+                    postId,
+                    stat: 'likes',
+                    isIncrease
+                })
+            )
+            await dbService.updateFieldInCollection(
+                postId,
+                'likes',
+                dbService.POSTS_DB_COLLECTION,
+                isIncrease ? 1 : -1
+            )
         } catch (error) {
             console.log('Cannot toggle likes. ', error)
         }

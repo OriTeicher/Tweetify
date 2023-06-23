@@ -1,10 +1,11 @@
 import {
     collection,
     doc,
-    addDoc,
+    updateDoc,
     getDocs,
     deleteDoc,
-    setDoc
+    setDoc,
+    increment
 } from 'firebase/firestore'
 import { feedService } from './feed.service'
 import { db } from '../firsebase'
@@ -16,6 +17,7 @@ export const dbService = {
     getCollectionFromDB,
     removeItemFromDB,
     updateItemInCollection,
+    updateFieldInCollection,
     setDemoDB,
 
     // consts
@@ -26,7 +28,7 @@ export const dbService = {
 
 async function addItemToCollection(item: object, itemId: string, col: string) {
     try {
-        await setDoc(doc(db,col,itemId), item)
+        await setDoc(doc(db, col, itemId), item)
     } catch (error) {
         console.error('Error adding document: ', error)
     }
@@ -73,7 +75,6 @@ async function setDemoDB(postsNum: number) {
                 randomPosts[i].id,
                 dbService.POSTS_DB_COLLECTION
             )
-            console.log('added')
         } catch (error) {
             console.log('cant add demo data', error)
         }
@@ -89,5 +90,20 @@ async function updateItemInCollection(
         await setDoc(doc(db, col, itemId), { ...updatedItem })
     } catch (error) {
         console.log('Cannot update item - ', error)
+    }
+}
+
+async function updateFieldInCollection(
+    itemId: string,
+    field: string,
+    col: string,
+    updatedInfo: any
+) { 
+    try {
+        const colRef = doc(db, col, itemId)
+        const updatedItem = { [field]: increment(updatedInfo) }
+        await updateDoc(colRef, updatedItem)
+    } catch (error) {
+        console.log(`Cannot update ${field} of item: ${itemId}`, Error)
     }
 }

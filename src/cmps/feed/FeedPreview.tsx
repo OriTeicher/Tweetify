@@ -43,8 +43,7 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
     handleIconClicked,
     isPostLoading
 }) => {
-    const [isLiked] = useState(false)
-    const [likesNum] = useState(likes)
+    const [isLiked, setIsLiked] = useState(false)
     const [commentsNum] = useState(comments?.length || 0)
     const [resqueaksNum] = useState(resqueaks)
     const [selectedPostId, setSelectedPostId] = useState('')
@@ -52,8 +51,13 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
     const onPostIconClicked = (action: {
         type: string
         postId: string
+        stat: string
         isStatIncrease: boolean
     }) => {
+        switch (action.stat) {
+            case 'likes':
+                setIsLiked(action.isStatIncrease)
+        }
         setSelectedPostId(action.postId)
         handleIconClicked(action)
     }
@@ -84,6 +88,7 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                             onPostIconClicked({
                                 type: 'removeFeedPost',
                                 postId,
+                                stat: 'post',
                                 isStatIncrease: false
                             })
                         }
@@ -102,8 +107,9 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                             fontSize="small"
                             onClick={() =>
                                 onPostIconClicked({
-                                    type: 'toggleLikes',
+                                    type: 'toggleStats',
                                     postId: id,
+                                    stat: 'likes',
                                     isStatIncrease: false
                                 })
                             }
@@ -114,15 +120,16 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                             fontSize="small"
                             onClick={() =>
                                 onPostIconClicked({
-                                    type: 'toggleLikes',
+                                    type: 'toggleStats',
                                     postId: id,
+                                    stat: 'likes',
                                     isStatIncrease: true
                                 })
                             }
                             className="unliked"
                         />
                     )}
-                    <p>{likes !== 0 && likesNum}</p>
+                    <p>{likes !== 0 && likes}</p>
                 </div>
                 <div className="icon-container">
                     <Loop fontSize="small" />

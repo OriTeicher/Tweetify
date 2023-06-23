@@ -52,6 +52,7 @@ a:hover {
 
 .app-container {
     display: flex;
+    grid-template-columns: 1fr 1fr 500px;
     height: fit-content;
     justify-content: center;
 }

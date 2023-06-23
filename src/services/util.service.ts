@@ -12,7 +12,7 @@ function generateId(idLength: number = 5) {
         'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
     let id = ''
     for (let i = 0; i < idLength; i++) {
-        id += letters.charAt(getRandomIntInclusive(0, letters.length))
+        id += letters.charAt(getRandomIntInclusive(0, letters.length - 1))
     }
     return id
 }

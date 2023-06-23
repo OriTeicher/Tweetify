@@ -58,6 +58,7 @@ const FeedList: React.FC<FeedListProps> = ({
                     handleIconClicked={(action: {
                         type: string
                         postId: string
+                        stat: string
                         isStatIncrease: boolean
                     }) => onIconClicked(action)}
                 />
