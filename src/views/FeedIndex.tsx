@@ -15,11 +15,10 @@ interface FeedIndexProps {
 }
 
 const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
-    const { feedPosts, isAppLoading, isPostLoading } = useSelector(
-        (state: RootState) => {
+    const { feedPosts, isAppLoading, isPostLoading, isNewPostLoading } =
+        useSelector((state: RootState) => {
             return state.feed
-        }
-    )
+        })
 
     const dispatch: ThunkDispatch<
         RootState,
@@ -61,7 +60,7 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
         <section className="feed-index">
             <MobileTopbar />
             <FeedTopbar topBarOption={topBarOption} />
-            <SqueakBox addPost={addPost} isPostLoading={isPostLoading} />
+            <SqueakBox addPost={addPost} isNewPostLoading={isNewPostLoading} />
             {isAppLoading ? (
                 <Loader />
             ) : (

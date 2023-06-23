@@ -92,11 +92,11 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
             )}
 
             <div className="post-icons">
-                <div className="comments-container">
+                <div className="icon-container">
                     <ChatBubbleOutlineIcon fontSize="small" />
                     <p>{comments.length !== 0 && commentsNum}</p>
                 </div>
-                <div className="likes-container">
+                <div className="icon-container">
                     {isLiked ? (
                         <FavoriteIcon
                             fontSize="small"
@@ -124,7 +124,7 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                     )}
                     <p>{likes !== 0 && likesNum}</p>
                 </div>
-                <div className="resqueaks-container">
+                <div className="icon-container">
                     <Loop fontSize="small" />
                     <p>{resqueaks !== 0 && resqueaksNum}</p>
                 </div>

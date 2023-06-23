@@ -26,7 +26,7 @@ export const dbService = {
 
 async function addItemToCollection(item: object, itemId: string, col: string) {
     try {
-        await setDoc(doc(db, itemId, col), item)
+        await setDoc(doc(db,col,itemId), item)
     } catch (error) {
         console.error('Error adding document: ', error)
     }
@@ -66,12 +66,17 @@ async function removeItemFromDB(itemId: string, col: string) {
 
 async function setDemoDB(postsNum: number) {
     const randomPosts = feedService.getRandomPosts(postsNum)
-    for (let i = 0; i < postsNum; i++) {
-        await addItemToCollection(
-            randomPosts[i],
-            randomPosts[i].id,
-            dbService.POSTS_DB_COLLECTION
-        )
+    for (let i = 0; i < 1; i++) {
+        try {
+            await addItemToCollection(
+                randomPosts[i],
+                randomPosts[i].id,
+                dbService.POSTS_DB_COLLECTION
+            )
+            console.log('added')
+        } catch (error) {
+            console.log('cant add demo data', error)
+        }
     }
 }
 

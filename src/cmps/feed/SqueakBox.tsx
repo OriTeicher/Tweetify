@@ -16,10 +16,13 @@ import Loader from '../utils/Loader'
 
 interface SqueakBoxProps {
     addPost: (post: string) => void
-    isPostLoading: boolean
+    isNewPostLoading: boolean
 }
 
-export default function SqueakBox({ addPost, isPostLoading }: SqueakBoxProps) {
+export default function SqueakBox({
+    addPost,
+    isNewPostLoading
+}: SqueakBoxProps) {
     const textareaRef = useRef<HTMLTextAreaElement>(null)
     const [msg, setMsg] = useState('')
 
@@ -64,7 +67,7 @@ export default function SqueakBox({ addPost, isPostLoading }: SqueakBoxProps) {
                     >
                         {'PK'}
                     </Avatar>
-                    {isPostLoading ? (
+                    {isNewPostLoading ? (
                         <Loader />
                     ) : (
                         <textarea

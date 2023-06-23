@@ -108,13 +108,21 @@
             color: rgb(222, 83, 83);
         }
     }
+    .icon-container {
+        position: relative;
+    }
     div {
         display: flex;
         justify-content: center;
         align-items: center;
         p {
+            position: absolute;
             font-size: 15px;
             font-family: 'Jost';
+            position: absolute;
+            left: calc(100% + 4px);
+            top: 50%;
+            transform: translateY(-50%);
         }
         gap: 2px;
     }
@@ -127,7 +135,6 @@
 .unliked {
     animation: pop 0.3s;
 }
-
 
 @media (max-width: 768px) {
     .post-preview {

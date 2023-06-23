@@ -4,6 +4,7 @@ interface FeedState {
     feedPosts: FeedPost[]
     isAppLoading: boolean
     isPostLoading: boolean
+    isNewPostLoading: boolean
 }
 
 interface FeedPost {
@@ -26,7 +27,8 @@ interface FeedPost {
 const initialState: FeedState = {
     feedPosts: [],
     isAppLoading: true,
-    isPostLoading: false
+    isPostLoading: false,
+    isNewPostLoading: false
 }
 
 const feedSlice = createSlice({
@@ -39,7 +41,7 @@ const feedSlice = createSlice({
         },
         addFeedPostSuccess: (state, action: PayloadAction<FeedPost>) => {
             state.feedPosts = [action.payload, ...state.feedPosts]
-            state.isPostLoading = false
+            state.isNewPostLoading = false
             console.log(state.feedPosts)
         },
         removeFeedPostSuccess: (state, action: PayloadAction<string>) => {
@@ -64,6 +66,9 @@ const feedSlice = createSlice({
         },
         setPostLoaderActive: (state) => {
             state.isPostLoading = true
+        },
+        setNewPostLoaderActive: (state) => {
+            state.isNewPostLoading = true
         }
     }
 })

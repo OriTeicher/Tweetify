@@ -17,6 +17,7 @@ function queryFeedPosts(): AppThunk {
             let feedPostsDB = await dbService.getCollectionFromDB(
                 dbService.POSTS_DB_COLLECTION
             )
+            debugger
             if (feedPostsDB.length < dbService.MIN_POST_NUM) {
                 await dbService.setDemoDB(
                     dbService.MIN_POST_NUM - feedPostsDB.length
@@ -35,7 +36,7 @@ function queryFeedPosts(): AppThunk {
 function addFeedPost(postContent: string): AppThunk {
     return async (dispatch) => {
         try {
-            dispatch(feedReducers.setPostLoaderActive())
+            dispatch(feedReducers.setNewPostLoaderActive())
             const newPost = feedService.getEmptyPost(
                 'Pukki Blinders',
                 'oriteicher'
