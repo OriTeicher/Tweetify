@@ -1,6 +1,6 @@
 import React from 'react'
-import NewsList from '../cmps/trending/NewsList'
-import Searchbar from '../cmps/trending/Searchbar'
+import NewsList from './NewsList'
+import Searchbar from './Searchbar'
 export default function NewsIndex() {
     return (
         <section className="news-index">

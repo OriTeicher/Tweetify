@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Avatar } from '@mui/material'
 import { MoreHoriz } from '@mui/icons-material'
+import { redirect } from 'react-router-dom'
 
 interface UserProps {
     displayName: string
@@ -8,10 +9,21 @@ interface UserProps {
 }
 
 export default class LoggedAcount extends Component<UserProps> {
+    moveToAccountPage = (moveTo: string) => {
+        redirect(`/${moveTo}`)
+    }
+
     render() {
         const { displayName, username } = this.props
         return (
-            <section className="logged-acount-container">
+            <section
+                className="logged-acount-container"
+                onClick={
+                    displayName
+                        ? () => this.moveToAccountPage('profile')
+                        : () => this.moveToAccountPage('login')
+                }
+            >
                 <div className="left-cred">
                     <Avatar
                         className="user-avatar"
