@@ -52,6 +52,20 @@ function getCurrentDate(timeStamp: number): string {
     ]
 
     const date = new Date(timeStamp)
+    const currentDate = new Date()
+    const timeDiff = Math.abs(currentDate.getTime() - date.getTime())
+    const hoursDiff = Math.floor(timeDiff / (1000 * 60 * 60))
+    const minutesDiff = Math.floor(timeDiff / (1000 * 60))
+
+    if (hoursDiff < 24) {
+        if (hoursDiff === 0) {
+            if(minutesDiff === 0) return 'now'
+            else return `${minutesDiff}m`
+        } else {
+            return `${hoursDiff}h`
+        }
+    }
+
     const day = date.getDate().toString().padStart(2, '0')
     const month = months[date.getMonth()]
 

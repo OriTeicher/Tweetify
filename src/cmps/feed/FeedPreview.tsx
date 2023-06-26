@@ -8,25 +8,7 @@ import ShareIcon from '@mui/icons-material/Share'
 import FeedCredentials from './FeedCredentials'
 import { utilService } from '../../services/util.service'
 import Loader from '../utils/Loader'
-
-interface FeedPreviewProps {
-    id: string
-    displayName: string
-    username: string
-    txt: string
-    imgUrl?: string
-    avatar: {
-        imgUrl?: string
-        bgColor: string
-    }
-    verified: boolean
-    createdAt: number
-    likes: number
-    comments: object[]
-    resqueaks: number
-    handleIconClicked: Function
-    isPostLoading: boolean
-}
+import { FeedPreviewProps } from '../../services/interface.service'
 
 const FeedPreview: React.FC<FeedPreviewProps> = ({
     id,

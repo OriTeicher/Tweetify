@@ -1,31 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { increment } from 'firebase/firestore'
+import { FeedPost, FeedState } from '../../services/interface.service'
 
-interface FeedState {
-    feedPosts: FeedPost[]
-    isAppLoading: boolean
-    isPostLoading: boolean
-    isNewPostLoading: boolean
-}
-
-interface FeedPost {
-    id: string
-    displayName: string
-    username: string
-    txt: string
-    imgUrl?: string
-    avatar: {
-        bgColor: string
-        imgUrl: string
-    }
-    verified: boolean
-    createdAt: number
-    likes: number
-    comments: object[]
-    resqueaks: number
-}
-
-const initialState: FeedState = {
+// Feed initial state
+export const initialState: FeedState = {
     feedPosts: [],
     isAppLoading: true,
     isPostLoading: false,
@@ -37,7 +14,9 @@ const feedSlice = createSlice({
     initialState,
     reducers: {
         queryFeedPostsSuccess: (state, action: PayloadAction<FeedPost[]>) => {
-            state.feedPosts = action.payload
+            state.feedPosts = action.payload.sort(
+                (a, b) => b.createdAt - a.createdAt
+            )
             state.isAppLoading = false
         },
         addFeedPostSuccess: (state, action: PayloadAction<FeedPost>) => {

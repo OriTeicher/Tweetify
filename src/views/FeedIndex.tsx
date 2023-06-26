@@ -9,10 +9,7 @@ import FeedList from '../cmps/feed/FeedList'
 import SqueakBox from '../cmps/feed/SqueakBox'
 import MobileTopbar from '../cmps/feed/MobileTopbar'
 import Loader from '../cmps/utils/Loader'
-
-interface FeedIndexProps {
-    topBarOption: string
-}
+import { FeedIndexProps } from '../services/interface.service'
 
 const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
     const { feedPosts, isAppLoading, isPostLoading, isNewPostLoading } =

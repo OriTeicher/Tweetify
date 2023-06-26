@@ -1,29 +1,7 @@
 import React from 'react'
 import FeedPreview from './FeedPreview'
 import { log } from 'console'
-
-interface FeedListProps {
-    feedPosts: FeedPost[]
-    handleIconClicked: Function
-    isPostLoading: boolean
-}
-
-interface FeedPost {
-    id: string
-    displayName: string
-    username: string
-    txt: string
-    imgUrl?: string
-    avatar: {
-        bgColor: string
-        imgUrl?: string
-    }
-    verified: boolean
-    createdAt: number
-    likes: number
-    comments: object[]
-    resqueaks: number
-}
+import { FeedListProps } from '../../services/interface.service'
 
 const FeedList: React.FC<FeedListProps> = ({
     feedPosts,
