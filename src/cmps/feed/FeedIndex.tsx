@@ -13,15 +13,10 @@ import { FeedIndexProps } from '../../services/interface.service'
 import ProfilePage from '../../views/ProfilePage'
 
 const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
-    const {
-        feedPosts,
-        isAppLoading,
-        isPostLoading,
-        isNewPostLoading,
-        currPage
-    } = useSelector((state: RootState) => {
-        return state.feed
-    })
+    const { feedPosts, isAppLoading, isPostLoading, isNewPostLoading } =
+        useSelector((state: RootState) => {
+            return state.feed
+        })
 
     const dispatch: ThunkDispatch<
         RootState,

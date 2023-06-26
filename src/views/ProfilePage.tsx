@@ -3,19 +3,22 @@ import { DateRange } from '@mui/icons-material'
 
 export default function ProfilePage() {
     return (
-        <section className="profile-container">
+        <section className=" profile-container">
             <img
                 className="profile-bgc-img"
                 src={`https://c4.wallpaperflare.com/wallpaper/169/139/716/twitter-logo-twitter-logo-wallpaper-preview.jpg`}
                 alt="bgc-picture"
             ></img>
             <div className="user-cred">
-                <img
-                    className="profile-img"
-                    src="https://xsgames.co/randomusers/assets/avatars/male/25.jpg"
-                    alt="profile-pic"
-                />
-                <div>
+                <div className="profile-img-container">
+                    <div className="edit-container">
+                        <img
+                            className="profile-img"
+                            src="https://xsgames.co/randomusers/assets/avatars/male/25.jpg"
+                            alt="profile-pic"
+                        />
+                        <button>Edit Profile</button>
+                    </div>
                     <h1>Pukki Blinders</h1>
                     <h2>@oriteicher</h2>
                 </div>

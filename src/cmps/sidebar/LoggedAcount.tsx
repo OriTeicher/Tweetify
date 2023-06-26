@@ -9,21 +9,8 @@ interface UserProps {
 }
 
 const LoggedAccount: React.FC<UserProps> = ({ displayName, username }) => {
-    const navigate = useNavigate()
-
-    const moveToAccountPage = (moveTo: string) => {
-        navigate(`/${moveTo}`)
-    }
-
     return (
-        <section
-            className="logged-account-container"
-            onClick={
-                displayName
-                    ? () => moveToAccountPage('profile')
-                    : () => moveToAccountPage('login')
-            }
-        >
+        <section className="logged-account-container">
             <div className="left-cred">
                 <Avatar
                     className="user-avatar"
