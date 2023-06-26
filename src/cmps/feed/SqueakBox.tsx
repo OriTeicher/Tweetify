@@ -64,6 +64,7 @@ export default function SqueakBox({
                             bgcolor: 'lightskyblue',
                             textShadow: '1px 1px 1px black'
                         }}
+                        src='https://xsgames.co/randomusers/assets/avatars/male/25.jpg'
                     >
                         {'PK'}
                     </Avatar>

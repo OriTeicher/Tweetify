@@ -80,10 +80,14 @@
         display: none;
     }
     img {
+        width: 100%;
+    }
+    .post-photo {
         height: 288px;
         width: 90%;
         border-radius: 20px;
         margin-left: 5px;
+        object-fit: cover;
         margin-top: 20px;
         outline: $outline1;
     }

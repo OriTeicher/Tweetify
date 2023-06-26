@@ -13,7 +13,7 @@ export const feedService = {
             txt,
             imgUrl: '',
             avatar: {
-                imgUrl: '',
+                imgUrl: 'https://xsgames.co/randomusers/assets/avatars/male/25.jpg',
                 bgColor: ''
             },
             verified: false,
