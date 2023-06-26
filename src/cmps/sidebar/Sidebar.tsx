@@ -5,7 +5,7 @@ import { Search as SearchIcon } from '@mui/icons-material'
 import { Notifications as NotificationIcon } from '@mui/icons-material'
 import { Mail as MsgIcon } from '@mui/icons-material'
 import { Bookmarks as BookmarkIcon } from '@mui/icons-material'
-import { ListSharp as ListsIcon } from '@mui/icons-material'
+import { Person as ProfileIcon } from '@mui/icons-material'
 import { MoreHoriz as MoreIcon } from '@mui/icons-material'
 import SidebarOption from './SidebarOption'
 import LoggedAcount from './LoggedAcount'
@@ -42,7 +42,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
             { Icon: NotificationIcon, txt: 'Notifications' },
             { Icon: MsgIcon, txt: 'Messages' },
             { Icon: BookmarkIcon, txt: 'Bookmarks' },
-            { Icon: ListsIcon, txt: 'Lists' },
+            { Icon: ProfileIcon, txt: 'Profile' },
             { Icon: MoreIcon, txt: 'More' }
         ]
 

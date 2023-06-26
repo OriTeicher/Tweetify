@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { FeedPost, FeedState } from '../../services/interface.service'
 
-// Feed initial state
 export const initialState: FeedState = {
     feedPosts: [],
     isAppLoading: true,
     isPostLoading: false,
-    isNewPostLoading: false
+    isNewPostLoading: false,
+    currPage: 'home'
 }
 
 const feedSlice = createSlice({

@@ -1,4 +1,4 @@
-.logged-acount-container {
+.logged-account-container {
     cursor: pointer;
     display: flex;
     position: absolute;
@@ -31,7 +31,7 @@
 }
 
 @media (max-width: 768px) {
-    .logged-acount-container {
+    .logged-account-container {
         display: none;
     }
 }

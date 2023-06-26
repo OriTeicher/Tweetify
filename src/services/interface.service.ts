@@ -56,5 +56,6 @@ export interface FeedState {
     isAppLoading: boolean
     isPostLoading: boolean
     isNewPostLoading: boolean
+    currPage: string
 }
 
