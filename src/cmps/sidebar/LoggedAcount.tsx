@@ -1,40 +1,63 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Avatar } from '@mui/material'
 import { MoreHoriz } from '@mui/icons-material'
+import OptionsDropdown from '../utils/OptionsDropdown'
 
 interface UserProps {
     displayName: string
     username: string
-    setIsModalOpen: Function
+    setIsLoginModalOpen: Function
 }
 
 const LoggedAccount: React.FC<UserProps> = ({
     displayName,
     username,
-    setIsModalOpen
+    setIsLoginModalOpen
 }) => {
-    const handleLoginClicked = () => {
-        setIsModalOpen(true)
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+    const dropdownOptions = ['Login to account', 'Log out from user']
+
+    const handleDropdownClick = (option: string) => {
+        console.log(option)
+        switch (option) {
+            case 'login':
+                setIsLoginModalOpen(true)
+                break
+        }
+    }
+
+    const handleAccountClicked = () => {
+        setIsDropdownOpen(!isDropdownOpen)
     }
 
     return (
-        <section
-            className="logged-account-container"
-            onClick={handleLoginClicked}
-        >
-            <div className="left-cred">
-                <Avatar
-                    className="user-avatar"
-                    src="https://xsgames.co/randomusers/assets/avatars/male/25.jpg"
-                >
-                    {'PK'}
-                </Avatar>
-                <div className="user-cred">
-                    <h1>{displayName}</h1>
-                    <h2>@{username}</h2>
+        <section className="dropdown-cred-container">
+            {isDropdownOpen && (
+                <OptionsDropdown
+                    options={dropdownOptions}
+                    setDropdownOption={(option: string) =>
+                        handleDropdownClick(option)
+                    }
+                />
+            )}
+            <section
+                className="logged-account-container"
+                onClick={handleAccountClicked}
+            >
+                <div className="left-cred">
+                    <Avatar
+                        className="user-avatar"
+                        src="https://xsgames.co/randomusers/assets/avatars/male/25.jpg"
+                    >
+                        {'PK'}
+                    </Avatar>
+                    <div className="user-cred">
+                        <h1>{displayName}</h1>
+                        <h2>@{username}</h2>
+                    </div>
                 </div>
-            </div>
-            <MoreHoriz />
+                <MoreHoriz />
+            </section>
         </section>
     )
 }

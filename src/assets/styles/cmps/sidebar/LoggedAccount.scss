@@ -1,7 +1,16 @@
+.dropdown-cred-container{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
+}
+
 .logged-account-container {
     cursor: pointer;
     display: flex;
-    position: absolute;
     justify-content: space-between;
     align-items: center;
     width: 90%;
@@ -35,3 +44,5 @@
         display: none;
     }
 }
+
+

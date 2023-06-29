@@ -75,7 +75,9 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
                 <LoggedAcount
                     displayName="Pukki Blinders"
                     username="oriteicher"
-                    setIsModalOpen={(isOpen: boolean) => setLoginModal(isOpen)}
+                    setIsLoginModalOpen={(isOpen: boolean) =>
+                        setLoginModal(isOpen)
+                    }
                 />
 
                 <LoginModal

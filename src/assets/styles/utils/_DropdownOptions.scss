@@ -1,0 +1,23 @@
+.dropdown-container {
+    background-color: $mainColor1;
+    box-shadow: 1px 1px 2px 2px $mainColor2;
+    font-size: 20px;
+    bottom: 0;
+    border-radius: 10px;
+    display: flex;
+    padding: 5px 0px;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    color: $mainColor2;
+    font-family: 'Jost';
+    font-weight: 700;
+    width: 100%;
+    list-style: none;
+    li{
+        &:hover{
+            background-color: $mainColor3;
+            cursor: pointer;
+        }
+    }
+}
