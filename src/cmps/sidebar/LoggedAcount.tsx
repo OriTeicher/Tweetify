@@ -15,12 +15,12 @@ const LoggedAccount: React.FC<UserProps> = ({
     setIsLoginModalOpen
 }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-    const dropdownOptions = ['Login to account', 'Log out from user']
+    const dropdownOptions = ['Login to account', `Log out from @${username}`]
 
     const handleDropdownClick = (option: string) => {
         console.log(option)
         switch (option) {
-            case 'login':
+            case 'Login to account':
                 setIsLoginModalOpen(true)
                 break
         }
