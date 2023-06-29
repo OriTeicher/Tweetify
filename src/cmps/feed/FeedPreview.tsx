@@ -53,7 +53,7 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                     <Avatar
                         src={avatar.imgUrl}
                         className="user-avatar"
-                        // sx={{ bgcolor: avatar.bgColor }}
+                        sx={{ bgcolor: avatar.bgColor }}
                     >
                         {utilService.getInitials(displayName)}
                     </Avatar>

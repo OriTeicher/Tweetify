@@ -1,8 +1,8 @@
 .dropdown-container {
     background-color: $mainColor1;
-    box-shadow: 1px 1px 2px 2px $mainColor2;
     font-size: 20px;
     bottom: 0;
+    outline: 1px solid $mainColor3;
     border-radius: 10px;
     display: flex;
     padding: 5px 0px;

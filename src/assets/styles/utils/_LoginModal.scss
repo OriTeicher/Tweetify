@@ -1,17 +1,68 @@
 .login-modal {
-    background-color: rgba(255, 255, 255, 0.233);
+    background-color: rgba(255, 255, 255, 0.466);
+    .twitter-icon {
+        position: absolute;
+        top: 0;
+        font-size: 40px;
+        margin-top: 20px;
+    }
     .modal-content {
+        gap: 30px;
         background-color: $mainColor1;
         width: 30vw;
         min-width: 400px;
         height: 600px;
-        justify-content: center;
         align-items: center;
         flex-direction: column;
+        justify-content: center;
         display: flex;
         margin: auto;
         transform: translateY(10%);
-        outline: 1px solid $mainColor2;
+        outline: white 1px solid;
         border-radius: 30px;
+    }
+    .login-form {
+        gap: 10px;
+        input {
+            color: white;
+            background-color: $mainColor3;
+            font-family: 'Jost';
+            font-size: 20px;
+            width: 300px;
+            padding: 5px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            padding-left: 10px;
+            &:focus{
+                outline: 2px solid $logoColor;
+            }
+        }
+        button {
+            margin: auto;
+            background-color: $logoColor;
+            color: white;
+            font-family: 'Jost', 'Gill Sans', 'Gill Sans MT', Calibri;
+            outline: none;
+            border: none;
+            font-size: 20px;
+            margin-top: 20px;
+            border-radius: 20px;
+            padding: 0px 20px;
+            &:hover{
+                cursor: pointer;
+                filter: brightness(90%);
+                
+            }
+        }
+    }
+    p{
+        span{
+            color: $logoColor;
+            &:hover{
+                cursor: pointer;
+                text-decoration: underline;
+            }
+        }
     }
 }
