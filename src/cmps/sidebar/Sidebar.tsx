@@ -9,6 +9,7 @@ import { Person as ProfileIcon } from '@mui/icons-material'
 import { MoreHoriz as MoreIcon } from '@mui/icons-material'
 import SidebarOption from './SidebarOption'
 import LoggedAcount from './LoggedAcount'
+import LoginModal from '../utils/LoginModal'
 
 interface SidebarProps {
     onOptionChange: (option: string) => void
@@ -17,6 +18,7 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
     const [selectedSidebarOption, setSelectedSidebarOption] = useState('Home')
     const [isSmallScreen, setIsSmallScreen] = useState(false)
+    const [isLoginModalOpen, setLoginModal] = useState(false)
 
     useEffect(() => {
         const handleResize = () => {
@@ -73,6 +75,12 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
                 <LoggedAcount
                     displayName="Pukki Blinders"
                     username="oriteicher"
+                    setIsModalOpen={(isOpen: boolean) => setLoginModal(isOpen)}
+                />
+
+                <LoginModal
+                    isOpen={isLoginModalOpen}
+                    setIsOpen={(isOpen: boolean) => setLoginModal(isOpen)}
                 />
             </div>
         </section>

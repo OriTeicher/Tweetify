@@ -1,0 +1,17 @@
+.login-modal {
+    background-color: rgba(255, 255, 255, 0.233);
+    .modal-content {
+        background-color: $mainColor1;
+        width: 30vw;
+        min-width: 400px;
+        height: 600px;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        display: flex;
+        margin: auto;
+        transform: translateY(10%);
+        outline: 1px solid $mainColor2;
+        border-radius: 30px;
+    }
+}

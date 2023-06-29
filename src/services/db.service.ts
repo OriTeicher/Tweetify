@@ -9,7 +9,6 @@ import {
 } from 'firebase/firestore'
 import { feedService } from './feed.service'
 import { db } from '../firsebase'
-import { utilService } from './util.service'
 
 export const dbService = {
     // functions

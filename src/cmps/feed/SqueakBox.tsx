@@ -23,7 +23,7 @@ export default function SqueakBox({
     addPost,
     isNewPostLoading
 }: SqueakBoxProps) {
-    const textareaRef = useRef<HTMLTextAreaElement>(null)
+    const txtAreaRef = useRef<HTMLTextAreaElement>(null)
     const [msg, setMsg] = useState('')
 
     const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -44,9 +44,9 @@ export default function SqueakBox({
     }
 
     const resizeTextarea = () => {
-        if (textareaRef.current) {
-            textareaRef.current.style.height = 'auto'
-            textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`
+        if (txtAreaRef.current) {
+            txtAreaRef.current.style.height = 'auto'
+            txtAreaRef.current.style.height = `${txtAreaRef.current.scrollHeight}px`
         }
     }
 
@@ -72,7 +72,7 @@ export default function SqueakBox({
                         <Loader />
                     ) : (
                         <textarea
-                            ref={textareaRef}
+                            ref={txtAreaRef}
                             className="squeak-textarea"
                             placeholder="What is happening?!"
                             value={msg}

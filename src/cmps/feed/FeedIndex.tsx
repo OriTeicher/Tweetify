@@ -11,6 +11,7 @@ import MobileTopbar from './MobileTopbar'
 import Loader from '../utils/Loader'
 import { FeedIndexProps } from '../../services/interface.service'
 import ProfilePage from '../../views/ProfilePage'
+import LoginModal from '../utils/LoginModal'
 
 const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
     const { feedPosts, isAppLoading, isPostLoading, isNewPostLoading } =
@@ -58,7 +59,9 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
             <MobileTopbar />
             <FeedTopbar topBarOption={topBarOption} />
             {topBarOption === 'Profile' ? (
-                <ProfilePage />
+                <>
+                    <ProfilePage />
+                </>
             ) : (
                 <>
                     <SqueakBox

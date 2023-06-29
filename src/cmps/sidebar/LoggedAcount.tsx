@@ -1,16 +1,27 @@
 import React from 'react'
 import { Avatar } from '@mui/material'
 import { MoreHoriz } from '@mui/icons-material'
-import { useNavigate } from 'react-router-dom'
 
 interface UserProps {
     displayName: string
     username: string
+    setIsModalOpen: Function
 }
 
-const LoggedAccount: React.FC<UserProps> = ({ displayName, username }) => {
+const LoggedAccount: React.FC<UserProps> = ({
+    displayName,
+    username,
+    setIsModalOpen
+}) => {
+    const handleLoginClicked = () => {
+        setIsModalOpen(true)
+    }
+
     return (
-        <section className="logged-account-container">
+        <section
+            className="logged-account-container"
+            onClick={handleLoginClicked}
+        >
             <div className="left-cred">
                 <Avatar
                     className="user-avatar"
