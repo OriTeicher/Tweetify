@@ -6,6 +6,7 @@ import React, {
     useRef
 } from 'react'
 import { Avatar } from '@mui/material'
+import EmojiPicker from 'emoji-picker-react'
 import {
     ImageOutlined,
     Gif,
@@ -25,6 +26,7 @@ export default function SqueakBox({
 }: SqueakBoxProps) {
     const txtAreaRef = useRef<HTMLTextAreaElement>(null)
     const [msg, setMsg] = useState('')
+    const [isEmojiMenuOpen, setIsEmojiMenuOpen] = useState(false)
 
     const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
         setMsg(event.target.value)
@@ -50,6 +52,10 @@ export default function SqueakBox({
         }
     }
 
+    const handleEmojiMenuClicked = () => {
+        setIsEmojiMenuOpen(!isEmojiMenuOpen)
+    }
+
     useEffect(() => {
         resizeTextarea()
     }, [msg])
@@ -64,7 +70,7 @@ export default function SqueakBox({
                             bgcolor: 'lightskyblue',
                             textShadow: '1px 1px 1px black'
                         }}
-                        src='https://xsgames.co/randomusers/assets/avatars/male/25.jpg'
+                        src="https://xsgames.co/randomusers/assets/avatars/male/25.jpg"
                     >
                         {'PK'}
                     </Avatar>
@@ -89,6 +95,7 @@ export default function SqueakBox({
                         <ImageOutlined className="icon" />
                         <GifBoxOutlined className="icon" />
                         <TagFacesOutlined className="icon" />
+                        {isEmojiMenuOpen && <EmojiPicker />}
                     </div>
                 </div>
             </form>
