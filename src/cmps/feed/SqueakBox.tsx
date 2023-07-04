@@ -7,6 +7,7 @@ import React, {
 } from 'react'
 import { Avatar } from '@mui/material'
 import EmojiPicker from 'emoji-picker-react'
+import { EmojiClickData } from 'emoji-picker-react/dist/types/exposedTypes'
 import {
     ImageOutlined,
     Gif,
@@ -27,6 +28,7 @@ export default function SqueakBox({
     const txtAreaRef = useRef<HTMLTextAreaElement>(null)
     const [msg, setMsg] = useState('')
     const [isEmojiMenuOpen, setIsEmojiMenuOpen] = useState(false)
+    const [selectedEmoji, setSelectedEmoji] = useState('')
 
     const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
         setMsg(event.target.value)
@@ -54,6 +56,11 @@ export default function SqueakBox({
 
     const handleEmojiMenuClicked = () => {
         setIsEmojiMenuOpen(!isEmojiMenuOpen)
+    }
+
+    function handleEmojiClicked(emojiData: EmojiClickData, event: MouseEvent) {
+        setSelectedEmoji(emojiData.emoji)
+        setMsg(msg + selectedEmoji)
     }
 
     useEffect(() => {
@@ -94,11 +101,18 @@ export default function SqueakBox({
                     <div className="left-icons">
                         <ImageOutlined className="icon" />
                         <GifBoxOutlined className="icon" />
-                        <TagFacesOutlined className="icon" />
-                        {isEmojiMenuOpen && <EmojiPicker />}
+                        <TagFacesOutlined
+                            onClick={handleEmojiMenuClicked}
+                            className="icon"
+                        />
                     </div>
                 </div>
             </form>
+            <div className="menu-container">
+                {isEmojiMenuOpen && (
+                    <EmojiPicker onEmojiClick={handleEmojiClicked} />
+                )}
+            </div>
         </section>
     )
 }
