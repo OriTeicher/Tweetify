@@ -28,7 +28,6 @@ export default function SqueakBox({
     const txtAreaRef = useRef<HTMLTextAreaElement>(null)
     const [msg, setMsg] = useState('')
     const [isEmojiMenuOpen, setIsEmojiMenuOpen] = useState(false)
-    const [selectedEmoji, setSelectedEmoji] = useState('')
 
     const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
         setMsg(event.target.value)
@@ -37,7 +36,7 @@ export default function SqueakBox({
     const handleKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
         if (event.key === 'Enter' && !event.shiftKey) {
             event.preventDefault()
-            setMsg((prevMsg) => prevMsg + '\n')
+            setMsg((prevMsg) => prevMsg + `\n`)
         }
     }
 
@@ -58,9 +57,8 @@ export default function SqueakBox({
         setIsEmojiMenuOpen(!isEmojiMenuOpen)
     }
 
-    function handleEmojiClicked(emojiData: EmojiClickData, event: MouseEvent) {
-        setSelectedEmoji(emojiData.emoji)
-        setMsg(msg + selectedEmoji)
+    function handleEmojiClicked(emojiData: EmojiClickData) {
+        setMsg(msg + emojiData.emoji)
     }
 
     useEffect(() => {

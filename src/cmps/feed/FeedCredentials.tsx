@@ -48,10 +48,15 @@ const FeedCredentials: React.FC<FeedCredentialsProps> = ({
                     className="more-icon mobile"
                     onClick={() => onRemovePostClick(id)}
                 />
-                
             </div>
-            <p className="post-txt">{txt}</p>
-            {imgUrl && <img src={imgUrl} className="post-photo" alt='NOTHING TO SEE HERE.'></img>}
+            <pre className="post-txt">{txt}</pre>
+            {imgUrl && (
+                <img
+                    src={imgUrl}
+                    className="post-photo"
+                    alt="NOTHING TO SEE HERE."
+                ></img>
+            )}
         </section>
     )
 }
