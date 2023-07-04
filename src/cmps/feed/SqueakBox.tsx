@@ -46,6 +46,8 @@ export default function SqueakBox({
         setMsg('')
     }
 
+    
+
     const resizeTextarea = () => {
         if (txtAreaRef.current) {
             txtAreaRef.current.style.height = 'auto'

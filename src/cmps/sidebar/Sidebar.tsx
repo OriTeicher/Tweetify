@@ -36,6 +36,10 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
         onOptionChange(option)
     }
 
+    const handleSiderbarSqueak = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+
     const renderSidebarOptions = () => {
         const optionsData = [
             { Icon: TwitterIcon, txt: '' },
@@ -69,6 +73,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
                 {renderSidebarOptions()}
                 <button
                     className={`squeak-btn ${isSmallScreen ? 'mobile' : ''}`}
+                    onClick={handleSiderbarSqueak}
                 >
                     {isSmallScreen ? '+' : 'Squeak'}
                 </button>
