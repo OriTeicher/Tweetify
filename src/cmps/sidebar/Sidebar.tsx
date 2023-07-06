@@ -70,7 +70,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
                     isSmallScreen ? 'mobile' : ''
                 }`}
             >
-                {renderSidebarOptions()}
+                {renderSidebarOptions()}  
                 <button
                     className={`squeak-btn ${isSmallScreen ? 'mobile' : ''}`}
                     onClick={handleSiderbarSqueak}
@@ -89,6 +89,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
                     isOpen={isLoginModalOpen}
                     setIsOpen={(isOpen: boolean) => setLoginModal(isOpen)}
                 />
+                
             </div>
         </section>
     )

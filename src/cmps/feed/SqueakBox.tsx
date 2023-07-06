@@ -5,6 +5,7 @@ import React, {
     KeyboardEvent,
     useRef
 } from 'react'
+import { uploadService } from '../../services/upload.service'
 import { Avatar } from '@mui/material'
 import EmojiPicker from 'emoji-picker-react'
 import { EmojiClickData } from 'emoji-picker-react/dist/types/exposedTypes'
@@ -17,7 +18,7 @@ import {
 import Loader from '../utils/Loader'
 
 interface SqueakBoxProps {
-    addPost: (post: string) => void
+    addPost: (post: string, imgUrl: string) => void
     isNewPostLoading: boolean
 }
 
@@ -28,6 +29,7 @@ export default function SqueakBox({
     const txtAreaRef = useRef<HTMLTextAreaElement>(null)
     const [msg, setMsg] = useState('')
     const [isEmojiMenuOpen, setIsEmojiMenuOpen] = useState(false)
+    const [file, setFile] = useState('')
 
     const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
         setMsg(event.target.value)
@@ -40,13 +42,13 @@ export default function SqueakBox({
         }
     }
 
-    const handleSqueak = (event: React.FormEvent) => {
-        event.preventDefault()
-        addPost(msg)
+    const handleSqueak = async (ev: React.FormEvent) => {
+        ev.preventDefault()
+        addPost(msg, file)
+        setIsEmojiMenuOpen(false)
         setMsg('')
+        setFile('')
     }
-
-    
 
     const resizeTextarea = () => {
         if (txtAreaRef.current) {
@@ -59,8 +61,13 @@ export default function SqueakBox({
         setIsEmojiMenuOpen(!isEmojiMenuOpen)
     }
 
-    function handleEmojiClicked(emojiData: EmojiClickData) {
+    const handleEmojiClicked = (emojiData: EmojiClickData) => {
         setMsg(msg + emojiData.emoji)
+    }
+
+    const handleFileChange = (ev: any) => {
+        console.log(`file:, ${ev.target.files[0]}`)
+        setFile(URL.createObjectURL(ev.target.files[0]))
     }
 
     useEffect(() => {
@@ -93,6 +100,11 @@ export default function SqueakBox({
                             onKeyDown={handleKeyDown}
                         />
                     )}
+                    {file && (
+                        <div className="imgs-container">
+                            <img src={file} alt="file" />
+                        </div>
+                    )}
                 </div>
                 <div className="squeak-box-btns">
                     <button type="submit" className="squeak-btn">
@@ -100,6 +112,11 @@ export default function SqueakBox({
                     </button>
                     <div className="left-icons">
                         <ImageOutlined className="icon" />
+                        <input
+                            type="file"
+                            className="file-upload-input"
+                            onChange={handleFileChange}
+                        />
                         <GifBoxOutlined className="icon" />
                         <TagFacesOutlined
                             onClick={handleEmojiMenuClicked}

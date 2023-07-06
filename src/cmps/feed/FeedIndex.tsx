@@ -29,8 +29,8 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
         dispatch(feedActions.queryFeedPosts())
     }, [dispatch])
 
-    const addPost = async (postContent: string) => {
-        dispatch(feedActions.addFeedPost(postContent))
+    const handleAddPost = async (postContent: string, postImgUrl: string) => {
+        dispatch(feedActions.addFeedPost(postContent,postImgUrl))
     }
 
     const onPostIconClicked = (action: {
@@ -65,7 +65,7 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
             ) : (
                 <>
                     <SqueakBox
-                        addPost={addPost}
+                        addPost={handleAddPost}
                         isNewPostLoading={isNewPostLoading}
                     />
                     {isAppLoading ? (

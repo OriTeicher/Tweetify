@@ -33,7 +33,7 @@ function queryFeedPosts(): AppThunk {
     }
 }
 
-function addFeedPost(postContent: string): AppThunk {
+function addFeedPost(postContent: string,postImgUrl: string): AppThunk {
     return async (dispatch) => {
         try {
             dispatch(feedReducers.setNewPostLoaderActive())
@@ -42,6 +42,7 @@ function addFeedPost(postContent: string): AppThunk {
                 'oriteicher'
             )
             newPost.txt = postContent
+            newPost.imgUrl = postImgUrl
             await dbService.addItemToCollection(
                 newPost,
                 newPost.id,
