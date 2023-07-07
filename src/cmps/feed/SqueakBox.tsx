@@ -93,18 +93,16 @@ export default function SqueakBox({
                     {isNewPostLoading ? (
                         <Loader />
                     ) : (
-                        <textarea
-                            ref={txtAreaRef}
-                            className="squeak-textarea"
-                            placeholder="What is happening?!"
-                            value={msg}
-                            onChange={handleInputChange}
-                            onKeyDown={handleKeyDown}
-                        />
-                    )}
-                    {fileUrl && (
-                        <div className="imgs-container">
-                            <img src={fileUrl} alt="file" />
+                        <div className="post-content">
+                            <textarea
+                                ref={txtAreaRef}
+                                className="squeak-textarea"
+                                placeholder="What is happening?!"
+                                value={msg}
+                                onChange={handleInputChange}
+                                onKeyDown={handleKeyDown}
+                            />
+                            {fileUrl && <img className='squeakbox-img' src={fileUrl} alt="file" />}
                         </div>
                     )}
                 </div>

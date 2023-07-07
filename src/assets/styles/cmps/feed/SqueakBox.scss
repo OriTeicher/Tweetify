@@ -72,13 +72,24 @@
     }
 
     .file-upload-input {
-        width: 10px;
+        position: absolute;
+        width: 20px;
+        background-color: transparent;
+        opacity: 0;
+
         button {
-            background-color: $mainColor1;
+            &:hover {
+                cursor: pointer;
+            }
         }
     }
+    .squeakbox-img {
+        height: 288px;
+        border-radius: 20px;
+        margin-left: 5px;
+        object-fit: cover;
+    }
 }
-
 @media (max-width: 768px) {
     .squeak-box {
         margin-top: 10px;
