@@ -2,6 +2,8 @@ import { feedReducers } from '../reducers/feedSlice'
 import { dbService } from '../../services/db.service'
 import { AppThunk } from '../feedStore'
 import { feedService } from '../../services/feed.service'
+import { uploadService } from '../../services/upload.service'
+import { cloudinaryService } from '../../services/cloudinary.service'
 
 export const feedActions = {
     queryFeedPosts,
@@ -33,7 +35,7 @@ function queryFeedPosts(): AppThunk {
     }
 }
 
-function addFeedPost(postContent: string,postImgUrl: string): AppThunk {
+function addFeedPost(postContent: string, file: File | null): AppThunk {
     return async (dispatch) => {
         try {
             dispatch(feedReducers.setNewPostLoaderActive())
@@ -42,13 +44,20 @@ function addFeedPost(postContent: string,postImgUrl: string): AppThunk {
                 'oriteicher'
             )
             newPost.txt = postContent
-            newPost.imgUrl = postImgUrl
+            newPost.imgUrl = file
+                ? await cloudinaryService.uploadImgToCloud(file)
+                : ''
+            console.log(
+                '🚀 ~ file: feedActions.ts:48 ~ return ~ newPost:',
+                newPost.imgUrl
+            )
+
             await dbService.addItemToCollection(
                 newPost,
                 newPost.id,
                 dbService.POSTS_DB_COLLECTION
             )
-            console.log('newPost', newPost)
+
             dispatch(feedReducers.addFeedPostSuccess(newPost))
         } catch (error) {
             console.log('Cannot add post. ', error)

@@ -66,9 +66,16 @@
         }
     }
 
-    .menu-container{
+    .menu-container {
         position: absolute;
         z-index: 1;
+    }
+
+    .file-upload-input {
+        width: 10px;
+        button {
+            background-color: $mainColor1;
+        }
     }
 }
 

@@ -18,7 +18,7 @@ import {
 import Loader from '../utils/Loader'
 
 interface SqueakBoxProps {
-    addPost: (post: string, imgUrl: string) => void
+    addPost: (post: string, file: File | null) => void
     isNewPostLoading: boolean
 }
 
@@ -28,8 +28,9 @@ export default function SqueakBox({
 }: SqueakBoxProps) {
     const txtAreaRef = useRef<HTMLTextAreaElement>(null)
     const [msg, setMsg] = useState('')
+    const [fileUrl, setFileUrl] = useState('')
+    const [file, setFile] = useState<File | null>(null)
     const [isEmojiMenuOpen, setIsEmojiMenuOpen] = useState(false)
-    const [file, setFile] = useState('')
 
     const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
         setMsg(event.target.value)
@@ -47,7 +48,7 @@ export default function SqueakBox({
         addPost(msg, file)
         setIsEmojiMenuOpen(false)
         setMsg('')
-        setFile('')
+        setFileUrl('')
     }
 
     const resizeTextarea = () => {
@@ -67,7 +68,8 @@ export default function SqueakBox({
 
     const handleFileChange = (ev: any) => {
         console.log(`file:, ${ev.target.files[0]}`)
-        setFile(URL.createObjectURL(ev.target.files[0]))
+        setFile(ev.target.files[0])
+        setFileUrl(URL.createObjectURL(ev.target.files[0]))
     }
 
     useEffect(() => {
@@ -100,9 +102,9 @@ export default function SqueakBox({
                             onKeyDown={handleKeyDown}
                         />
                     )}
-                    {file && (
+                    {fileUrl && (
                         <div className="imgs-container">
-                            <img src={file} alt="file" />
+                            <img src={fileUrl} alt="file" />
                         </div>
                     )}
                 </div>
