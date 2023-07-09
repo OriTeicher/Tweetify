@@ -141,7 +141,6 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                 )}
             </section>
             {isCommentsClicked && comments.length !== 0 && (
-                <section className="feed-index">
                     <div className="post-list comments-list">
                         {comments.map((comment, idx) => (
                             <FeedPreview
@@ -164,7 +163,6 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                             />
                         ))}
                     </div>
-                </section>
             )}
         </>
     )
