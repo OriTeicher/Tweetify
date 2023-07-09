@@ -13,9 +13,12 @@
 
 @media (max-width: 768px) {
     .img-modal{
+        background-color: $mainColor1;
         img{
-            width: 90vw;
-            height: 60%;
+            outline: none;
+            border-radius: 0px;
+            width: 100vw;
+            height: 50%;
         }
     }
     
