@@ -9,6 +9,7 @@ import FeedCredentials from './FeedCredentials'
 import { utilService } from '../../services/util.service'
 import Loader from '../utils/Loader'
 import { FeedPreviewProps } from '../../services/interface.service'
+import ImgModal from './ImgModal'
 
 const FeedPreview: React.FC<FeedPreviewProps> = ({
     id,
@@ -26,6 +27,7 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
     isPostLoading
 }) => {
     const [isLiked, setIsLiked] = useState(false)
+    const [isImgClicked, setIsImgClicked] = useState(false)
     const [commentsNum] = useState(comments?.length || 0)
     const [resqueaksNum] = useState(resqueaks)
     const [selectedPostId, setSelectedPostId] = useState('')
@@ -43,6 +45,9 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
         setSelectedPostId(action.postId)
         handleIconClicked(action)
     }
+
+    const handleImgModalClosed = () => setIsImgClicked(false)
+    const handleImgClick = () => setIsImgClicked(true)
 
     return (
         <section className="post-preview">
@@ -74,6 +79,7 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                                 isStatIncrease: false
                             })
                         }
+                        onImgClick={handleImgClick}
                     />
                 </div>
             )}
@@ -119,6 +125,13 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                 </div>
                 <ShareIcon fontSize="small" />
             </div>
+
+            {isImgClicked && (
+                <ImgModal
+                    onCloseModal={() => handleImgModalClosed()}
+                    imgUrl={imgUrl}
+                />
+            )}
         </section>
     )
 }

@@ -88,9 +88,13 @@
         width: 90%;
         border-radius: 20px;
         margin-left: 5px;
-        object-fit: contain;
+        object-fit: cover;
         margin-top: 20px;
         outline: $outline1;
+        &:hover {
+            cursor: pointer;
+            opacity: 0.9;
+        }
     }
 }
 

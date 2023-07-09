@@ -85,9 +85,10 @@
     }
     .squeakbox-img {
         height: 288px;
+        width: 100%;       
         border-radius: 20px;
-        margin-left: 5px;
-        object-fit: cover;
+        object-fit: fill;
+        outline: $outline1;
     }
 }
 @media (max-width: 768px) {

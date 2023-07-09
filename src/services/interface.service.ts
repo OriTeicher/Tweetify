@@ -1,3 +1,5 @@
+// * FEED INTERFACES
+
 export interface FeedIndexProps {
     topBarOption: string
 }
@@ -59,3 +61,6 @@ export interface FeedState {
     currPage: string
 }
 
+export interface ImgModalProps {
+    imgUrl: string
+}

@@ -11,6 +11,7 @@ interface FeedCredentialsProps {
     txt?: string
     imgUrl?: string
     handleRemovePost: Function
+    onImgClick: Function
 }
 
 const FeedCredentials: React.FC<FeedCredentialsProps> = ({
@@ -21,11 +22,14 @@ const FeedCredentials: React.FC<FeedCredentialsProps> = ({
     createdAt,
     txt,
     imgUrl,
+    onImgClick,
     handleRemovePost
 }) => {
     const onRemovePostClick = (postId: string) => {
         handleRemovePost(postId)
     }
+
+    const handleImgClick = () => onImgClick()
 
     const truncatedUsername =
         username.length > 15 ? username.slice(0, 3) + '...' : username
@@ -54,7 +58,8 @@ const FeedCredentials: React.FC<FeedCredentialsProps> = ({
                 <img
                     src={imgUrl}
                     className="post-photo"
-                    alt="NOTHING TO SEE HERE."
+                    alt="NOTHING TO SEE HERE 🖼️"
+                    onClick={handleImgClick}
                 ></img>
             )}
         </section>

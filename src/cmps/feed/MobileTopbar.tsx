@@ -5,10 +5,8 @@ export default function MobileTopbar() {
     return (
         <section className="mobile-topbar-container">
             <Avatar
-                sx={{
-                    bgcolor: 'lightskyblue',
-                    textShadow: '1px 1px 1px black'
-                }}
+                className="user-avatar"
+                src="https://xsgames.co/randomusers/assets/avatars/male/25.jpg"
             >
                 PK
             </Avatar>
