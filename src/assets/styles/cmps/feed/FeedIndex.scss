@@ -3,20 +3,17 @@
     border-top: none;
     border-collapse: collapse;
     height: fit-content;
-    padding-bottom: 100px;
     border-right: $outline1;
     border-left: $outline1;
-    // min-height: 100vh;
     max-height: fit-content;
+    border-bottom: none;
 }
 
 @media (max-width: 1700px) {
-    .feed-index 
-    {
+    .feed-index {
         flex: 0.7;
     }
 }
-
 
 @media (max-width: 850px) {
     .feed-index {

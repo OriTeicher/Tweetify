@@ -78,7 +78,7 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
                                 postId: string
                                 stat: string
                                 isStatIncrease: boolean
-                            }) => onPostIconClicked(action)}
+                            }) => onPostIconClicked(action)} 
                             isPostLoading={isPostLoading}
                         />
                     )}

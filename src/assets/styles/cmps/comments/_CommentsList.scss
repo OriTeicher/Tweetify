@@ -1,0 +1,13 @@
+.comments-list {
+    background-color: $mainColor4;
+    margin: 0px;
+    border: none;
+    padding: 0px;
+    .post-preview {
+        border: none;
+        border-right: none;
+        border-left: none;
+        outline: none;
+        padding: 17px;
+    }
+}

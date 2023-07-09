@@ -98,6 +98,10 @@
     }
 }
 
+.post-preview:last-child {
+    border: none;
+}
+
 .post-icons {
     display: flex;
     justify-content: start;

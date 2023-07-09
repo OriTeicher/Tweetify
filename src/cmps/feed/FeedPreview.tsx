@@ -52,88 +52,97 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
     const handleCommentClick = () => setIsCommentsClicked(!isCommentsClicked)
 
     return (
-        <section className="post-preview">
-            {isPostLoading && id === selectedPostId ? (
-                <Loader />
-            ) : (
-                <div className="top-preview">
-                    <Avatar
-                        src={avatar.imgUrl}
-                        className="user-avatar"
-                        sx={{ bgcolor: avatar.bgColor }}
-                    >
-                        {utilService.getInitials(displayName)}
-                    </Avatar>
+        <>
+            <section className="post-preview">
+                {isPostLoading && id === selectedPostId ? (
+                    <Loader />
+                ) : (
+                    <div className="top-preview">
+                        <Avatar
+                            src={avatar.imgUrl}
+                            className="user-avatar"
+                            sx={{ bgcolor: avatar.bgColor }}
+                        >
+                            {utilService.getInitials(displayName)}
+                        </Avatar>
 
-                    <FeedCredentials
-                        id={id}
-                        displayName={displayName}
-                        username={username}
-                        verified={verified}
-                        createdAt={createdAt}
-                        txt={txt}
-                        imgUrl={imgUrl}
-                        handleRemovePost={(postId: string) =>
-                            onPostIconClicked({
-                                type: 'removeFeedPost',
-                                postId,
-                                stat: 'post',
-                                isStatIncrease: false
-                            })
-                        }
-                        onImgClick={handleImgClick}
-                    />
-                </div>
-            )}
-
-            <div className="post-icons">
-                <div className="icon-container">
-                    <ChatBubbleOutlineIcon
-                        fontSize="small"
-                        onClick={handleCommentClick}
-                    />
-                    <p>{comments.length !== 0 && commentsNum}</p>
-                </div>
-                <div className="icon-container">
-                    {isLiked ? (
-                        <FavoriteIcon
-                            fontSize="small"
-                            onClick={() =>
+                        <FeedCredentials
+                            id={id}
+                            displayName={displayName}
+                            username={username}
+                            verified={verified}
+                            createdAt={createdAt}
+                            txt={txt}
+                            imgUrl={imgUrl}
+                            handleRemovePost={(postId: string) =>
                                 onPostIconClicked({
-                                    type: 'toggleStats',
-                                    postId: id,
-                                    stat: 'likes',
+                                    type: 'removeFeedPost',
+                                    postId,
+                                    stat: 'post',
                                     isStatIncrease: false
                                 })
                             }
-                            className="liked"
+                            onImgClick={handleImgClick}
                         />
-                    ) : (
-                        <FavoriteBorderIcon
+                    </div>
+                )}
+
+                <div className="post-icons">
+                    <div className="icon-container">
+                        <ChatBubbleOutlineIcon
                             fontSize="small"
-                            onClick={() =>
-                                onPostIconClicked({
-                                    type: 'toggleStats',
-                                    postId: id,
-                                    stat: 'likes',
-                                    isStatIncrease: true
-                                })
-                            }
-                            className="unliked"
+                            onClick={handleCommentClick}
                         />
-                    )}
-                    <p>{likes !== 0 && likes}</p>
+                        <p>{comments.length !== 0 && commentsNum}</p>
+                    </div>
+                    <div className="icon-container">
+                        {isLiked ? (
+                            <FavoriteIcon
+                                fontSize="small"
+                                onClick={() =>
+                                    onPostIconClicked({
+                                        type: 'toggleStats',
+                                        postId: id,
+                                        stat: 'likes',
+                                        isStatIncrease: false
+                                    })
+                                }
+                                className="liked"
+                            />
+                        ) : (
+                            <FavoriteBorderIcon
+                                fontSize="small"
+                                onClick={() =>
+                                    onPostIconClicked({
+                                        type: 'toggleStats',
+                                        postId: id,
+                                        stat: 'likes',
+                                        isStatIncrease: true
+                                    })
+                                }
+                                className="unliked"
+                            />
+                        )}
+                        <p>{likes !== 0 && likes}</p>
+                    </div>
+                    <div className="icon-container">
+                        <Loop fontSize="small" />
+                        <p>{resqueaks !== 0 && resqueaksNum}</p>
+                    </div>
+                    <ShareIcon fontSize="small" />
                 </div>
-                <div className="icon-container">
-                    <Loop fontSize="small" />
-                    <p>{resqueaks !== 0 && resqueaksNum}</p>
-                </div>
-                <ShareIcon fontSize="small" />
-            </div>
-            {/* comments */}
+                {/* comments */}
+
+                {isImgClicked && (
+                    <ImgModal
+                        onCloseModal={() => handleImgModalClosed()}
+                        imgUrl={imgUrl}
+                    />
+                )}
+            </section>
             {isCommentsClicked && comments.length !== 0 && (
                 <section className="feed-index">
-                    <div className="post-list">
+                    <div className="post-list comments-list">
                         {comments.map((comment, idx) => (
                             <FeedPreview
                                 key={idx}
@@ -157,15 +166,7 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                     </div>
                 </section>
             )}
-
-            {isImgClicked && (
-                <ImgModal
-                    onCloseModal={() => handleImgModalClosed()}
-                    imgUrl={imgUrl}
-                />
-            )}
-            {}
-        </section>
+        </>
     )
 }
 

@@ -23,11 +23,17 @@
 @import 'cmps/feed/FeedList';
 @import 'cmps/feed/MobileTopbar';
 @import 'cmps/feed/ImgModal';
+
+// comments
+@import 'cmps/comments/CommentsList';
+
 // news
 @import 'cmps/news/NewsIndex';
 @import 'cmps/news/NewsList';
 @import 'cmps/news/NewsPreview';
 @import 'cmps/news/Searchbar';
+
+
 
 // profile
 @import 'views/ProfilePage';
