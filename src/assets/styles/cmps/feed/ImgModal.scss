@@ -1,25 +1,24 @@
-.img-modal{
+.img-modal {
+    background-color: $mainColor1;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    img{
+    img {
+        object-fit: cover;
         outline: 1px solid $mainColor2;
         border-radius: 10px;
         width: 50vw;
-        height: auto;
+        height: 50vh;
     }
 }
 
 @media (max-width: 768px) {
-    .img-modal{
-        background-color: $mainColor1;
-        img{
+    .img-modal {
+        img {
             outline: none;
             border-radius: 0px;
             width: 100vw;
             height: 50%;
         }
     }
-    
 }

@@ -40,7 +40,7 @@ export interface FeedPreviewProps {
     verified: boolean
     createdAt: number
     likes: number
-    comments: object[]
+    comments: any[]
     resqueaks: number
     handleIconClicked: Function
     isPostLoading: boolean
@@ -63,4 +63,10 @@ export interface FeedState {
 
 export interface ImgModalProps {
     imgUrl: string
+}
+
+// * comments
+
+export interface CommentsProps {
+    comments: any
 }

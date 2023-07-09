@@ -3,7 +3,7 @@ import { Hompage } from './views/Homepage'
 import EditSqueakPage from './views/EditSqueakPage'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ProfilePage from './views/ProfilePage'
-function App() {
+function App () {
     return (
         <BrowserRouter>
             <Routes>

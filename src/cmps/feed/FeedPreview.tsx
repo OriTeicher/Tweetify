@@ -28,6 +28,7 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
 }) => {
     const [isLiked, setIsLiked] = useState(false)
     const [isImgClicked, setIsImgClicked] = useState(false)
+    const [isCommentsClicked, setIsCommentsClicked] = useState(false)
     const [commentsNum] = useState(comments?.length || 0)
     const [resqueaksNum] = useState(resqueaks)
     const [selectedPostId, setSelectedPostId] = useState('')
@@ -48,6 +49,7 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
 
     const handleImgModalClosed = () => setIsImgClicked(false)
     const handleImgClick = () => setIsImgClicked(true)
+    const handleCommentClick = () => setIsCommentsClicked(!isCommentsClicked)
 
     return (
         <section className="post-preview">
@@ -86,7 +88,10 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
 
             <div className="post-icons">
                 <div className="icon-container">
-                    <ChatBubbleOutlineIcon fontSize="small" />
+                    <ChatBubbleOutlineIcon
+                        fontSize="small"
+                        onClick={handleCommentClick}
+                    />
                     <p>{comments.length !== 0 && commentsNum}</p>
                 </div>
                 <div className="icon-container">
@@ -125,6 +130,33 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                 </div>
                 <ShareIcon fontSize="small" />
             </div>
+            {/* comments */}
+            {isCommentsClicked && comments.length !== 0 && (
+                <section className="feed-index">
+                    <div className="post-list">
+                        {comments.map((comment, idx) => (
+                            <FeedPreview
+                                key={idx}
+                                id={comment.id}
+                                displayName={comment.displayName}
+                                username={comment.username}
+                                txt={comment.txt}
+                                imgUrl={comment.imgUrl}
+                                avatar={comment.avatar}
+                                verified={comment.verified}
+                                createdAt={comment.createdAt}
+                                likes={comment.likes}
+                                comments={comment.comments}
+                                resqueaks={comment.resqueaks}
+                                isPostLoading={false}
+                                handleIconClicked={() =>
+                                    console.log('icon clicked')
+                                }
+                            />
+                        ))}
+                    </div>
+                </section>
+            )}
 
             {isImgClicked && (
                 <ImgModal
@@ -132,6 +164,7 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                     imgUrl={imgUrl}
                 />
             )}
+            {}
         </section>
     )
 }
