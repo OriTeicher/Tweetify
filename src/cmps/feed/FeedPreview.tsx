@@ -141,28 +141,29 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                 )}
             </section>
             {isCommentsClicked && comments.length !== 0 && (
-                    <div className="post-list comments-list">
-                        {comments.map((comment, idx) => (
-                            <FeedPreview
-                                key={idx}
-                                id={comment.id}
-                                displayName={comment.displayName}
-                                username={comment.username}
-                                txt={comment.txt}
-                                imgUrl={comment.imgUrl}
-                                avatar={comment.avatar}
-                                verified={comment.verified}
-                                createdAt={comment.createdAt}
-                                likes={comment.likes}
-                                comments={comment.comments}
-                                resqueaks={comment.resqueaks}
-                                isPostLoading={false}
-                                handleIconClicked={() =>
-                                    console.log('icon clicked')
-                                }
-                            />
-                        ))}
-                    </div>
+                <div className="post-list comments-list">
+                    {comments.map((comment, idx) => (
+                        <FeedPreview
+                            key={idx}
+                            id={comment.id}
+                            displayName={comment.displayName}
+                            username={comment.username}
+                            txt={comment.txt}
+                            imgUrl={comment.imgUrl}
+                            avatar={comment.avatar}
+                            verified={comment.verified}
+                            createdAt={comment.createdAt}
+                            likes={comment.likes}
+                            comments={comment.comments}
+                            resqueaks={comment.resqueaks}
+                            isPostLoading={false}
+                            handleIconClicked={() =>
+                                console.log('icon clicked')
+                            }
+                        />
+                    ))}
+                    <div className="squeak-concat"></div>
+                </div>
             )}
         </>
     )

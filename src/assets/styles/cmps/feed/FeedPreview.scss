@@ -1,6 +1,6 @@
 .post-preview {
     flex-direction: column;
-    border-bottom: $outline1;
+    border-top: $outline1;
     padding: 17px;
     font-size: 18px;
     font-weight: 100;
@@ -98,9 +98,7 @@
     }
 }
 
-.post-preview:last-child {
-    border: none;
-}
+
 
 .post-icons {
     display: flex;
@@ -171,4 +169,9 @@
             display: block;
         }
     }
+}
+
+
+.squeak-concat{
+    width: 20px;
 }

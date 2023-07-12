@@ -1,14 +1,15 @@
 .comments-list {
-    background-color: $mainColor4;
+    background-color: $mainColor5;
     margin: 0px;
     border: none;
     padding: 0px;
-
+    min-height: fit-content;
+    max-height: 500px;
+    overflow: auto;
     .post-preview {
-        border: none;
-        border-right: none;
-        border-left: none;
-        outline: none;
-        padding: 17px;
+        border-top: none;
+        &:nth-child(2n) {
+            background-color: $mainColor4;
+        }
     }
 }

@@ -1,6 +1,5 @@
 .squeak-box {
     padding: 15px 17px;
-    border-bottom: $outline1;
     .squeak-input-container {
         margin-bottom: 15px;
         display: flex;
@@ -76,21 +75,47 @@
         width: 20px;
         background-color: transparent;
         opacity: 0;
-
-        button {
-            &:hover {
+        button{
+            &:hover{
                 cursor: pointer;
             }
         }
     }
     .squeakbox-img {
         height: 288px;
-        width: 100%;       
         border-radius: 20px;
         object-fit: fill;
         outline: $outline1;
+        max-width: 288px;
+        border-radius: 20px;
+        outline: 1px solid #2f3336;
+    }
+    .img-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 }
+
+.remove-photo-btn {
+    background-color: $mainColor3;
+    margin-top: 5px;
+    color: white;
+    border: none !important;
+    font-weight: 600;
+    text-transform: inherit;
+    border-radius: 30px;
+    font-size: 1em;
+    width: -moz-fit-content;
+    width: fit-content;
+    padding: 7px 10px;
+    &:hover {
+        cursor: pointer;
+        opacity: 0.9;
+    }
+}
+
 @media (max-width: 768px) {
     .squeak-box {
         margin-top: 10px;

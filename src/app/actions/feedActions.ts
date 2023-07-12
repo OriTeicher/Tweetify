@@ -35,7 +35,11 @@ function queryFeedPosts(): AppThunk {
     }
 }
 
-function addFeedPost(postContent: string, file: File | null): AppThunk {
+function addFeedPost(
+    postContent: string,
+    file: File | null,
+    gifUrl: string = ''
+): AppThunk {
     return async (dispatch) => {
         try {
             dispatch(feedReducers.setNewPostLoaderActive())
@@ -46,6 +50,8 @@ function addFeedPost(postContent: string, file: File | null): AppThunk {
             newPost.txt = postContent
             newPost.imgUrl = file
                 ? await cloudinaryService.uploadImgToCloud(file)
+                : gifUrl
+                ? gifUrl
                 : ''
             console.log(
                 '🚀 ~ file: feedActions.ts:48 ~ return ~ newPost:',

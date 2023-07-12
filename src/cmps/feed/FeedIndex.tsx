@@ -29,8 +29,8 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
         dispatch(feedActions.queryFeedPosts())
     }, [dispatch])
 
-    const handleAddPost = async (postContent: string, file: File | null) => {
-        dispatch(feedActions.addFeedPost(postContent, file))
+    const handleAddPost = async (postContent: string, file: File | null, gifUrl: string) => {
+        dispatch(feedActions.addFeedPost(postContent, file, gifUrl))
     }
 
     const onPostIconClicked = (action: {

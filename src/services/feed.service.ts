@@ -65,7 +65,7 @@ export const feedService = {
                 createdAt,
                 likes: utilService.getRandomIntInclusive(0, 500),
                 comments: this.getRandomComments(
-                    utilService.getRandomIntInclusive(0, 3)
+                    utilService.getRandomIntInclusive(0, 7)
                 ),
                 resqueaks: utilService.getRandomIntInclusive(0, 50)
             }

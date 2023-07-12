@@ -5,9 +5,9 @@ import React, {
     KeyboardEvent,
     useRef
 } from 'react'
-import { uploadService } from '../../services/upload.service'
 import { Avatar } from '@mui/material'
 import EmojiPicker from 'emoji-picker-react'
+import GifPicker from 'gif-picker-react'
 import { EmojiClickData } from 'emoji-picker-react/dist/types/exposedTypes'
 import {
     ImageOutlined,
@@ -18,7 +18,7 @@ import {
 import Loader from '../utils/Loader'
 
 interface SqueakBoxProps {
-    addPost: (post: string, file: File | null) => void
+    addPost: (post: string, file: File | null, gifUrl: string) => void
     isNewPostLoading: boolean
 }
 
@@ -31,6 +31,7 @@ export default function SqueakBox({
     const [fileUrl, setFileUrl] = useState('')
     const [file, setFile] = useState<File | null>(null)
     const [isEmojiMenuOpen, setIsEmojiMenuOpen] = useState(false)
+    const [isGifMenuOpen, setIsGifMenuOpen] = useState(false)
 
     const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
         setMsg(event.target.value)
@@ -45,7 +46,7 @@ export default function SqueakBox({
 
     const handleSqueak = async (ev: React.FormEvent) => {
         ev.preventDefault()
-        addPost(msg, file)
+        addPost(msg, file, fileUrl)
         setIsEmojiMenuOpen(false)
         setMsg('')
         setFileUrl('')
@@ -61,9 +62,22 @@ export default function SqueakBox({
     const handleEmojiMenuClicked = () => {
         setIsEmojiMenuOpen(!isEmojiMenuOpen)
     }
-
+    const handleGifMenuClicked = () => {
+        setIsGifMenuOpen(!isGifMenuOpen)
+    }
     const handleEmojiClicked = (emojiData: EmojiClickData) => {
         setMsg(msg + emojiData.emoji)
+    }
+
+    const handleGifPick = (gifSelected: any) => {
+        setFileUrl(gifSelected.url)
+        setFile(null)
+    }
+
+    const handleRemovePhoto = (ev: React.FormEvent) => {
+        ev.preventDefault()
+        setFileUrl('')
+        setFile(null)
     }
 
     const handleFileChange = (ev: any) => {
@@ -102,7 +116,24 @@ export default function SqueakBox({
                                 onChange={handleInputChange}
                                 onKeyDown={handleKeyDown}
                             />
-                            {fileUrl && <img className='squeakbox-img' src={fileUrl} alt="file" />}
+                            {fileUrl && (
+                                <>
+                                    <div className="img-container">
+                                        <img
+                                            className="squeakbox-img"
+                                            src={fileUrl}
+                                            alt="file"
+                                        />
+                                        <button
+                                            className="remove-photo-btn"
+                                            type="submit"
+                                            onClick={handleRemovePhoto}
+                                        >
+                                            Remove Photo
+                                        </button>
+                                    </div>
+                                </>
+                            )}
                         </div>
                     )}
                 </div>
@@ -117,7 +148,10 @@ export default function SqueakBox({
                             className="file-upload-input"
                             onChange={handleFileChange}
                         />
-                        <GifBoxOutlined className="icon" />
+                        <GifBoxOutlined
+                            className="icon"
+                            onClick={handleGifMenuClicked}
+                        />
                         <TagFacesOutlined
                             onClick={handleEmojiMenuClicked}
                             className="icon"
@@ -125,9 +159,16 @@ export default function SqueakBox({
                     </div>
                 </div>
             </form>
+
             <div className="menu-container">
                 {isEmojiMenuOpen && (
                     <EmojiPicker onEmojiClick={handleEmojiClicked} />
+                )}
+                {isGifMenuOpen && (
+                    <GifPicker
+                        tenorApiKey={'AIzaSyA8hCpAa0XX6_3ppoUFSeoknmxHLO4Koso'}
+                        onGifClick={handleGifPick}
+                    />
                 )}
             </div>
         </section>
