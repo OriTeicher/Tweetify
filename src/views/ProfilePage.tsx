@@ -20,7 +20,7 @@ export default function ProfilePage() {
                         <button>Edit Profile</button>
                     </div>
                     <h1>Pukki Blinders</h1>
-                    <h2>@oriteicher</h2>
+                    <h2>@pukki123</h2>
                 </div>
                 <div>
                     <p>

@@ -48,6 +48,7 @@ export default function SqueakBox({
         ev.preventDefault()
         addPost(msg, file, fileUrl)
         setIsEmojiMenuOpen(false)
+        setIsGifMenuOpen(false)
         setMsg('')
         setFileUrl('')
     }
@@ -71,6 +72,7 @@ export default function SqueakBox({
 
     const handleGifPick = (gifSelected: any) => {
         setFileUrl(gifSelected.url)
+        setIsGifMenuOpen(false)
         setFile(null)
     }
 
@@ -85,6 +87,7 @@ export default function SqueakBox({
         setFile(ev.target.files[0])
         setFileUrl(URL.createObjectURL(ev.target.files[0]))
     }
+
 
     useEffect(() => {
         resizeTextarea()

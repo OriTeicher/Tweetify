@@ -45,7 +45,7 @@ function addFeedPost(
             dispatch(feedReducers.setNewPostLoaderActive())
             const newPost = feedService.getEmptyPost(
                 'Pukki Blinders',
-                'oriteicher'
+                'pukki123'
             )
             newPost.txt = postContent
             newPost.imgUrl = file

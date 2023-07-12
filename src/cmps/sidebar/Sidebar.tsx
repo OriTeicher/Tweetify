@@ -79,7 +79,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
                 </button>
                 <LoggedAcount
                     displayName="Pukki Blinders"
-                    username="oriteicher"
+                    username="pukki123"
                     setIsLoginModalOpen={(isOpen: boolean) =>
                         setLoginModal(isOpen)
                     }

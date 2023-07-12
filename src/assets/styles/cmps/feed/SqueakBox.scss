@@ -81,20 +81,24 @@
             }
         }
     }
-    .squeakbox-img {
+
+    .post-content{
+        width: 100%;
+    }
+
+    .post-content .squeakbox-img {
         height: 288px;
+        width: 90%;
         border-radius: 20px;
-        object-fit: fill;
-        outline: $outline1;
-        max-width: 288px;
-        border-radius: 20px;
+        object-fit: cover;
+        object-position: center center;
+        margin-top: 20px;
         outline: 1px solid #2f3336;
     }
     .img-container {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
     }
 }
 
