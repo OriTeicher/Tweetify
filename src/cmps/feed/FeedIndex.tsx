@@ -63,7 +63,6 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
 
     return (
         <section className="feed-index">
-            <h1>filter: {filterBy}</h1>
             <MobileTopbar />
             <FeedTopbar topBarOption={topBarOption} />
             <SqueakBox
@@ -74,6 +73,7 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
                 <Loader />
             ) : (
                 <FeedList
+                    filterBy={filterBy}
                     feedPosts={feedPosts}
                     handleIconClicked={(action: {
                         type: string

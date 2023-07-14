@@ -25,9 +25,11 @@ export interface FeedListProps {
     feedPosts: FeedPost[]
     handleIconClicked: Function
     isPostLoading: boolean
+    filterBy: string
 }
 
 export interface FeedPreviewProps {
+    filterBy: string
     id: string
     displayName: string
     username: string

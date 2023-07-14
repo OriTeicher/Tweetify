@@ -50,8 +50,15 @@ async function getCollectionFromDB(col: string, filterBy: string = '') {
             resqueaks: doc.data().resqueaks || 0
         }))
         if (filterBy) {
-            const resArr = collectionArr.filter((post) =>
-                post.txt.includes(filterBy)
+            const resArr = collectionArr.filter(
+                (post) =>
+                    post.txt.toLowerCase().includes(filterBy.toLowerCase()) ||
+                    post.username
+                        .toLowerCase()
+                        .includes(filterBy.toLowerCase()) ||
+                    post.displayName
+                        .toLowerCase()
+                        .includes(filterBy.toLowerCase())
             )
             return resArr
         } else return collectionArr

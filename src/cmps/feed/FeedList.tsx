@@ -7,6 +7,7 @@ const FeedList: React.FC<FeedListProps> = ({
     feedPosts,
     handleIconClicked,
     isPostLoading,
+    filterBy
 }) => {
     const onIconClicked = (action: {
         type: string
@@ -20,6 +21,7 @@ const FeedList: React.FC<FeedListProps> = ({
         <section className="posts-list">
             {feedPosts.map((post, idx) => (
                 <FeedPreview
+                    filterBy={filterBy}
                     key={idx}
                     id={post.id}
                     displayName={post.displayName}

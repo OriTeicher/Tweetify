@@ -24,7 +24,8 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
     comments,
     resqueaks,
     handleIconClicked,
-    isPostLoading
+    isPostLoading,
+    filterBy
 }) => {
     const [isLiked, setIsLiked] = useState(false)
     const [isImgClicked, setIsImgClicked] = useState(false)
@@ -67,6 +68,7 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                         </Avatar>
 
                         <FeedCredentials
+                            filterBy={filterBy}
                             id={id}
                             displayName={displayName}
                             username={username}
@@ -144,6 +146,7 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                 <div className="post-list comments-list">
                     {comments.map((comment, idx) => (
                         <FeedPreview
+                            filterBy={filterBy}
                             key={idx}
                             id={comment.id}
                             displayName={comment.displayName}

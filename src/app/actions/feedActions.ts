@@ -111,6 +111,8 @@ function toggleStats(postId: string, isIncrease: boolean): AppThunk {
 function setFilterBy(newFilterBy: string): AppThunk {
     return async (dispatch) => {
         try {
+            dispatch(feedReducers.setAppLoaderActive())
+            dispatch(feedReducers.setFilterBy(newFilterBy))
             const feedPostsDB = await dbService.getCollectionFromDB(
                 dbService.POSTS_DB_COLLECTION,
                 newFilterBy

@@ -22,7 +22,6 @@
         padding-left: 10px;
     }
     .user-avatar {
-
         font-weight: 500;
         text-shadow: 1px 1px 1px black;
         &:hover {
@@ -100,8 +99,6 @@
     }
 }
 
-
-
 .post-icons {
     display: flex;
     justify-content: start;
@@ -173,7 +170,13 @@
     }
 }
 
-
-.squeak-concat{
+.squeak-concat {
     width: 20px;
+}
+
+mark {
+    background-color: $logoColor;
+    color: white;
+    font-weight: 500;
+    border-radius: 10px;
 }
