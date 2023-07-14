@@ -9,9 +9,9 @@ import { Avatar } from '@mui/material'
 import EmojiPicker from 'emoji-picker-react'
 import GifPicker from 'gif-picker-react'
 import { EmojiClickData } from 'emoji-picker-react/dist/types/exposedTypes'
+import ImgModal from '../utils/ImgModal'
 import {
     ImageOutlined,
-    Gif,
     TagFacesOutlined,
     GifBoxOutlined
 } from '@mui/icons-material'
@@ -32,6 +32,7 @@ export default function SqueakBox({
     const [file, setFile] = useState<File | null>(null)
     const [isEmojiMenuOpen, setIsEmojiMenuOpen] = useState(false)
     const [isGifMenuOpen, setIsGifMenuOpen] = useState(false)
+    const [selectedImgUrl, setSelectedImgUrl] = useState('')
 
     const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
         setMsg(event.target.value)
@@ -88,7 +89,6 @@ export default function SqueakBox({
         setFileUrl(URL.createObjectURL(ev.target.files[0]))
     }
 
-
     useEffect(() => {
         resizeTextarea()
     }, [msg])
@@ -123,6 +123,9 @@ export default function SqueakBox({
                                 <>
                                     <div className="img-container">
                                         <img
+                                            onClick={() =>
+                                                setSelectedImgUrl(fileUrl)
+                                            }
                                             className="squeakbox-img"
                                             src={fileUrl}
                                             alt="file"
@@ -162,7 +165,12 @@ export default function SqueakBox({
                     </div>
                 </div>
             </form>
-
+            {selectedImgUrl && (
+                <ImgModal
+                    onCloseModal={() => setSelectedImgUrl('')}
+                    imgUrl={selectedImgUrl}
+                />
+            )}
             <div className="menu-container">
                 {isEmojiMenuOpen && (
                     <EmojiPicker onEmojiClick={handleEmojiClicked} />

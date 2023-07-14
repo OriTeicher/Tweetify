@@ -7,6 +7,13 @@
 ::selection {
 }
 
+img {
+    &:hover {
+        cursor: pointer;
+        filter: brightness(90%);
+    }
+}
+
 html {
     overflow: scroll;
     overflow-x: hidden;

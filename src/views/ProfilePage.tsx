@@ -1,13 +1,22 @@
 import React from 'react'
 import { DateRange } from '@mui/icons-material'
+import ImgModal from '../cmps/utils/ImgModal'
+import { useState } from 'react'
 
 export default function ProfilePage() {
+    const [selectedImgUrl, setSelectedImgUrl] = useState('')
+
     return (
         <section className="feed-index profile-container">
             <img
                 className="profile-bgc-img"
                 src={`https://c4.wallpaperflare.com/wallpaper/169/139/716/twitter-logo-twitter-logo-wallpaper-preview.jpg`}
                 alt="bgc-picture"
+                onClick={() =>
+                    setSelectedImgUrl(
+                        'https://c4.wallpaperflare.com/wallpaper/169/139/716/twitter-logo-twitter-logo-wallpaper-preview.jpg'
+                    )
+                }
             ></img>
             <div className="user-cred">
                 <div className="profile-img-container">
@@ -16,6 +25,11 @@ export default function ProfilePage() {
                             className="profile-img"
                             src="https://xsgames.co/randomusers/assets/avatars/male/25.jpg"
                             alt="profile-pic"
+                            onClick={() =>
+                                setSelectedImgUrl(
+                                    'https://xsgames.co/randomusers/assets/avatars/male/25.jpg'
+                                )
+                            }
                         />
                         <button>Edit Profile</button>
                     </div>
@@ -42,6 +56,12 @@ export default function ProfilePage() {
                     </p>
                 </div>
             </div>
+            {selectedImgUrl && (
+                <ImgModal
+                    imgUrl={selectedImgUrl}
+                    onCloseModal={() => setSelectedImgUrl('')}
+                />
+            )}
         </section>
     )
 }

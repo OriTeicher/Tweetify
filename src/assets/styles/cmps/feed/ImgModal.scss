@@ -4,6 +4,10 @@
     justify-content: center;
     align-items: center;
     img {
+        &:hover {
+            cursor: default;
+            filter: brightness(100%);
+        }
         object-fit: cover;
         outline: 1px solid $mainColor2;
         border-radius: 10px;
