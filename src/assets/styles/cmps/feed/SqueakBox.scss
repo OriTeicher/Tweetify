@@ -1,5 +1,6 @@
 .squeak-box {
     padding: 15px 17px;
+    border-bottom: $outline1;
     .squeak-input-container {
         margin-bottom: 15px;
         display: flex;
@@ -75,14 +76,14 @@
         width: 20px;
         background-color: transparent;
         opacity: 0;
-        button{
-            &:hover{
+        button {
+            &:hover {
                 cursor: pointer;
             }
         }
     }
 
-    .post-content{
+    .post-content {
         width: 100%;
     }
 
@@ -96,9 +97,17 @@
         outline: 1px solid #2f3336;
     }
     .img-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        position: relative;
+        button {
+            position: absolute;
+            margin-top: 20px;
+            margin-left: -29px;
+            border-radius: 0px 20px 0px 10px;
+            &:hover {
+                filter: brightness(90%);
+                color: $logoColor;
+            }
+        }
     }
 }
 

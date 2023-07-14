@@ -43,7 +43,7 @@ const LoginModal: React.FC<LoginModalState> = ({ isOpen, setIsOpen }) => {
                                     type="text"
                                     placeholder=" Confirm Password..."
                                 />
-                                <button type="submit">Sign-Up</button>
+                                <button type="submit">Sign Up</button>
                             </>
                         )}
                     </form>

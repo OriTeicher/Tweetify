@@ -26,10 +26,6 @@ const LoggedAccount: React.FC<UserProps> = ({
         }
     }
 
-    const handleAccountClicked = () => {
-        setIsDropdownOpen(!isDropdownOpen)
-    }
-
     return (
         <section className="dropdown-cred-container">
             {isDropdownOpen && (
@@ -42,7 +38,7 @@ const LoggedAccount: React.FC<UserProps> = ({
             )}
             <section
                 className="logged-account-container"
-                onClick={handleAccountClicked}
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
                 <div className="left-cred">
                     <Avatar

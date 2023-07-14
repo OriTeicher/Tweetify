@@ -70,3 +70,7 @@ export interface ImgModalProps {
 export interface CommentsProps {
     comments: any
 }
+
+
+// * users
+

@@ -15,6 +15,13 @@
         height: 30px;
         margin-left: 6px;
     }
+    .user-avatar
+    {
+        cursor: pointer;
+        &:hover{
+            filter: brightness(95%);
+        }
+    }
 }
 
 @media (max-width: 768px) {

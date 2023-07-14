@@ -11,7 +11,6 @@ import MobileTopbar from './MobileTopbar'
 import Loader from '../utils/Loader'
 import { FeedIndexProps } from '../../services/interface.service'
 import ProfilePage from '../../views/ProfilePage'
-import LoginModal from '../utils/LoginModal'
 
 const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
     const { feedPosts, isAppLoading, isPostLoading, isNewPostLoading } =
@@ -29,7 +28,11 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
         dispatch(feedActions.queryFeedPosts())
     }, [dispatch])
 
-    const handleAddPost = async (postContent: string, file: File | null, gifUrl: string) => {
+    const handleAddPost = async (
+        postContent: string,
+        file: File | null,
+        gifUrl: string
+    ) => {
         dispatch(feedActions.addFeedPost(postContent, file, gifUrl))
     }
 
@@ -78,7 +81,7 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
                                 postId: string
                                 stat: string
                                 isStatIncrease: boolean
-                            }) => onPostIconClicked(action)} 
+                            }) => onPostIconClicked(action)}
                             isPostLoading={isPostLoading}
                         />
                     )}

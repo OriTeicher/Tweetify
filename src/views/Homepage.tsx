@@ -1,17 +1,26 @@
-import React, { Component, useState } from 'react'
+import React, { useState } from 'react'
 import Sidebar from '../cmps/sidebar/Sidebar'
-import FeedIndex from '../cmps/feed/FeedIndex'
 import NewsIndex from '../cmps/trending/NewsIndex'
+import FeedIndex from '../cmps/feed/FeedIndex'
+import { FeedIndexProps } from '../services/interface.service'
 
-export function Hompage() {
+interface AppProps {
+    cmp?: React.ComponentType<FeedIndexProps>
+}
+
+export function Hompage(props: AppProps) {
     const [topBarOption, setTopBarOption] = useState('Home')
-    const handleSidebarOptionClick = (topBarOption: string) => {
-        setTopBarOption(topBarOption)
-    }
+
+    const DynamicComponent = props.cmp || FeedIndex
+
     return (
         <section className="app-container">
-            <Sidebar onOptionChange={handleSidebarOptionClick} />
-            <FeedIndex topBarOption={topBarOption} />
+            <Sidebar
+                onOptionChange={(topBarOption: string) =>
+                    setTopBarOption(topBarOption)
+                }
+            />
+            <DynamicComponent topBarOption={topBarOption} />
             <NewsIndex />
         </section>
     )

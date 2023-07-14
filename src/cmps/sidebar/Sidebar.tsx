@@ -64,34 +64,37 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
     }
 
     return (
-        <section className="left-menu">
-            <div
-                className={`sidebar-container  ${
-                    isSmallScreen ? 'mobile' : ''
-                }`}
-            >
-                {renderSidebarOptions()}  
-                <button
-                    className={`squeak-btn ${isSmallScreen ? 'mobile' : ''}`}
-                    onClick={handleSiderbarSqueak}
+        <>
+            <section className="left-menu">
+                <div
+                    className={`sidebar-container  ${
+                        isSmallScreen ? 'mobile' : ''
+                    }`}
                 >
-                    {isSmallScreen ? '+' : 'Squeak'}
-                </button>
-                <LoggedAcount
-                    displayName="Pukki Blinders"
-                    username="pukki123"
-                    setIsLoginModalOpen={(isOpen: boolean) =>
-                        setLoginModal(isOpen)
-                    }
-                />
+                    {renderSidebarOptions()}
+                    <button
+                        className={`squeak-btn ${
+                            isSmallScreen ? 'mobile' : ''
+                        }`}
+                        onClick={handleSiderbarSqueak}
+                    >
+                        {isSmallScreen ? '+' : 'Squeak'}
+                    </button>
+                    <LoggedAcount
+                        displayName="Pukki Blinders"
+                        username="pukki123"
+                        setIsLoginModalOpen={(isOpen: boolean) =>
+                            setLoginModal(isOpen)
+                        }
+                    />
 
-                <LoginModal
-                    isOpen={isLoginModalOpen}
-                    setIsOpen={(isOpen: boolean) => setLoginModal(isOpen)}
-                />
-                
-            </div>
-        </section>
+                    <LoginModal
+                        isOpen={isLoginModalOpen}
+                        setIsOpen={(isOpen: boolean) => setLoginModal(isOpen)}
+                    />
+                </div>
+            </section>
+        </>
     )
 }
 

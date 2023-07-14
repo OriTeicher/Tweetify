@@ -9,7 +9,7 @@ import FeedCredentials from './FeedCredentials'
 import { utilService } from '../../services/util.service'
 import Loader from '../utils/Loader'
 import { FeedPreviewProps } from '../../services/interface.service'
-import ImgModal from './ImgModal'
+import ImgModal from '../utils/ImgModal'
 
 const FeedPreview: React.FC<FeedPreviewProps> = ({
     id,

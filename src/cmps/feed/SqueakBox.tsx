@@ -132,7 +132,7 @@ export default function SqueakBox({
                                             type="submit"
                                             onClick={handleRemovePhoto}
                                         >
-                                            Remove Photo
+                                            x
                                         </button>
                                     </div>
                                 </>
