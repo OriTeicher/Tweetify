@@ -1,12 +1,16 @@
 import React from 'react'
-import NewsList from './NewsList'
+import TrendingList from './TrendingList'
 import Searchbar from './Searchbar'
 import { useDispatch } from 'react-redux'
 import { RootState } from '../../app/feedStore'
 import { feedActions } from '../../app/actions/feedActions'
 import { ThunkDispatch, Action } from '@reduxjs/toolkit'
+import { Trend } from '../../services/interface.service'
+import { trendsService } from '../../services/trends.service'
 
 export default function NewsIndex() {
+    const trends = trendsService.getRandomTrends(5)
+
     const dispatch: ThunkDispatch<
         RootState,
         undefined,
@@ -18,13 +22,13 @@ export default function NewsIndex() {
     }
 
     return (
-        <section className="news-index">
+        <section className="trending-index">
             <Searchbar
                 onSetFilterBy={(filterValue: string) =>
                     handleFilterBy(filterValue)
                 }
             />
-            <NewsList />
+            <TrendingList trends={trends} />
         </section>
     )
 }

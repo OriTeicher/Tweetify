@@ -1,4 +1,4 @@
-.news-index {
+.trending-index {
     width: 250px;
     padding: 20px;
     position: sticky;
@@ -10,7 +10,7 @@
 }
 
 @media (max-width: 768px) {
-    .news-index {
+    .trending-index {
         display: none;
     }
 }

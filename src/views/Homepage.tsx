@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Sidebar from '../cmps/sidebar/Sidebar'
-import NewsIndex from '../cmps/trending/NewsIndex'
+import TrendingIndex from '../cmps/trending/TrendingIndex'
 import FeedIndex from '../cmps/feed/FeedIndex'
 import { FeedIndexProps } from '../services/interface.service'
 
@@ -21,7 +21,7 @@ export function Hompage(props: AppProps) {
                 }
             />
             <DynamicComponent topBarOption={topBarOption} />
-            <NewsIndex />
+            <TrendingIndex />
         </section>
     )
 }

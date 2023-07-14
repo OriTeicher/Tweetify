@@ -28,6 +28,12 @@ export interface FeedListProps {
     filterBy: string
 }
 
+export interface Trend {
+    category: string
+    title: string
+    tweetsCount: number
+}
+
 export interface FeedPreviewProps {
     filterBy: string
     id: string

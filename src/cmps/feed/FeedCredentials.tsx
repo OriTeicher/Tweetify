@@ -36,7 +36,7 @@ const FeedCredentials: React.FC<FeedCredentialsProps> = ({
   const truncatedUsername =
     username.length > 15 ? username.slice(0, 3) + '...' : username;
 
-  const highlightMatchedText = (text: string, filterBy: string) => {
+  const highlightMatchedTxt = (text: string, filterBy: string) => {
     const regex = new RegExp(`(${filterBy})`, 'gi');
     return text.replace(regex, '<mark>$1</mark>');
   };
@@ -44,7 +44,7 @@ const FeedCredentials: React.FC<FeedCredentialsProps> = ({
   const markedDisplayName = truncatedUsername.includes(filterBy) ? (
     <span
       dangerouslySetInnerHTML={{
-        __html: highlightMatchedText(displayName, filterBy),
+        __html: highlightMatchedTxt(displayName, filterBy),
       }}
     ></span>
   ) : (
@@ -54,7 +54,7 @@ const FeedCredentials: React.FC<FeedCredentialsProps> = ({
   const markedUsername = truncatedUsername.includes(filterBy) ? (
     <span
       dangerouslySetInnerHTML={{
-        __html: highlightMatchedText(truncatedUsername, filterBy),
+        __html: highlightMatchedTxt(truncatedUsername, filterBy),
       }}
     ></span>
   ) : (
@@ -65,7 +65,7 @@ const FeedCredentials: React.FC<FeedCredentialsProps> = ({
     <pre
       className="post-txt"
       dangerouslySetInnerHTML={{
-        __html: highlightMatchedText(txt, filterBy),
+        __html: highlightMatchedTxt(txt, filterBy),
       }}
     ></pre>
   ) : null;
