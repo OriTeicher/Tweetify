@@ -10,13 +10,17 @@ import SqueakBox from './SqueakBox'
 import MobileTopbar from './MobileTopbar'
 import Loader from '../utils/Loader'
 import { FeedIndexProps } from '../../services/interface.service'
-import ProfilePage from '../../views/ProfilePage'
 
 const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
-    const { feedPosts, isAppLoading, isPostLoading, isNewPostLoading } =
-        useSelector((state: RootState) => {
-            return state.feed
-        })
+    const {
+        filterBy,
+        feedPosts,
+        isAppLoading,
+        isPostLoading,
+        isNewPostLoading
+    } = useSelector((state: RootState) => {
+        return state.feed
+    })
 
     const dispatch: ThunkDispatch<
         RootState,
@@ -59,6 +63,7 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
 
     return (
         <section className="feed-index">
+            <h1>filter: {filterBy}</h1>
             <MobileTopbar />
             <FeedTopbar topBarOption={topBarOption} />
             <SqueakBox

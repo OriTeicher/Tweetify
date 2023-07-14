@@ -33,7 +33,7 @@ async function addItemToCollection(item: object, itemId: string, col: string) {
     }
 }
 
-async function getCollectionFromDB(col: string) {
+async function getCollectionFromDB(col: string, filterBy: string = '') {
     try {
         const querySnapshot = await getDocs(collection(db, col))
         const collectionArr = querySnapshot.docs.map((doc) => ({
@@ -49,7 +49,12 @@ async function getCollectionFromDB(col: string) {
             comments: doc.data().comments || [],
             resqueaks: doc.data().resqueaks || 0
         }))
-        return collectionArr
+        if (filterBy) {
+            const resArr = collectionArr.filter((post) =>
+                post.txt.includes(filterBy)
+            )
+            return resArr
+        } else return collectionArr
     } catch (error) {
         console.error('Error getting collection: ', error)
         return []
@@ -97,7 +102,7 @@ async function updateFieldInCollection(
     field: string,
     col: string,
     updatedInfo: any
-) { 
+) {
     try {
         const colRef = doc(db, col, itemId)
         const updatedItem = { [field]: increment(updatedInfo) }

@@ -6,7 +6,7 @@ import { FeedListProps } from '../../services/interface.service'
 const FeedList: React.FC<FeedListProps> = ({
     feedPosts,
     handleIconClicked,
-    isPostLoading
+    isPostLoading,
 }) => {
     const onIconClicked = (action: {
         type: string

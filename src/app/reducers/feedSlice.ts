@@ -6,7 +6,8 @@ export const initialState: FeedState = {
     isAppLoading: true,
     isPostLoading: false,
     isNewPostLoading: false,
-    currPage: 'home'
+    currPage: 'home',
+    filterBy: ''
 }
 
 const feedSlice = createSlice({
@@ -14,9 +15,9 @@ const feedSlice = createSlice({
     initialState,
     reducers: {
         queryFeedPostsSuccess: (state, action: PayloadAction<FeedPost[]>) => {
-            state.feedPosts = action.payload.sort(
-                (a, b) => b.createdAt - a.createdAt
-            )
+            state.feedPosts = action.payload
+                .filter((post) => post.txt.includes(state.filterBy))
+                .sort((a, b) => b.createdAt - a.createdAt)
             state.isAppLoading = false
         },
         addFeedPostSuccess: (state, action: PayloadAction<FeedPost>) => {
@@ -55,6 +56,9 @@ const feedSlice = createSlice({
         },
         setNewPostLoaderActive: (state) => {
             state.isNewPostLoading = true
+        },
+        setFilterBy: (state, action: PayloadAction<string>) => {
+            state.filterBy = action.payload
         }
     }
 })

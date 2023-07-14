@@ -59,6 +59,7 @@ export interface FeedState {
     isPostLoading: boolean
     isNewPostLoading: boolean
     currPage: string
+    filterBy: string
 }
 
 export interface ImgModalProps {
@@ -71,6 +72,4 @@ export interface CommentsProps {
     comments: any
 }
 
-
 // * users
-

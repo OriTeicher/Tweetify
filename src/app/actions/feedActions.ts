@@ -2,14 +2,14 @@ import { feedReducers } from '../reducers/feedSlice'
 import { dbService } from '../../services/db.service'
 import { AppThunk } from '../feedStore'
 import { feedService } from '../../services/feed.service'
-import { uploadService } from '../../services/upload.service'
 import { cloudinaryService } from '../../services/cloudinary.service'
 
 export const feedActions = {
     queryFeedPosts,
     addFeedPost,
     removeFeedPost,
-    toggleStats
+    toggleStats,
+    setFilterBy
 }
 
 function queryFeedPosts(): AppThunk {
@@ -104,6 +104,20 @@ function toggleStats(postId: string, isIncrease: boolean): AppThunk {
             )
         } catch (error) {
             console.log('Cannot toggle likes. ', error)
+        }
+    }
+}
+
+function setFilterBy(newFilterBy: string): AppThunk {
+    return async (dispatch) => {
+        try {
+            const feedPostsDB = await dbService.getCollectionFromDB(
+                dbService.POSTS_DB_COLLECTION,
+                newFilterBy
+            )
+            dispatch(feedReducers.queryFeedPostsSuccess(feedPostsDB))
+        } catch (error) {
+            console.log('Cannot set filter by. ', error)
         }
     }
 }

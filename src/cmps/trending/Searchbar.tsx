@@ -1,8 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { SearchOutlined as SearchIcon } from '@mui/icons-material'
 
-export default function Searchbar() {
+interface SearchbarProps {
+    onSetFilterBy: Function
+}
+
+export default function Searchbar(props: SearchbarProps) {
     const [isInputFocused, setIsInputFocused] = useState(false)
+    const [filterBy, setFilterBy] = useState('')
 
     const handleInputFocus = () => {
         setIsInputFocused(true)
@@ -11,6 +16,20 @@ export default function Searchbar() {
     const handleInputBlur = () => {
         setIsInputFocused(false)
     }
+
+    const handleTxtChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+        const newFilterBy = ev.target.value
+        setFilterBy(newFilterBy)
+    }
+
+    useEffect(() => {
+        const debounce = setTimeout(() => {
+            props.onSetFilterBy(filterBy)
+        }, 1000)
+        return () => {
+            clearTimeout(debounce)
+        }
+    })
 
     return (
         <section
@@ -26,6 +45,7 @@ export default function Searchbar() {
                 placeholder="Search Squeaker..."
                 onFocus={handleInputFocus}
                 onBlur={handleInputBlur}
+                onChange={handleTxtChange}
             ></input>
         </section>
     )
