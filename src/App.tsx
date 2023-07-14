@@ -1,5 +1,5 @@
 import './assets/styles/main.scss'
-import { Hompage } from './views/Homepage'
+import { Hompage as DynamicHomepage } from './views/Homepage'
 import EditSqueakPage from './views/EditSqueakPage'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import FeedIndex from './cmps/feed/FeedIndex'
@@ -8,15 +8,23 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Hompage />} />
+                <Route path="/" element={<DynamicHomepage />} />
+                <Route
+                    path="/home"
+                    element={<DynamicHomepage cmp={FeedIndex} />}
+                />
                 <Route
                     path="/Squeaker-Twitter-clone"
-                    element={<Hompage cmp={FeedIndex} />}
+                    element={<DynamicHomepage cmp={FeedIndex} />}
+                />
+                <Route
+                    path="/*"
+                    element={<DynamicHomepage cmp={FeedIndex} />}
                 />
                 <Route path="/edit" element={<EditSqueakPage />} />
                 <Route
                     path="/profile"
-                    element={<Hompage cmp={ProfilePage} />}
+                    element={<DynamicHomepage cmp={ProfilePage} />}
                 />
             </Routes>
         </BrowserRouter>

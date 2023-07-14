@@ -61,31 +61,23 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
         <section className="feed-index">
             <MobileTopbar />
             <FeedTopbar topBarOption={topBarOption} />
-            {topBarOption === 'Profile' ? (
-                <>
-                    <ProfilePage />
-                </>
+            <SqueakBox
+                addPost={handleAddPost}
+                isNewPostLoading={isNewPostLoading}
+            />
+            {isAppLoading ? (
+                <Loader />
             ) : (
-                <>
-                    <SqueakBox
-                        addPost={handleAddPost}
-                        isNewPostLoading={isNewPostLoading}
-                    />
-                    {isAppLoading ? (
-                        <Loader />
-                    ) : (
-                        <FeedList
-                            feedPosts={feedPosts}
-                            handleIconClicked={(action: {
-                                type: string
-                                postId: string
-                                stat: string
-                                isStatIncrease: boolean
-                            }) => onPostIconClicked(action)}
-                            isPostLoading={isPostLoading}
-                        />
-                    )}
-                </>
+                <FeedList
+                    feedPosts={feedPosts}
+                    handleIconClicked={(action: {
+                        type: string
+                        postId: string
+                        stat: string
+                        isStatIncrease: boolean
+                    }) => onPostIconClicked(action)}
+                    isPostLoading={isPostLoading}
+                />
             )}
         </section>
     )

@@ -3,7 +3,7 @@ import { DateRange } from '@mui/icons-material'
 
 export default function ProfilePage() {
     return (
-        <section className=" profile-container">
+        <section className="feed-index profile-container">
             <img
                 className="profile-bgc-img"
                 src={`https://c4.wallpaperflare.com/wallpaper/169/139/716/twitter-logo-twitter-logo-wallpaper-preview.jpg`}

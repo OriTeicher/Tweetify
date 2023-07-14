@@ -10,7 +10,7 @@ import { MoreHoriz as MoreIcon } from '@mui/icons-material'
 import SidebarOption from './SidebarOption'
 import LoggedAcount from './LoggedAcount'
 import LoginModal from '../utils/LoginModal'
-
+import { useNavigate } from 'react-router-dom'
 interface SidebarProps {
     onOptionChange: (option: string) => void
 }
@@ -19,6 +19,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
     const [selectedSidebarOption, setSelectedSidebarOption] = useState('Home')
     const [isSmallScreen, setIsSmallScreen] = useState(false)
     const [isLoginModalOpen, setLoginModal] = useState(false)
+    const navigate = useNavigate()
 
     useEffect(() => {
         const handleResize = () => {
@@ -34,6 +35,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
     const handleOptionClick = (option: string) => {
         setSelectedSidebarOption(option)
         onOptionChange(option)
+        navigate(`/${option.toLowerCase()}`)
     }
 
     const handleSiderbarSqueak = () => {
