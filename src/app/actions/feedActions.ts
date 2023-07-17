@@ -133,7 +133,7 @@ function addFeedComment(
 ): AppThunk {
     return async (dispatch) => {
         try {
-            dispatch(feedReducers.setNewPostLoaderActive())
+            dispatch(feedReducers.setAppLoaderActive)
             const newComment = feedService.getEmptyPost(
                 'Pukki Blinders',
                 'pukki123'

@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { FeedPost, FeedState } from '../../services/interface.service'
-import { Action } from '@remix-run/router'
 
 export const initialState: FeedState = {
     feedPosts: [],
@@ -67,6 +66,7 @@ const feedSlice = createSlice({
             const updatedPost = state.feedPosts[idx]
             updatedPost.comments.unshift(action.payload[0].comments[0])
             state.feedPosts = [...state.feedPosts, updatedPost]
+            state.isAppLoading = false
         }
     }
 })
