@@ -23,7 +23,7 @@ export const dbService = {
     // consts
     POSTS_DB_COLLECTION: 'posts',
     USER_DB_COLLECTION: 'users',
-    MIN_POST_NUM: 10
+    MIN_POST_NUM: 20
 }
 
 async function addItemToCollection(item: object, itemId: string, col: string) {

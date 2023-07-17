@@ -14,19 +14,33 @@ function getRandomTrends(count: number): Trend[] {
         'Politics',
         'Music'
     ]
+
     const titles = [
         'Cristiano Ronaldo',
-        'Blockchain',
-        'Movie',
-        'Election',
-        'Benjamin Netanya'
+        'Premier League',
+        'Chelsea',
+        'Goal',
+        'Mourinho',
+        'Pep Guardiola',
+        'Lionel Messi',
+        'Tottenham',
+        'Arsenal'
     ]
+
+    const usedTitles: string[] = []
 
     for (let i = 0; i < count; i++) {
         const randomCategoryIndex = Math.floor(
             Math.random() * categories.length
         )
-        const randomTitleIndex = Math.floor(Math.random() * titles.length)
+
+        let randomTitleIndex = Math.floor(Math.random() * titles.length)
+        while (usedTitles.includes(titles[randomTitleIndex])) {
+            randomTitleIndex = Math.floor(Math.random() * titles.length)
+        }
+
+        usedTitles.push(titles[randomTitleIndex])
+
         const randomTweetsCount = Math.floor(Math.random() * 10) + 1
 
         const newTrend: Trend = {

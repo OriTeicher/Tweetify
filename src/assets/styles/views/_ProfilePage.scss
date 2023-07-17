@@ -14,12 +14,11 @@
         gap: 10px;
         flex-direction: column;
         padding: 15px;
-        left: 20px;
         .edit-container {
             display: flex;
             justify-content: space-between;
-            align-items: end;
-            button {
+        align-items: center;
+        button {
                 &:hover {
                     cursor: pointer;
                     filter: brightness(90%);
