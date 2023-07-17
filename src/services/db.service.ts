@@ -18,6 +18,7 @@ export const dbService = {
     updateItemInCollection,
     updateFieldInCollection,
     setDemoDB,
+    getPostByIdFromDb,
 
     // consts
     POSTS_DB_COLLECTION: 'posts',
@@ -116,5 +117,35 @@ async function updateFieldInCollection(
         await updateDoc(colRef, updatedItem)
     } catch (error) {
         console.log(`Cannot update ${field} of item: ${itemId}`, Error)
+    }
+}
+
+async function getPostByIdFromDb(itemId: string, col: string, comment: any) {
+    try {
+        const querySnapshot = await getDocs(collection(db, col))
+        const collectionArr = querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            displayName: doc.data().displayName,
+            username: doc.data().username,
+            txt: doc.data().txt,
+            avatar: doc.data().avatar,
+            imgUrl: doc.data().imgUrl || '',
+            verified: doc.data().verified || false,
+            createdAt: doc.data().createdAt || Date.now(),
+            likes: doc.data().likes || 0,
+            comments: doc.data().comments || [],
+            resqueaks: doc.data().resqueaks || 0
+        }))
+        const resArr = collectionArr.filter((post) => post.id === itemId)
+        resArr[0].comments.unshift(comment)
+        await addItemToCollection(
+            resArr[0],
+            itemId,
+            dbService.POSTS_DB_COLLECTION
+        )
+        return resArr
+    } catch (error) {
+        console.error('Error getting collection: ', error)
+        return []
     }
 }

@@ -6,6 +6,9 @@
     min-height: fit-content;
     max-height: 500px;
     overflow: auto;
+    .squeak-box {
+        background-color: $mainColor1;
+    }
     .post-preview {
         border-top: none;
         &:nth-child(2n) {

@@ -26,6 +26,7 @@ export interface FeedListProps {
     handleIconClicked: Function
     isPostLoading: boolean
     filterBy: string
+    onAddComment: Function
 }
 
 export interface Trend {
@@ -52,6 +53,7 @@ export interface FeedPreviewProps {
     resqueaks: number
     handleIconClicked: Function
     isPostLoading: boolean
+    onAddComment: Function
 }
 
 export interface FeedPostAction {

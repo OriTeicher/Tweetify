@@ -1,0 +1,12 @@
+.trending-list {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: $mainColor5;
+    align-items: center;
+    border-radius: 20px;
+    width: 300px;
+    max-height: 80vh;
+    overflow: auto;
+}

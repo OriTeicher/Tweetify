@@ -10,6 +10,7 @@ import { utilService } from '../../services/util.service'
 import Loader from '../utils/Loader'
 import { FeedPreviewProps } from '../../services/interface.service'
 import ImgModal from '../utils/ImgModal'
+import SqueakBox from './SqueakBox'
 
 const FeedPreview: React.FC<FeedPreviewProps> = ({
     id,
@@ -25,7 +26,8 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
     resqueaks,
     handleIconClicked,
     isPostLoading,
-    filterBy
+    filterBy,
+    onAddComment
 }) => {
     const [isLiked, setIsLiked] = useState(false)
     const [isImgClicked, setIsImgClicked] = useState(false)
@@ -51,7 +53,12 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
     const handleImgModalClosed = () => setIsImgClicked(false)
     const handleImgClick = () => setIsImgClicked(true)
     const handleCommentClick = () => setIsCommentsClicked(!isCommentsClicked)
-
+    const handleAddComment = (
+        post: string,
+        file: File | null,
+        gifUrl: string,
+        postId: string
+    ) => onAddComment(post, file, gifUrl, postId)
     return (
         <>
             <section className="post-preview">
@@ -142,10 +149,24 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                     />
                 )}
             </section>
-            {isCommentsClicked && comments.length !== 0 && (
+            {isCommentsClicked && (
                 <div className="post-list comments-list">
+                    <SqueakBox
+                        addPost={(
+                            post: string,
+                            file: File | null,
+                            gifUrl: string
+                        ) => handleAddComment(post, file, gifUrl, id)}
+                        isNewPostLoading={false}
+                    />
                     {comments.map((comment, idx) => (
                         <FeedPreview
+                            onAddComment={(
+                                post: string,
+                                file: File | null,
+                                gifUrl: string,
+                                postId: string
+                            ) => handleAddComment(post, file, gifUrl, postId)}
                             filterBy={filterBy}
                             key={idx}
                             id={comment.id}
@@ -165,7 +186,6 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                             }
                         />
                     ))}
-                    <div className="squeak-concat"></div>
                 </div>
             )}
         </>

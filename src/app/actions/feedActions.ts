@@ -7,6 +7,7 @@ import { cloudinaryService } from '../../services/cloudinary.service'
 export const feedActions = {
     queryFeedPosts,
     addFeedPost,
+    addFeedComment,
     removeFeedPost,
     toggleStats,
     setFilterBy
@@ -120,6 +121,38 @@ function setFilterBy(newFilterBy: string): AppThunk {
             dispatch(feedReducers.queryFeedPostsSuccess(feedPostsDB))
         } catch (error) {
             console.log('Cannot set filter by. ', error)
+        }
+    }
+}
+
+function addFeedComment(
+    postContent: string,
+    file: File | null,
+    gifUrl: string = '',
+    postId: string
+): AppThunk {
+    return async (dispatch) => {
+        try {
+            dispatch(feedReducers.setNewPostLoaderActive())
+            const newComment = feedService.getEmptyPost(
+                'Pukki Blinders',
+                'pukki123'
+            )
+            newComment.txt = postContent
+            newComment.imgUrl = file
+                ? await cloudinaryService.uploadImgToCloud(file)
+                : gifUrl
+                ? gifUrl
+                : ''
+
+            const updatedPost = await dbService.getPostByIdFromDb(
+                postId,
+                dbService.POSTS_DB_COLLECTION,
+                newComment
+            )
+            dispatch(feedReducers.addCommentSuccess(updatedPost))
+        } catch (error) {
+            console.log('Cannot add post. ', error)
         }
     }
 }

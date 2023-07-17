@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { FeedPost, FeedState } from '../../services/interface.service'
+import { Action } from '@remix-run/router'
 
 export const initialState: FeedState = {
     feedPosts: [],
@@ -46,7 +47,6 @@ const feedSlice = createSlice({
             action.payload.isIncrease
                 ? updatedPost.likes++
                 : updatedPost.likes--
-            console.log(updatedPost.likes)
         },
         setAppLoaderActive: (state) => {
             state.isAppLoading = true
@@ -59,6 +59,14 @@ const feedSlice = createSlice({
         },
         setFilterBy: (state, action: PayloadAction<string>) => {
             state.filterBy = action.payload
+        },
+        addCommentSuccess: (state, action: PayloadAction<FeedPost[]>) => {
+            const idx = state.feedPosts.findIndex(
+                (post) => post.id === action.payload[0].id
+            )
+            const updatedPost = state.feedPosts[idx]
+            updatedPost.comments.unshift(action.payload[0].comments[0])
+            state.feedPosts = [...state.feedPosts, updatedPost]
         }
     }
 })

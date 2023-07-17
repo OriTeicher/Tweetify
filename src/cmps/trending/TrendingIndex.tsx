@@ -9,7 +9,7 @@ import { Trend } from '../../services/interface.service'
 import { trendsService } from '../../services/trends.service'
 
 export default function NewsIndex() {
-    const trends = trendsService.getRandomTrends(5)
+    const trends = trendsService.getRandomTrends(6)
 
     const dispatch: ThunkDispatch<
         RootState,

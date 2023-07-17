@@ -7,7 +7,8 @@ const FeedList: React.FC<FeedListProps> = ({
     feedPosts,
     handleIconClicked,
     isPostLoading,
-    filterBy
+    filterBy,
+    onAddComment
 }) => {
     const onIconClicked = (action: {
         type: string
@@ -15,6 +16,15 @@ const FeedList: React.FC<FeedListProps> = ({
         isStatIncrease: boolean
     }) => {
         handleIconClicked(action)
+    }
+
+    const handleAddComment = (
+        post: string,
+        file: File | null,
+        gifUrl: string,
+        postId: string
+    ) => {
+        onAddComment(post, file, gifUrl, postId)
     }
 
     return (
@@ -35,6 +45,7 @@ const FeedList: React.FC<FeedListProps> = ({
                     comments={post.comments}
                     resqueaks={post.resqueaks}
                     isPostLoading={isPostLoading}
+                    onAddComment={handleAddComment}
                     handleIconClicked={(action: {
                         type: string
                         postId: string

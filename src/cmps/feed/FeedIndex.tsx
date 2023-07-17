@@ -40,6 +40,15 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
         dispatch(feedActions.addFeedPost(postContent, file, gifUrl))
     }
 
+    const handleAddComment = async (
+        postContent: string,
+        file: File | null,
+        gifUrl: string,
+        postId: string
+    ) => {
+        dispatch(feedActions.addFeedComment(postContent, file, gifUrl, postId))
+    }
+
     const onPostIconClicked = (action: {
         type: string
         postId: string
@@ -82,6 +91,7 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
                         isStatIncrease: boolean
                     }) => onPostIconClicked(action)}
                     isPostLoading={isPostLoading}
+                    onAddComment={handleAddComment}
                 />
             )}
         </section>
