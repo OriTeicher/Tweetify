@@ -181,9 +181,7 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                             comments={comment.comments}
                             resqueaks={comment.resqueaks}
                             isPostLoading={false}
-                            handleIconClicked={() =>
-                                console.log('icon clicked')
-                            }
+                            handleIconClicked={() => console.log('')}
                         />
                     ))}
                 </div>

@@ -8,8 +8,11 @@
     overflow: auto;
     .squeak-box {
         background-color: $mainColor1;
+        border-bottom: none;
     }
     .post-preview {
+        border-bottom: none;
+        border: none;
         border-top: none;
         &:nth-child(2n) {
             background-color: rgb(33, 33, 33);

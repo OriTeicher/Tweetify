@@ -23,7 +23,6 @@ const feedSlice = createSlice({
         addFeedPostSuccess: (state, action: PayloadAction<FeedPost>) => {
             state.feedPosts = [action.payload, ...state.feedPosts]
             state.isNewPostLoading = false
-            console.log(state.feedPosts)
         },
         removeFeedPostSuccess: (state, action: PayloadAction<string>) => {
             state.feedPosts = state.feedPosts.filter(

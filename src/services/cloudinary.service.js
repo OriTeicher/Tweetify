@@ -1,10 +1,11 @@
+
 export const cloudinaryService = {
     uploadImgToCloud
 }
 
 async function uploadImgToCloud(file) {
-    const UPLOAD_PRESET = 'squeaker-img'
-    const CLOUD_NAME = 'dcg0ivasg'
+    const UPLOAD_PRESET = import.meta.VITE_UPLOAD_PRESET
+    const CLOUD_NAME = import.meta.VITE_CLOUD_NAME
     const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`
     console.log('UPLOAD_URL,UPLOAD_PRESET', UPLOAD_URL, UPLOAD_PRESET)
     try {

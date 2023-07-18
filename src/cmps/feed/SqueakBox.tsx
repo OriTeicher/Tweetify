@@ -7,7 +7,7 @@ import React, {
 } from 'react'
 import { Avatar } from '@mui/material'
 import EmojiPicker from 'emoji-picker-react'
-import GifPicker from 'gif-picker-react'
+import GifPicker, { Theme } from 'gif-picker-react'
 import { EmojiClickData } from 'emoji-picker-react/dist/types/exposedTypes'
 import ImgModal from '../utils/ImgModal'
 import {
@@ -72,6 +72,7 @@ export default function SqueakBox({
     }
 
     const handleGifPick = (gifSelected: any) => {
+
         setFileUrl(gifSelected.url)
         setIsGifMenuOpen(false)
         setFile(null)
@@ -84,7 +85,6 @@ export default function SqueakBox({
     }
 
     const handleFileChange = (ev: any) => {
-        console.log(`file:, ${ev.target.files[0]}`)
         setFile(ev.target.files[0])
         setFileUrl(URL.createObjectURL(ev.target.files[0]))
     }
@@ -173,12 +173,14 @@ export default function SqueakBox({
             )}
             <div className="menu-container">
                 {isEmojiMenuOpen && (
-                    <EmojiPicker onEmojiClick={handleEmojiClicked} />
+                    <EmojiPicker onEmojiClick={handleEmojiClicked} theme={Theme.DARK} />
                 )}
                 {isGifMenuOpen && (
                     <GifPicker
                         tenorApiKey={'AIzaSyA8hCpAa0XX6_3ppoUFSeoknmxHLO4Koso'}
                         onGifClick={handleGifPick}
+                        theme={Theme.DARK}
+                
                     />
                 )}
             </div>

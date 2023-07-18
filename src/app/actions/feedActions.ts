@@ -54,10 +54,6 @@ function addFeedPost(
                 : gifUrl
                 ? gifUrl
                 : ''
-            console.log(
-                '🚀 ~ file: feedActions.ts:48 ~ return ~ newPost:',
-                newPost.imgUrl
-            )
 
             await dbService.addItemToCollection(
                 newPost,
