@@ -4,6 +4,7 @@ import EditSqueakPage from './views/EditSqueakPage'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import FeedIndex from './cmps/feed/FeedIndex'
 import ProfilePage from './views/ProfilePage'
+import CreateProfilePage from './views/CreateProfilePage'
 
 function App() {
     return (
@@ -22,6 +23,10 @@ function App() {
                 <Route
                     path="/profile"
                     element={<DynamicHomepage cmp={ProfilePage} />}
+                />
+                <Route
+                    path="/newprofile"
+                    element={<DynamicHomepage cmp={CreateProfilePage} />}
                 />
             </Routes>
         </BrowserRouter>

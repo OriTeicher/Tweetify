@@ -10,7 +10,8 @@ import { MoreHoriz as MoreIcon } from '@mui/icons-material'
 import SidebarOption from './SidebarOption'
 import LoggedAcount from './LoggedAcount'
 import LoginModal from '../utils/LoginModal'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
+
 interface SidebarProps {
     onOptionChange: (option: string) => void
 }
@@ -20,6 +21,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
     const [isSmallScreen, setIsSmallScreen] = useState(false)
     const [isLoginModalOpen, setLoginModal] = useState(false)
     const navigate = useNavigate()
+    const location = useLocation()
 
     useEffect(() => {
         const handleResize = () => {
@@ -74,14 +76,18 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
                     }`}
                 >
                     {renderSidebarOptions()}
-                    <button
-                        className={`squeak-btn ${
-                            isSmallScreen ? 'mobile' : ''
-                        }`}
-                        onClick={handleSiderbarSqueak}
-                    >
-                        {isSmallScreen ? '+' : 'Squeak'}
-                    </button>
+                    {
+                        (location.pathname === '/home' && (
+                            <button
+                                className={`squeak-btn ${
+                                    isSmallScreen ? 'mobile' : ''
+                                }`}
+                                onClick={handleSiderbarSqueak}
+                            >
+                                {isSmallScreen ? '+' : 'Squeak'}
+                            </button>
+                        ))
+                    }
                     <LoggedAcount
                         displayName="Pukki Blinders"
                         username="pukki123"

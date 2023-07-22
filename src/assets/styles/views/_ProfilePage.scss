@@ -11,14 +11,14 @@
     }
     .user-cred {
         display: flex;
-        gap: 10px;
+        gap: 20px;
         flex-direction: column;
         padding: 15px;
         .edit-container {
             display: flex;
             justify-content: space-between;
-        align-items: center;
-        button {
+            align-items: start;
+            button {
                 &:hover {
                     cursor: pointer;
                     filter: brightness(90%);
@@ -28,7 +28,6 @@
                 height: fit-content;
                 font-size: 15px;
                 padding: 5px 15px;
-                margin-right: 20px;
                 border-radius: 20px;
                 background-color: $mainColor1;
                 color: white;
@@ -37,8 +36,11 @@
             }
         }
         h1 {
+            margin-top: 15px;
             font-size: 20px;
+            width: fit-content;
         }
+        
         h2 {
             font-size: 15px;
             color: $mainColor2;
@@ -48,13 +50,23 @@
             gap: 5px;
         }
         p {
+            border-radius: 5px;
             font-size: 15px;
+            width: fit-content;
         }
     }
     .profile-img {
         border-radius: 50%;
         border: 5px solid black;
         width: 150px;
+    }
+    .new-profile-img {
+        width: 150px;
+        height: 150px;
+        cursor: pointer;
+        &:hover {
+            filter: brightness(90%);
+        }
     }
     .followers-container {
         display: flex;

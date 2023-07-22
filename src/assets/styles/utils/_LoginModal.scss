@@ -3,6 +3,7 @@
     .twitter-icon {
         position: absolute;
         top: 0;
+        color: $logoColor;
         font-size: 40px;
         margin-top: 20px;
     }
@@ -18,7 +19,7 @@
         display: flex;
         margin: auto;
         transform: translateY(10%);
-        outline: white 1px solid;
+        outline: $logoColor 1px solid;
         border-radius: 30px;
     }
     .login-form {
