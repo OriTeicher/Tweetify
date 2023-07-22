@@ -112,7 +112,6 @@ async function updateFieldInCollection(
     updatedInfo: any
 ) {
     try {
-        
         const colRef = doc(db, col, itemId)
         const updatedItem = { [field]: increment(updatedInfo) }
         await updateDoc(colRef, updatedItem)

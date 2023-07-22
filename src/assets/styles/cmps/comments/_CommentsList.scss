@@ -1,7 +1,8 @@
 .comments-list {
+    border-left: 1px solid $logoColor;
     background-color: rgb(57, 57, 57);
     margin: 0px;
-    border: none;
+    // border: none;
     padding: 0px;
     min-height: fit-content;
     max-height: 500px;
