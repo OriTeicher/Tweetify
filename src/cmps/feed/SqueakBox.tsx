@@ -16,6 +16,7 @@ import {
     GifBoxOutlined
 } from '@mui/icons-material'
 import Loader from '../utils/Loader'
+import { apiService } from '../../services/api.service'
 
 interface SqueakBoxProps {
     addPost: (post: string, file: File | null, gifUrl: string) => void
@@ -72,7 +73,6 @@ export default function SqueakBox({
     }
 
     const handleGifPick = (gifSelected: any) => {
-
         setFileUrl(gifSelected.url)
         setIsGifMenuOpen(false)
         setFile(null)
@@ -173,14 +173,12 @@ export default function SqueakBox({
             )}
             <div className="menu-container">
                 {isEmojiMenuOpen && (
-                    <EmojiPicker onEmojiClick={handleEmojiClicked} theme={Theme.DARK} />
+                    <EmojiPicker onEmojiClick={handleEmojiClicked} />
                 )}
                 {isGifMenuOpen && (
                     <GifPicker
-                        tenorApiKey={'AIzaSyA8hCpAa0XX6_3ppoUFSeoknmxHLO4Koso'}
+                        tenorApiKey={apiService.TENOR_API_KEY}
                         onGifClick={handleGifPick}
-                        theme={Theme.DARK}
-                
                     />
                 )}
             </div>

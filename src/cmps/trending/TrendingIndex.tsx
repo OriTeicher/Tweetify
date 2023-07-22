@@ -30,10 +30,7 @@ export default function NewsIndex() {
                     handleFilterBy(filterValue)
                 }
             />
-            <TrendingList
-                trends={trends}
-                onSearchTrend={handleSearchTrend}
-            />
+            <TrendingList trends={trends} onSearchTrend={handleSearchTrend} />
         </section>
     )
 }

@@ -1,16 +1,14 @@
+import { apiService } from "./api.service"
 
 export const cloudinaryService = {
     uploadImgToCloud
 }
 
 async function uploadImgToCloud(file) {
-    const UPLOAD_PRESET = import.meta.VITE_UPLOAD_PRESET
-    const CLOUD_NAME = import.meta.VITE_CLOUD_NAME
-    const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`
-    console.log('UPLOAD_URL,UPLOAD_PRESET', UPLOAD_URL, UPLOAD_PRESET)
+    const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${apiService.CLOUD_NAME}/image/upload`
     try {
         const formData = new FormData()
-        formData.append('upload_preset', UPLOAD_PRESET)
+        formData.append('UPLOAD_PRESET', apiService.UPLOAD_PRESET)
         formData.append('file', file)
 
         const res = await fetch(UPLOAD_URL, {

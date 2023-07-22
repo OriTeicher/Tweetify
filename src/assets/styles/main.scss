@@ -1,7 +1,5 @@
 //* Setup *
 @import 'setup/variables';
-@import 'setup/functions';
-@import 'setup/mixins';
 @import 'setup/typography';
 
 // * Basics *
@@ -14,7 +12,7 @@
 @import 'cmps/sidebar/Sidebar';
 @import 'cmps/sidebar/LoggedAccount';
 
-// feed
+// * feed *
 @import 'cmps/feed/FeedTopbar';
 @import 'cmps/feed/SqueakBox';
 @import 'cmps/feed/FeedIndex';
@@ -23,19 +21,19 @@
 @import 'cmps/feed/MobileTopbar';
 @import 'cmps/feed/ImgModal';
 
-// comments
+// * comments *
 @import 'cmps/comments/CommentsList';
 
-// trending
+// * trending *
 @import 'cmps/trending/TrendingIndex';
 @import 'cmps/trending/TrendingList';
 @import 'cmps/trending/TrendingPreview';
 @import 'cmps/trending/Searchbar';
 
-// profile
+// * profile *
 @import 'views/ProfilePage';
 
-// utils
+// * utils *
 @import 'utils/Loader';
 @import 'utils/_LoginModal';
 @import 'utils/_DropdownOptions';

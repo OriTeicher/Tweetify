@@ -8,7 +8,7 @@ import {
     increment
 } from 'firebase/firestore'
 import { feedService } from './feed.service'
-import { db } from '../firsebase'
+import { db } from '../firebase'
 
 export const dbService = {
     // functions
@@ -112,6 +112,7 @@ async function updateFieldInCollection(
     updatedInfo: any
 ) {
     try {
+        
         const colRef = doc(db, col, itemId)
         const updatedItem = { [field]: increment(updatedInfo) }
         await updateDoc(colRef, updatedItem)

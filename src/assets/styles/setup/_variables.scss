@@ -1,22 +1,24 @@
-// main colors
-$logoColor: #50b7f5;
+// * main colors
+$logoColor: #1ed760;
 $squeakIconsColor1: #1d9bf0;
-// background color
+
+// * background color
 $mainColor1: #101010;
 $mainColor2: rgb(113, 113, 113);
 $mainColor3: #2f3336;
 $mainColor4: #16181c;
 $mainColor5: #16181c86;
-// hover colors
+
+// * hover colors
 $hoverClr1: #e8f5fe;
 $hoverClr2: #e8f5fe0b;
 
-// box-shadows & outlines
+// * box-shadows & outlines
 $boxShadow1: 1px 1px 0px $mainColor3;
 $boxShadow2: 1px 0px 0px 0px $mainColor3;
 $outline1: 1px solid $mainColor3;
 
-// keyframes
+// * keyframes
 
 @keyframes pop {
     0% {

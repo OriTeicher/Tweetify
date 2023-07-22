@@ -4,6 +4,7 @@ import EditSqueakPage from './views/EditSqueakPage'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import FeedIndex from './cmps/feed/FeedIndex'
 import ProfilePage from './views/ProfilePage'
+
 function App() {
     return (
         <BrowserRouter>
@@ -11,10 +12,6 @@ function App() {
                 <Route path="/" element={<DynamicHomepage />} />
                 <Route
                     path="/home"
-                    element={<DynamicHomepage cmp={FeedIndex} />}
-                />
-                <Route
-                    path="/Squeaker-Twitter-clone"
                     element={<DynamicHomepage cmp={FeedIndex} />}
                 />
                 <Route
