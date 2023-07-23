@@ -5,8 +5,7 @@ import { cloudinaryService } from '../../services/cloudinary.service'
 
 export const userActions = {
     loginUser,
-    signUp,
-
+    signUp
 }
 
 // TODO: build loginUser function
@@ -33,12 +32,12 @@ function signUp(
             const profileBgUrl = await cloudinaryService.uploadImgToCloud(
                 profileBgFile
             )
-            user.bgImgUrl = profileImgUrl
-            user.profileBgUrl = profileBgUrl
+            user.profileImgUrl = profileImgUrl
+            user.bgImgUrl = profileBgUrl
             await dbService.addItemToCollection(
                 user,
                 user.id,
-                dbService.POSTS_DB_COLLECTION
+                dbService.USER_DB_COLLECTION
             )
             dispatch(userReducer.onSignUp(user))
         } catch (error) {

@@ -10,6 +10,7 @@ export const userService = {
 // TODO: get empty user function
 function getEmptyUser() {
     return {
+        isAdmin: false,
         id: 'USER-' + utilService.generateId(5),
         username: '',
         password: '',

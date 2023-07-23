@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 interface UserState {
     loggedInUser: {
+        isAdmin: boolean
         username: string
         displayName: string
         password: string
@@ -16,6 +17,7 @@ interface UserState {
 
 export const initialState: UserState = {
     loggedInUser: {
+        isAdmin: false,
         username: 'Guest',
         displayName: 'guest',
         password: '!@#$',
@@ -24,7 +26,7 @@ export const initialState: UserState = {
         following: [],
         profileImgUrl: '',
         bgImgUrl: '',
-        joinedAt: '',
+        joinedAt: ''
     }
 }
 
@@ -33,7 +35,9 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         onSignUp: (state, newUser: any) => {
+            debugger
             state.loggedInUser = newUser
+            console.log('state.loggedInUser', state.loggedInUser)
         }
     }
 })

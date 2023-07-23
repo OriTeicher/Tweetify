@@ -3,6 +3,7 @@ import { Avatar } from '@mui/material'
 import { useLocation } from 'react-router-dom'
 import { userActions } from '../app/actions/userActions'
 import { userService } from '../services/user.service'
+import { useDispatch } from 'react-redux'
 
 export default function CreateProfilePage() {
     const [description, setDescription] = useState('')
@@ -12,6 +13,7 @@ export default function CreateProfilePage() {
     const [profileImgFile, setProfileImgFile] = useState<File | null>(null)
     const [profileBgImgFile, setProfileBgImgFile] = useState<File | null>(null)
 
+    const dispatch: any = useDispatch()
     const location = useLocation()
     const { username, password } = location.state || {}
 
@@ -33,25 +35,17 @@ export default function CreateProfilePage() {
         newUser.password = password
         newUser.description = description
         newUser.diplayName = displayName
-        userActions.signUp(newUser, profileImgFile, profileBgImgFile)
+        dispatch(userActions.signUp(newUser, profileImgFile, profileBgImgFile))
     }
 
-    const handleBgImgChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const files = event.target.files
-        if (!files || files.length === 0) return
-        const selectedFile = files[0]!
-        setProfileBgImgFile(selectedFile)
-        setProfileBgUrl(URL.createObjectURL(selectedFile))
+    const handleBgImgChange = (event: any) => {
+        setProfileBgImgFile(event.target.files[0])
+        setProfileBgUrl(URL.createObjectURL(event.target.files[0]))
     }
 
-    const handleProfileImgChange = (
-        event: React.ChangeEvent<HTMLInputElement>
-    ) => {
-        const files = event.target.files
-        if (!files || files.length === 0) return
-        const selectedFile = files[0]!
-        setProfileImgFile(selectedFile)
-        setProfileImage(URL.createObjectURL(selectedFile))
+    const handleProfileImgChange = (event: any) => {
+        setProfileImgFile(event.target.files[0])
+        setProfileImage(URL.createObjectURL(event.target.files[0]))
     }
 
     return (
