@@ -1,19 +1,20 @@
 import React, { useState } from 'react'
 import { Avatar } from '@mui/material'
+import { useLocation } from 'react-router-dom'
 
 interface CreateProfilePageProps {
-    username: string 
+    username: string
     password: string
 }
 
 export default function CreateProfilePage(props: CreateProfilePageProps) {
-    const initialParagraph = 'Click here to enter your profile description...'
-    const initialDisplayName = 'Display name goes here...'
+    const [description, setDescription] = useState('')
+    const [displayName, setDisplayName] = useState('')
+    const [profileImage, setProfileImage] = useState('')
+    const [profileBgcImage, setProfileBgcImage] = useState('')
 
-    const [description, setDescription] = useState<string>(initialParagraph)
-    const [displayName, setDisplayName] = useState<string>(initialDisplayName)
-    const [profileImage, setProfileImage] = useState<string>('')
-    const [profileBgcImage, setProfileBgcImage] = useState<string>('')
+    const location = useLocation()
+    const { username, password } = location.state || {}
 
     const handleParagraphChange = (
         event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -25,6 +26,10 @@ export default function CreateProfilePage(props: CreateProfilePageProps) {
         event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
     ) => {
         setDisplayName(event.target.value)
+    }
+
+    const handleSaveProfile = () => {
+        console.log('submitted')
     }
 
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,14 +91,16 @@ export default function CreateProfilePage(props: CreateProfilePageProps) {
                             onChange={handleBgcImageChange}
                             style={{ display: 'none' }}
                         />
-                        <button>Save Profile</button>
+                        <button onClick={handleSaveProfile}>
+                            Save Profile
+                        </button>
                     </div>
                     <input
                         type="text"
                         onChange={handleDisplayNameChange}
                         placeholder="Display name goes here..."
                     />
-                    <h2>@{props.username || 'Guest'}</h2>
+                    <h2>@{username}</h2>
                 </div>
                 <div>
                     <textarea

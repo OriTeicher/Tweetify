@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Modal, Box } from '@mui/material'
 import { Twitter } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
@@ -15,11 +15,21 @@ const LoginModal: React.FC<LoginModalState> = ({ isOpen, setIsOpen }) => {
     const [passwordConfirm, setPasswordConfirm] = useState('')
     const navigate = useNavigate()
 
+    useEffect(() => {
+        setUsername('')
+        setPassword('')
+        setPasswordConfirm('')
+    }, [])
+
     const handleModeToggle = () => {
         setIsSignInMode((prevMode) => !prevMode)
     }
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSignIn = (event: React.FormEvent) => {
+        if (!username || !password) return
+    }
+
+    const handleSignUp = (event: React.FormEvent) => {
         event.preventDefault()
         if (
             !username ||
@@ -29,12 +39,15 @@ const LoginModal: React.FC<LoginModalState> = ({ isOpen, setIsOpen }) => {
         )
             return
 
-        navigate('/newprofile', {
-            state: {
-                username,
-                password
-            }
-        })
+        const props = {
+            username: username,
+            password: password
+        }
+
+        navigate('/newprofile', { state: props })
+        setUsername('')
+        setPassword('')
+        setPasswordConfirm('')
     }
 
     return (
@@ -49,7 +62,7 @@ const LoginModal: React.FC<LoginModalState> = ({ isOpen, setIsOpen }) => {
                     <h2>{isSignInMode ? 'Log-in' : 'Sign up'} to Squeaker</h2>
                     <form
                         className="flex column login-form"
-                        onSubmit={handleSubmit}
+                        onSubmit={handleSignUp}
                     >
                         <input
                             type="text"
@@ -70,7 +83,9 @@ const LoginModal: React.FC<LoginModalState> = ({ isOpen, setIsOpen }) => {
                         />
 
                         {isSignInMode ? (
-                            <button type="submit">Sign In</button>
+                            <button type="submit" onClick={handleSignIn}>
+                                Sign In
+                            </button>
                         ) : (
                             <>
                                 <input
@@ -81,7 +96,9 @@ const LoginModal: React.FC<LoginModalState> = ({ isOpen, setIsOpen }) => {
                                         setPasswordConfirm(event.target.value)
                                     }
                                 />
-                                <button type="submit">Sign Up</button>
+                                <button type="submit" onClick={handleSignUp}>
+                                    Sign Up
+                                </button>
                             </>
                         )}
                     </form>
