@@ -157,6 +157,30 @@
     animation: pop 0.3s;
 }
 
+.light {
+    .more-icon {
+        &:hover {
+            color: $mainColor1;
+        }
+    }
+    .post-icons {
+        color: $mainColor1;
+        svg {
+            &:hover {
+                color: $logoColor;
+            }
+        }
+        svg.liked {
+            color: rgb(222, 83, 83);
+        }
+        svg.unliked {
+            &:hover {
+                color: rgb(222, 83, 83);
+            }
+        }
+    }
+}
+
 @media (max-width: 768px) {
     .post-preview {
         padding: 15px 10px;

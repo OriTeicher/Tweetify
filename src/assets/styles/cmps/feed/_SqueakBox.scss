@@ -133,7 +133,11 @@
 }
 
 .light {
+    .squeak-box{
+        background-color: $mainColor0;
+    }
     .squeak-input-container {
+        background-color: $mainColor0;
         .squeak-textarea {
             color: $mainColor1;
             background-color: $mainColor0;

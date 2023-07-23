@@ -20,3 +20,27 @@
         }
     }
 }
+
+.light {
+    .squeak-box {
+        background-color: $mainColor0;
+        border-bottom: none;
+    }
+    .comments-list {
+        border-left: 2px solid $logoColor;
+        margin: 0px;
+        padding: 0px;
+        min-height: fit-content;
+        max-height: 500px;
+        overflow: auto;
+        background-color: #b9b9b9;
+        .post-preview {
+            border-bottom: none;
+            border: none;
+            border-top: none;
+            &:nth-child(2n) {
+                background-color: #dddddd;
+            }
+        }
+    }
+}
