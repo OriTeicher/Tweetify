@@ -15,7 +15,7 @@
         outline: none;
         background-color: $mainColor1;
         border-radius: 5px;
-        color: white;
+        color: $mainColor0;
         font-size: 20px;
         width: fit-content;
         border: none;
@@ -24,7 +24,7 @@
         resize: none;
         width: 100%;
         background-color: $mainColor1;
-        color: white;
+        color: $mainColor0;
         border-radius: 5px;
         outline: none;
         border: none;
@@ -52,7 +52,7 @@
                 padding: 5px 15px;
                 border-radius: 20px;
                 background-color: $mainColor1;
-                color: white;
+                color: $mainColor0;
                 border: none;
                 outline: 1px solid $mainColor2;
             }
@@ -98,7 +98,7 @@
             color: $mainColor2;
         }
         span {
-            color: white;
+            color: $mainColor0;
             font-weight: 600;
         }
     }

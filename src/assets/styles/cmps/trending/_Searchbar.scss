@@ -14,7 +14,7 @@
         font-size: 13px;
         background-color: $hoverClr2;
         &:focus {
-            color: white;
+            color: $mainColor0;
             outline: 1px solid $logoColor;
         }
     }

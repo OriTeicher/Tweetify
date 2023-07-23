@@ -76,18 +76,16 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
                     }`}
                 >
                     {renderSidebarOptions()}
-                    {
-                        (location.pathname === '/home' && (
-                            <button
-                                className={`squeak-btn ${
-                                    isSmallScreen ? 'mobile' : ''
-                                }`}
-                                onClick={handleSiderbarSqueak}
-                            >
-                                {isSmallScreen ? '+' : 'Squeak'}
-                            </button>
-                        ))
-                    }
+                    {location.pathname === '/home' && (
+                        <button
+                            className={`squeak-btn ${
+                                isSmallScreen ? 'mobile' : ''
+                            }`}
+                            onClick={handleSiderbarSqueak}
+                        >
+                            {isSmallScreen ? '+' : 'Squeak'}
+                        </button>
+                    )}
                     <LoggedAcount
                         displayName="Pukki Blinders"
                         username="pukki123"

@@ -7,12 +7,23 @@ import { feedActions } from '../../app/actions/feedActions'
 import { ThunkDispatch, Action } from '@reduxjs/toolkit'
 import { trendsService } from '../../services/trends.service'
 
-export default function NewsIndex() {
-    const trends = trendsService.getRandomTrends(5)
-    const [searchTxt, setSearchTxt] = useState('')
+interface NewsIndexProps {
+    setDarkMode: Function
+}
+
+export default function NewsIndex(props: NewsIndexProps) {
+    const trends = trendsService.getRandomTrends(6)
+    const [isDarkMode, setIsDarkMode] = useState(true)
+
     const handleSearchTrend = (searchVal: string) => {
         handleFilterBy(searchVal)
     }
+
+    const handleDarkModeChange = (event: React.FormEvent) => {
+        setIsDarkMode(!isDarkMode)
+        props.setDarkMode(!isDarkMode)
+    }
+
     const dispatch: ThunkDispatch<
         RootState,
         undefined,
@@ -31,6 +42,9 @@ export default function NewsIndex() {
                 }
             />
             <TrendingList trends={trends} onSearchTrend={handleSearchTrend} />
+            <button onClick={handleDarkModeChange}>
+                {isDarkMode ? '☀️' : '🌙'}
+            </button>
         </section>
     )
 }

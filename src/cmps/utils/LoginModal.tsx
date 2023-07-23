@@ -26,11 +26,14 @@ const LoginModal: React.FC<LoginModalState> = ({ isOpen, setIsOpen }) => {
     }
 
     const handleSignIn = (event: React.FormEvent) => {
+        setIsOpen(false)
+
         if (!username || !password) return
     }
 
     const handleSignUp = (event: React.FormEvent) => {
         event.preventDefault()
+
         if (
             !username ||
             !password ||
@@ -45,6 +48,7 @@ const LoginModal: React.FC<LoginModalState> = ({ isOpen, setIsOpen }) => {
         }
 
         navigate('/newprofile', { state: props })
+        setIsOpen(false)
         setUsername('')
         setPassword('')
         setPasswordConfirm('')

@@ -28,8 +28,7 @@ html {
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: $mainColor1;
-    color: white;
+    color: $mainColor0;
 }
 
 h1,
@@ -59,7 +58,18 @@ a:hover {
 
 .app-container {
     display: flex;
+    background-color: $mainColor1;
     grid-template-columns: 1fr 1fr 500px;
     height: fit-content;
     justify-content: center;
+}
+
+.light {
+    color: $mainColor6;
+    background-color: $mainColor0;
+}
+
+.dark {
+    color: $mainColor0;
+    background-color: $mainColor1;
 }

@@ -19,13 +19,13 @@
         display: flex;
         margin: auto;
         transform: translateY(10%);
-        outline: $logoColor 1px solid;
+        outline: $mainColor0 1px solid;
         border-radius: 30px;
     }
     .login-form {
         gap: 10px;
         input {
-            color: white;
+            color: $mainColor0;
             background-color: $mainColor3;
             font-family: 'Jost';
             font-size: 20px;
@@ -42,7 +42,7 @@
         button {
             margin: auto;
             background-color: $logoColor;
-            color: white;
+            color: $mainColor0;
             font-family: 'Jost', 'Gill Sans', 'Gill Sans MT', Calibri;
             outline: none;
             border: none;
