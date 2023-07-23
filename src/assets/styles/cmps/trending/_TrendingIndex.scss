@@ -10,28 +10,30 @@
     }
 }
 
-@media (max-width: 768px) {
-    .trending-index {
-        display: none;
+.dark-mode-btn {
+    background-color: $hoverClr3;
+    width: 300px;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 20px;
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    &:hover{
+        cursor: pointer;
+        opacity: 0.9;
+    }
+}
+.light {
+    .dark-mode-btn {
+        background-color: #E9E9E9;
+        
     }
 }
 
-.light {
-    .trending-list {
-        background-color: #bbbbbb52;
-        color: $mainColor1;
-        h3 {
-            color: $mainColor2;
-            font-size: 12px;
-        }
-        .trending-preview {
-            &:hover {
-                color: $mainColor0;
-                background-color: rgb(204, 204, 204);
-                h3 {
-                    color: black;
-                }
-            }
-        }
+
+@media (max-width: 768px) {
+    .trending-index {
+        display: none;
     }
 }

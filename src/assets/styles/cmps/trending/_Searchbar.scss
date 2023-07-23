@@ -13,33 +13,38 @@
         width: 300px;
         min-width: 200px;
         font-size: 13px;
-        background-color: $hoverClr2;
+        background-color: $hoverClr3;
+        color: $mainColor0;
+
         &:focus {
             color: $mainColor0;
             outline: 1px solid $logoColor;
         }
     }
 
-    .search-icon {
-        color: $mainColor2;
-        position: absolute;
-        margin-left: 10px;
-    }
     #focused {
         color: $logoColor;
+    }
+    .search-icon {
+        z-index: 200;
+        color: $mainColor0;
+        position: absolute;
+        margin-left: 10px;
     }
 }
 
 .light {
     .search-container {
-        .search-icon {
-            color: black;
-        }
-        color: black;
+        color: $mainColor1;
         .searchbar {
-            border: 1px solid black;
+            border: 1px solid $mainColor1;
             background-color: $hoverClr2;
-            color: black;
+            color: $mainColor1;
+        }
+        .search-icon {
+            color: $mainColor1;
+            position: absolute;
+            margin-left: 10px;
         }
     }
 }

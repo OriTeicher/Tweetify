@@ -24,13 +24,16 @@
 }
 
 .light {
-    .treding-index {
-        .trending-list {
-            .trending-preview {
-                &:hover {
-                    background-color: $mainColor6;
-                    cursor: pointer;
-                }
+    .trending-list {
+        background-color: #bbbbbb52;
+        color: $mainColor1;
+        h3 {
+            color: $mainColor2;
+            font-size: 12px;
+        }
+        .trending-preview {
+            &:hover {
+                background-color: rgb(204, 204, 204);
             }
         }
     }

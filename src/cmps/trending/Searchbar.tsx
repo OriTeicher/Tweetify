@@ -36,7 +36,7 @@ export default function Searchbar(props: SearchbarProps) {
             className={`search-container ${isInputFocused ? 'focused' : ''}`}
         >
             <SearchIcon
-                className={`search-icon `}
+                className={`search-icon`}
                 id={`${isInputFocused ? 'focused' : ''}`}
             />
             <input

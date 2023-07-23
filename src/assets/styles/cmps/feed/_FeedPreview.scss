@@ -23,7 +23,7 @@
     }
     .user-avatar {
         font-weight: 500;
-        text-shadow: 1px 1px 1px black;
+        text-shadow: 1px 1px 1px $mainColor1;
         &:hover {
             filter: brightness(95%);
             cursor: pointer;
@@ -99,7 +99,7 @@
             opacity: 0.9;
         }
     }
-    &:last-child{
+    &:last-child {
         margin-bottom: 100px;
     }
 }
@@ -181,7 +181,7 @@
 
 mark {
     background-color: $logoColor;
-    color: black;
+    color: $mainColor1;
     font-weight: 800;
     border-radius: 3px;
 }

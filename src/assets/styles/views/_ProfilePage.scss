@@ -79,11 +79,11 @@
     }
     .profile-img {
         border-radius: 50%;
-        border: 5px solid black;
+        border: 5px solid $mainColor1;
         width: 150px;
     }
     .new-profile-img {
-        border: 3px solid black ;
+        border: 3px solid $mainColor1 ;
         width: 150px;
         height: 150px;
         cursor: pointer;

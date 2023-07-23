@@ -132,8 +132,18 @@
     }
 }
 
-.light{
-    
+.light {
+    .squeak-input-container {
+        .squeak-textarea {
+            color: $mainColor1;
+            background-color: $mainColor0;
+        }
+    }
+    .squeak-box-btns{
+        .left-icons{
+            color: $mainColor1;
+        }
+    }
 }
 
 @media (max-width: 768px) {
