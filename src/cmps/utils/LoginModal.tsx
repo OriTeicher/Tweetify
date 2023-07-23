@@ -56,9 +56,7 @@ const LoginModal: React.FC<LoginModalState> = ({ isOpen, setIsOpen }) => {
     const preventSpaceKeyPress = (
         event: React.KeyboardEvent<HTMLInputElement>
     ) => {
-        if (event.nativeEvent.keyCode === 32) {
-            event.preventDefault()
-        }
+        if (event.key === ' ') event.preventDefault()
     }
 
     return (

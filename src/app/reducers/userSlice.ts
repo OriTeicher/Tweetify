@@ -10,6 +10,7 @@ interface UserState {
         bgImgUrl: string
         followers: []
         following: []
+        joinedAt: string
     }
 }
 
@@ -22,7 +23,8 @@ export const initialState: UserState = {
         followers: [],
         following: [],
         profileImgUrl: '',
-        bgImgUrl: ''
+        bgImgUrl: '',
+        joinedAt: '',
     }
 }
 

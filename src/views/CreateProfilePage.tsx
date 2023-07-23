@@ -4,12 +4,7 @@ import { useLocation } from 'react-router-dom'
 import { userActions } from '../app/actions/userActions'
 import { userService } from '../services/user.service'
 
-interface CreateProfilePageProps {
-    username: string
-    password: string
-}
-
-export default function CreateProfilePage(props: CreateProfilePageProps) {
+export default function CreateProfilePage() {
     const [description, setDescription] = useState('')
     const [displayName, setDisplayName] = useState('')
     const [profileImage, setProfileImage] = useState('')
@@ -18,7 +13,7 @@ export default function CreateProfilePage(props: CreateProfilePageProps) {
     const [profileBgImgFile, setProfileBgImgFile] = useState<File | null>(null)
 
     const location = useLocation()
-    const { usernameProp, passwordProp } = location.state || {}
+    const { username, password } = location.state || {}
 
     const handleParagraphChange = (
         event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -34,8 +29,8 @@ export default function CreateProfilePage(props: CreateProfilePageProps) {
 
     const handleSaveProfile = () => {
         const newUser = userService.getEmptyUser()
-        newUser.username = usernameProp
-        newUser.password = passwordProp
+        newUser.username = username
+        newUser.password = password
         newUser.description = description
         newUser.diplayName = displayName
         userActions.signUp(newUser, profileImgFile, profileBgImgFile)
@@ -106,7 +101,7 @@ export default function CreateProfilePage(props: CreateProfilePageProps) {
                         onChange={handleDisplayNameChange}
                         placeholder="Display name..."
                     />
-                    <h2>@{usernameProp}</h2>
+                    <h2>{'@' + username}</h2>
                 </div>
                 <div>
                     <textarea

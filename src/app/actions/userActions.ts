@@ -1,14 +1,12 @@
 import { dbService } from '../../services/db.service'
 import { AppThunk } from '../feedStore'
-import { userService } from '../../services/user.service'
 import { userReducer } from '../reducers/userSlice'
 import { cloudinaryService } from '../../services/cloudinary.service'
 
 export const userActions = {
     loginUser,
     signUp,
-    logOut,
-    checkPassword
+
 }
 
 // TODO: build loginUser function
@@ -50,21 +48,21 @@ function signUp(
 }
 
 // TODO: build password auth function
-function checkPassword(): AppThunk {
-    return async (dispatch) => {
-        try {
-        } catch (error) {
-            console.log('Login Failed.' + error)
-        }
-    }
-}
+// function checkPassword(): AppThunk {
+//     return async (dispatch) => {
+//         try {
+//         } catch (error) {
+//             console.log('Login Failed.' + error)
+//         }
+//     }
+// }
 
 // TODO: build logOut function
-function logOut(): AppThunk {
-    return async (dispatch) => {
-        try {
-        } catch (error) {
-            console.log('Login Failed.' + error)
-        }
-    }
-}
+// function logOut(): AppThunk {
+//     return async (dispatch) => {
+//         try {
+//         } catch (error) {
+//             console.log('Login Failed.' + error)
+//         }
+//     }
+// }

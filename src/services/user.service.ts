@@ -18,6 +18,7 @@ function getEmptyUser() {
         bgImgUrl: '',
         profileImgUrl: '',
         followers: [],
-        following: []
+        following: [],
+        createdAt: utilService.getJoinedDateFormat()
     }
 }

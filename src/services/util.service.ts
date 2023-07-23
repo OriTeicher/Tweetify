@@ -1,10 +1,13 @@
+import { Timestamp } from 'firebase/firestore'
+
 export const utilService = {
     getRandomIntInclusive,
     getRandomColor,
     getCurrentDate,
     getInitials,
     generateRandomSentences,
-    generateId
+    generateId,
+    getJoinedDateFormat
 }
 
 function generateId(idLength: number = 5) {
@@ -59,7 +62,7 @@ function getCurrentDate(timeStamp: number): string {
 
     if (hoursDiff < 24) {
         if (hoursDiff === 0) {
-            if(minutesDiff === 0) return 'now'
+            if (minutesDiff === 0) return 'now'
             else return `${minutesDiff}m`
         } else {
             return `${hoursDiff}h`
@@ -112,4 +115,11 @@ function generateRandomSentences(sentencesCount: number) {
     for (let i = 0; i < sentencesCount; i++)
         res += sentences[getRandomIntInclusive(0, sentences.length - 1)]
     return res
+}
+
+function getJoinedDateFormat() {
+    const currentDate = new Date()
+    let month = currentDate.getMonth() + 1
+    const year = currentDate.getFullYear()
+    return `${month < 10 ? '0' + month : month}/${year}`
 }
