@@ -5,7 +5,7 @@ import FeedIndex from '../cmps/feed/FeedIndex'
 import { FeedIndexProps } from '../services/interface.service'
 
 interface AppProps {
-    cmp?: React.ComponentType<FeedIndexProps>
+    cmp?: React.ComponentType<any> 
 }
 
 export function Hompage(props: AppProps) {

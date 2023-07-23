@@ -99,6 +99,9 @@
             opacity: 0.9;
         }
     }
+    &:last-child{
+        margin-bottom: 100px;
+    }
 }
 
 .post-icons {

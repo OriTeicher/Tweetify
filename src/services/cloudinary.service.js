@@ -8,7 +8,7 @@ async function uploadImgToCloud(file) {
     const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${apiService.CLOUD_NAME}/image/upload`
     try {
         const formData = new FormData()
-        formData.append('UPLOAD_PRESET', apiService.UPLOAD_PRESET)
+        formData.append('upload_preset', apiService.UPLOAD_PRESET)
         formData.append('file', file)
 
         const res = await fetch(UPLOAD_URL, {

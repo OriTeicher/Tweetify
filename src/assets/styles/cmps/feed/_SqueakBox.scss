@@ -46,6 +46,9 @@
             }
         }
         .left-icons {
+            label {
+                display: flex;
+            }
             display: flex;
             align-items: center;
             font-size: 10px;
@@ -55,7 +58,7 @@
                 font-size: 20px;
                 cursor: pointer;
                 &:hover {
-                    opacity: 0.9;
+                    color: $logoColor;
                 }
             }
             .gif {

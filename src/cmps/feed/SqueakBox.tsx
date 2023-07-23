@@ -7,7 +7,7 @@ import React, {
 } from 'react'
 import { Avatar } from '@mui/material'
 import EmojiPicker from 'emoji-picker-react'
-import GifPicker, { Theme } from 'gif-picker-react'
+import GifPicker from 'gif-picker-react'
 import { EmojiClickData } from 'emoji-picker-react/dist/types/exposedTypes'
 import ImgModal from '../utils/ImgModal'
 import {
@@ -34,6 +34,8 @@ export default function SqueakBox({
     const [isEmojiMenuOpen, setIsEmojiMenuOpen] = useState(false)
     const [isGifMenuOpen, setIsGifMenuOpen] = useState(false)
     const [selectedImgUrl, setSelectedImgUrl] = useState('')
+
+    const fileInputRef = useRef<HTMLInputElement>(null)
 
     const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
         setMsg(event.target.value)
@@ -64,8 +66,10 @@ export default function SqueakBox({
 
     const handleEmojiMenuClicked = () => {
         setIsEmojiMenuOpen(!isEmojiMenuOpen)
+        setIsGifMenuOpen(false)
     }
     const handleGifMenuClicked = () => {
+        setIsEmojiMenuOpen(false)
         setIsGifMenuOpen(!isGifMenuOpen)
     }
     const handleEmojiClicked = (emojiData: EmojiClickData) => {
@@ -82,6 +86,12 @@ export default function SqueakBox({
         ev.preventDefault()
         setFileUrl('')
         setFile(null)
+    }
+
+    const handleAddImgClick = () => {
+        setIsEmojiMenuOpen(false)
+        setIsGifMenuOpen(false)
+        fileInputRef.current?.click()
     }
 
     const handleFileChange = (ev: any) => {
@@ -148,11 +158,22 @@ export default function SqueakBox({
                         Squeak
                     </button>
                     <div className="left-icons">
-                        <ImageOutlined className="icon" />
+                        <label
+                            htmlFor="file-upload"
+                            className="file-upload-label"
+                        >
+                            <ImageOutlined
+                                className="icon"
+                                onMouseDown={handleAddImgClick}
+                            />
+                        </label>
                         <input
                             type="file"
+                            id="file-upload"
                             className="file-upload-input"
+                            ref={fileInputRef}
                             onChange={handleFileChange}
+                            style={{ display: 'none' }}
                         />
                         <GifBoxOutlined
                             className="icon"

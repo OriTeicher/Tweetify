@@ -2,12 +2,34 @@
     display: flex;
     position: relative;
     flex-direction: column;
+    font-family: 'Jost', sans-serif;
     .profile-bgc-img {
         width: 100%;
         opacity: 0.7;
         height: 200px;
         object-fit: cover;
         object-position: center center;
+    }
+    input {
+        margin-top: 10px;
+        outline: none;
+        background-color: $mainColor1;
+        border-radius: 5px;
+        color: white;
+        font-size: 20px;
+        width: fit-content;
+        border: none;
+    }
+    textarea {
+        resize: none;
+        width: 100%;
+        background-color: $mainColor1;
+        color: white;
+        border-radius: 5px;
+        outline: none;
+        border: none;
+        font-family: 'Jost';
+        font-size: 15px;
     }
     .user-cred {
         display: flex;
@@ -40,7 +62,7 @@
             font-size: 20px;
             width: fit-content;
         }
-        
+
         h2 {
             font-size: 15px;
             color: $mainColor2;
@@ -61,6 +83,7 @@
         width: 150px;
     }
     .new-profile-img {
+        border: 3px solid black ;
         width: 150px;
         height: 150px;
         cursor: pointer;

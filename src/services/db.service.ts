@@ -80,7 +80,7 @@ async function removeItemFromDB(itemId: string, col: string) {
 
 async function setDemoDB(postsNum: number) {
     const randomPosts = feedService.getRandomPosts(postsNum)
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 5; i++) {
         try {
             await addItemToCollection(
                 randomPosts[i],

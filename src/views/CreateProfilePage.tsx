@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
-import { DateRange } from '@mui/icons-material'
-import ImgModal from '../cmps/utils/ImgModal'
 import { Avatar } from '@mui/material'
 
-interface CreateProfilePageProps {}
+interface CreateProfilePageProps {
+    username: string 
+    password: string
+}
 
 export default function CreateProfilePage(props: CreateProfilePageProps) {
     const initialParagraph = 'Click here to enter your profile description...'
     const initialDisplayName = 'Display name goes here...'
 
-    const [currParagraph, setCurrParagraph] = useState<string>(initialParagraph)
+    const [description, setDescription] = useState<string>(initialParagraph)
     const [displayName, setDisplayName] = useState<string>(initialDisplayName)
     const [profileImage, setProfileImage] = useState<string>('')
     const [profileBgcImage, setProfileBgcImage] = useState<string>('')
@@ -17,7 +18,7 @@ export default function CreateProfilePage(props: CreateProfilePageProps) {
     const handleParagraphChange = (
         event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
     ) => {
-        setCurrParagraph(event.target.value)
+        setDescription(event.target.value)
     }
 
     const handleDisplayNameChange = (
@@ -89,15 +90,13 @@ export default function CreateProfilePage(props: CreateProfilePageProps) {
                     </div>
                     <input
                         type="text"
-                        value={displayName}
                         onChange={handleDisplayNameChange}
                         placeholder="Display name goes here..."
                     />
-                    <h2>@pukki123</h2>
+                    <h2>@{props.username || 'Guest'}</h2>
                 </div>
                 <div>
                     <textarea
-                        value={currParagraph}
                         onChange={handleParagraphChange}
                         placeholder="Click here to enter your profile description..."
                     />

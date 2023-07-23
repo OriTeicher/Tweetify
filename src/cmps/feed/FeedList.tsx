@@ -28,31 +28,35 @@ const FeedList: React.FC<FeedListProps> = ({
 
     return (
         <section className="posts-list">
-            {feedPosts.map((post, idx) => (
-                <FeedPreview
-                    filterBy={filterBy}
-                    key={idx}
-                    id={post.id}
-                    displayName={post.displayName}
-                    username={post.username}
-                    txt={post.txt}
-                    imgUrl={post.imgUrl}
-                    avatar={post.avatar}
-                    verified={post.verified}
-                    createdAt={post.createdAt}
-                    likes={post.likes}
-                    comments={post.comments}
-                    resqueaks={post.resqueaks}
-                    isPostLoading={isPostLoading}
-                    onAddComment={handleAddComment}
-                    handleIconClicked={(action: {
-                        type: string
-                        postId: string
-                        stat: string
-                        isStatIncrease: boolean
-                    }) => onIconClicked(action)}
-                />
-            ))}
+            {feedPosts.length ? (
+                feedPosts.map((post, idx) => (
+                    <FeedPreview
+                        filterBy={filterBy}
+                        key={idx}
+                        id={post.id}
+                        displayName={post.displayName}
+                        username={post.username}
+                        txt={post.txt}
+                        imgUrl={post.imgUrl}
+                        avatar={post.avatar}
+                        verified={post.verified}
+                        createdAt={post.createdAt}
+                        likes={post.likes}
+                        comments={post.comments}
+                        resqueaks={post.resqueaks}
+                        isPostLoading={isPostLoading}
+                        onAddComment={handleAddComment}
+                        handleIconClicked={(action: {
+                            type: string
+                            postId: string
+                            stat: string
+                            isStatIncrease: boolean
+                        }) => onIconClicked(action)}
+                    />
+                ))
+            ) : (
+                <p style={{ textAlign: 'center', margin: '10px 0px' }}>No Squeaks for you 🥲</p>
+            )}
         </section>
     )
 }
