@@ -20,6 +20,8 @@
             cursor: pointer;
             border: none;
             outline: none;
+            font-family: 'Jost';
+
             &:hover {
                 background-color: $hoverClr2;
             }
@@ -33,13 +35,36 @@
     }
 }
 
+.light {
+    .topbar-container {
+        background-color: $mainColor0;
+        color: $mainColor1;
+        .topbar-btns {
+            button {
+                color: $mainColor1;
+                width: 100%;
+                padding: 20px;
+                background-color: $mainColor0;
+                cursor: pointer;
+                border: none;
+                outline: none;
+                &:hover {
+                    background-color: $hoverClr2;
+                }
+                font-size: 16px;
+            }
+            background-color: $mainColor0;
+        }
+    }
+}
+
 @media (max-width: 768px) {
     .topbar-container {
         h1 {
             display: none;
         }
-        .topbar-btns{
-            button{
+        .topbar-btns {
+            button {
                 padding: 15px;
             }
         }

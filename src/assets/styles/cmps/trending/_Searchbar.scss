@@ -3,6 +3,7 @@
     align-items: center;
     margin-top: 20px;
     .searchbar {
+        font-family: 'Jost';
         position: absolute;
         padding: 14px;
         padding-left: 50px;
@@ -26,5 +27,19 @@
     }
     #focused {
         color: $logoColor;
+    }
+}
+
+.light {
+    .search-container {
+        .search-icon {
+            color: black;
+        }
+        color: black;
+        .searchbar {
+            border: 1px solid black;
+            background-color: $hoverClr2;
+            color: black;
+        }
     }
 }

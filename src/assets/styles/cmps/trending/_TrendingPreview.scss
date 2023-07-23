@@ -22,3 +22,16 @@
         }
     }
 }
+
+.light {
+    .treding-index {
+        .trending-list {
+            .trending-preview {
+                &:hover {
+                    background-color: $mainColor6;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
