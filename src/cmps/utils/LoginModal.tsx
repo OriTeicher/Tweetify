@@ -27,7 +27,6 @@ const LoginModal: React.FC<LoginModalState> = ({ isOpen, setIsOpen }) => {
 
     const handleSignIn = (event: React.FormEvent) => {
         setIsOpen(false)
-
         if (!username || !password) return
     }
 
@@ -54,6 +53,14 @@ const LoginModal: React.FC<LoginModalState> = ({ isOpen, setIsOpen }) => {
         setPasswordConfirm('')
     }
 
+    const preventSpaceKeyPress = (
+        event: React.KeyboardEvent<HTMLInputElement>
+    ) => {
+        if (event.nativeEvent.keyCode === 32) {
+            event.preventDefault()
+        }
+    }
+
     return (
         <div>
             <Modal
@@ -69,21 +76,25 @@ const LoginModal: React.FC<LoginModalState> = ({ isOpen, setIsOpen }) => {
                         onSubmit={handleSignUp}
                     >
                         <input
+                            onKeyDown={preventSpaceKeyPress}
                             type="text"
                             placeholder="Username..."
                             value={username}
-                            onChange={(event) =>
-                                setUsername(event.target.value)
-                            }
+                            onChange={(event: any) => {
+                                if (event.nativeEvent.keyCode === 32)
+                                    event.preventDefault()
+                                else setUsername(event.target.value)
+                            }}
                         />
                         <input
+                            onKeyDown={preventSpaceKeyPress}
                             maxLength={16}
                             type="password"
                             placeholder="Password..."
                             value={password}
-                            onChange={(event) =>
+                            onChange={(event: any) => {
                                 setPassword(event.target.value)
-                            }
+                            }}
                         />
 
                         {isSignInMode ? (
@@ -93,12 +104,13 @@ const LoginModal: React.FC<LoginModalState> = ({ isOpen, setIsOpen }) => {
                         ) : (
                             <>
                                 <input
+                                    onKeyDown={preventSpaceKeyPress}
                                     type="password"
                                     placeholder="Confirm Password..."
                                     value={passwordConfirm}
-                                    onChange={(event) =>
+                                    onChange={(event) => {
                                         setPasswordConfirm(event.target.value)
-                                    }
+                                    }}
                                 />
                                 <button type="submit" onClick={handleSignUp}>
                                     Sign Up

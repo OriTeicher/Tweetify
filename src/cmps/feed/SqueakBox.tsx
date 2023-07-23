@@ -195,12 +195,16 @@ export default function SqueakBox({
             )}
             <div className="menu-container">
                 {isEmojiMenuOpen && (
-                    <EmojiPicker onEmojiClick={handleEmojiClicked} />
+                    <EmojiPicker
+                        onEmojiClick={handleEmojiClicked}
+                        theme={Theme.DARK}
+                    />
                 )}
                 {isGifMenuOpen && (
                     <GifPicker
                         tenorApiKey={apiService.TENOR_API_KEY}
                         onGifClick={handleGifPick}
+                        theme={Theme.DARK}
                     />
                 )}
             </div>
