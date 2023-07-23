@@ -17,6 +17,7 @@ import {
 } from '@mui/icons-material'
 import Loader from '../utils/Loader'
 import { apiService } from '../../services/api.service'
+import { Theme } from 'gif-picker-react'
 
 interface SqueakBoxProps {
     addPost: (post: string, file: File | null, gifUrl: string) => void

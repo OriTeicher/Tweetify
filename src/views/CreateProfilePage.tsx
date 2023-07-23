@@ -91,7 +91,7 @@ export default function CreateProfilePage(props: CreateProfilePageProps) {
                             onChange={handleBgcImageChange}
                             style={{ display: 'none' }}
                         />
-                        <button onClick={handleSaveProfile}>
+                        <button onClick={handleSaveProfile} className='save-profile-btn'>
                             Save Profile
                         </button>
                     </div>

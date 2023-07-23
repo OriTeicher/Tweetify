@@ -32,15 +32,21 @@
         font-size: 15px;
     }
     .user-cred {
+        width: 100%;
+        margin-top: 110px;
+        position: absolute;
         display: flex;
         gap: 20px;
         flex-direction: column;
         padding: 15px;
+
         .edit-container {
+            width: 100%;
             display: flex;
             justify-content: space-between;
-            align-items: start;
+            align-items: center;
             button {
+                margin-top: 50px;
                 &:hover {
                     cursor: pointer;
                     filter: brightness(90%);
@@ -83,7 +89,7 @@
         width: 150px;
     }
     .new-profile-img {
-        border: 3px solid $mainColor1 ;
+        border: 3px solid $mainColor1;
         width: 150px;
         height: 150px;
         cursor: pointer;
