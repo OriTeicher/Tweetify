@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Avatar } from '@mui/material'
 import { useLocation } from 'react-router-dom'
+import { userActions } from '../app/actions/userActions'
+import { userService } from '../services/user.service'
 
 interface CreateProfilePageProps {
     username: string
@@ -11,10 +13,12 @@ export default function CreateProfilePage(props: CreateProfilePageProps) {
     const [description, setDescription] = useState('')
     const [displayName, setDisplayName] = useState('')
     const [profileImage, setProfileImage] = useState('')
-    const [profileBgcImage, setProfileBgcImage] = useState('')
+    const [profileBgImgUrl, setProfileBgUrl] = useState('')
+    const [profileImgFile, setProfileImgFile] = useState<File | null>(null)
+    const [profileBgImgFile, setProfileBgImgFile] = useState<File | null>(null)
 
     const location = useLocation()
-    const { username, password } = location.state || {}
+    const { usernameProp, passwordProp } = location.state || {}
 
     const handleParagraphChange = (
         event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -29,40 +33,39 @@ export default function CreateProfilePage(props: CreateProfilePageProps) {
     }
 
     const handleSaveProfile = () => {
-        console.log('submitted')
+        const newUser = userService.getEmptyUser()
+        newUser.username = usernameProp
+        newUser.password = passwordProp
+        newUser.description = description
+        newUser.diplayName = displayName
+        userActions.signUp(newUser, profileImgFile, profileBgImgFile)
     }
 
-    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0]
-        if (file) {
-            const reader = new FileReader()
-            reader.onloadend = () => {
-                setProfileImage(reader.result as string)
-            }
-            reader.readAsDataURL(file)
-        }
+    const handleBgImgChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const files = event.target.files
+        if (!files || files.length === 0) return
+        const selectedFile = files[0]!
+        setProfileBgImgFile(selectedFile)
+        setProfileBgUrl(URL.createObjectURL(selectedFile))
     }
 
-    const handleBgcImageChange = (
+    const handleProfileImgChange = (
         event: React.ChangeEvent<HTMLInputElement>
     ) => {
-        const file = event.target.files?.[0]
-        if (file) {
-            const reader = new FileReader()
-            reader.onloadend = () => {
-                setProfileBgcImage(reader.result as string)
-            }
-            reader.readAsDataURL(file)
-        }
+        const files = event.target.files
+        if (!files || files.length === 0) return
+        const selectedFile = files[0]!
+        setProfileImgFile(selectedFile)
+        setProfileImage(URL.createObjectURL(selectedFile))
     }
 
     return (
         <section className="feed-index profile-container">
-            <label htmlFor="bgc-image-upload">
+            <label htmlFor="bgc-img-upload">
                 <img
                     className="profile-bgc-img"
                     src={
-                        profileBgcImage ||
+                        profileBgImgUrl ||
                         'https://i0.wp.com/css-tricks.com/wp-content/uploads/2015/11/drag-drop-upload-2.gif'
                     }
                     alt="Profile Background"
@@ -71,27 +74,30 @@ export default function CreateProfilePage(props: CreateProfilePageProps) {
             <div className="user-cred">
                 <div className="profile-img-container">
                     <div className="edit-container">
-                        <label htmlFor="image-upload">
+                        <label htmlFor="img-upload">
                             <Avatar
                                 className="new-profile-img"
                                 src={profileImage}
                             />
                         </label>
                         <input
-                            id="image-upload"
+                            id="img-upload"
                             type="file"
                             accept="image/*"
-                            onChange={handleImageChange}
+                            onChange={handleProfileImgChange}
                             style={{ display: 'none' }}
                         />
                         <input
-                            id="bgc-image-upload"
+                            id="bgc-img-upload"
                             type="file"
                             accept="image/*"
-                            onChange={handleBgcImageChange}
+                            onChange={handleBgImgChange}
                             style={{ display: 'none' }}
                         />
-                        <button onClick={handleSaveProfile} className='save-profile-btn'>
+                        <button
+                            onClick={handleSaveProfile}
+                            className="save-profile-btn"
+                        >
                             Save Profile
                         </button>
                     </div>
@@ -100,7 +106,7 @@ export default function CreateProfilePage(props: CreateProfilePageProps) {
                         onChange={handleDisplayNameChange}
                         placeholder="Display name..."
                     />
-                    <h2>@{username}</h2>
+                    <h2>@{usernameProp}</h2>
                 </div>
                 <div>
                     <textarea

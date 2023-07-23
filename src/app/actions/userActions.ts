@@ -1,11 +1,14 @@
+import { dbService } from '../../services/db.service'
 import { AppThunk } from '../feedStore'
+import { userService } from '../../services/user.service'
 import { userReducer } from '../reducers/userSlice'
+import { cloudinaryService } from '../../services/cloudinary.service'
 
 export const userActions = {
     loginUser,
     signUp,
     logOut,
-    checkPassword,
+    checkPassword
 }
 
 // TODO: build loginUser function
@@ -19,9 +22,27 @@ function loginUser(): AppThunk {
 }
 
 // TODO: build signUp function
-function signUp(): AppThunk {
+function signUp(
+    user: any,
+    profileImgFile: File | null,
+    profileBgFile: File | null
+): AppThunk {
     return async (dispatch) => {
         try {
+            const profileImgUrl = await cloudinaryService.uploadImgToCloud(
+                profileImgFile
+            )
+            const profileBgUrl = await cloudinaryService.uploadImgToCloud(
+                profileBgFile
+            )
+            user.bgImgUrl = profileImgUrl
+            user.profileBgUrl = profileBgUrl
+            await dbService.addItemToCollection(
+                user,
+                user.id,
+                dbService.POSTS_DB_COLLECTION
+            )
+            dispatch(userReducer.onSignUp(user))
         } catch (error) {
             console.log('Login Failed.' + error)
         }
