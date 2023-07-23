@@ -11,8 +11,12 @@
         object-position: center center;
     }
     input {
+        &:focus {
+            outline: $logoColor 1px solid;
+        }
+        padding: 10px;
         margin-top: 10px;
-        outline: none;
+        outline: 1px solid $mainColor3;
         background-color: $mainColor1;
         border-radius: 5px;
         color: $mainColor0;
@@ -21,13 +25,17 @@
         border: none;
     }
     textarea {
+        &:focus {
+            outline: $logoColor 1px solid;
+        }
+        border: none;
+        outline: 1px solid $mainColor3;
+        padding: 10px;
         resize: none;
         width: 100%;
         background-color: $mainColor1;
         color: $mainColor0;
         border-radius: 5px;
-        outline: none;
-        border: none;
         font-family: 'Jost';
         font-size: 15px;
     }
@@ -70,6 +78,7 @@
         }
 
         h2 {
+            margin-top: 5px;
             font-size: 15px;
             color: $mainColor2;
             font-weight: 400;
@@ -106,6 +115,17 @@
         span {
             color: $mainColor0;
             font-weight: 600;
+        }
+    }
+}
+
+.light {
+    .profile-container {
+        textarea,
+        input {
+            color: $mainColor1;
+            background-color: $mainColor0;
+            outline: 1px solid $mainColor1;
         }
     }
 }

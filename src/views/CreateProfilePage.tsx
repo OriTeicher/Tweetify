@@ -98,7 +98,7 @@ export default function CreateProfilePage(props: CreateProfilePageProps) {
                     <input
                         type="text"
                         onChange={handleDisplayNameChange}
-                        placeholder="Display name goes here..."
+                        placeholder="Display name..."
                     />
                     <h2>@{username}</h2>
                 </div>
