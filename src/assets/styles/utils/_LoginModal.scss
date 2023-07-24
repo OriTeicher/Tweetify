@@ -10,7 +10,7 @@
     .modal-content {
         gap: 30px;
         background-color: $mainColor1;
-        width: 30vw;
+        width: 550px;
         min-width: 400px;
         height: 600px;
         align-items: center;
@@ -74,6 +74,8 @@
         .modal-content{
             width: 100vw;
             border-radius: 0px;
+            height: 100vh;
+            transform: translateY(0%);
         }
 
     }

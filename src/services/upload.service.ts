@@ -21,3 +21,6 @@ async function uploadImg(image: File): Promise<string> {
     }
 }
 
+
+
+
