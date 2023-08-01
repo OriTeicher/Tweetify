@@ -36,6 +36,7 @@ export default function ProfilePage() {
                             }
                         />
                         <button>Edit Profile</button>
+                        <button>Edit Profile</button>
                     </div>
                     <h1>{loggedInUser.displayName}</h1>
                     <h2>@{loggedInUser.username}</h2>
