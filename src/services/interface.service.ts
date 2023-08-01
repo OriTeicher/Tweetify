@@ -83,3 +83,7 @@ export interface CommentsProps {
 }
 
 // * users
+
+export interface User {
+    
+}

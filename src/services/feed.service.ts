@@ -4,6 +4,7 @@ export const feedService = {
     getEmptyPost(
         displayName: string = 'Guest',
         username: string = 'guestUser01',
+        profileImg: string,
         txt: string = '...'
     ) {
         return {
@@ -13,7 +14,7 @@ export const feedService = {
             txt,
             imgUrl: '',
             avatar: {
-                imgUrl: 'https://xsgames.co/randomusers/assets/avatars/male/25.jpg',
+                imgUrl: profileImg,
                 bgColor: ''
             },
             verified: false,

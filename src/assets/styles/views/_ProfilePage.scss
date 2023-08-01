@@ -96,6 +96,7 @@
         border-radius: 50%;
         border: 5px solid $mainColor1;
         width: 150px;
+        height: 150px;
     }
     .new-profile-img {
         border: 3px solid $mainColor1;
@@ -128,4 +129,8 @@
             outline: 1px solid $mainColor1;
         }
     }
+}
+
+.new-profile-loader-container{
+    margin: auto;
 }

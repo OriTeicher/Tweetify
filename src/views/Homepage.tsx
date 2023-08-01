@@ -15,9 +15,9 @@ export function Hompage(props: AppProps) {
 
     return (
         <section
-            className={
-                `${isDarkMode ? 'app-container' : 'light app-container'}`
-            }
+            className={`${
+                isDarkMode ? 'app-container' : 'light app-container'
+            }`}
         >
             <Sidebar
                 onOptionChange={(topBarOption: string) =>

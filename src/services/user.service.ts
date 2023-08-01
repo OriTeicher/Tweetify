@@ -11,13 +11,15 @@ export const userService = {
 function getEmptyUser() {
     return {
         isAdmin: false,
-        id: 'USER-' + utilService.generateId(5),
+        isVerified: false,
+        id: 'U-' + utilService.generateId(5),
         username: '',
         password: '',
-        diplayName: '',
+        displayName: '',
         description: '',
         bgImgUrl: '',
         profileImgUrl: '',
+        postsId: [],
         followers: [],
         following: [],
         createdAt: utilService.getJoinedDateFormat()

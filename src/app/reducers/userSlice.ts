@@ -1,8 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { utilService } from '../../services/util.service'
+import { PayloadAction } from '@reduxjs/toolkit'
 
 interface UserState {
     loggedInUser: {
         isAdmin: boolean
+        isVerified: boolean
         username: string
         displayName: string
         password: string
@@ -18,15 +21,16 @@ interface UserState {
 export const initialState: UserState = {
     loggedInUser: {
         isAdmin: false,
-        username: 'Guest',
-        displayName: 'guest',
+        isVerified: false,
+        username: 'G-' + utilService.generateId(5),
+        displayName: 'Guest',
         password: '!@#$',
-        description: '',
+        description: 'This is a guest account, you should create your own user...',
         followers: [],
         following: [],
         profileImgUrl: '',
         bgImgUrl: '',
-        joinedAt: ''
+        joinedAt: '06/23'
     }
 }
 
@@ -34,13 +38,19 @@ const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        onSignUp: (state, newUser: any) => {
-            debugger
-            state.loggedInUser = newUser
-            console.log('state.loggedInUser', state.loggedInUser)
+        onSignUp: (state, action: PayloadAction<any>) => {
+            state.loggedInUser = action.payload
         }
     }
 })
 
 export const userReducer = userSlice.actions
 export default userSlice.reducer
+
+/*         queryFeedPostsSuccess: (state, action: PayloadAction<FeedPost[]>) => {
+            state.feedPosts = action.payload.sort(
+                (a, b) => b.createdAt - a.createdAt
+            )
+            state.isAppLoading = false
+        },
+*/

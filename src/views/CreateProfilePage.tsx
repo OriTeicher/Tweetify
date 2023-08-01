@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { Avatar } from '@mui/material'
-import { useLocation } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { userActions } from '../app/actions/userActions'
 import { userService } from '../services/user.service'
 import { useDispatch } from 'react-redux'
+import Loader from '../cmps/utils/Loader'
 
 export default function CreateProfilePage() {
     const [description, setDescription] = useState('')
@@ -12,9 +13,11 @@ export default function CreateProfilePage() {
     const [profileBgImgUrl, setProfileBgUrl] = useState('')
     const [profileImgFile, setProfileImgFile] = useState<File | null>(null)
     const [profileBgImgFile, setProfileBgImgFile] = useState<File | null>(null)
+    const [isLoaderOn, setIsLoaderOn] = useState(false)
 
     const dispatch: any = useDispatch()
     const location = useLocation()
+    const navigate = useNavigate()
     const { username, password } = location.state || {}
 
     const handleParagraphChange = (
@@ -29,13 +32,18 @@ export default function CreateProfilePage() {
         setDisplayName(event.target.value)
     }
 
-    const handleSaveProfile = () => {
+    const handleSaveProfile = async () => {
+        setIsLoaderOn(true)
         const newUser = userService.getEmptyUser()
         newUser.username = username
         newUser.password = password
         newUser.description = description
-        newUser.diplayName = displayName
-        dispatch(userActions.signUp(newUser, profileImgFile, profileBgImgFile))
+        newUser.displayName = displayName
+        await dispatch(
+            userActions.signUp(newUser, profileImgFile, profileBgImgFile)
+        )
+        setIsLoaderOn(false)
+        navigate('/home')
     }
 
     const handleBgImgChange = (event: any) => {
@@ -103,6 +111,12 @@ export default function CreateProfilePage() {
                         placeholder="Click here to enter your profile description..."
                     />
                 </div>
+                {isLoaderOn ? (
+                    <div className="new-profile-loader-container">
+                        <p>Creating new profile...</p>
+                        <Loader />
+                    </div>
+                ) : null}
             </div>
         </section>
     )

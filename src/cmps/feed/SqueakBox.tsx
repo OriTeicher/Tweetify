@@ -22,11 +22,13 @@ import { Theme } from 'gif-picker-react'
 interface SqueakBoxProps {
     addPost: (post: string, file: File | null, gifUrl: string) => void
     isNewPostLoading: boolean
+    loggedInUser: any
 }
 
 export default function SqueakBox({
     addPost,
-    isNewPostLoading
+    isNewPostLoading,
+    loggedInUser
 }: SqueakBoxProps) {
     const txtAreaRef = useRef<HTMLTextAreaElement>(null)
     const [msg, setMsg] = useState('')
@@ -110,14 +112,8 @@ export default function SqueakBox({
                 <div className="squeak-input-container">
                     <Avatar
                         className="user-avatar"
-                        sx={{
-                            bgcolor: 'lightskyblue',
-                            textShadow: '1px 1px 1px black'
-                        }}
-                        src="https://xsgames.co/randomusers/assets/avatars/male/25.jpg"
-                    >
-                        {'PK'}
-                    </Avatar>
+                        src={loggedInUser.profileImgUrl}
+                    />
                     {isNewPostLoading ? (
                         <Loader />
                     ) : (

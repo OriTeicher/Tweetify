@@ -22,6 +22,11 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
         return state.feed
     })
 
+    const { loggedInUser } = useSelector((state: RootState) => {
+        console.log(state.user)
+        return state.user
+    })
+
     const dispatch: ThunkDispatch<
         RootState,
         undefined,
@@ -37,7 +42,9 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
         file: File | null,
         gifUrl: string
     ) => {
-        dispatch(feedActions.addFeedPost(postContent, file, gifUrl))
+        dispatch(
+            feedActions.addFeedPost(loggedInUser, postContent, file, gifUrl)
+        )
     }
 
     const handleAddComment = async (
@@ -77,6 +84,7 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
             <SqueakBox
                 addPost={handleAddPost}
                 isNewPostLoading={isNewPostLoading}
+                loggedInUser={loggedInUser}
             />
             {isAppLoading ? (
                 <Loader />

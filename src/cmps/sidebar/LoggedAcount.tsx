@@ -6,12 +6,14 @@ import OptionsDropdown from '../utils/OptionsDropdown'
 interface UserProps {
     displayName: string
     username: string
+    profileImg: string
     setIsLoginModalOpen: Function
 }
 
 const LoggedAccount: React.FC<UserProps> = ({
     displayName,
     username,
+    profileImg,
     setIsLoginModalOpen
 }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
@@ -41,12 +43,7 @@ const LoggedAccount: React.FC<UserProps> = ({
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
                 <div className="left-cred">
-                    <Avatar
-                        className="user-avatar"
-                        src="https://xsgames.co/randomusers/assets/avatars/male/25.jpg"
-                    >
-                        {'PK'}
-                    </Avatar>
+                    <Avatar className="user-avatar" src={profileImg}></Avatar>
                     <div className="user-cred">
                         <h1>{displayName}</h1>
                         <h2>@{username}</h2>

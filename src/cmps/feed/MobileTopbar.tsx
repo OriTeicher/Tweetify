@@ -13,7 +13,6 @@ export default function MobileTopbar() {
                 src="https://xsgames.co/randomusers/assets/avatars/male/25.jpg"
                 onClick={() => setIsLoginModalOpen(!isLoginModalOpen)}
             >
-                PK
             </Avatar>
             <TwitterIcon className="twitter-icon" />
             <LoginModal

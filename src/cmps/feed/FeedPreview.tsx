@@ -11,6 +11,8 @@ import Loader from '../utils/Loader'
 import { FeedPreviewProps } from '../../services/interface.service'
 import ImgModal from '../utils/ImgModal'
 import SqueakBox from './SqueakBox'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../app/feedStore'
 
 const FeedPreview: React.FC<FeedPreviewProps> = ({
     id,
@@ -49,7 +51,9 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
         setSelectedPostId(action.postId)
         handleIconClicked(action)
     }
-
+    const { loggedInUser } = useSelector((state: RootState) => {
+        return state.user
+    })
     const handleImgModalClosed = () => setIsImgClicked(false)
     const handleImgClick = () => setIsImgClicked(true)
     const handleCommentClick = () => setIsCommentsClicked(!isCommentsClicked)
@@ -158,6 +162,7 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                             gifUrl: string
                         ) => handleAddComment(post, file, gifUrl, id)}
                         isNewPostLoading={false}
+                        loggedInUser={loggedInUser}
                     />
                     {comments.map((comment, idx) => (
                         <FeedPreview

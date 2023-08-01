@@ -43,7 +43,7 @@ export default function NewsIndex(props: NewsIndexProps) {
             />
             <TrendingList trends={trends} onSearchTrend={handleSearchTrend} />
             <button onClick={handleDarkModeChange} className='dark-mode-btn'>
-                {isDarkMode ? '☀️' : '🌙'}
+                {isDarkMode ? 'Light Mode ☀️' : 'Dark Mode 🌙'}
             </button>
         </section>
     )

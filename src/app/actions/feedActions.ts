@@ -37,6 +37,7 @@ function queryFeedPosts(): AppThunk {
 }
 
 function addFeedPost(
+    loggedInUser: any,
     postContent: string,
     file: File | null,
     gifUrl: string = ''
@@ -44,9 +45,11 @@ function addFeedPost(
     return async (dispatch) => {
         try {
             dispatch(feedReducers.setNewPostLoaderActive())
+            console.log('loggedInUser.profileImg', loggedInUser)
             const newPost = feedService.getEmptyPost(
-                'Pukki Blinders',
-                'pukki123'
+                loggedInUser.displayName,
+                loggedInUser.username,
+                loggedInUser.profileImgUrl
             )
             newPost.txt = postContent
             newPost.imgUrl = file
@@ -54,7 +57,6 @@ function addFeedPost(
                 : gifUrl
                 ? gifUrl
                 : ''
-
             await dbService.addItemToCollection(
                 newPost,
                 newPost.id,
@@ -132,7 +134,9 @@ function addFeedComment(
             dispatch(feedReducers.setAppLoaderActive)
             const newComment = feedService.getEmptyPost(
                 'Pukki Blinders',
-                'pukki123'
+                'pukki123',
+                '',
+                ''
             )
             newComment.txt = postContent
             newComment.imgUrl = file

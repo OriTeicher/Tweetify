@@ -11,8 +11,14 @@
 }
 
 .dark-mode-btn {
+    display: flex;
+    align-items: start;
+    justify-content: center;
     background-color: $hoverClr3;
     width: 300px;
+    color: $mainColor0;
+    font-family: 'Jost';
+    text-shadow: 1px 1px 1px $mainColor1;
     border-radius: 20px;
     text-align: center;
     font-size: 20px;

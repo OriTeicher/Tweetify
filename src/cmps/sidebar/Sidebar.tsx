@@ -11,6 +11,8 @@ import SidebarOption from './SidebarOption'
 import LoggedAcount from './LoggedAcount'
 import LoginModal from '../utils/LoginModal'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../app/feedStore'
 
 interface SidebarProps {
     onOptionChange: (option: string) => void
@@ -22,6 +24,11 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
     const [isLoginModalOpen, setLoginModal] = useState(false)
     const navigate = useNavigate()
     const location = useLocation()
+
+    // * LOGGED IN USER *
+    const { loggedInUser } = useSelector((state: RootState) => {
+        return state.user
+    })
 
     useEffect(() => {
         const handleResize = () => {
@@ -87,8 +94,9 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
                         </button>
                     )}
                     <LoggedAcount
-                        displayName="Pukki Blinders"
-                        username="pukki123"
+                        displayName={loggedInUser.displayName}
+                        username={loggedInUser.username}
+                        profileImg={loggedInUser.profileImgUrl}
                         setIsLoginModalOpen={(isOpen: boolean) =>
                             setLoginModal(isOpen)
                         }
