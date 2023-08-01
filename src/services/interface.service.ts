@@ -5,20 +5,18 @@ export interface FeedIndexProps {
 }
 
 export interface FeedPost {
+    filterBy: string
     id: string
-    displayName: string
-    username: string
-    txt: string
+    owner: Owner
+    content: string
     imgUrl?: string
-    avatar: {
-        bgColor: string
-        imgUrl?: string
-    }
-    verified: boolean
     createdAt: number
     likes: number
-    comments: object[]
+    comments: FeedPost[]
     resqueaks: number
+    handleIconClicked: Function
+    onAddComment: Function
+    isPostLoading: boolean
 }
 
 export interface FeedListProps {
@@ -35,25 +33,12 @@ export interface Trend {
     tweetsCount: number
 }
 
-export interface FeedPreviewProps {
-    filterBy: string
-    id: string
+export interface Owner {
+    userId: string
     displayName: string
     username: string
-    txt: string
-    imgUrl?: string
-    avatar: {
-        imgUrl?: string
-        bgColor: string
-    }
-    verified: boolean
-    createdAt: number
-    likes: number
-    comments: any[]
-    resqueaks: number
-    handleIconClicked: Function
-    isPostLoading: boolean
-    onAddComment: Function
+    profileImgUrl?: string
+    isVerified: boolean
 }
 
 export interface FeedPostAction {
@@ -78,12 +63,6 @@ export interface ImgModalProps {
 
 // * comments
 
-export interface CommentsProps {
-    comments: any
-}
-
 // * users
 
-export interface User {
-    
-}
+export interface User {}

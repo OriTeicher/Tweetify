@@ -49,14 +49,16 @@ function addFeedPost(
             const newPost = feedService.getEmptyPost(
                 loggedInUser.displayName,
                 loggedInUser.username,
-                loggedInUser.profileImgUrl
+                loggedInUser.profileImgUrl,
+                postContent
             )
-            newPost.txt = postContent
+
             newPost.imgUrl = file
                 ? await cloudinaryService.uploadImgToCloud(file)
                 : gifUrl
                 ? gifUrl
                 : ''
+                
             await dbService.addItemToCollection(
                 newPost,
                 newPost.id,
@@ -138,7 +140,7 @@ function addFeedComment(
                 '',
                 ''
             )
-            newComment.txt = postContent
+            newComment.content = postContent
             newComment.imgUrl = file
                 ? await cloudinaryService.uploadImgToCloud(file)
                 : gifUrl
@@ -150,7 +152,7 @@ function addFeedComment(
                 dbService.POSTS_DB_COLLECTION,
                 newComment
             )
-            dispatch(feedReducers.addCommentSuccess(updatedPost))
+            // dispatch(feedReducers.addCommentSuccess(updatedPost))
         } catch (error) {
             console.log('Cannot add post. ', error)
         }

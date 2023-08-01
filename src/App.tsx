@@ -16,6 +16,10 @@ function App() {
                     element={<DynamicHomepage cmp={FeedIndex} />}
                 />
                 <Route
+                    path="/Squeaker-Twitter-clone"
+                    element={<DynamicHomepage cmp={FeedIndex} />}
+                />
+                <Route
                     path="/*"
                     element={<DynamicHomepage cmp={FeedIndex} />}
                 />

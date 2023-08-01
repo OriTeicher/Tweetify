@@ -9,28 +9,18 @@ interface AppProps {
 
 export function Hompage(props: AppProps) {
     const [topBarOption, setTopBarOption] = useState('Home')
-    const [isDarkMode, setIsDarkMode] = useState(true)
 
     const DynamicComponent = props.cmp || FeedIndex
 
     return (
-        <section
-            className={`${
-                isDarkMode ? 'app-container' : 'light app-container'
-            }`}
-        >
+        <section className="app-container">
             <Sidebar
                 onOptionChange={(topBarOption: string) =>
                     setTopBarOption(topBarOption)
                 }
             />
             <DynamicComponent topBarOption={topBarOption} />
-            <TrendingIndex
-                setDarkMode={(isDarkMode: boolean) => {
-                    console.log(isDarkMode ? 'dark' : 'light')
-                    setIsDarkMode(isDarkMode)
-                }}
-            />
+            <TrendingIndex />
         </section>
     )
 }

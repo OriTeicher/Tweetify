@@ -1,27 +1,32 @@
 import { utilService } from './util.service'
+import { FeedPost, Owner } from './interface.service'
 
 export const feedService = {
     getEmptyPost(
         displayName: string = 'Guest',
         username: string = 'guestUser01',
-        profileImg: string,
-        txt: string = '...'
-    ) {
+        profileImgUrl: string,
+        content: string = '...'
+    ): FeedPost {
         return {
             id: 'P-' + utilService.generateId(5),
-            displayName,
-            username,
-            txt,
-            imgUrl: '',
-            avatar: {
-                imgUrl: profileImg,
-                bgColor: ''
+            owner: {
+                userId: '',
+                isVerified: false,
+                displayName,
+                username,
+                profileImgUrl
             },
-            verified: false,
+            content,
+            imgUrl: '',
             createdAt: Date.now(),
             likes: 0,
             resqueaks: 0,
-            comments: []
+            comments: [],
+            filterBy: '',
+            isPostLoading: false,
+            handleIconClicked: () => {},
+            onAddComment: () => {}
         }
     },
     getRandomPosts(postsCount: number) {
@@ -44,30 +49,32 @@ export const feedService = {
             const displayName =
                 names[utilService.getRandomIntInclusive(0, names.length - 1)]
             const username = displayName.toLowerCase().replace(/\s/g, '')
-            const txt = utilService.generateRandomSentences(
+            const content = utilService.generateRandomSentences(
                 utilService.getRandomIntInclusive(1, 4)
             )
+            const owner = {
+                displayName,
+                username,
+                profileImgUrl: '',
+                isVerified: Math.random() < 0.5
+            }
+
             const imgUrl =
                 demoPhotos[
                     utilService.getRandomIntInclusive(0, demoPhotos.length - 1)
                 ]
-            const avatar = { bgColor: utilService.getRandomColor(), imgUrl: '' }
-            const verified = Math.random() < 0.5
             const createdAt = Date.now()
-
             const post = {
                 id,
-                displayName,
-                username,
-                txt,
+                owner,
+                content,
                 imgUrl,
-                avatar,
-                verified,
                 createdAt,
                 likes: utilService.getRandomIntInclusive(0, 500),
-                comments: this.getRandomComments(
-                    utilService.getRandomIntInclusive(0, 7)
-                ),
+                // comments: this.getRandomComments(
+                //     utilService.getRandomIntInclusive(0, 7)
+                // ),
+                comments: [],
                 resqueaks: utilService.getRandomIntInclusive(0, 50)
             }
             posts.push(post)
@@ -75,34 +82,39 @@ export const feedService = {
         return posts
     },
 
-    getRandomComments(length: number) {
-        let comments = []
-        for (let i = 0; i < length; i++) {
-            let randomComment: object = this.getRandomComment()
-            comments.push(randomComment)
-        }
-        return comments
-    },
-
-    getRandomComment(displayName: string = 'Guest'): object {
-        const names = ['John Doe', 'Jane Smith', 'Mike Johnson', 'Emily Brown']
-        const comment = {
-            displayName:
-                names[utilService.getRandomIntInclusive(0, names.length - 1)],
-            username: displayName.toLowerCase().replace(/\s/g, ''),
-            txt: utilService.generateRandomSentences(
-                utilService.getRandomIntInclusive(1, 10)
-            ),
-            imgUrl: '',
-            avatar: '',
-            verified: false,
-            createdAt: Date.now(),
-            likes: 0,
-            resqueaks: 0,
-            comments: []
-        }
-        return comment
+    getEmptyUser() {
+        return {} as Owner
     }
+
+    // getRandomComments(length: number) {
+    //     let comments = []
+    //     for (let i = 0; i < length; i++) {
+    //         let randomComment: object = this.getRandomComment()
+    //         comments.push(randomComment)
+    //     }
+    //     return comments
+    // },
+
+    //     getRandomComment(displayName: string = 'Guest'): object {
+    //         const names = ['John Doe', 'Jane Smith', 'Mike Johnson', 'Emily Brown']
+    //         const comment = {
+    //             displayName:
+    //                 names[utilService.getRandomIntInclusive(0, names.length - 1)],
+    //             username: displayName.toLowerCase().replace(/\s/g, ''),
+    //             content: utilService.generateRandomSentences(
+    //                 utilService.getRandomIntInclusive(1, 10)
+    //             ),
+    //             imgUrl: '',
+    //             avatar: '',
+    //             verified: false,
+    //             createdAt: Date.now(),
+    //             likes: 0,
+    //             resqueaks: 0,
+    //             comments: []
+    //         }
+    //         return comment
+    //     }
+    // }
 }
 
 const demoPhotos = [

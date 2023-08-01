@@ -34,12 +34,9 @@ const FeedList: React.FC<FeedListProps> = ({
                         filterBy={filterBy}
                         key={idx}
                         id={post.id}
-                        displayName={post.displayName}
-                        username={post.username}
-                        txt={post.txt}
+                        owner={post.owner}
+                        content={post.content}
                         imgUrl={post.imgUrl}
-                        avatar={post.avatar}
-                        verified={post.verified}
                         createdAt={post.createdAt}
                         likes={post.likes}
                         comments={post.comments}
@@ -55,7 +52,9 @@ const FeedList: React.FC<FeedListProps> = ({
                     />
                 ))
             ) : (
-                <p style={{ textAlign: 'center', margin: '10px 0px' }}>No Squeaks for you 🥲</p>
+                <p style={{ textAlign: 'center', margin: '10px 0px' }}>
+                    No Squeaks for you 🥲
+                </p>
             )}
         </section>
     )

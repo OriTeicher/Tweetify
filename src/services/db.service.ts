@@ -39,25 +39,29 @@ async function getCollectionFromDB(col: string, filterBy: string = '') {
         const querySnapshot = await getDocs(collection(db, col))
         const collectionArr = querySnapshot.docs.map((doc) => ({
             id: doc.id,
-            displayName: doc.data().displayName,
+            owner: doc.data().owner,
             username: doc.data().username,
-            txt: doc.data().txt,
-            avatar: doc.data().avatar,
+            content: doc.data().content,
             imgUrl: doc.data().imgUrl || '',
-            verified: doc.data().verified || false,
             createdAt: doc.data().createdAt || Date.now(),
             likes: doc.data().likes || 0,
             comments: doc.data().comments || [],
-            resqueaks: doc.data().resqueaks || 0
+            resqueaks: doc.data().resqueaks || 0,
+            filterBy,
+            isPostLoading: false,
+            handleIconClicked: () => {},
+            onAddComment: () => {}
         }))
         if (filterBy) {
             const resArr = collectionArr.filter(
                 (post) =>
-                    post.txt.toLowerCase().includes(filterBy.toLowerCase()) ||
-                    post.username
+                    post.content
                         .toLowerCase()
                         .includes(filterBy.toLowerCase()) ||
-                    post.displayName
+                    post.owner.username
+                        .toLowerCase()
+                        .includes(filterBy.toLowerCase()) ||
+                    post.owner.displayName
                         .toLowerCase()
                         .includes(filterBy.toLowerCase())
             )
@@ -125,16 +129,15 @@ async function getPostByIdFromDb(itemId: string, col: string, comment: any) {
         const querySnapshot = await getDocs(collection(db, col))
         const collectionArr = querySnapshot.docs.map((doc) => ({
             id: doc.id,
-            displayName: doc.data().displayName,
+            owner: doc.data().owner,
             username: doc.data().username,
-            txt: doc.data().txt,
-            avatar: doc.data().avatar,
+            content: doc.data().content,
             imgUrl: doc.data().imgUrl || '',
-            verified: doc.data().verified || false,
             createdAt: doc.data().createdAt || Date.now(),
             likes: doc.data().likes || 0,
             comments: doc.data().comments || [],
-            resqueaks: doc.data().resqueaks || 0
+            resqueaks: doc.data().resqueaks || 0,
+
         }))
         const resArr = collectionArr.filter((post) => post.id === itemId)
         resArr[0].comments.unshift(comment)

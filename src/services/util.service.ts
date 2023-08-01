@@ -75,6 +75,7 @@ function getCurrentDate(timeStamp: number): string {
 }
 
 function getInitials(fullName: string) {
+    if (!fullName) return
     const nameParts = fullName.split(' ')
     const firstInitial = nameParts[0].charAt(0)
     const lastInitial = nameParts[nameParts.length - 1].charAt(0)

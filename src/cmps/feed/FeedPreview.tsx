@@ -8,20 +8,18 @@ import ShareIcon from '@mui/icons-material/Share'
 import FeedCredentials from './FeedCredentials'
 import { utilService } from '../../services/util.service'
 import Loader from '../utils/Loader'
-import { FeedPreviewProps } from '../../services/interface.service'
+import { FeedPost } from '../../services/interface.service'
 import ImgModal from '../utils/ImgModal'
 import SqueakBox from './SqueakBox'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../app/feedStore'
+import { json } from 'stream/consumers'
 
-const FeedPreview: React.FC<FeedPreviewProps> = ({
+const FeedPreview: React.FC<FeedPost> = ({
     id,
-    displayName,
-    username,
-    txt,
+    owner,
+    content,
     imgUrl,
-    avatar,
-    verified,
     createdAt,
     likes,
     comments,
@@ -51,9 +49,11 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
         setSelectedPostId(action.postId)
         handleIconClicked(action)
     }
+
     const { loggedInUser } = useSelector((state: RootState) => {
         return state.user
     })
+
     const handleImgModalClosed = () => setIsImgClicked(false)
     const handleImgClick = () => setIsImgClicked(true)
     const handleCommentClick = () => setIsCommentsClicked(!isCommentsClicked)
@@ -71,21 +71,20 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                 ) : (
                     <div className="top-preview">
                         <Avatar
-                            src={avatar.imgUrl}
+                            src={owner?.profileImgUrl}
                             className="user-avatar"
-                            sx={{ bgcolor: avatar.bgColor }}
                         >
-                            {utilService.getInitials(displayName)}
+                            {utilService.getInitials(owner.displayName)}
                         </Avatar>
 
                         <FeedCredentials
                             filterBy={filterBy}
                             id={id}
-                            displayName={displayName}
-                            username={username}
-                            verified={verified}
+                            displayName={owner.displayName}
+                            username={owner.username}
+                            verified={owner.isVerified}
                             createdAt={createdAt}
-                            txt={txt}
+                            content={content}
                             imgUrl={imgUrl}
                             handleRemovePost={(postId: string) =>
                                 onPostIconClicked({
@@ -144,7 +143,6 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                     </div>
                     <ShareIcon fontSize="small" />
                 </div>
-                {/* comments */}
 
                 {isImgClicked && (
                     <ImgModal
@@ -157,10 +155,10 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                 <div className="post-list comments-list">
                     <SqueakBox
                         addPost={(
-                            post: string,
+                            content: string,
                             file: File | null,
                             gifUrl: string
-                        ) => handleAddComment(post, file, gifUrl, id)}
+                        ) => handleAddComment(content, file, gifUrl, id)}
                         isNewPostLoading={false}
                         loggedInUser={loggedInUser}
                     />
@@ -175,12 +173,9 @@ const FeedPreview: React.FC<FeedPreviewProps> = ({
                             filterBy={filterBy}
                             key={idx}
                             id={comment.id}
-                            displayName={comment.displayName}
-                            username={comment.username}
-                            txt={comment.txt}
+                            owner={comment.owner}
+                            content={comment.content}
                             imgUrl={comment.imgUrl}
-                            avatar={comment.avatar}
-                            verified={comment.verified}
                             createdAt={comment.createdAt}
                             likes={comment.likes}
                             comments={comment.comments}

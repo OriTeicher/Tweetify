@@ -20,7 +20,7 @@ import { apiService } from '../../services/api.service'
 import { Theme } from 'gif-picker-react'
 
 interface SqueakBoxProps {
-    addPost: (post: string, file: File | null, gifUrl: string) => void
+    addPost: (content: string, file: File | null, gifUrl: string) => void
     isNewPostLoading: boolean
     loggedInUser: any
 }
