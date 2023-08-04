@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../app/feedStore'
+import { RootState } from '../../app/store'
 import { Action } from '@reduxjs/toolkit'
 import { feedActions } from '../../app/actions/feed.actions'
 import { ThunkDispatch } from 'redux-thunk'

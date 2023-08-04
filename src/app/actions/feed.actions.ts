@@ -1,6 +1,6 @@
 import { feedReducers } from '../reducers/feed.slice'
 import { dbService } from '../../services/db.service'
-import { AppThunk } from '../feedStore'
+import { AppThunk } from '../store'
 import { feedService } from '../../services/feed.service'
 import { cloudinaryService } from '../../services/cloudinary.service'
 import { loaderReducers } from '../reducers/loader.slice'

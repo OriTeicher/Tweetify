@@ -3,7 +3,7 @@ import { DateRange } from '@mui/icons-material'
 import ImgModal from '../cmps/utils/ImgModal'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { RootState } from '../app/feedStore'
+import { RootState } from '../app/store'
 import { Avatar } from '@mui/material'
 
 export default function ProfilePage() {

@@ -12,7 +12,7 @@ import LoggedAcount from './LoggedAcount'
 import LoginModal from '../utils/LoginModal'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { RootState } from '../../app/feedStore'
+import { RootState } from '../../app/store'
 
 interface SidebarProps {
     onOptionChange: (option: string) => void

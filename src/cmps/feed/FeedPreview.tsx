@@ -6,19 +6,10 @@ import Loader from '../utils/Loader'
 import { FeedPost } from '../../services/interface.service'
 import SqueakBox from './SqueakBox'
 import { useSelector } from 'react-redux'
-import { RootState } from '../../app/feedStore'
+import { RootState } from '../../app/store'
 import FeedPreviewIcons from './FeedPreviewIcons'
 
-const FeedPreview: React.FC<FeedPost> = ({
-    id,
-    owner,
-    content,
-    imgUrl,
-    createdAt,
-    likes,
-    comments,
-    resqueaks
-}) => {
+const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
     const [isCommentsClicked, setIsCommentsClicked] = useState(false)
 
     const { loggedInUser } = useSelector((state: RootState) => {
@@ -28,48 +19,52 @@ const FeedPreview: React.FC<FeedPost> = ({
         return state.loader
     })
 
-    const handleCommentClick = () => setIsCommentsClicked(!isCommentsClicked)
+    // TODO: handle icon click function - switch function
+    const handleIconClick = (selectedIcon: string) =>
+        setIsCommentsClicked(!isCommentsClicked)
 
     return (
         <>
             <section className="post-preview">
-                {isPostLoading && id ? (
+                {isPostLoading ? (
                     <Loader />
                 ) : (
                     <div className="top-preview">
                         <Avatar
-                            src={owner?.profileImgUrl}
+                            src={props.owner?.profileImgUrl}
                             className="user-avatar"
                         >
-                            {utilService.getInitials(owner.displayName)}
+                            {utilService.getInitials(props.owner.displayName)}
                         </Avatar>
 
                         <FeedContentPreview
-                            // ? passing id to know which post to change due to ceratin action
-                            id={id}
-                            displayName={owner.displayName}
-                            username={owner.username}
-                            verified={owner.isVerified}
-                            createdAt={createdAt}
-                            content={content}
-                            imgUrl={imgUrl}
+                            id={props.id}
+                            displayName={props.owner.displayName}
+                            username={props.owner.username}
+                            verified={props.owner.isVerified}
+                            createdAt={props.createdAt}
+                            content={props.content}
+                            imgUrl={props.imgUrl}
                         />
                     </div>
                 )}
                 <FeedPreviewIcons
-                    likesNum={likes}
-                    commentsNum={comments.length}
-                    resqueaksNum={resqueaks}
-                    onIconClick={() => {}}
+                    likesNum={props.likes}
+                    commentsNum={props.comments.length}
+                    resqueaksNum={props.resqueaks}
+                    onIconClick={handleIconClick}
                 />
             </section>
+
             {isCommentsClicked && (
                 <div className="post-list comments-list">
                     <SqueakBox
                         loggedInUser={loggedInUser}
                         addPost={() => console.log('you')}
                     />
-                    {comments.map((comment, idx) => (
+
+                    {props.comments.map((comment, idx) => (
+                        // * COMMENTS HERE
                         <FeedPreview
                             key={idx}
                             id={comment.id}

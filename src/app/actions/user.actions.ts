@@ -1,5 +1,5 @@
 import { dbService } from '../../services/db.service'
-import { AppThunk } from '../feedStore'
+import { AppThunk } from '../store'
 import { userReducer } from '../reducers/user.slice'
 import { cloudinaryService } from '../../services/cloudinary.service'
 

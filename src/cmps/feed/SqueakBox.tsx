@@ -19,7 +19,7 @@ import Loader from '../utils/Loader'
 import { apiService } from '../../services/api.service'
 import { Theme } from 'gif-picker-react'
 import { useSelector } from 'react-redux'
-import { RootState } from '../../app/feedStore'
+import { RootState } from '../../app/store'
 
 interface SqueakBoxProps {
     addPost: (content: string, file: File | null, gifUrl: string) => void

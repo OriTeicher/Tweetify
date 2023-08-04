@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
-import feedStore from './app/feedStore'
+import feedStore from './app/store'
 
 const rootElement = document.getElementById('root') as Element
 

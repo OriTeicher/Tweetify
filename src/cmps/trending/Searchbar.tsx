@@ -25,11 +25,11 @@ export default function Searchbar(props: SearchbarProps) {
     useEffect(() => {
         const debounce = setTimeout(() => {
             props.onSetFilterBy(filterBy)
-        }, 1000)
+        }, 1200)
         return () => {
             clearTimeout(debounce)
         }
-    })
+    }, [props, filterBy])
 
     return (
         <section
