@@ -5,7 +5,8 @@ import {
     getDocs,
     deleteDoc,
     setDoc,
-    increment
+    increment,
+    arrayUnion
 } from 'firebase/firestore'
 import { feedService } from './feed.service'
 import { db } from '../firebase'
@@ -19,6 +20,7 @@ export const dbService = {
     updateFieldInCollection,
     setDemoDB,
     getPostByIdFromDb,
+    pushStringToArrayField,
 
     // consts
     POSTS_DB_COLLECTION: 'posts',
@@ -48,9 +50,6 @@ async function getCollectionFromDB(col: string, filterBy: string = '') {
             comments: doc.data().comments || [],
             resqueaks: doc.data().resqueaks || 0,
             filterBy,
-            isPostLoading: false,
-            handleIconClicked: () => {},
-            onAddComment: () => {}
         }))
         if (filterBy) {
             const resArr = collectionArr.filter(
@@ -109,6 +108,23 @@ async function updateItemInCollection(
     }
 }
 
+async function pushStringToArrayField(
+    itemId: string,
+    col: string,
+    field: string,
+    val: string
+) {
+    try {
+        const colRef = doc(db, col, itemId)
+        const updatedItem = {
+            [field]: arrayUnion(val)
+        }
+        await updateDoc(colRef, updatedItem)
+    } catch (error) {
+        console.log(`Error pushing string to array field: ${error}`)
+    }
+}
+
 async function updateFieldInCollection(
     itemId: string,
     field: string,
@@ -136,8 +152,7 @@ async function getPostByIdFromDb(itemId: string, col: string, comment: any) {
             createdAt: doc.data().createdAt || Date.now(),
             likes: doc.data().likes || 0,
             comments: doc.data().comments || [],
-            resqueaks: doc.data().resqueaks || 0,
-
+            resqueaks: doc.data().resqueaks || 0
         }))
         const resArr = collectionArr.filter((post) => post.id === itemId)
         resArr[0].comments.unshift(comment)

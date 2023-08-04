@@ -1,21 +1,17 @@
 import { utilService } from './util.service'
 import { FeedPost, Owner } from './interface.service'
+import { constsService } from './consts.service'
 
 export const feedService = {
-    getEmptyPost(
-        displayName: string = 'Guest',
-        username: string = 'guestUser01',
-        profileImgUrl: string,
-        content: string = '...'
-    ): FeedPost {
+    getEmptyPost(user: Owner, content: string = '...'): FeedPost {
         return {
-            id: 'P-' + utilService.generateId(5),
+            id: 'P-' + utilService.generateId(constsService.ID_LENGTH),
             owner: {
-                userId: '',
-                isVerified: false,
-                displayName,
-                username,
-                profileImgUrl
+                userId: user.userId ? user.userId : constsService.GUEST_ID,
+                isVerified: user.isVerified,
+                displayName: user.displayName,
+                username: user.username,
+                profileImgUrl: user.profileImgUrl
             },
             content,
             imgUrl: '',
@@ -23,10 +19,6 @@ export const feedService = {
             likes: 0,
             resqueaks: 0,
             comments: [],
-            filterBy: '',
-            isPostLoading: false,
-            handleIconClicked: () => {},
-            onAddComment: () => {}
         }
     },
     getRandomPosts(postsCount: number) {

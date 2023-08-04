@@ -1,6 +1,6 @@
 import { dbService } from '../../services/db.service'
 import { AppThunk } from '../feedStore'
-import { userReducer } from '../reducers/userSlice'
+import { userReducer } from '../reducers/user.slice'
 import { cloudinaryService } from '../../services/cloudinary.service'
 
 export const userActions = {

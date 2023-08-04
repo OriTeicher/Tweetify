@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Verified, MoreHoriz, MoreVert } from '@mui/icons-material'
 import { utilService } from '../../services/util.service'
+import { RootState } from '../../app/feedStore'
+import { Action } from '@reduxjs/toolkit'
+import { feedActions } from '../../app/actions/feed.actions'
+import { ThunkDispatch } from 'redux-thunk'
+import { useSelector,useDispatch } from 'react-redux'
+import ImgModal from '../utils/ImgModal'
 
-interface FeedCredentialsProps {
+interface FeedContentPreview {
     id: string
     displayName: string
     username: string
@@ -10,28 +16,35 @@ interface FeedCredentialsProps {
     createdAt: number
     content?: string
     imgUrl?: string
-    handleRemovePost: Function
-    onImgClick: Function
-    filterBy: string
 }
 
-const FeedCredentials: React.FC<FeedCredentialsProps> = ({
+const FeedContentPreview: React.FC<FeedContentPreview> = ({
     id,
     displayName,
     username,
     verified,
     createdAt,
     content,
-    imgUrl,
-    onImgClick,
-    handleRemovePost,
-    filterBy
+    imgUrl
 }) => {
-    const onRemovePostClick = (postId: string) => {
-        handleRemovePost(postId)
+    const [isImgClicked, setIsImgClicked] = useState(false)
+
+    const dispatch: ThunkDispatch<
+        RootState,
+        undefined,
+        Action<string>
+    > = useDispatch()
+
+    const { filterBy } = useSelector((state: RootState) => {
+        return state.feed
+    })
+
+    const handleRemovePost = async (postId: string) => {
+        dispatch(feedActions.removeFeedPost(postId))
     }
 
-    const handleImgClick = () => onImgClick()
+
+    // TODO: fix img modal
 
     const truncatedUsername =
         username.length > 15 ? username.slice(0, 3) + '...' : username
@@ -82,11 +95,11 @@ const FeedCredentials: React.FC<FeedCredentialsProps> = ({
                 </p>
                 <MoreHoriz
                     className="more-icon"
-                    onClick={() => onRemovePostClick(id)}
+                    onClick={() => handleRemovePost(id)}
                 />
                 <MoreVert
                     className="more-icon mobile"
-                    onClick={() => onRemovePostClick(id)}
+                    onClick={() => handleRemovePost(id)}
                 />
             </div>
             {markedTxt}
@@ -95,11 +108,17 @@ const FeedCredentials: React.FC<FeedCredentialsProps> = ({
                     src={imgUrl}
                     className="post-photo"
                     alt="NOTHING TO SEE HERE 🖼️"
-                    onClick={handleImgClick}
+                    onClick={() => setIsImgClicked(true)}
                 ></img>
+            )}
+            {isImgClicked && (
+                <ImgModal
+                    imgUrl={imgUrl}
+                    onCloseModal={() => setIsImgClicked(false)}
+                />
             )}
         </section>
     )
 }
 
-export default FeedCredentials
+export default FeedContentPreview

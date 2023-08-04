@@ -1,6 +1,7 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
-import feedReducer from './reducers/feedSlice'
-import userReducer from './reducers/userSlice'
+import userReducers from './reducers/user.slice'
+import feedReducers from './reducers/feed.slice'
+import loaderReducers from './reducers/loader.slice'
 export type AppThunk<ReturnType = void> = ThunkAction<
     ReturnType,
     RootState,
@@ -12,8 +13,9 @@ export type RootState = ReturnType<typeof store.getState>
 
 const store = configureStore({
     reducer: {
-        feed: feedReducer,
-        user: userReducer
+        feed: feedReducers,
+        user: userReducers,
+        loader: loaderReducers
     }
 })
 

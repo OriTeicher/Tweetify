@@ -47,10 +47,3 @@ const userSlice = createSlice({
 export const userReducer = userSlice.actions
 export default userSlice.reducer
 
-/*         queryFeedPostsSuccess: (state, action: PayloadAction<FeedPost[]>) => {
-            state.feedPosts = action.payload.sort(
-                (a, b) => b.createdAt - a.createdAt
-            )
-            state.isAppLoading = false
-        },
-*/

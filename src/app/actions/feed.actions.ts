@@ -1,13 +1,14 @@
-import { feedReducers } from '../reducers/feedSlice'
+import { feedReducers } from '../reducers/feed.slice'
 import { dbService } from '../../services/db.service'
 import { AppThunk } from '../feedStore'
 import { feedService } from '../../services/feed.service'
 import { cloudinaryService } from '../../services/cloudinary.service'
+import { loaderReducers } from '../reducers/loader.slice'
+import { constsService } from '../../services/consts.service'
 
 export const feedActions = {
     queryFeedPosts,
     addFeedPost,
-    addFeedComment,
     removeFeedPost,
     toggleStats,
     setFilterBy
@@ -16,19 +17,17 @@ export const feedActions = {
 function queryFeedPosts(): AppThunk {
     return async (dispatch) => {
         try {
-            dispatch(feedReducers.setAppLoaderActive())
+            dispatch(loaderReducers.toggleAppLoader())
             let feedPostsDB = await dbService.getCollectionFromDB(
                 dbService.POSTS_DB_COLLECTION
             )
-
             if (feedPostsDB.length < dbService.MIN_POST_NUM) {
-                await dbService.setDemoDB(
-                    dbService.MIN_POST_NUM - feedPostsDB.length
-                )
+                await dbService.setDemoDB(constsService.DEMO_POSTS_NUM)
                 feedPostsDB = await dbService.getCollectionFromDB(
                     dbService.POSTS_DB_COLLECTION
                 )
             }
+            dispatch(loaderReducers.toggleAppLoader())
             dispatch(feedReducers.queryFeedPostsSuccess(feedPostsDB))
         } catch (error) {
             console.log(error)
@@ -44,25 +43,25 @@ function addFeedPost(
 ): AppThunk {
     return async (dispatch) => {
         try {
-            dispatch(feedReducers.setNewPostLoaderActive())
-            console.log('loggedInUser.profileImg', loggedInUser)
-            const newPost = feedService.getEmptyPost(
-                loggedInUser.displayName,
-                loggedInUser.username,
-                loggedInUser.profileImgUrl,
-                postContent
-            )
+            dispatch(loaderReducers.toggleNewPostLoader())
+            const newPost = feedService.getEmptyPost(loggedInUser, postContent)
 
             newPost.imgUrl = file
                 ? await cloudinaryService.uploadImgToCloud(file)
                 : gifUrl
                 ? gifUrl
                 : ''
-                
+
             await dbService.addItemToCollection(
                 newPost,
                 newPost.id,
                 dbService.POSTS_DB_COLLECTION
+            )
+            await dbService.pushStringToArrayField(
+                loggedInUser.id,
+                dbService.USER_DB_COLLECTION,
+                'postsId',
+                newPost.id
             )
 
             dispatch(feedReducers.addFeedPostSuccess(newPost))
@@ -74,7 +73,7 @@ function addFeedPost(
 
 function removeFeedPost(postId: string): AppThunk {
     return async (dispatch) => {
-        dispatch(feedReducers.setPostLoaderActive())
+        dispatch(loaderReducers.toggleNewPostLoader())
         try {
             await dbService.removeItemFromDB(
                 postId,
@@ -90,18 +89,12 @@ function removeFeedPost(postId: string): AppThunk {
 function toggleStats(postId: string, isIncrease: boolean): AppThunk {
     return async (dispatch) => {
         try {
-            dispatch(
-                feedReducers.toggleStatsSuccess({
-                    postId,
-                    stat: 'likes',
-                    isIncrease
-                })
-            )
+            dispatch(feedReducers.toggleStatsSuccess())
             await dbService.updateFieldInCollection(
                 postId,
-                'likes',
+                constsService.LIKES_FIELD,
                 dbService.POSTS_DB_COLLECTION,
-                isIncrease ? 1 : -1
+                isIncrease ? constsService.LIKE : constsService.UNLIKE
             )
         } catch (error) {
             console.log('Cannot toggle likes. ', error)
@@ -112,49 +105,51 @@ function toggleStats(postId: string, isIncrease: boolean): AppThunk {
 function setFilterBy(newFilterBy: string): AppThunk {
     return async (dispatch) => {
         try {
-            dispatch(feedReducers.setAppLoaderActive())
-            dispatch(feedReducers.setFilterBy(newFilterBy))
+            dispatch(loaderReducers.toggleAppLoader())
+            dispatch(feedReducers.setFilterBySuccess(newFilterBy))
             const feedPostsDB = await dbService.getCollectionFromDB(
                 dbService.POSTS_DB_COLLECTION,
                 newFilterBy
             )
             dispatch(feedReducers.queryFeedPostsSuccess(feedPostsDB))
+            dispatch(loaderReducers.toggleAppLoader())
         } catch (error) {
             console.log('Cannot set filter by. ', error)
         }
     }
 }
 
-function addFeedComment(
-    postContent: string,
-    file: File | null,
-    gifUrl: string = '',
-    postId: string
-): AppThunk {
-    return async (dispatch) => {
-        try {
-            dispatch(feedReducers.setAppLoaderActive)
-            const newComment = feedService.getEmptyPost(
-                'Pukki Blinders',
-                'pukki123',
-                '',
-                ''
-            )
-            newComment.content = postContent
-            newComment.imgUrl = file
-                ? await cloudinaryService.uploadImgToCloud(file)
-                : gifUrl
-                ? gifUrl
-                : ''
+// TODO: fix add comment functions
+// function addFeedComment(
+//     postContent: string,
+//     file: File | null,
+//     gifUrl: string = '',
+//     postId: string
+// ): AppThunk {
+//     return async (dispatch) => {
+//         try {
+//             dispatch(feedReducers.setAppLoaderActive)
+//             const newComment = feedService.getEmptyPost(
+//                 'Pukki Blinders',
+//                 'pukki123',
+//                 '',
+//                 ''
+//             )
+//             newComment.content = postContent
+//             newComment.imgUrl = file
+//                 -? await cloudinaryService.uploadImgToCloud(file)
+//                 : gifUrl
+//                 -? gifUrl
+//                 : ''
 
-            const updatedPost = await dbService.getPostByIdFromDb(
-                postId,
-                dbService.POSTS_DB_COLLECTION,
-                newComment
-            )
-            // dispatch(feedReducers.addCommentSuccess(updatedPost))
-        } catch (error) {
-            console.log('Cannot add post. ', error)
-        }
-    }
-}
+//             const updatedPost = await dbService.getPostByIdFromDb(
+//                 postId,
+//                 dbService.POSTS_DB_COLLECTION,
+//                 newComment
+//             )
+//             // dispatch(feedReducers.addCommentSuccess(updatedPost))
+//         } catch (error) {
+//             console.log('Cannot add post. ', error)
+//         }
+//     }
+// }

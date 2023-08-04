@@ -1,19 +1,13 @@
 import { Avatar } from '@mui/material'
 import React, { useState } from 'react'
-import Loop from '@mui/icons-material/Loop'
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import FavoriteIcon from '@mui/icons-material/Favorite'
-import ShareIcon from '@mui/icons-material/Share'
-import FeedCredentials from './FeedCredentials'
+import FeedContentPreview from './FeedContentPreview'
 import { utilService } from '../../services/util.service'
 import Loader from '../utils/Loader'
 import { FeedPost } from '../../services/interface.service'
-import ImgModal from '../utils/ImgModal'
 import SqueakBox from './SqueakBox'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../app/feedStore'
-import { json } from 'stream/consumers'
+import FeedPreviewIcons from './FeedPreviewIcons'
 
 const FeedPreview: React.FC<FeedPost> = ({
     id,
@@ -23,50 +17,23 @@ const FeedPreview: React.FC<FeedPost> = ({
     createdAt,
     likes,
     comments,
-    resqueaks,
-    handleIconClicked,
-    isPostLoading,
-    filterBy,
-    onAddComment
+    resqueaks
 }) => {
-    const [isLiked, setIsLiked] = useState(false)
-    const [isImgClicked, setIsImgClicked] = useState(false)
     const [isCommentsClicked, setIsCommentsClicked] = useState(false)
-    const [commentsNum] = useState(comments?.length || 0)
-    const [resqueaksNum] = useState(resqueaks)
-    const [selectedPostId, setSelectedPostId] = useState('')
-
-    const onPostIconClicked = (action: {
-        type: string
-        postId: string
-        stat: string
-        isStatIncrease: boolean
-    }) => {
-        switch (action.stat) {
-            case 'likes':
-                setIsLiked(action.isStatIncrease)
-        }
-        setSelectedPostId(action.postId)
-        handleIconClicked(action)
-    }
 
     const { loggedInUser } = useSelector((state: RootState) => {
         return state.user
     })
+    const { isPostLoading } = useSelector((state: RootState) => {
+        return state.loader
+    })
 
-    const handleImgModalClosed = () => setIsImgClicked(false)
-    const handleImgClick = () => setIsImgClicked(true)
     const handleCommentClick = () => setIsCommentsClicked(!isCommentsClicked)
-    const handleAddComment = (
-        post: string,
-        file: File | null,
-        gifUrl: string,
-        postId: string
-    ) => onAddComment(post, file, gifUrl, postId)
+
     return (
         <>
             <section className="post-preview">
-                {isPostLoading && id === selectedPostId ? (
+                {isPostLoading && id ? (
                     <Loader />
                 ) : (
                     <div className="top-preview">
@@ -77,8 +44,8 @@ const FeedPreview: React.FC<FeedPost> = ({
                             {utilService.getInitials(owner.displayName)}
                         </Avatar>
 
-                        <FeedCredentials
-                            filterBy={filterBy}
+                        <FeedContentPreview
+                            // ? passing id to know which post to change due to ceratin action
                             id={id}
                             displayName={owner.displayName}
                             username={owner.username}
@@ -86,91 +53,24 @@ const FeedPreview: React.FC<FeedPost> = ({
                             createdAt={createdAt}
                             content={content}
                             imgUrl={imgUrl}
-                            handleRemovePost={(postId: string) =>
-                                onPostIconClicked({
-                                    type: 'removeFeedPost',
-                                    postId,
-                                    stat: 'post',
-                                    isStatIncrease: false
-                                })
-                            }
-                            onImgClick={handleImgClick}
                         />
                     </div>
                 )}
-
-                <div className="post-icons">
-                    <div className="icon-container">
-                        <ChatBubbleOutlineIcon
-                            fontSize="small"
-                            onClick={handleCommentClick}
-                        />
-                        <p>{comments.length !== 0 && commentsNum}</p>
-                    </div>
-                    <div className="icon-container">
-                        {isLiked ? (
-                            <FavoriteIcon
-                                fontSize="small"
-                                onClick={() =>
-                                    onPostIconClicked({
-                                        type: 'toggleStats',
-                                        postId: id,
-                                        stat: 'likes',
-                                        isStatIncrease: false
-                                    })
-                                }
-                                className="liked"
-                            />
-                        ) : (
-                            <FavoriteBorderIcon
-                                fontSize="small"
-                                onClick={() =>
-                                    onPostIconClicked({
-                                        type: 'toggleStats',
-                                        postId: id,
-                                        stat: 'likes',
-                                        isStatIncrease: true
-                                    })
-                                }
-                                className="unliked"
-                            />
-                        )}
-                        <p>{likes !== 0 && likes}</p>
-                    </div>
-                    <div className="icon-container">
-                        <Loop fontSize="small" />
-                        <p>{resqueaks !== 0 && resqueaksNum}</p>
-                    </div>
-                    <ShareIcon fontSize="small" />
-                </div>
-
-                {isImgClicked && (
-                    <ImgModal
-                        onCloseModal={() => handleImgModalClosed()}
-                        imgUrl={imgUrl}
-                    />
-                )}
+                <FeedPreviewIcons
+                    likesNum={likes}
+                    commentsNum={comments.length}
+                    resqueaksNum={resqueaks}
+                    onIconClick={() => {}}
+                />
             </section>
             {isCommentsClicked && (
                 <div className="post-list comments-list">
                     <SqueakBox
-                        addPost={(
-                            content: string,
-                            file: File | null,
-                            gifUrl: string
-                        ) => handleAddComment(content, file, gifUrl, id)}
-                        isNewPostLoading={false}
                         loggedInUser={loggedInUser}
+                        addPost={() => console.log('you')}
                     />
                     {comments.map((comment, idx) => (
                         <FeedPreview
-                            onAddComment={(
-                                post: string,
-                                file: File | null,
-                                gifUrl: string,
-                                postId: string
-                            ) => handleAddComment(post, file, gifUrl, postId)}
-                            filterBy={filterBy}
                             key={idx}
                             id={comment.id}
                             owner={comment.owner}
@@ -180,8 +80,6 @@ const FeedPreview: React.FC<FeedPost> = ({
                             likes={comment.likes}
                             comments={comment.comments}
                             resqueaks={comment.resqueaks}
-                            isPostLoading={false}
-                            handleIconClicked={() => console.log('')}
                         />
                     ))}
                 </div>

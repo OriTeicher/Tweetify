@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../app/feedStore'
 import { Action } from '@reduxjs/toolkit'
-import { feedActions } from '../../app/actions/feedActions'
+import { feedActions } from '../../app/actions/feed.actions'
 import { ThunkDispatch } from 'redux-thunk'
 import FeedTopbar from './FeedTopbar'
 import FeedList from './FeedList'
@@ -12,18 +12,15 @@ import Loader from '../utils/Loader'
 import { FeedIndexProps } from '../../services/interface.service'
 
 const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
-    const {
-        filterBy,
-        feedPosts,
-        isAppLoading,
-        isPostLoading,
-        isNewPostLoading
-    } = useSelector((state: RootState) => {
+    const { feedPosts } = useSelector((state: RootState) => {
         return state.feed
     })
 
+    const { isAppLoading } = useSelector((state: RootState) => {
+        return state.loader
+    })
+
     const { loggedInUser } = useSelector((state: RootState) => {
-        console.log(state.user)
         return state.user
     })
 
@@ -47,61 +44,12 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
         )
     }
 
-    const handleAddComment = async (
-        postContent: string,
-        file: File | null,
-        gifUrl: string,
-        postId: string
-    ) => {
-        dispatch(feedActions.addFeedComment(postContent, file, gifUrl, postId))
-    }
-
-    const onPostIconClicked = (action: {
-        type: string
-        postId: string
-        stat: string
-        isStatIncrease: boolean
-    }) => {
-        switch (action.type) {
-            case 'removeFeedPost':
-                dispatch(feedActions.removeFeedPost(action.postId))
-                break
-            case 'toggleStats':
-                dispatch(
-                    feedActions.toggleStats(
-                        action.postId,
-                        action.isStatIncrease
-                    )
-                )
-                break
-        }
-    }
-
     return (
         <section className="feed-index">
             <MobileTopbar />
             <FeedTopbar topBarOption={topBarOption} />
-            <SqueakBox
-                addPost={handleAddPost}
-                isNewPostLoading={isNewPostLoading}
-                loggedInUser={loggedInUser}
-            />
-            {isAppLoading ? (
-                <Loader />
-            ) : (
-                <FeedList
-                    filterBy={filterBy}
-                    feedPosts={feedPosts}
-                    handleIconClicked={(action: {
-                        type: string
-                        postId: string
-                        stat: string
-                        isStatIncrease: boolean
-                    }) => onPostIconClicked(action)}
-                    isPostLoading={isPostLoading}
-                    onAddComment={handleAddComment}
-                />
-            )}
+            <SqueakBox addPost={handleAddPost} loggedInUser={loggedInUser} />
+            {isAppLoading ? <Loader /> : <FeedList feedPosts={feedPosts} />}
         </section>
     )
 }

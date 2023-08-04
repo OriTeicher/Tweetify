@@ -1,24 +1,37 @@
-.img-modal {
-    background-color: $mainColor1;
+.img-modal-container {
     display: flex;
-    justify-content: center;
     align-items: center;
-    img {
-        &:hover {
-            cursor: default;
-            filter: brightness(100%);
+    justify-content: center;
+}
+
+.img-modal {
+    height: 288px;
+    width: 65vw;
+    height: 60vh;
+    border-radius: 20px;
+    margin-left: 5px;
+    object-fit: fill;
+    object-position: center center;
+    border: none;
+    margin-top: 20px;
+    outline: $outline1;
+
+    @keyframes scaleAnimation {
+        0% {
+            transform: scale(0);
         }
-        object-fit: fill;
-        object-position: center center;
-        outline: 1px solid $mainColor2;
-        border-radius: 10px;
-        width: 50vw;
-        height: 50vh;
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    &.scale-animation {
+        animation: scaleAnimation 0.3s ease; /* Adjust the duration and timing function as needed */
     }
 }
 
 @media (max-width: 768px) {
-    .img-modal {
+    .img-modal-container {
         img {
             outline: none;
             border-radius: 0px;

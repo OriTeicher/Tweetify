@@ -3,7 +3,7 @@ import TrendingList from './TrendingList'
 import Searchbar from './Searchbar'
 import { useDispatch } from 'react-redux'
 import { RootState } from '../../app/feedStore'
-import { feedActions } from '../../app/actions/feedActions'
+import { feedActions } from '../../app/actions/feed.actions'
 import { ThunkDispatch, Action } from '@reduxjs/toolkit'
 import { trendsService } from '../../services/trends.service'
 

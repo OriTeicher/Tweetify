@@ -18,18 +18,15 @@ import {
 import Loader from '../utils/Loader'
 import { apiService } from '../../services/api.service'
 import { Theme } from 'gif-picker-react'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../app/feedStore'
 
 interface SqueakBoxProps {
     addPost: (content: string, file: File | null, gifUrl: string) => void
-    isNewPostLoading: boolean
     loggedInUser: any
 }
 
-export default function SqueakBox({
-    addPost,
-    isNewPostLoading,
-    loggedInUser
-}: SqueakBoxProps) {
+export default function SqueakBox({ addPost, loggedInUser }: SqueakBoxProps) {
     const txtAreaRef = useRef<HTMLTextAreaElement>(null)
     const [msg, setMsg] = useState('')
     const [fileUrl, setFileUrl] = useState('')
@@ -43,6 +40,10 @@ export default function SqueakBox({
     const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
         setMsg(event.target.value)
     }
+
+    const { isNewPostLoading } = useSelector((state: RootState) => {
+        return state.loader
+    })
 
     const handleKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
         if (event.key === 'Enter' && !event.shiftKey) {

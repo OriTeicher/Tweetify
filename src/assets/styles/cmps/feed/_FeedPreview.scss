@@ -94,15 +94,15 @@
         border: none;
         margin-top: 20px;
         outline: $outline1;
+        transition: transform 0.5s ease-in-out, scale 0.5s ease-in-out;
         &:hover {
             cursor: pointer;
-            opacity: 0.9;
+            filter: brightness(90%);
         }
     }
-    &:last-child {
-        margin-bottom: 100px;
-    }
 }
+
+
 
 .post-icons {
     display: flex;

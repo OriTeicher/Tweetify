@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Avatar } from '@mui/material'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { userActions } from '../app/actions/userActions'
+import { userActions } from '../app/actions/user.actions'
 import { userService } from '../services/user.service'
 import { useDispatch } from 'react-redux'
 import Loader from '../cmps/utils/Loader'
