@@ -24,7 +24,11 @@ function getRandomTrends(count: number): Trend[] {
         'Pep Guardiola',
         'Lionel Messi',
         'Tottenham',
-        'Arsenal'
+        'Arsenal',
+        'Harry Kane',
+        'News',
+        'Fabrizio Romano',
+        'Michael Jordan'
     ]
 
     const usedTitles: string[] = []

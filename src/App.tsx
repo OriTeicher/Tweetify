@@ -10,7 +10,7 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<DynamicHomepage />} />
+                <Route path="/" element={<DynamicHomepage cmp={FeedIndex} />} />
                 <Route
                     path="/home"
                     element={<DynamicHomepage cmp={FeedIndex} />}

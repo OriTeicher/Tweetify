@@ -79,20 +79,20 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
             <section className="left-menu">
                 <div
                     className={`sidebar-container  ${
-                        isSmallScreen ? 'mobile' : ''
+                        isSmallScreen ? 'mobile' : null
                     }`}
                 >
                     {renderSidebarOptions()}
-                    {location.pathname === '/home' && (
-                        <button
-                            className={`squeak-btn ${
-                                isSmallScreen ? 'mobile' : ''
-                            }`}
-                            onClick={handleSiderbarSqueak}
-                        >
-                            {isSmallScreen ? '+' : 'Squeak'}
-                        </button>
-                    )}
+
+                    <button
+                        className={`squeak-btn ${
+                            isSmallScreen ? 'mobile' : 'null'
+                        }`}
+                        onClick={handleSiderbarSqueak}
+                    >
+                        {isSmallScreen ? '+' : 'Squeak'}
+                    </button>
+
                     <LoggedAcount
                         displayName={loggedInUser.displayName}
                         username={loggedInUser.username}

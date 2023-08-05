@@ -1,10 +1,9 @@
 import { Avatar } from '@mui/material'
-import React, { useState } from 'react'
+import React from 'react'
 import FeedContentPreview from './FeedContentPreview'
 import { utilService } from '../../services/util.service'
 import Loader from '../utils/Loader'
 import { FeedPost } from '../../services/interface.service'
-import SqueakBox from './SqueakBox'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../app/store'
 import FeedPreviewIcons from './FeedPreviewIcons'
@@ -12,6 +11,7 @@ import { constsService } from '../../services/consts.service'
 
 const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
     // TODO: use logged in user in front
+    
     const { loggedInUser } = useSelector((state: RootState) => {
         return state.user
     })

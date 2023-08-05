@@ -11,20 +11,18 @@ const ImgModal: React.FC<ImgModalProps> = ({ imgUrl, onCloseModal }) => {
     const imgRef = useRef<HTMLImageElement>(null)
 
     useEffect(() => {
-        // Function to handle the animation
         const animateImage = () => {
             const imgElement = imgRef.current
             if (imgElement) {
                 imgElement.classList.add('scale-animation')
 
-                // Remove the class after a short delay to trigger the animation
                 setTimeout(() => {
                     imgElement.classList.remove('scale-animation')
-                }, 1500) // Adjust the delay duration as needed
+                }, 1500)
             }
         }
 
-        animateImage() // Trigger the animation when the component mounts
+        animateImage()
     }, [])
     return (
         <>
@@ -34,6 +32,7 @@ const ImgModal: React.FC<ImgModalProps> = ({ imgUrl, onCloseModal }) => {
                 onClose={handleCloseClick}
             >
                 <img
+                    alt="nothing here... :("
                     className="img-modal scale-animation"
                     ref={imgRef}
                     src={imgUrl}
