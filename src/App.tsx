@@ -2,7 +2,7 @@ import './assets/styles/main.scss'
 import { Hompage as DynamicHomepage } from './views/Homepage'
 import EditSqueakPage from './views/EditSqueakPage'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import FeedIndex from './cmps/feed/FeedIndex'
+import FeedIndex from './views/FeedIndex'
 import ProfilePage from './views/ProfilePage'
 import CreateProfilePage from './views/CreateProfilePage'
 

@@ -1,9 +1,6 @@
-// * FEED INTERFACES
+ // ? CONTAINS RE-USABLE INTERFACES
 
-export interface FeedIndexProps {
-    topBarOption: string
-}
-
+// * FEED INTERFACES 
 export interface FeedPost {
     id: string
     owner: Owner
@@ -15,9 +12,6 @@ export interface FeedPost {
     resqueaks: number
 }
 
-export interface FeedListProps {
-    feedPosts: FeedPost[]
-}
 
 export interface Trend {
     category: string
@@ -34,9 +28,6 @@ export interface FeedPostAction {
 
 
 
-export interface ImgModalProps {
-    imgUrl: string
-}
 
 // * comments *
 

@@ -8,10 +8,10 @@ import SqueakBox from './SqueakBox'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../app/store'
 import FeedPreviewIcons from './FeedPreviewIcons'
+import { constsService } from '../../services/consts.service'
 
 const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
-    const [isCommentsClicked, setIsCommentsClicked] = useState(false)
-
+    // TODO: use logged in user in front
     const { loggedInUser } = useSelector((state: RootState) => {
         return state.user
     })
@@ -20,8 +20,13 @@ const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
     })
 
     // TODO: handle icon click function - switch function
-    const handleIconClick = (selectedIcon: string) =>
-        setIsCommentsClicked(!isCommentsClicked)
+    const handleIconClick = (selectedIcon: string) => {
+        switch (selectedIcon) {
+            case constsService.LIKES_FIELD:
+                console.log(constsService.LIKES_FIELD)
+                break
+        }
+    }
 
     return (
         <>
@@ -55,30 +60,6 @@ const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
                     onIconClick={handleIconClick}
                 />
             </section>
-
-            {isCommentsClicked && (
-                <div className="post-list comments-list">
-                    <SqueakBox
-                        loggedInUser={loggedInUser}
-                        addPost={() => console.log('you')}
-                    />
-
-                    {props.comments.map((comment, idx) => (
-                        // * COMMENTS HERE
-                        <FeedPreview
-                            key={idx}
-                            id={comment.id}
-                            owner={comment.owner}
-                            content={comment.content}
-                            imgUrl={comment.imgUrl}
-                            createdAt={comment.createdAt}
-                            likes={comment.likes}
-                            comments={comment.comments}
-                            resqueaks={comment.resqueaks}
-                        />
-                    ))}
-                </div>
-            )}
         </>
     )
 }

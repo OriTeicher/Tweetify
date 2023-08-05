@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Sidebar from '../cmps/sidebar/Sidebar'
 import TrendingIndex from '../cmps/trending/TrendingIndex'
-import FeedIndex from '../cmps/feed/FeedIndex'
+import FeedIndex from './FeedIndex'
 
 interface AppProps {
     cmp?: React.ComponentType<any>
@@ -12,13 +12,11 @@ export function Hompage(props: AppProps) {
 
     const DynamicComponent = props.cmp || FeedIndex
 
+    const handleOptionChange = (option: string) => setTopBarOption(option)
+
     return (
         <section className="app-container">
-            <Sidebar
-                onOptionChange={(topBarOption: string) =>
-                    setTopBarOption(topBarOption)
-                }
-            />
+            <Sidebar onOptionChange={handleOptionChange} />
             <DynamicComponent topBarOption={topBarOption} />
             <TrendingIndex />
         </section>

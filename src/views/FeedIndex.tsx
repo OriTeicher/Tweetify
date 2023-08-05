@@ -1,17 +1,20 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../app/store'
+import { RootState } from '../app/store'
 import { Action } from '@reduxjs/toolkit'
-import { feedActions } from '../../app/actions/feed.actions'
-import { ThunkDispatch } from 'redux-thunk'
-import FeedTopbar from './FeedTopbar'
-import FeedList from './FeedList'
-import SqueakBox from './SqueakBox'
-import MobileTopbar from './MobileTopbar'
-import Loader from '../utils/Loader'
-import { FeedIndexProps } from '../../services/interface.service'
+import { feedActions } from '../app/actions/feed.actions'
+import { ThunkDispatch } from '@reduxjs/toolkit'
+import FeedTopbar from '../cmps/feed/FeedTopbar'
+import FeedList from '../cmps/feed/FeedList'
+import SqueakBox from '../cmps/feed/SqueakBox'
+import MobileTopbar from '../cmps/feed/MobileTopbar'
+import Loader from '../cmps/utils/Loader'
 
-const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
+export interface FeedIndexProps {
+    topBarOption: string
+}
+
+const FeedIndex: React.FC<FeedIndexProps> = (props: FeedIndexProps) => {
     const { feedPosts } = useSelector((state: RootState) => {
         return state.feed
     })
@@ -47,7 +50,7 @@ const FeedIndex: React.FC<FeedIndexProps> = ({ topBarOption }) => {
     return (
         <section className="feed-index">
             <MobileTopbar />
-            <FeedTopbar topBarOption={topBarOption} />
+            <FeedTopbar topBarOption={props.topBarOption} />
             <SqueakBox addPost={handleAddPost} loggedInUser={loggedInUser} />
             {isAppLoading ? <Loader /> : <FeedList feedPosts={feedPosts} />}
         </section>

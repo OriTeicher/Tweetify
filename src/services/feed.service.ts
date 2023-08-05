@@ -18,7 +18,7 @@ export const feedService = {
             createdAt: Date.now(),
             likes: 0,
             resqueaks: 0,
-            comments: [],
+            comments: []
         }
     },
     getRandomPosts(postsCount: number) {
@@ -63,10 +63,9 @@ export const feedService = {
                 imgUrl,
                 createdAt,
                 likes: utilService.getRandomIntInclusive(0, 500),
-                // comments: this.getRandomComments(
-                //     utilService.getRandomIntInclusive(0, 7)
-                // ),
-                comments: [],
+                comments: this.getRandomComments(
+                    utilService.getRandomIntInclusive(0, 7)
+                ),
                 resqueaks: utilService.getRandomIntInclusive(0, 50)
             }
             posts.push(post)
@@ -76,37 +75,36 @@ export const feedService = {
 
     getEmptyUser() {
         return {} as Owner
+    },
+
+    getRandomComments(length: number) {
+        let comments = []
+        for (let i = 0; i < length; i++) {
+            let randomComment: object = this.getRandomComment()
+            comments.push(randomComment)
+        }
+        return comments
+    },
+
+    getRandomComment(displayName: string = 'Guest'): object {
+        const names = ['John Doe', 'Jane Smith', 'Mike Johnson', 'Emily Brown']
+        const comment = {
+            displayName:
+                names[utilService.getRandomIntInclusive(0, names.length - 1)],
+            username: displayName.toLowerCase().replace(/\s/g, ''),
+            content: utilService.generateRandomSentences(
+                utilService.getRandomIntInclusive(1, 10)
+            ),
+            imgUrl: '',
+            avatar: '',
+            verified: false,
+            createdAt: Date.now(),
+            likes: 0,
+            resqueaks: 0,
+            comments: []
+        }
+        return comment
     }
-
-    // getRandomComments(length: number) {
-    //     let comments = []
-    //     for (let i = 0; i < length; i++) {
-    //         let randomComment: object = this.getRandomComment()
-    //         comments.push(randomComment)
-    //     }
-    //     return comments
-    // },
-
-    //     getRandomComment(displayName: string = 'Guest'): object {
-    //         const names = ['John Doe', 'Jane Smith', 'Mike Johnson', 'Emily Brown']
-    //         const comment = {
-    //             displayName:
-    //                 names[utilService.getRandomIntInclusive(0, names.length - 1)],
-    //             username: displayName.toLowerCase().replace(/\s/g, ''),
-    //             content: utilService.generateRandomSentences(
-    //                 utilService.getRandomIntInclusive(1, 10)
-    //             ),
-    //             imgUrl: '',
-    //             avatar: '',
-    //             verified: false,
-    //             createdAt: Date.now(),
-    //             likes: 0,
-    //             resqueaks: 0,
-    //             comments: []
-    //         }
-    //         return comment
-    //     }
-    // }
 }
 
 const demoPhotos = [

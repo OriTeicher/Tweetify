@@ -1,6 +1,11 @@
 import React from 'react'
 import FeedPreview from './FeedPreview'
-import { FeedListProps } from '../../services/interface.service'
+import { FeedPost } from '../../services/interface.service'
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied'
+
+export interface FeedListProps {
+    feedPosts: FeedPost[]
+}
 
 const FeedList: React.FC<FeedListProps> = ({ feedPosts }) => {
     return (
@@ -20,9 +25,13 @@ const FeedList: React.FC<FeedListProps> = ({ feedPosts }) => {
                     />
                 ))
             ) : (
-                <p className='no-squeaks-para'>
-                    No Squeaks for you 🥲
-                </p>
+                <section className="no-squeaks-container">
+                    <SentimentVeryDissatisfiedIcon />
+                    <p className="no-squeaks-para">
+                        No Squeaks for you right now
+                    </p>
+                    <SentimentVeryDissatisfiedIcon />
+                </section>
             )}
         </section>
     )

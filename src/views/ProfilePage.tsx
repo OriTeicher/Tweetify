@@ -16,12 +16,12 @@ export default function ProfilePage() {
     return (
         <section className="feed-index profile-container">
             <img
+                alt="NOTHING HERE"
                 className="profile-bgc-img"
                 src={
                     loggedInUser.bgImgUrl ||
                     'https://t3.ftcdn.net/jpg/04/21/50/96/360_F_421509616_AW4LfRfbYST8T2ZT9gFGxGWfrCwr4qm4.jpg'
                 }
-                alt="bgc-picture"
                 onClick={() => setSelectedImgUrl(loggedInUser.bgImgUrl)}
             />
             <div className="user-cred">
