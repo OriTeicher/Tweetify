@@ -18,17 +18,13 @@ export default function CreateProfilePage() {
     const dispatch: any = useDispatch()
     const location = useLocation()
     const navigate = useNavigate()
-    const { username, password } = location.state || {}
+    const { username, password, email } = location.state
 
-    const handleParagraphChange = (
-        event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-    ) => {
+    const handleParagraphChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
         setDescription(event.target.value)
     }
 
-    const handleDisplayNameChange = (
-        event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-    ) => {
+    const handleDisplayNameChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
         setDisplayName(event.target.value)
     }
 
@@ -39,9 +35,8 @@ export default function CreateProfilePage() {
         newUser.password = password
         newUser.description = description
         newUser.displayName = displayName
-        await dispatch(
-            userActions.signUp(newUser, profileImgFile, profileBgImgFile)
-        )
+        newUser.email = email
+        await dispatch(userActions.signUp(newUser, profileImgFile, profileBgImgFile))
         setIsLoaderOn(false)
         navigate('/home')
     }
@@ -59,57 +54,25 @@ export default function CreateProfilePage() {
     return (
         <section className="feed-index profile-container">
             <label htmlFor="bgc-img-upload">
-                <img
-                    className="profile-bgc-img"
-                    src={
-                        profileBgImgUrl ||
-                        'https://i0.wp.com/css-tricks.com/wp-content/uploads/2015/11/drag-drop-upload-2.gif'
-                    }
-                    alt="Profile Background"
-                />
+                <img className="profile-bgc-img" src={profileBgImgUrl || 'https://i0.wp.com/css-tricks.com/wp-content/uploads/2015/11/drag-drop-upload-2.gif'} alt="Profile Background" />
             </label>
             <div className="user-cred">
                 <div className="profile-img-container">
                     <div className="edit-container">
                         <label htmlFor="img-upload">
-                            <Avatar
-                                className="new-profile-img"
-                                src={profileImage}
-                            />
+                            <Avatar className="new-profile-img" src={profileImage} />
                         </label>
-                        <input
-                            id="img-upload"
-                            type="file"
-                            accept="image/*"
-                            onChange={handleProfileImgChange}
-                            style={{ display: 'none' }}
-                        />
-                        <input
-                            id="bgc-img-upload"
-                            type="file"
-                            accept="image/*"
-                            onChange={handleBgImgChange}
-                            style={{ display: 'none' }}
-                        />
-                        <button
-                            onClick={handleSaveProfile}
-                            className="save-profile-btn"
-                        >
+                        <input id="img-upload" type="file" accept="image/*" onChange={handleProfileImgChange} style={{ display: 'none' }} />
+                        <input id="bgc-img-upload" type="file" accept="image/*" onChange={handleBgImgChange} style={{ display: 'none' }} />
+                        <button onClick={handleSaveProfile} className="save-profile-btn">
                             Save Profile
                         </button>
                     </div>
-                    <input
-                        type="text"
-                        onChange={handleDisplayNameChange}
-                        placeholder="Display name..."
-                    />
+                    <input type="text" onChange={handleDisplayNameChange} placeholder="Display name..." />
                     <h2>{'@' + username}</h2>
                 </div>
                 <div>
-                    <textarea
-                        onChange={handleParagraphChange}
-                        placeholder="Click here to enter your profile description..."
-                    />
+                    <textarea onChange={handleParagraphChange} placeholder="Click here to enter your profile description..." />
                 </div>
                 {isLoaderOn ? (
                     <div className="new-profile-loader-container">

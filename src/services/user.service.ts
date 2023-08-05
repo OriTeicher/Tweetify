@@ -17,6 +17,7 @@ function getEmptyUser() {
         password: '',
         displayName: '',
         description: '',
+        email: '',
         bgImgUrl: '',
         profileImgUrl: '',
         postsId: [],

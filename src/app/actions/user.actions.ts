@@ -1,7 +1,9 @@
-import { dbService } from '../../services/db.service'
 import { AppThunk } from '../store'
 import { userReducer } from '../reducers/user.slice'
 import { cloudinaryService } from '../../services/cloudinary.service'
+import { httpService } from '../../services/http.service'
+import { apiService } from '../../services/api.service'
+import { CreateUserDto } from '../../services/interface.service'
 
 export const userActions = {
     loginUser,
@@ -19,26 +21,34 @@ function loginUser(): AppThunk {
 }
 
 // TODO: build signUp function
-function signUp(
-    user: any,
-    profileImgFile: File | null,
-    profileBgFile: File | null
-): AppThunk {
+function signUp(user: any, profileImgFile: File | null, profileBgFile: File | null): AppThunk {
     return async (dispatch) => {
         try {
-            const profileImgUrl = await cloudinaryService.uploadImgToCloud(
-                profileImgFile
-            )
-            const profileBgUrl = await cloudinaryService.uploadImgToCloud(
-                profileBgFile
-            )
-            user.profileImgUrl = profileImgUrl
-            user.bgImgUrl = profileBgUrl
-            await dbService.addItemToCollection(
-                user,
-                user.id,
-                dbService.USER_DB_COLLECTION
-            )
+            if (profileBgFile && profileImgFile) {
+                var profileImgUrl = await cloudinaryService.uploadImgToCloud(profileImgFile)
+                var profileBgUrl = await cloudinaryService.uploadImgToCloud(profileBgFile)
+            }
+            // user.profileImgUrl = profileImgUrl
+            // user.bgImgUrl = profileBgUrl
+            user.bgImgUrl = 'https://applicants.mta.ac.il/wp-content/uploads/2019/11/rominazi.png'
+            user.profileImgUrl = 'https://applicants.mta.ac.il/wp-content/uploads/2019/11/yossi.png'
+
+            console.log('apiService.SQUEAKER_API_USERS_URL', apiService.SQUEAKER_API_USERS_URL)
+            await httpService.post(apiService.SQUEAKER_API_USERS_URL, () => {
+                const newUser: CreateUserDto = {
+                    email: user.email,
+                    password: user.password,
+                    username: user.username,
+                    displayName: user.displayName
+                }
+                return newUser
+            })
+            // ? without backend
+            // await dbService.addItemToCollection(
+            //     user,
+            //     user.id,
+            //     dbService.USER_DB_COLLECTION
+            // )
             dispatch(userReducer.onSignUp(user))
         } catch (error) {
             console.log('Login Failed.' + error)

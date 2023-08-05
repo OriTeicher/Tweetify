@@ -1,6 +1,5 @@
- // ? CONTAINS RE-USABLE INTERFACES
+// ? CONTAINS RE-USABLE INTERFACES
 
-// * FEED INTERFACES 
 export interface FeedPost {
     id: string
     owner: Owner
@@ -12,26 +11,11 @@ export interface FeedPost {
     resqueaks: number
 }
 
-
 export interface Trend {
     category: string
     title: string
     tweetsCount: number
 }
-
-export interface FeedPostAction {
-    type: string
-    postId: string
-    stat: string
-    isStatIncrease: boolean
-}
-
-
-
-
-// * comments *
-
-// * users *
 
 export interface Owner {
     userId: string
@@ -39,4 +23,11 @@ export interface Owner {
     username: string
     profileImgUrl?: string
     isVerified: boolean
+}
+
+export interface CreateUserDto {
+    email: string
+    username: string
+    password: string
+    displayName: string
 }

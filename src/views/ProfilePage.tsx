@@ -13,6 +13,7 @@ export default function ProfilePage() {
     const { loggedInUser } = useSelector((state: RootState) => {
         return state.user
     })
+    
     return (
         <section className="feed-index profile-container">
             <img

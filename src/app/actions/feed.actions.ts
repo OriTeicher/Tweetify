@@ -63,8 +63,8 @@ function addFeedPost(
                 'postsId',
                 newPost.id
             )
-
             dispatch(feedReducers.addFeedPostSuccess(newPost))
+            dispatch(loaderReducers.toggleNewPostLoader())
         } catch (error) {
             console.log('Cannot add post. ', error)
         }

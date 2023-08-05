@@ -29,6 +29,10 @@ function App() {
                     element={<DynamicHomepage cmp={ProfilePage} />}
                 />
                 <Route
+                    path="/profile/:id"
+                    element={<DynamicHomepage cmp={ProfilePage} />} 
+                />
+                <Route
                     path="/newprofile"
                     element={<DynamicHomepage cmp={CreateProfilePage} />}
                 />

@@ -3,7 +3,7 @@ import { apiService } from './api.service';
 
 export const cloudinaryService = {
     uploadImgToCloud,
-};
+}
 
 async function uploadImgToCloud(file) {
     const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${apiService.CLOUD_NAME}/image/upload`;

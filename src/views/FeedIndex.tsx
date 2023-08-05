@@ -15,6 +15,7 @@ export interface FeedIndexProps {
 }
 
 const FeedIndex: React.FC<FeedIndexProps> = (props: FeedIndexProps) => {
+    
     const { feedPosts } = useSelector((state: RootState) => {
         return state.feed
     })

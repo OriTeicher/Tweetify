@@ -15,6 +15,7 @@ const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
     const { loggedInUser } = useSelector((state: RootState) => {
         return state.user
     })
+    
     const { isPostLoading } = useSelector((state: RootState) => {
         return state.loader
     })
