@@ -73,13 +73,14 @@ function addFeedPost(
 
 function removeFeedPost(postId: string): AppThunk {
     return async (dispatch) => {
-        dispatch(loaderReducers.toggleNewPostLoader())
+        dispatch(loaderReducers.toggleAppLoader())
         try {
             await dbService.removeItemFromDB(
                 postId,
                 dbService.POSTS_DB_COLLECTION
             )
             dispatch(feedReducers.removeFeedPostSuccess(postId))
+            dispatch(loaderReducers.toggleAppLoader())
         } catch (error) {
             console.log('Cannot remove post. ', error)
         }

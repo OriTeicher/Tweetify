@@ -9,6 +9,7 @@ export interface FeedListProps {
 }
 
 const FeedList: React.FC<FeedListProps> = (props: FeedListProps) => {
+    
     const [randomFact, setRandomFact] = useState('')
     const [isLoadingFact, setIsLoadingFact] = useState(false)
 

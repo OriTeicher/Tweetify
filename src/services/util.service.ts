@@ -29,7 +29,7 @@ function getRandomColor(): string {
     const green = Math.floor(Math.random() * 256)
     const blue = Math.floor(Math.random() * 256)
 
-    const color = `#${red.toString(16)}${green.toString(16)}${blue.toString(
+    const color = `${red.toString(16)}${green.toString(16)}${blue.toString(
         16
     )}`
 

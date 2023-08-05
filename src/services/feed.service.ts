@@ -21,6 +21,16 @@ export const feedService = {
             comments: []
         }
     },
+
+    getRandomProfilePhoto() {
+        const randomNum = utilService.getRandomIntInclusive(1, 25)
+        const randomGender =
+            utilService.getRandomIntInclusive(1, 2) % 2 === 0
+                ? 'male'
+                : 'female'
+        if (randomNum % 2 === 0)
+            return `https://xsgames.co/randomusers/assets/avatars/${randomGender}/${randomNum}.jpg`
+    },
     getRandomPosts(postsCount: number) {
         const names = [
             'Jermia Defoe',
@@ -37,6 +47,7 @@ export const feedService = {
         const posts = []
 
         for (let i = 0; i < postsCount; i++) {
+            const randomColor = utilService.getRandomColor()
             const id = 'P-' + utilService.generateId(5)
             const displayName =
                 names[utilService.getRandomIntInclusive(0, names.length - 1)]
@@ -47,7 +58,9 @@ export const feedService = {
             const owner = {
                 displayName,
                 username,
-                profileImgUrl: '',
+                profileImgUrl:
+                    this.getRandomProfilePhoto() ||
+                    `https://source.boringavatars.com/beam/120/Stefan?colors=${randomColor}`,
                 isVerified: Math.random() < 0.5
             }
 
