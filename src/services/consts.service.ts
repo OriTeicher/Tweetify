@@ -2,8 +2,9 @@
 const GUEST_ID = 'GUEST'
 const ID_LENGTH = 5
 
-// * POSTS
+// * FEED
 const DEMO_POSTS_NUM = 10
+const MAIN_BG_COLOR = 'rgb(16, 16, 16)'
 
 // * SQUEAK STATS
 const LIKE = 1
@@ -27,5 +28,6 @@ export const constsService = {
     ID_LENGTH,
     NO_BG_WALLPAPER,
     COMMENTS_FIELD,
-    DEBOUNCE_DELAY
+    DEBOUNCE_DELAY,
+    MAIN_BG_COLOR
 }

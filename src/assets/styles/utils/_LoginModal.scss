@@ -27,7 +27,7 @@
         input {
             color: $mainColor0;
             background-color: $mainColor3;
-            font-family: 'Jost';
+            font-family: $mainFont;
             font-size: 20px;
             width: 300px;
             padding: 5px;
@@ -43,7 +43,7 @@
             margin: auto;
             background-color: $logoColor;
             color: $mainColor0;
-            font-family: 'Jost', 'Gill Sans', 'Gill Sans MT', Calibri;
+            font-family: $mainFont;
             outline: none;
             border: none;
             font-size: 20px;

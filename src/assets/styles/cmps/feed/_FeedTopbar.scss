@@ -20,7 +20,7 @@
             cursor: pointer;
             border: none;
             outline: none;
-            font-family: 'Jost';
+            font-family: $mainFont;
 
             &:hover {
                 background-color: $hoverClr2;

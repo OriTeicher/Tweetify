@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import React, { useState } from 'react'
 import { Verified, MoreHoriz, MoreVert } from '@mui/icons-material'
 import { utilService } from '../../services/util.service'
@@ -8,7 +9,7 @@ import { ThunkDispatch } from 'redux-thunk'
 import { useSelector, useDispatch } from 'react-redux'
 import ImgModal from '../utils/ImgModal'
 
-interface IFeedContentPreview {
+interface FeedContentPreview {
     id: string
     displayName: string
     username: string
@@ -18,16 +19,8 @@ interface IFeedContentPreview {
     imgUrl?: string
 }
 
-const FeedContentPreview: React.FC<IFeedContentPreview> = ({
-    id,
-    displayName,
-    username,
-    verified,
-    createdAt,
-    content,
-    imgUrl
-}) => {
-    const [isImgClicked, setIsImgClicked] = useState(false)
+const FeedContentPreview: React.FC<FeedContentPreview> = (props: FeedContentPreview) => {
+    const [isImgModalOpen, setIsImgModalOpen] = useState(false)
 
     const dispatch: ThunkDispatch<RootState, undefined, Action<string>> = useDispatch()
 
@@ -39,12 +32,12 @@ const FeedContentPreview: React.FC<IFeedContentPreview> = ({
         dispatch(feedActions.removeFeedPost(selectedId))
     }
 
-    const handleImageClick = (event: React.MouseEvent) => {
-        event.stopPropagation()
-        setIsImgClicked(true)
+    const handleImageClick = (isOpen: boolean) => {
+        setIsImgModalOpen(isOpen)
     }
 
-    const truncatedUsername = username.length > 15 ? username.slice(0, 3) + '...' : username
+    const truncatedUsername =
+        props.username.length > 15 ? props.username.slice(0, 3) + '...' : props.username
 
     const highlightMatchedTxt = (text: string, filterBy: string) => {
         const regex = new RegExp(`(${filterBy})`, 'gi')
@@ -54,11 +47,11 @@ const FeedContentPreview: React.FC<IFeedContentPreview> = ({
     const markedDisplayName = truncatedUsername.includes(filterBy) ? (
         <span
             dangerouslySetInnerHTML={{
-                __html: highlightMatchedTxt(displayName, filterBy)
+                __html: highlightMatchedTxt(props.displayName, filterBy)
             }}
         ></span>
     ) : (
-        displayName
+        props.displayName
     )
 
     const markedUsername = truncatedUsername.includes(filterBy) ? (
@@ -68,14 +61,14 @@ const FeedContentPreview: React.FC<IFeedContentPreview> = ({
             }}
         ></span>
     ) : (
-        username
+        props.username
     )
 
-    const markedTxt = content ? (
+    const markedTxt = props.content ? (
         <pre
             className="post-txt"
             dangerouslySetInnerHTML={{
-                __html: highlightMatchedTxt(content, filterBy)
+                __html: highlightMatchedTxt(props.content, filterBy)
             }}
         ></pre>
     ) : null
@@ -84,19 +77,24 @@ const FeedContentPreview: React.FC<IFeedContentPreview> = ({
         <section className="post-info-container">
             <div className="top-cred">
                 <h1>{markedDisplayName}</h1>
-                {verified && <Verified className="verified-logo" />}
+                {props.verified && <Verified className="verified-logo" />}
                 <h2>@{markedUsername}</h2>
                 <h3>.</h3>
-                <p className="post-date">{utilService.getCurrentDate(createdAt)}</p>
-                <MoreHoriz className="more-icon" onClick={() => handleRemovePost(id)} />
-                <MoreVert className="more-icon mobile" onClick={() => handleRemovePost(id)} />
+                <p className="post-date">{utilService.getCurrentDate(props.createdAt)}</p>
+                <MoreHoriz className="more-icon" onClick={() => handleRemovePost(props.id)} />
+                <MoreVert className="more-icon mobile" onClick={() => handleRemovePost(props.id)} />
             </div>
             {markedTxt}
-            {imgUrl && (
-                <img src={imgUrl} className="post-photo" alt="🖼️" onClick={handleImageClick}></img>
+            {props.imgUrl && (
+                <img
+                    src={props.imgUrl}
+                    className="post-photo"
+                    alt="🖼️"
+                    onClick={() => handleImageClick(true)}
+                ></img>
             )}
-            {isImgClicked && (
-                <ImgModal imgUrl={imgUrl} onCloseModal={() => setIsImgClicked(false)} />
+            {isImgModalOpen && (
+                <ImgModal imgUrl={props.imgUrl} onCloseModal={() => handleImageClick(false)} />
             )}
         </section>
     )

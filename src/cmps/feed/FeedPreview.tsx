@@ -1,7 +1,6 @@
 import { Avatar } from '@mui/material'
 import React, { useState } from 'react'
 import FeedContentPreview from './FeedContentPreview'
-import { utilService } from '../../services/util.service'
 import Loader from '../utils/Loader'
 import { FeedPost } from '../../services/interface.service'
 import { useSelector } from 'react-redux'
@@ -11,7 +10,6 @@ import { constsService } from '../../services/consts.service'
 import { eventBus } from '../../services/event.bus.service'
 
 export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
-
     const { isPostLoading } = useSelector((state: RootState) => {
         return state.loader
     })
@@ -27,7 +25,9 @@ export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
         }
     }
 
-    const handlePostClick = () => {
+    const handlePostClick = (event: React.MouseEvent) => {
+        const clickedElement = event.target as HTMLElement
+        if (clickedElement.classList.contains('post-photo') || true) return
         handleSelectedSqueak(props.id)
     }
 
@@ -42,10 +42,7 @@ export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
                     <Loader />
                 ) : (
                     <div className="top-preview">
-                        <Avatar src={props.owner?.profileImgUrl} className="user-avatar">
-                            {utilService.getInitials(props.owner.displayName)}
-                        </Avatar>
-
+                        <Avatar src={props.owner?.profileImgUrl} className="user-avatar" />
                         <FeedContentPreview
                             id={props.id}
                             displayName={props.owner.displayName}

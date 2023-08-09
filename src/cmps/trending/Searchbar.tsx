@@ -9,7 +9,6 @@ interface SearchbarProps {
 
 export default function Searchbar(props: SearchbarProps) {
     const [isInputFocused, setIsInputFocused] = useState(false)
-    const [filterBy, setFilterBy] = useState('')
 
     const handleInputFocus = () => {
         setIsInputFocused(true)
@@ -21,7 +20,7 @@ export default function Searchbar(props: SearchbarProps) {
 
     const handleTxtChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
         const newFilterBy = ev.target.value
-        utilService.debounce(() => setFilterBy(newFilterBy), constsService.DEBOUNCE_DELAY)
+        utilService.debounce(() => props.onSetFilterBy(newFilterBy), constsService.DEBOUNCE_DELAY)()
     }
 
     return (
