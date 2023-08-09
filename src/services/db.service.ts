@@ -19,13 +19,14 @@ export const dbService = {
     updateItemInCollection,
     updateFieldInCollection,
     setDemoDB,
-    getPostByIdFromDb,
     pushStringToArrayField,
+    getPostByIdFromDb,
 
     // consts
     POSTS_DB_COLLECTION: 'posts',
     USER_DB_COLLECTION: 'users',
-    MIN_POST_NUM: 20
+    MIN_POST_NUM: 20,
+    POSTS_ID_FIELD: 'postsId'
 }
 
 async function addItemToCollection(item: object, itemId: string, col: string) {
@@ -49,20 +50,14 @@ async function getCollectionFromDB(col: string, filterBy: string = '') {
             likes: doc.data().likes || 0,
             comments: doc.data().comments || [],
             resqueaks: doc.data().resqueaks || 0,
-            filterBy,
+            filterBy
         }))
         if (filterBy) {
             const resArr = collectionArr.filter(
                 (post) =>
-                    post.content
-                        .toLowerCase()
-                        .includes(filterBy.toLowerCase()) ||
-                    post.owner.username
-                        .toLowerCase()
-                        .includes(filterBy.toLowerCase()) ||
-                    post.owner.displayName
-                        .toLowerCase()
-                        .includes(filterBy.toLowerCase())
+                    post.content.toLowerCase().includes(filterBy.toLowerCase()) ||
+                    post.owner.username.toLowerCase().includes(filterBy.toLowerCase()) ||
+                    post.owner.displayName.toLowerCase().includes(filterBy.toLowerCase())
             )
             return resArr
         } else return collectionArr
@@ -96,11 +91,7 @@ async function setDemoDB(postsNum: number) {
     }
 }
 
-async function updateItemInCollection(
-    updatedItem: object,
-    itemId: string,
-    col: string
-) {
+async function updateItemInCollection(updatedItem: object, itemId: string, col: string) {
     try {
         await setDoc(doc(db, col, itemId), { ...updatedItem })
     } catch (error) {
@@ -108,12 +99,7 @@ async function updateItemInCollection(
     }
 }
 
-async function pushStringToArrayField(
-    itemId: string,
-    col: string,
-    field: string,
-    val: string
-) {
+async function pushStringToArrayField(itemId: string, col: string, field: string, val: string) {
     try {
         const colRef = doc(db, col, itemId)
         const updatedItem = {
@@ -140,7 +126,7 @@ async function updateFieldInCollection(
     }
 }
 
-async function getPostByIdFromDb(itemId: string, col: string, comment: any) {
+async function getPostByIdFromDb(itemId: string, col: string) {
     try {
         const querySnapshot = await getDocs(collection(db, col))
         const collectionArr = querySnapshot.docs.map((doc) => ({
@@ -155,13 +141,7 @@ async function getPostByIdFromDb(itemId: string, col: string, comment: any) {
             resqueaks: doc.data().resqueaks || 0
         }))
         const resArr = collectionArr.filter((post) => post.id === itemId)
-        resArr[0].comments.unshift(comment)
-        await addItemToCollection(
-            resArr[0],
-            itemId,
-            dbService.POSTS_DB_COLLECTION
-        )
-        return resArr
+        return resArr[0] 
     } catch (error) {
         console.error('Error getting collection: ', error)
         return []

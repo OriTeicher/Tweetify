@@ -1,33 +1,33 @@
 import React from 'react'
 import { FeedPost } from '../services/interface.service'
-import FeedPreview from '../cmps/feed/FeedPreview'
+import { FeedPreview } from '../cmps/feed/FeedPreview'
+import { useDispatch, useSelector } from 'react-redux'
+import { ThunkDispatch, Action } from '@reduxjs/toolkit'
+import { RootState } from '../app/store'
 
-interface ReplySqueakPagepProps {
-    SelectedSqueak: React.ComponentType<any>
-    comments: FeedPost[]
+export default function ReplySqueakPage() {
+    const { selectedSqueakId } = useSelector((state: RootState) => {
+        return state.feed
+    })
+
+    return <section className="reply-page-container"></section>
 }
 
-export default function ReplySqueakPage(props: ReplySqueakPagepProps) {
-    const SqueakPreview = props.SelectedSqueak
+// {
+// <SqueakPreview />
+// }
 
-    return (
-        <section className="reply-page-container">
-            <SqueakPreview />
-
-            {props.comments.map((comment, idx) => (
-            ////// * COMMENTS HERE * //////
-                <FeedPreview
-                    key={idx}
-                    id={comment.id}
-                    owner={comment.owner}
-                    content={comment.content}
-                    imgUrl={comment.imgUrl}
-                    createdAt={comment.createdAt}
-                    likes={comment.likes}
-                    comments={comment.comments}
-                    resqueaks={comment.resqueaks}
-                />
-            ))}
-        </section>
-    )
-}
+// {props.comments.map((comment, idx) => (
+// ////// *** COMMENTS HERE ***  //////
+//     <FeedPreview
+//         key={idx}
+//         id={comment.id}
+//         owner={comment.owner}
+//         content={comment.content}
+//         imgUrl={comment.imgUrl}
+//         createdAt={comment.createdAt}
+//         likes={comment.likes}
+//         comments={comment.comments}
+//         resqueaks={comment.resqueaks}
+//     />
+// ))}

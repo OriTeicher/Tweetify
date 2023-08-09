@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../app/store'
 import { Avatar } from '@mui/material'
+import { constsService } from '../services/consts.service'
 
 export default function ProfilePage() {
     const [selectedImgUrl, setSelectedImgUrl] = useState('')
@@ -13,16 +14,13 @@ export default function ProfilePage() {
     const { loggedInUser } = useSelector((state: RootState) => {
         return state.user
     })
-    
+
     return (
         <section className="feed-index profile-container">
             <img
                 alt="NOTHING HERE"
                 className="profile-bgc-img"
-                src={
-                    loggedInUser.bgImgUrl ||
-                    'https://t3.ftcdn.net/jpg/04/21/50/96/360_F_421509616_AW4LfRfbYST8T2ZT9gFGxGWfrCwr4qm4.jpg'
-                }
+                src={loggedInUser.bgImgUrl || `${constsService.NO_BG_WALLPAPER}`}
                 onClick={() => setSelectedImgUrl(loggedInUser.bgImgUrl)}
             />
             <div className="user-cred">
@@ -32,9 +30,7 @@ export default function ProfilePage() {
                             className="profile-img"
                             src={loggedInUser.profileImgUrl}
                             alt="profile-pic"
-                            onClick={() =>
-                                setSelectedImgUrl(loggedInUser.profileImgUrl)
-                            }
+                            onClick={() => setSelectedImgUrl(loggedInUser.profileImgUrl)}
                         />
                         <button>Edit Profile</button>
                     </div>
@@ -57,10 +53,7 @@ export default function ProfilePage() {
                 </div>
             </div>
             {selectedImgUrl && (
-                <ImgModal
-                    imgUrl={selectedImgUrl}
-                    onCloseModal={() => setSelectedImgUrl('')}
-                />
+                <ImgModal imgUrl={selectedImgUrl} onCloseModal={() => setSelectedImgUrl('')} />
             )}
         </section>
     )

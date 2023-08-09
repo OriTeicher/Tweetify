@@ -7,7 +7,7 @@ interface AppProps {
     cmp?: React.ComponentType<any>
 }
 
-export function Hompage(props: AppProps) {
+export function AppCenterDynamicCmp(props: AppProps) {
     const [topBarOption, setTopBarOption] = useState('Home')
 
     const DynamicComponent = props.cmp || FeedIndex

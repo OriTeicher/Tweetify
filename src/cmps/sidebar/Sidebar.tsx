@@ -10,12 +10,12 @@ import { MoreHoriz as MoreIcon } from '@mui/icons-material'
 import SidebarOption from './SidebarOption'
 import LoggedAcount from './LoggedAcount'
 import LoginModal from '../utils/LoginModal'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../app/store'
 
 interface SidebarProps {
-    onOptionChange: (option: string) => void
+    onOptionChange: Function
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
@@ -23,9 +23,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
     const [isSmallScreen, setIsSmallScreen] = useState(false)
     const [isLoginModalOpen, setLoginModal] = useState(false)
     const navigate = useNavigate()
-    const location = useLocation()
 
-    // * LOGGED IN USER *
     const { loggedInUser } = useSelector((state: RootState) => {
         return state.user
     })
@@ -67,6 +65,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
             <SidebarOption
                 key={txt}
                 Icon={Icon}
+                // ? hides the irrelevant sidebar icons in mobile
                 txt={isSmallScreen ? '' : txt}
                 isActive={selectedSidebarOption === txt}
                 onClick={() => handleOptionClick(txt)}

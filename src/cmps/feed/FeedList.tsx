@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import FeedPreview from './FeedPreview'
+import { FeedPreview } from './FeedPreview'
 import { FeedPost } from '../../services/interface.service'
 import { apiService } from '../../services/api.service'
 import Loader from '../utils/Loader'
@@ -9,7 +9,6 @@ export interface FeedListProps {
 }
 
 const FeedList: React.FC<FeedListProps> = (props: FeedListProps) => {
-    
     const [randomFact, setRandomFact] = useState('')
     const [isLoadingFact, setIsLoadingFact] = useState(false)
 
@@ -32,35 +31,25 @@ const FeedList: React.FC<FeedListProps> = (props: FeedListProps) => {
     return (
         <section className="posts-list">
             {props.feedPosts.length ? (
-                props.feedPosts.map((post, idx) => (
+                props.feedPosts.map((squeak, idx) => (
                     <FeedPreview
                         key={idx}
-                        id={post.id}
-                        owner={post.owner}
-                        content={post.content}
-                        imgUrl={post.imgUrl}
-                        createdAt={post.createdAt}
-                        likes={post.likes}
-                        comments={post.comments}
-                        resqueaks={post.resqueaks}
+                        id={squeak.id}
+                        owner={squeak.owner}
+                        content={squeak.content}
+                        imgUrl={squeak.imgUrl}
+                        createdAt={squeak.createdAt}
+                        likes={squeak.likes}
+                        comments={squeak.comments}
+                        resqueaks={squeak.resqueaks}
                     />
                 ))
             ) : (
-                <>
-                    {isLoadingFact ? (
-                        <Loader />
-                    ) : (
-                        <section className="no-squeaks-container">
-                            <p className="no-squeaks-para">
-                                No Squeaks for you right now..
-                            </p>
-                            <p className="no-squeaks-para">
-                                Here's a random fact:
-                            </p>
-                            <p className="no-squeaks-para">{randomFact}</p>
-                        </section>
-                    )}
-                </>
+                <section className="no-squeaks-container">
+                    <p className="no-squeaks-para">No Squeaks for you right now..</p>
+                    <p className="no-squeaks-para">Here's a random fact:</p>
+                    {isLoadingFact ? <Loader /> : <p className="no-squeaks-para">{randomFact}</p>}
+                </section>
             )}
         </section>
     )

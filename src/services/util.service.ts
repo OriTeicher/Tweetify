@@ -5,12 +5,12 @@ export const utilService = {
     getInitials,
     generateRandomSentences,
     generateId,
-    getJoinedDateFormat
+    getJoinedDateFormat,
+    debounce
 }
 
 function generateId(idLength: number = 5) {
-    const letters =
-        'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
+    const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
     let id = ''
     for (let i = 0; i < idLength; i++) {
         id += letters.charAt(getRandomIntInclusive(0, letters.length - 1))
@@ -29,9 +29,7 @@ function getRandomColor(): string {
     const green = Math.floor(Math.random() * 256)
     const blue = Math.floor(Math.random() * 256)
 
-    const color = `${red.toString(16)}${green.toString(16)}${blue.toString(
-        16
-    )}`
+    const color = `${red.toString(16)}${green.toString(16)}${blue.toString(16)}`
 
     return color
 }
@@ -121,4 +119,19 @@ function getJoinedDateFormat() {
     let month = currentDate.getMonth() + 1
     const year = currentDate.getFullYear()
     return `${month < 10 ? '0' + month : month}/${year}`
+}
+
+function debounce(func: Function, delay: any) {
+    let timeoutId: ReturnType<typeof setTimeout> | null
+
+    return (...args: any[]) => {
+        if (timeoutId) {
+            clearTimeout(timeoutId)
+        }
+
+        timeoutId = setTimeout(() => {
+            func(...args)
+            timeoutId = null
+        }, delay)
+    }
 }

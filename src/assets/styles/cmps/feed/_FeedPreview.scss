@@ -100,9 +100,13 @@
             filter: brightness(90%);
         }
     }
+
+    &:hover {
+        &:not(img) {
+            cursor: pointer;
+        }
+    }
 }
-
-
 
 .post-icons {
     display: flex;
@@ -196,7 +200,7 @@
         .more-icon.mobile {
             display: block;
         }
-        .post-photo{
+        .post-photo {
             width: 98.5%;
         }
     }

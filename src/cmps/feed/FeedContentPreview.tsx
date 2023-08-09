@@ -5,10 +5,10 @@ import { RootState } from '../../app/store'
 import { Action } from '@reduxjs/toolkit'
 import { feedActions } from '../../app/actions/feed.actions'
 import { ThunkDispatch } from 'redux-thunk'
-import { useSelector,useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import ImgModal from '../utils/ImgModal'
 
-interface FeedContentPreview {
+interface IFeedContentPreview {
     id: string
     displayName: string
     username: string
@@ -18,7 +18,7 @@ interface FeedContentPreview {
     imgUrl?: string
 }
 
-const FeedContentPreview: React.FC<FeedContentPreview> = ({
+const FeedContentPreview: React.FC<IFeedContentPreview> = ({
     id,
     displayName,
     username,
@@ -29,25 +29,22 @@ const FeedContentPreview: React.FC<FeedContentPreview> = ({
 }) => {
     const [isImgClicked, setIsImgClicked] = useState(false)
 
-    const dispatch: ThunkDispatch<
-        RootState,
-        undefined,
-        Action<string>
-    > = useDispatch()
+    const dispatch: ThunkDispatch<RootState, undefined, Action<string>> = useDispatch()
 
     const { filterBy } = useSelector((state: RootState) => {
         return state.feed
     })
 
-    const handleRemovePost = async (postId: string) => {
-        dispatch(feedActions.removeFeedPost(postId))
+    const handleRemovePost = async (selectedId: string) => {
+        dispatch(feedActions.removeFeedPost(selectedId))
     }
 
+    const handleImageClick = (event: React.MouseEvent) => {
+        event.stopPropagation()
+        setIsImgClicked(true)
+    }
 
-    // TODO: fix img modal
-
-    const truncatedUsername =
-        username.length > 15 ? username.slice(0, 3) + '...' : username
+    const truncatedUsername = username.length > 15 ? username.slice(0, 3) + '...' : username
 
     const highlightMatchedTxt = (text: string, filterBy: string) => {
         const regex = new RegExp(`(${filterBy})`, 'gi')
@@ -90,32 +87,16 @@ const FeedContentPreview: React.FC<FeedContentPreview> = ({
                 {verified && <Verified className="verified-logo" />}
                 <h2>@{markedUsername}</h2>
                 <h3>.</h3>
-                <p className="post-date">
-                    {utilService.getCurrentDate(createdAt)}
-                </p>
-                <MoreHoriz
-                    className="more-icon"
-                    onClick={() => handleRemovePost(id)}
-                />
-                <MoreVert
-                    className="more-icon mobile"
-                    onClick={() => handleRemovePost(id)}
-                />
+                <p className="post-date">{utilService.getCurrentDate(createdAt)}</p>
+                <MoreHoriz className="more-icon" onClick={() => handleRemovePost(id)} />
+                <MoreVert className="more-icon mobile" onClick={() => handleRemovePost(id)} />
             </div>
             {markedTxt}
             {imgUrl && (
-                <img
-                    src={imgUrl}
-                    className="post-photo"
-                    alt="NOTHING TO SEE HERE 🖼️"
-                    onClick={() => setIsImgClicked(true)}
-                ></img>
+                <img src={imgUrl} className="post-photo" alt="🖼️" onClick={handleImageClick}></img>
             )}
             {isImgClicked && (
-                <ImgModal
-                    imgUrl={imgUrl}
-                    onCloseModal={() => setIsImgClicked(false)}
-                />
+                <ImgModal imgUrl={imgUrl} onCloseModal={() => setIsImgClicked(false)} />
             )}
         </section>
     )

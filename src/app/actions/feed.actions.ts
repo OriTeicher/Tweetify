@@ -11,24 +11,21 @@ export const feedActions = {
     addFeedPost,
     removeFeedPost,
     toggleStats,
-    setFilterBy
+    setFilterBy,
+    setSelectedSqueak
 }
 
 function queryFeedPosts(): AppThunk {
     return async (dispatch) => {
         try {
             dispatch(loaderReducers.toggleAppLoader())
-            let feedPostsDB = await dbService.getCollectionFromDB(
-                dbService.POSTS_DB_COLLECTION
-            )
+            let feedPostsDB = await dbService.getCollectionFromDB(dbService.POSTS_DB_COLLECTION)
             if (feedPostsDB.length < dbService.MIN_POST_NUM) {
                 await dbService.setDemoDB(constsService.DEMO_POSTS_NUM)
-                feedPostsDB = await dbService.getCollectionFromDB(
-                    dbService.POSTS_DB_COLLECTION
-                )
+                feedPostsDB = await dbService.getCollectionFromDB(dbService.POSTS_DB_COLLECTION)
             }
-            dispatch(loaderReducers.toggleAppLoader())
             dispatch(feedReducers.queryFeedPostsSuccess(feedPostsDB))
+            dispatch(loaderReducers.toggleAppLoader())
         } catch (error) {
             console.log(error)
         }
@@ -46,21 +43,13 @@ function addFeedPost(
             dispatch(loaderReducers.toggleNewPostLoader())
             const newPost = feedService.getEmptyPost(loggedInUser, postContent)
 
-            newPost.imgUrl = file
-                ? await cloudinaryService.uploadImgToCloud(file)
-                : gifUrl
-                ? gifUrl
-                : ''
+            newPost.imgUrl = file ? await cloudinaryService.uploadImgToCloud(file) : gifUrl
 
-            await dbService.addItemToCollection(
-                newPost,
-                newPost.id,
-                dbService.POSTS_DB_COLLECTION
-            )
+            await dbService.addItemToCollection(newPost, newPost.id, dbService.POSTS_DB_COLLECTION)
             await dbService.pushStringToArrayField(
                 loggedInUser.id,
                 dbService.USER_DB_COLLECTION,
-                'postsId',
+                dbService.POSTS_ID_FIELD,
                 newPost.id
             )
             dispatch(feedReducers.addFeedPostSuccess(newPost))
@@ -75,10 +64,7 @@ function removeFeedPost(postId: string): AppThunk {
     return async (dispatch) => {
         dispatch(loaderReducers.toggleAppLoader())
         try {
-            await dbService.removeItemFromDB(
-                postId,
-                dbService.POSTS_DB_COLLECTION
-            )
+            await dbService.removeItemFromDB(postId, dbService.POSTS_DB_COLLECTION)
             dispatch(feedReducers.removeFeedPostSuccess(postId))
             dispatch(loaderReducers.toggleAppLoader())
         } catch (error) {
@@ -114,6 +100,16 @@ function setFilterBy(newFilterBy: string): AppThunk {
             )
             dispatch(feedReducers.queryFeedPostsSuccess(feedPostsDB))
             dispatch(loaderReducers.toggleAppLoader())
+        } catch (error) {
+            console.log('Cannot set filter by. ', error)
+        }
+    }
+}
+
+function setSelectedSqueak(id: string): AppThunk {
+    return async (dispatch) => {
+        try {
+            dispatch(feedReducers.setSelectedSqueakId(id))
         } catch (error) {
             console.log('Cannot set filter by. ', error)
         }

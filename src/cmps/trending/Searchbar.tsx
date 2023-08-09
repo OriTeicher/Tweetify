@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { SearchOutlined as SearchIcon } from '@mui/icons-material'
+import { utilService } from '../../services/util.service'
+import { constsService } from '../../services/consts.service'
 
 interface SearchbarProps {
     onSetFilterBy: Function
@@ -19,26 +21,12 @@ export default function Searchbar(props: SearchbarProps) {
 
     const handleTxtChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
         const newFilterBy = ev.target.value
-        setFilterBy(newFilterBy)
+        utilService.debounce(() => setFilterBy(newFilterBy), constsService.DEBOUNCE_DELAY)
     }
 
-    useEffect(() => {
-        const debounce = setTimeout(() => {
-            props.onSetFilterBy(filterBy)
-        }, 1200)
-        return () => {
-            clearTimeout(debounce)
-        }
-    }, [props, filterBy])
-
     return (
-        <section
-            className={`search-container ${isInputFocused ? 'focused' : ''}`}
-        >
-            <SearchIcon
-                className={`search-icon`}
-                id={`${isInputFocused ? 'focused' : ''}`}
-            />
+        <section className={`search-container ${isInputFocused ? 'focused' : ''}`}>
+            <SearchIcon className={`search-icon`} id={`${isInputFocused ? 'focused' : ''}`} />
             <input
                 type="search"
                 className="searchbar"

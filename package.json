@@ -23,6 +23,7 @@
         "crypto-browserify": "^3.12.0",
         "dotenv": "^16.3.1",
         "emoji-picker-react": "^4.4.9",
+        "eventemitter2": "^6.4.9",
         "firebase": "^9.22.2",
         "fs": "^0.0.1-security",
         "gif-picker-react": "^1.3.0",
@@ -35,6 +36,7 @@
         "react-redux": "^8.1.0",
         "react-router-dom": "^6.14.0",
         "react-scripts": "^5.0.1",
+        "reflect-metadata": "^0.1.13",
         "sass": "^1.63.4",
         "typescript": "^4.9.5",
         "web-vitals": "^2.1.4"

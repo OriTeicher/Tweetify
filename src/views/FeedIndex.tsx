@@ -9,13 +9,17 @@ import FeedList from '../cmps/feed/FeedList'
 import SqueakBox from '../cmps/feed/SqueakBox'
 import MobileTopbar from '../cmps/feed/MobileTopbar'
 import Loader from '../cmps/utils/Loader'
+import { useNavigate } from 'react-router-dom'
+import { eventBus } from '../services/event.bus.service'
 
 export interface FeedIndexProps {
+    // TODO: fix top bar option -> set it in store
     topBarOption: string
 }
 
 const FeedIndex: React.FC<FeedIndexProps> = (props: FeedIndexProps) => {
-    
+    const navigate = useNavigate()
+
     const { feedPosts } = useSelector((state: RootState) => {
         return state.feed
     })
@@ -28,24 +32,25 @@ const FeedIndex: React.FC<FeedIndexProps> = (props: FeedIndexProps) => {
         return state.user
     })
 
-    const dispatch: ThunkDispatch<
-        RootState,
-        undefined,
-        Action<string>
-    > = useDispatch()
+    const handleSelectedSqueak = (selectedId: string) => {
+        if (!selectedId) return
+        navigate(`/home/${selectedId}`)
+    }
+
+    const dispatch: ThunkDispatch<RootState, undefined, Action<string>> = useDispatch()
 
     useEffect(() => {
         dispatch(feedActions.queryFeedPosts())
-    }, [dispatch])
+        const cb = (selectedId: string) => {
+            feedActions.setSelectedSqueak(selectedId)
+            handleSelectedSqueak(selectedId)
+        }
+        eventBus.subscribeToEvent('setSelectedSqueakId', cb)
+        return () => eventBus.unsubscribeFromEvent('setSelectedSqueakId', cb)
+    }, [])
 
-    const handleAddPost = async (
-        postContent: string,
-        file: File | null,
-        gifUrl: string
-    ) => {
-        dispatch(
-            feedActions.addFeedPost(loggedInUser, postContent, file, gifUrl)
-        )
+    const handleAddPost = async (postContent: string, file: File | null, gifUrl: string) => {
+        dispatch(feedActions.addFeedPost(loggedInUser, postContent, file, gifUrl))
     }
 
     return (
