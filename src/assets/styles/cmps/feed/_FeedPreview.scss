@@ -20,7 +20,31 @@
         gap: 8px;
         align-items: center;
         padding-left: 10px;
+
+        .dropdown-container {
+            padding: 0px;
+            position: absolute;
+            border-radius: 10px;
+            top: -40px;
+            right: 0;
+            width: 100px;
+            height: fit-content;
+            color: white;
+            font-weight: 200;
+            font-size: 15px;
+            background-color: $mainColor4;
+            
+            .li-dropdown-content:nth-child(1) {
+                border-radius: 10px 10px 0px 0px;
+                padding: 2px 10px;
+            }
+            .li-dropdown-content:nth-child(2) {
+                border-radius: 0px 0px 10px 10px;
+                padding: 2px 10px;
+            }
+        }
     }
+
     .user-avatar {
         font-weight: 500;
         text-shadow: 1px 1px 1px $mainColor1;

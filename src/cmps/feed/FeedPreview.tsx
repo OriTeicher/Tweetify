@@ -1,11 +1,11 @@
-import { Avatar } from '@mui/material'
-import React, { useState } from 'react'
+import React from 'react'
 import FeedContentPreview from './FeedContentPreview'
 import Loader from '../utils/Loader'
+import FeedPreviewIcons from './FeedPreviewIcons'
+import { Avatar } from '@mui/material'
 import { FeedPost } from '../../services/interface.service'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../app/store'
-import FeedPreviewIcons from './FeedPreviewIcons'
 import { constsService } from '../../services/consts.service'
 import { eventBus } from '../../services/event.bus.service'
 
@@ -25,19 +25,13 @@ export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
         }
     }
 
-    const handlePostClick = (event: React.MouseEvent) => {
-        const clickedElement = event.target as HTMLElement
-        if (clickedElement.classList.contains('post-photo') || true) return
-        handleSelectedSqueak(props.id)
-    }
-
     const handleSelectedSqueak = (selectedId: string) => {
         eventBus.emitEvent('setSelectedSqueakId', selectedId)
     }
 
     return (
         <>
-            <section className="post-preview" onClick={handlePostClick}>
+            <section className="post-preview">
                 {isPostLoading ? (
                     <Loader />
                 ) : (
@@ -51,6 +45,7 @@ export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
                             createdAt={props.createdAt}
                             content={props.content}
                             imgUrl={props.imgUrl}
+                            onReadPost={() => handleSelectedSqueak(props.id)}
                         />
                     </div>
                 )}

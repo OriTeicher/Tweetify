@@ -9,8 +9,8 @@ const MAIN_BG_COLOR = 'rgb(16, 16, 16)'
 // * SQUEAK STATS
 const LIKE = 1
 const UNLIKE = -1
-const LIKES_FIELD = 'likes'
-const COMMENTS_FIELD = 'comments'
+const LIKES_FIELD = 'like'
+const COMMENTS_FIELD = 'comment'
 
 // * USERS
 const NO_BG_WALLPAPER =

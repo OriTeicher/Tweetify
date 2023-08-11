@@ -16,19 +16,19 @@ export default function FeedPreviewIcons(props: FeedPreviewIconProps) {
     const [isLiked, setIsLiked] = useState(false)
 
     // TODO: handle comment click prop function
-    const handleCommentClick = () => {}
+    const handleCommentClick = () => {
+        props.onIconClick('comment')
+    }
     // TODO: handle like click prop function
     const handleLikeClick = () => {
         setIsLiked(!isLiked)
+        props.onIconClick('like', isLiked)
     }
 
     return (
         <div className="post-icons">
             <div className="icon-container">
-                <ChatBubbleOutlineIcon
-                    fontSize="small"
-                    onClick={handleCommentClick}
-                />
+                <ChatBubbleOutlineIcon fontSize="small" onClick={handleCommentClick} />
                 <p>{props.commentsNum !== 0 && props.commentsNum}</p>
             </div>
             <div className="icon-container">

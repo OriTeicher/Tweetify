@@ -8,6 +8,7 @@ import { feedActions } from '../../app/actions/feed.actions'
 import { ThunkDispatch } from 'redux-thunk'
 import { useSelector, useDispatch } from 'react-redux'
 import ImgModal from '../utils/ImgModal'
+import OptionsDropdown from '../utils/OptionsDropdown'
 
 interface FeedContentPreview {
     id: string
@@ -17,10 +18,12 @@ interface FeedContentPreview {
     createdAt: number
     content?: string
     imgUrl?: string
+    onReadPost: Function
 }
 
 const FeedContentPreview: React.FC<FeedContentPreview> = (props: FeedContentPreview) => {
     const [isImgModalOpen, setIsImgModalOpen] = useState(false)
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
     const dispatch: ThunkDispatch<RootState, undefined, Action<string>> = useDispatch()
 
@@ -28,8 +31,15 @@ const FeedContentPreview: React.FC<FeedContentPreview> = (props: FeedContentPrev
         return state.feed
     })
 
+    const dropdownOptions = ['Read Post', 'Delete Post']
+
     const handleRemovePost = async (selectedId: string) => {
         dispatch(feedActions.removeFeedPost(selectedId))
+    }
+
+    const handleDropdownSelect = (option: string) => {
+        if (option === 'Delete Post') handleRemovePost(props.id)
+        else props.onReadPost(props.id)
     }
 
     const handleImageClick = (isOpen: boolean) => {
@@ -81,8 +91,20 @@ const FeedContentPreview: React.FC<FeedContentPreview> = (props: FeedContentPrev
                 <h2>@{markedUsername}</h2>
                 <h3>.</h3>
                 <p className="post-date">{utilService.getCurrentDate(props.createdAt)}</p>
-                <MoreHoriz className="more-icon" onClick={() => handleRemovePost(props.id)} />
-                <MoreVert className="more-icon mobile" onClick={() => handleRemovePost(props.id)} />
+                <MoreHoriz
+                    className="more-icon"
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                />
+                <MoreVert
+                    className="more-icon mobile"
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                />
+                {isDropdownOpen && (
+                    <OptionsDropdown
+                        setDropdownOption={handleDropdownSelect}
+                        options={dropdownOptions}
+                    />
+                )}
             </div>
             {markedTxt}
             {props.imgUrl && (
