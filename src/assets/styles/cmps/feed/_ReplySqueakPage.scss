@@ -1,0 +1,21 @@
+.reply-page-container {
+    position: relative;
+    .arrow-back {
+        border-radius: 50%;
+        font-size: 30px;
+        margin: 5px;
+        &:hover {
+            background-color: $mainColor3;
+            cursor: pointer;
+        }
+    }
+    .comments-list {
+        .avatar-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+    }
+
+}

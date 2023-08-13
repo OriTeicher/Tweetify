@@ -5,6 +5,7 @@ import { feedService } from '../../services/feed.service'
 import { cloudinaryService } from '../../services/cloudinary.service'
 import { loaderReducers } from '../reducers/loader.slice'
 import { constsService } from '../../services/consts.service'
+import { FeedPost } from '../../services/interface.service'
 
 export const feedActions = {
     queryFeedPosts,
@@ -106,10 +107,11 @@ function setFilterBy(newFilterBy: string): AppThunk {
     }
 }
 
-function setSelectedSqueak(id: string): AppThunk {
+function setSelectedSqueak(selectedSqueak: FeedPost): AppThunk {
     return async (dispatch) => {
         try {
-            dispatch(feedReducers.setSelectedSqueakId(id))
+            console.log('setSelec',selectedSqueak)
+            dispatch(feedReducers.setSelectedSqueak(selectedSqueak))
         } catch (error) {
             console.log('Cannot set filter by. ', error)
         }

@@ -24,10 +24,7 @@ export const feedService = {
 
     getRandomProfilePhoto() {
         const randomNum = utilService.getRandomIntInclusive(1, 25)
-        const randomGender =
-            utilService.getRandomIntInclusive(1, 2) % 2 === 0
-                ? 'male'
-                : 'female'
+        const randomGender = utilService.getRandomIntInclusive(1, 2) % 2 === 0 ? 'male' : 'female'
         if (randomNum % 2 === 0)
             return `https://xsgames.co/randomusers/assets/avatars/${randomGender}/${randomNum}.jpg`
     },
@@ -49,8 +46,7 @@ export const feedService = {
         for (let i = 0; i < postsCount; i++) {
             const randomColor = utilService.getRandomColor()
             const id = 'P-' + utilService.generateId(5)
-            const displayName =
-                names[utilService.getRandomIntInclusive(0, names.length - 1)]
+            const displayName = names[utilService.getRandomIntInclusive(0, names.length - 1)]
             const username = displayName.toLowerCase().replace(/\s/g, '')
             const content = utilService.generateRandomSentences(
                 utilService.getRandomIntInclusive(1, 4)
@@ -64,10 +60,7 @@ export const feedService = {
                 isVerified: Math.random() < 0.5
             }
 
-            const imgUrl =
-                demoPhotos[
-                    utilService.getRandomIntInclusive(0, demoPhotos.length - 1)
-                ]
+            const imgUrl = demoPhotos[utilService.getRandomIntInclusive(0, demoPhotos.length - 1)]
             const createdAt = Date.now()
             const post = {
                 id,
@@ -76,9 +69,7 @@ export const feedService = {
                 imgUrl,
                 createdAt,
                 likes: utilService.getRandomIntInclusive(0, 500),
-                comments: this.getRandomComments(
-                    utilService.getRandomIntInclusive(0, 7)
-                ),
+                comments: this.getRandomComments(utilService.getRandomIntInclusive(0, 7)),
                 resqueaks: utilService.getRandomIntInclusive(0, 50)
             }
             posts.push(post)
@@ -101,21 +92,18 @@ export const feedService = {
 
     getRandomComment(displayName: string = 'Guest'): object {
         const names = ['John Doe', 'Jane Smith', 'Mike Johnson', 'Emily Brown']
-        const comment = {
-            displayName:
-                names[utilService.getRandomIntInclusive(0, names.length - 1)],
-            username: displayName.toLowerCase().replace(/\s/g, ''),
-            content: utilService.generateRandomSentences(
-                utilService.getRandomIntInclusive(1, 10)
-            ),
-            imgUrl: '',
-            avatar: '',
-            verified: false,
-            createdAt: Date.now(),
-            likes: 0,
-            resqueaks: 0,
-            comments: []
+        const randomColor = utilService.getRandomColor()
+        const owner: Owner = {
+            userId: 'U' + utilService.generateId(5),
+            displayName: names[utilService.getRandomIntInclusive(0, 3)],
+            profileImgUrl: `https://source.boringavatars.com/beam/120/Stefan?colors=${randomColor}`,
+            username: 'demo-user',
+            isVerified: true
         }
+        const comment = this.getEmptyPost(
+            owner,
+            utilService.generateRandomSentences(utilService.getRandomIntInclusive(1, 3))
+        )
         return comment
     }
 }

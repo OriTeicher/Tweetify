@@ -12,6 +12,7 @@ import MobileTopbar from '../cmps/feed/MobileTopbar'
 import Loader from '../cmps/utils/Loader'
 import { useNavigate } from 'react-router-dom'
 import { eventBus } from '../services/event.bus.service'
+import { FeedPost } from '../services/interface.service'
 
 export interface FeedIndexProps {
     // TODO: fix top bar option -> set it in store
@@ -33,21 +34,21 @@ const FeedIndex: React.FC<FeedIndexProps> = (props: FeedIndexProps) => {
         return state.user
     })
 
-    const handleSelectedSqueak = (selectedId: string) => {
-        if (!selectedId) return
-        navigate(`/home/${selectedId}`)
+    const handleSelectedSqueak = (selectedSqueak: FeedPost) => {
+        if (!selectedSqueak) return
+        navigate(`/home/${selectedSqueak.id}`)
     }
 
     const dispatch: ThunkDispatch<RootState, undefined, Action<string>> = useDispatch()
 
     useEffect(() => {
         dispatch(feedActions.queryFeedPosts())
-        const cb = (selectedId: string) => {
-            feedActions.setSelectedSqueak(selectedId)
-            handleSelectedSqueak(selectedId)
+        const cb = (selectedSqueak: [FeedPost]) => {
+            dispatch(feedActions.setSelectedSqueak(...selectedSqueak))
+            handleSelectedSqueak(...selectedSqueak)
         }
-        eventBus.subscribeToEvent('setSelectedSqueakId', cb)
-        return () => eventBus.unsubscribeFromEvent('setSelectedSqueakId', cb)
+        eventBus.subscribeToEvent('setSelectedSqueak', cb)
+        return () => eventBus.unsubscribeFromEvent('setSelectedSqueak', cb)
     }, [])
 
     const handleAddPost = async (postContent: string, file: File | null, gifUrl: string) => {

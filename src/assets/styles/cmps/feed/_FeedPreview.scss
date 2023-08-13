@@ -1,10 +1,13 @@
 .post-preview {
     flex-direction: column;
     border-top: $outline1;
-    padding: 17px;
+    padding: 10px 15px;
     font-size: 18px;
     font-weight: 100;
     position: relative;
+    .link-line-complete {
+        display: none;
+    }
     .top-preview {
         display: grid;
         grid-template-columns: 40px 1fr;
@@ -33,7 +36,7 @@
             font-weight: 200;
             font-size: 15px;
             background-color: $mainColor4;
-            
+
             .li-dropdown-content:nth-child(1) {
                 border-radius: 10px 10px 0px 0px;
                 padding: 2px 10px;
@@ -105,12 +108,10 @@
     .more-icon.mobile {
         display: none;
     }
-    img {
-        width: 100%;
-    }
+
     .post-photo {
         height: 288px;
-        width: 90%;
+        width: 99%;
         border-radius: 20px;
         margin-left: 5px;
         object-fit: fill;
@@ -134,11 +135,9 @@
 
 .post-icons {
     display: flex;
-    justify-content: start;
-    padding-left: 48px;
     justify-content: space-between;
-    width: 90%;
-    margin: 20px 0px 0px;
+    width: 100%;
+    margin: 20px 0px 0px 0px;
     color: $mainColor2;
     svg {
         cursor: pointer;

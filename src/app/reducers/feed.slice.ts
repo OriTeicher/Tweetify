@@ -3,16 +3,16 @@ import { FeedPost } from '../../services/interface.service'
 
 export interface FeedState {
     feedPosts: FeedPost[]
-    currPage: string
+    currPageName: string
     filterBy: string
-    selectedSqueakId: string
+    selectedSqueak?: FeedPost
 }
 
 export const initialState: FeedState = {
     feedPosts: [],
-    currPage: 'home',
+    currPageName: 'home',
     filterBy: '',
-    selectedSqueakId: ''
+    selectedSqueak: {} as FeedPost
 }
 
 const feedSlice = createSlice({
@@ -43,9 +43,8 @@ const feedSlice = createSlice({
             updatedPost.comments.unshift(action.payload[0].comments[0])
             state.feedPosts = [...state.feedPosts, updatedPost]
         },
-        setSelectedSqueakId: (state, action: PayloadAction<string>) => {
-            console.log('action', action.payload)
-            state.selectedSqueakId = action.payload
+        setSelectedSqueak: (state, action: PayloadAction<FeedPost>) => {
+            state.selectedSqueak = action.payload
         }
     }
 })

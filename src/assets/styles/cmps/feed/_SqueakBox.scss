@@ -1,5 +1,6 @@
 .squeak-box {
-    padding: 15px 17px;
+    padding: 10px 15px ;
+    margin-top: 10px;
     border-bottom: $outline1;
     .squeak-input-container {
         margin-bottom: 15px;
@@ -85,14 +86,16 @@
             }
         }
     }
-
+    img{
+        width: 100%;
+    }
     .post-content {
         width: 100%;
     }
 
     .post-content .squeakbox-img {
         height: 288px;
-        width: 90%;
+        width: 100%;
         border-radius: 20px;
         object-fit: fill;
         object-position: center center;
@@ -103,7 +106,6 @@
         position: relative;
         button {
             position: absolute;
-            right: 62.5px;
             padding: 2px 10px;
             margin-top: 20px;
             margin-left: -29px;
@@ -117,7 +119,6 @@
 }
 
 .remove-photo-btn {
-
     background-color: $hoverClr3;
     margin-top: 5px;
     color: gray;
@@ -135,7 +136,7 @@
 }
 
 .light {
-    .squeak-box{
+    .squeak-box {
         border-bottom: 1px solid $mainColor1;
         background-color: $mainColor0;
     }
@@ -146,8 +147,8 @@
             background-color: $mainColor0;
         }
     }
-    .squeak-box-btns{
-        .left-icons{
+    .squeak-box-btns {
+        .left-icons {
             color: $mainColor1;
         }
     }

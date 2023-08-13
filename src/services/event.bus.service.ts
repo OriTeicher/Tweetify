@@ -17,7 +17,5 @@ function unsubscribeFromEvent(evName: string, cb: ListenerFn) {
 }
 
 function emitEvent(evName: string, ...args: any[]) {
-    console.log('args',...args)
     event.emit(evName, args)
 }
-

@@ -1,7 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import FeedContentPreview from './FeedContentPreview'
 import Loader from '../utils/Loader'
-import FeedPreviewIcons from './FeedPreviewIcons'
 import { Avatar } from '@mui/material'
 import { FeedPost } from '../../services/interface.service'
 import { useSelector } from 'react-redux'
@@ -20,13 +20,13 @@ export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
             case constsService.LIKES_FIELD:
                 break
             case constsService.COMMENTS_FIELD:
-                handleSelectedSqueak(props.id)
+                handleSelectedSqueak(props)
                 break
         }
     }
 
-    const handleSelectedSqueak = (selectedId: string) => {
-        eventBus.emitEvent('setSelectedSqueakId', selectedId)
+    const handleSelectedSqueak = (selectedSqueak: FeedPost) => {
+        eventBus.emitEvent('setSelectedSqueak', selectedSqueak)
     }
 
     return (
@@ -36,7 +36,10 @@ export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
                     <Loader />
                 ) : (
                     <div className="top-preview">
-                        <Avatar src={props.owner?.profileImgUrl} className="user-avatar" />
+                        <div className="avatar-container">
+                            <Avatar src={props.owner?.profileImgUrl} className="user-avatar" />
+                            <div className="link-line"></div>
+                        </div>
                         <FeedContentPreview
                             id={props.id}
                             displayName={props.owner.displayName}
@@ -45,16 +48,10 @@ export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
                             createdAt={props.createdAt}
                             content={props.content}
                             imgUrl={props.imgUrl}
-                            onReadPost={() => handleSelectedSqueak(props.id)}
+                            onReadPost={() => handleSelectedSqueak(props)}
                         />
                     </div>
                 )}
-                <FeedPreviewIcons
-                    likesNum={props.likes}
-                    commentsNum={props.comments.length}
-                    resqueaksNum={props.resqueaks}
-                    onIconClick={handleIconClick}
-                />
             </section>
         </>
     )
