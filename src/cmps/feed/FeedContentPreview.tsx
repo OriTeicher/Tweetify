@@ -9,7 +9,7 @@ import { ThunkDispatch } from 'redux-thunk'
 import { useSelector, useDispatch } from 'react-redux'
 import ImgModal from '../utils/ImgModal'
 import OptionsDropdown from '../utils/OptionsDropdown'
-import FeedPreviewIcons from './FeedPreviewIcons'
+
 interface FeedContentPreview {
     id: string
     displayName: string
@@ -33,6 +33,7 @@ const FeedContentPreview: React.FC<FeedContentPreview> = (props: FeedContentPrev
 
     const dropdownOptions = ['Read Post', 'Delete Post']
 
+    // TODO: change it to event bus function
     const handleRemovePost = async (selectedId: string) => {
         dispatch(feedActions.removeFeedPost(selectedId))
     }
@@ -118,12 +119,7 @@ const FeedContentPreview: React.FC<FeedContentPreview> = (props: FeedContentPrev
             {isImgModalOpen && (
                 <ImgModal imgUrl={props.imgUrl} onCloseModal={() => handleImageClick(false)} />
             )}
-            <FeedPreviewIcons
-                likesNum={100}
-                commentsNum={2}
-                resqueaksNum={2}
-                onIconClick={()=>{}}
-            />
+
         </section>
     )
 }

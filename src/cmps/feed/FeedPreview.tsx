@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../app/store'
 import { constsService } from '../../services/consts.service'
 import { eventBus } from '../../services/event.bus.service'
+import FeedPreviewIcons from './FeedPreviewIcons'
 
 export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
     const { isPostLoading } = useSelector((state: RootState) => {
@@ -40,16 +41,24 @@ export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
                             <Avatar src={props.owner?.profileImgUrl} className="user-avatar" />
                             <div className="link-line"></div>
                         </div>
-                        <FeedContentPreview
-                            id={props.id}
-                            displayName={props.owner.displayName}
-                            username={props.owner.username}
-                            verified={props.owner.isVerified}
-                            createdAt={props.createdAt}
-                            content={props.content}
-                            imgUrl={props.imgUrl}
-                            onReadPost={() => handleSelectedSqueak(props)}
-                        />
+                        <div className="  ">
+                            <FeedContentPreview
+                                id={props.id}
+                                displayName={props.owner.displayName}
+                                username={props.owner.username}
+                                verified={props.owner.isVerified}
+                                createdAt={props.createdAt}
+                                content={props.content}
+                                imgUrl={props.imgUrl}
+                                onReadPost={() => handleSelectedSqueak(props)}
+                            />
+                            <FeedPreviewIcons
+                                likesNum={props.likes}
+                                commentsNum={props.comments.length}
+                                resqueaksNum={props.resqueaks}
+                                onIconClick={handleIconClick}
+                            />
+                        </div>
                     </div>
                 )}
             </section>

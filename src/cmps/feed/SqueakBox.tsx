@@ -1,20 +1,10 @@
-import React, {
-    useState,
-    useEffect,
-    ChangeEvent,
-    KeyboardEvent,
-    useRef
-} from 'react'
+import React, { useState, useEffect, ChangeEvent, KeyboardEvent, useRef } from 'react'
 import { Avatar } from '@mui/material'
 import EmojiPicker from 'emoji-picker-react'
 import GifPicker from 'gif-picker-react'
 import { EmojiClickData } from 'emoji-picker-react/dist/types/exposedTypes'
 import ImgModal from '../utils/ImgModal'
-import {
-    ImageOutlined,
-    TagFacesOutlined,
-    GifBoxOutlined
-} from '@mui/icons-material'
+import { ImageOutlined, TagFacesOutlined, GifBoxOutlined } from '@mui/icons-material'
 import Loader from '../utils/Loader'
 import { apiService } from '../../services/api.service'
 import { Theme } from 'gif-picker-react'
@@ -111,10 +101,7 @@ export default function SqueakBox({ addPost, loggedInUser }: SqueakBoxProps) {
         <section className="squeak-box">
             <form onSubmit={handleSqueak}>
                 <div className="squeak-input-container">
-                    <Avatar
-                        className="user-avatar"
-                        src={loggedInUser.profileImgUrl}
-                    />
+                    <Avatar className="user-avatar" src={loggedInUser.profileImgUrl} />
                     {isNewPostLoading ? (
                         <Loader />
                     ) : (
@@ -131,9 +118,7 @@ export default function SqueakBox({ addPost, loggedInUser }: SqueakBoxProps) {
                                 <>
                                     <div className="img-container">
                                         <img
-                                            onClick={() =>
-                                                setSelectedImgUrl(fileUrl)
-                                            }
+                                            onClick={() => setSelectedImgUrl(fileUrl)}
                                             className="squeakbox-img"
                                             src={fileUrl}
                                             alt="file"
@@ -156,14 +141,8 @@ export default function SqueakBox({ addPost, loggedInUser }: SqueakBoxProps) {
                         Squeak
                     </button>
                     <div className="left-icons">
-                        <label
-                            htmlFor="file-upload"
-                            className="file-upload-label"
-                        >
-                            <ImageOutlined
-                                className="icon"
-                                onMouseDown={handleAddImgClick}
-                            />
+                        <label htmlFor="file-upload" className="file-upload-label">
+                            <ImageOutlined className="icon" onMouseDown={handleAddImgClick} />
                         </label>
                         <input
                             type="file"
@@ -173,29 +152,17 @@ export default function SqueakBox({ addPost, loggedInUser }: SqueakBoxProps) {
                             onChange={handleFileChange}
                             style={{ display: 'none' }}
                         />
-                        <GifBoxOutlined
-                            className="icon"
-                            onClick={handleGifMenuClicked}
-                        />
-                        <TagFacesOutlined
-                            onClick={handleEmojiMenuClicked}
-                            className="icon"
-                        />
+                        <GifBoxOutlined className="icon" onClick={handleGifMenuClicked} />
+                        <TagFacesOutlined onClick={handleEmojiMenuClicked} className="icon" />
                     </div>
                 </div>
             </form>
             {selectedImgUrl && (
-                <ImgModal
-                    onCloseModal={() => setSelectedImgUrl('')}
-                    imgUrl={selectedImgUrl}
-                />
+                <ImgModal onCloseModal={() => setSelectedImgUrl('')} imgUrl={selectedImgUrl} />
             )}
             <div className="menu-container">
                 {isEmojiMenuOpen && (
-                    <EmojiPicker
-                        onEmojiClick={handleEmojiClicked}
-                        theme={Theme.DARK}
-                    />
+                    <EmojiPicker onEmojiClick={handleEmojiClicked} theme={Theme.DARK} />
                 )}
                 {isGifMenuOpen && (
                     <GifPicker

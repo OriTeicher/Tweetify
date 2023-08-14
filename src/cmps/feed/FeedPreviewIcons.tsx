@@ -5,7 +5,6 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ShareIcon from '@mui/icons-material/Share'
 import { SaveAltRounded } from '@mui/icons-material'
-import { eventBus } from '../../services/event.bus.service'
 
 interface FeedPreviewIconProps {
     commentsNum: number
@@ -30,7 +29,6 @@ export default function FeedPreviewIcons(props: FeedPreviewIconProps) {
     return (
         <>
             <div className="post-icons">
-                <div className="link-line-complete"></div>
                 <div className="icon-container">
                     <ChatBubbleOutlineIcon fontSize="small" onClick={handleCommentClick} />
                     <p>{props.commentsNum !== 0 && props.commentsNum}</p>
