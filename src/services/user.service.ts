@@ -3,8 +3,6 @@ export const userService = {
     getEmptyUser
 }
 
-// TODO: login
-
 // TODO: sign up function
 
 // TODO: get empty user function

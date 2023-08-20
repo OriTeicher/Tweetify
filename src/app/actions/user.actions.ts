@@ -11,9 +11,17 @@ export const userActions = {
 }
 
 // TODO: build loginUser function
-function loginUser(): AppThunk {
+function loginUser(email: string, password: string): AppThunk {
     return async (dispatch) => {
         try {
+            const res = await httpService.post('auth/sign-in', () => {
+                console.log(email, password)
+                return {
+                    email,
+                    password
+                }
+            })
+            console.log(res?.data)
         } catch (error) {
             console.log('Login Failed.' + error)
         }
@@ -33,8 +41,7 @@ function signUp(user: any, profileImgFile: File | null, profileBgFile: File | nu
             user.bgImgUrl = 'https://applicants.mta.ac.il/wp-content/uploads/2019/11/rominazi.png'
             user.profileImgUrl = 'https://applicants.mta.ac.il/wp-content/uploads/2019/11/yossi.png'
 
-            console.log('apiService.SQUEAKER_API_USERS_URL', apiService.SQUEAKER_API_USERS_URL)
-            await httpService.post(apiService.SQUEAKER_API_USERS_URL, () => {
+            await httpService.post('users', () => {
                 const newUser: CreateUserDto = {
                     email: user.email,
                     password: user.password,

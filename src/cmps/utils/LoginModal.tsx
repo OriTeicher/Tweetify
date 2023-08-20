@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { Modal, Box } from '@mui/material'
 import { Twitter } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
+import { userActions } from '../../app/actions/user.actions'
+import { Action, ThunkDispatch } from '@reduxjs/toolkit'
+import { RootState } from '../../app/store'
+import { useDispatch } from 'react-redux'
 
 export interface LoginModalState {
     isOpen: boolean
@@ -15,6 +19,7 @@ const LoginModal: React.FC<LoginModalState> = ({ isOpen, setIsOpen }) => {
     const [password, setPassword] = useState('')
     const [passwordConfirm, setPasswordConfirm] = useState('')
     const navigate = useNavigate()
+    const dispatch: ThunkDispatch<RootState, undefined, Action<string>> = useDispatch()
 
     // TODO: reset data function
 
@@ -36,6 +41,7 @@ const LoginModal: React.FC<LoginModalState> = ({ isOpen, setIsOpen }) => {
     const handleSignIn = (event: React.FormEvent) => {
         setIsOpen(false)
         if (!username || !password) return
+        dispatch(userActions.loginUser(username, password))
     }
 
     const handleSignUp = (event: React.FormEvent) => {
@@ -49,7 +55,6 @@ const LoginModal: React.FC<LoginModalState> = ({ isOpen, setIsOpen }) => {
             password,
             email
         }
-
 
         navigate('/newprofile', { state: props })
         setIsOpen(false)
@@ -66,7 +71,10 @@ const LoginModal: React.FC<LoginModalState> = ({ isOpen, setIsOpen }) => {
                 <Box className="modal-content">
                     <Twitter className="twitter-icon" />
                     <h2>{isSignInMode ? 'Log-in' : 'Sign up'} to Squeaker</h2>
-                    <form className="flex column login-form" onSubmit={handleSignUp}>
+                    <form
+                        className="flex column login-form"
+                        onSubmit={isSignInMode ? handleSignUp : handleSignUp}
+                    >
                         <input
                             onKeyDown={preventSpaceKeyPress}
                             type="text"
@@ -123,7 +131,9 @@ const LoginModal: React.FC<LoginModalState> = ({ isOpen, setIsOpen }) => {
                     </form>
                     <p>
                         {isSignInMode ? "Don't have an account yet? " : 'Already have an account? '}
-                        <span onClick={handleModeToggle}>{isSignInMode ? 'Sign up!' : 'Sign in!'}</span>
+                        <span onClick={handleModeToggle}>
+                            {isSignInMode ? 'Sign up!' : 'Sign in!'}
+                        </span>
                     </p>
                 </Box>
             </Modal>

@@ -141,7 +141,7 @@ async function getPostByIdFromDb(itemId: string, col: string) {
             resqueaks: doc.data().resqueaks || 0
         }))
         const resArr = collectionArr.filter((post) => post.id === itemId)
-        return resArr[0] 
+        return resArr[0]
     } catch (error) {
         console.error('Error getting collection: ', error)
         return []
