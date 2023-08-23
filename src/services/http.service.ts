@@ -25,3 +25,5 @@ async function post(url: string, cb: Function) {
         if (error instanceof AxiosError) console.log(error.response?.data)
     }
 }
+
+
