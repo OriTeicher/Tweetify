@@ -31,7 +31,7 @@ const FeedContentPreview: React.FC<FeedContentPreview> = (props: FeedContentPrev
         return state.feed
     })
 
-    const dropdownOptions = ['Read Post', 'Delete Post']
+    const dropdownOptions = ['Reply', 'Delete Post']
 
     // TODO: change it to event bus function
     const handleRemovePost = async (selectedId: string) => {
@@ -119,7 +119,6 @@ const FeedContentPreview: React.FC<FeedContentPreview> = (props: FeedContentPrev
             {isImgModalOpen && (
                 <ImgModal imgUrl={props.imgUrl} onCloseModal={() => handleImageClick(false)} />
             )}
-
         </section>
     )
 }

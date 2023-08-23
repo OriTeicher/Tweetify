@@ -19,3 +19,9 @@
         }
     }
 }
+
+.dropdown-container.show {
+    max-height: 500px; /* Adjust the value based on your content */
+    transition: max-height 0.3s ease-in-out;
+    overflow: hidden;
+}
