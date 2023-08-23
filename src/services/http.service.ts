@@ -13,7 +13,7 @@ const axiosInstance = axios.create({
 
 async function get(url: string) {}
 
-async function post(url: string, cb: Function) {
+async function post(url: string, cb: () => unknown) {
     try {
         const res = await axiosInstance.post(url, cb(), {
             headers: {

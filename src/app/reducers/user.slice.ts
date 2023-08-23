@@ -38,7 +38,7 @@ const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        onSignUp: (state, action: PayloadAction<any>) => {
+        onLoginUser: (state, action: PayloadAction<any>) => {
             state.loggedInUser = action.payload
         }
     }
@@ -46,4 +46,3 @@ const userSlice = createSlice({
 
 export const userReducer = userSlice.actions
 export default userSlice.reducer
-
