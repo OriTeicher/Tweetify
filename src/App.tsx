@@ -6,9 +6,12 @@ import FeedIndex from './views/FeedIndex'
 import ProfilePage from './views/ProfilePage'
 import CreateProfilePage from './views/CreateProfilePage'
 import ReplySqueakPage from './views/ReplySqueakPage'
+import { SilentLogin } from './services/http.service'
+
 function App() {
     return (
         <BrowserRouter>
+            <SilentLogin />
             <Routes>
                 <Route path="/" element={<AppCenterDynamicCmp cmp={FeedIndex} />} />
                 <Route path="/home" element={<AppCenterDynamicCmp cmp={FeedIndex} />} />

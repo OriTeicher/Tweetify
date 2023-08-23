@@ -1,12 +1,13 @@
 import { AppThunk } from '../store'
-import { userReducer } from '../reducers/user.slice'
+import { initialState, userReducer } from '../reducers/user.slice'
 import { cloudinaryService } from '../../services/cloudinary.service'
 import { httpService } from '../../services/http.service'
 import { CreateUserDto } from '../../services/interface.service'
 
 export const userActions = {
     loginUser,
-    signUp
+    signUp,
+    logOutUser
 }
 
 function loginUser(email: string, password: string): AppThunk {
@@ -35,7 +36,7 @@ function signUp(user: any, profileImgFile: File | null, profileBgFile: File | nu
             // TODO: change to consts
             user.bgImgUrl = 'https://applicants.mta.ac.il/wp-content/uploads/2019/11/rominazi.png'
             user.profileImgUrl = 'https://applicants.mta.ac.il/wp-content/uploads/2019/11/yossi.png'
-            await httpService.post('users', () => {
+            await httpService.post('/auth/sign-up', () => {
                 const newUser: CreateUserDto = {
                     email: user.email,
                     password: user.password,
@@ -51,18 +52,19 @@ function signUp(user: any, profileImgFile: File | null, profileBgFile: File | nu
     }
 }
 
+function logOutUser(): AppThunk {
+    return async (dispatch) => {
+        try {
+            await httpService.post('auth/sign-out', () => {})
+            dispatch(userReducer.onLoginUser(initialState.loggedInUser))
+        } catch (error) {
+            console.log('Login Failed.' + error)
+        }
+    }
+}
+
 // TODO: build password auth function
 // function checkPassword(): AppThunk {
-//     return async (dispatch) => {
-//         try {
-//         } catch (error) {
-//             console.log('Login Failed.' + error)
-//         }
-//     }
-// }
-
-// TODO: build logOut function
-// function logOut(): AppThunk {
 //     return async (dispatch) => {
 //         try {
 //         } catch (error) {

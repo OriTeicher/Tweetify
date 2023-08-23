@@ -2,6 +2,10 @@ import React, { useState } from 'react'
 import { Avatar } from '@mui/material'
 import { MoreHoriz } from '@mui/icons-material'
 import OptionsDropdown from '../utils/OptionsDropdown'
+import { useDispatch } from 'react-redux'
+import { userActions } from '../../app/actions/user.actions'
+import { RootState } from '../../app/store'
+import { Action, ThunkDispatch } from '@reduxjs/toolkit'
 
 interface UserProps {
     displayName: string
@@ -18,12 +22,16 @@ const LoggedAccount: React.FC<UserProps> = ({
 }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     const dropdownOptions = ['Login to account', `Log out from @${username}`]
+    const dispatch: ThunkDispatch<RootState, undefined, Action<string>> = useDispatch()
 
     const handleDropdownClick = (option: string) => {
         setIsDropdownOpen(false)
         switch (option) {
             case 'Login to account':
                 setIsLoginModalOpen(true)
+                break
+            default:
+                dispatch(userActions.logOutUser())
                 break
         }
     }
@@ -33,9 +41,7 @@ const LoggedAccount: React.FC<UserProps> = ({
             {isDropdownOpen && (
                 <OptionsDropdown
                     options={dropdownOptions}
-                    setDropdownOption={(option: string) =>
-                        handleDropdownClick(option)
-                    }
+                    setDropdownOption={(option: string) => handleDropdownClick(option)}
                 />
             )}
             <section
