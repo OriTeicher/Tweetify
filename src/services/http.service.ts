@@ -15,16 +15,37 @@ const axiosInstance = axios.create({
     withCredentials: true
 })
 
-async function get(url: string): Promise<unknown> {
+async function get(url: string, shouldRefresh?: boolean): Promise<unknown> {
     try {
+        if (shouldRefresh) {
+            refresh()
+        }
         return await axiosInstance.get(url)
     } catch (error) {
         throw error
     }
 }
 
-async function post(url: string, cb: () => unknown) {
+async function refresh() {
     try {
+        await post('/auth/ping', () => {})
+    } catch (err) {
+        if (err instanceof AxiosError && err.response?.status === 401) {
+            try {
+                await post('/auth/refresh', () => {})
+            } catch (refreshError) {
+                if (err instanceof AxiosError) console.log(err.message)
+                else console.log(err)
+            }
+        }
+    }
+}
+
+async function post(url: string, cb: () => unknown, shouldRefresh?: boolean) {
+    try {
+        if (shouldRefresh) {
+            refresh()
+        }
         const res = await axiosInstance.post(url, cb(), {
             headers: {
                 'Content-Type': 'application/json'
@@ -43,28 +64,25 @@ export function SilentLogin() {
 
     useEffect(() => {
         ;(async () => {
+            let user = undefined
+
             try {
-                const user = await post('/auth/ping', () => {})
-                if (user) {
-                    dispatch(userReducer.onLoginUser(user?.data))
-                    navigate('/home')
-                }
+                user = await post('/auth/ping', () => {})
             } catch (err) {
                 if (err instanceof AxiosError && err.response?.status === 401) {
                     try {
-                        const user = await post('/auth/refresh', () => {})
-                        dispatch(userReducer.onLoginUser(user?.data))
-                        navigate('/home')
+                        user = await post('/auth/refresh', () => {})
                     } catch (refreshError) {
-                        dispatch(userReducer.onLoginUser(initialState.loggedInUser))
-                        navigate('/home')
+                        if (err instanceof AxiosError) console.log(err.message)
+                        else console.log(err)
                     }
-                } else {
-                    navigate('/home')
                 }
+            } finally {
+                dispatch(userReducer.onLoginUser(user?.data || initialState.loggedInUser))
+                navigate('/home')
             }
         })()
-    }, [navigate, dispatch])
+    }, [])
 
     return null
 }

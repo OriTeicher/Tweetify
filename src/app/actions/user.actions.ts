@@ -36,6 +36,8 @@ function signUp(user: any, profileImgFile: File | null, profileBgFile: File | nu
             // TODO: change to consts
             user.bgImgUrl = 'https://applicants.mta.ac.il/wp-content/uploads/2019/11/rominazi.png'
             user.profileImgUrl = 'https://applicants.mta.ac.il/wp-content/uploads/2019/11/yossi.png'
+
+            console.log('here1')
             await httpService.post('/auth/sign-up', () => {
                 const newUser: CreateUserDto = {
                     email: user.email,
@@ -45,6 +47,7 @@ function signUp(user: any, profileImgFile: File | null, profileBgFile: File | nu
                 }
                 return newUser
             })
+            console.log('here2')
             dispatch(userReducer.onLoginUser(user))
         } catch (error) {
             console.log('Login Failed.' + error)
