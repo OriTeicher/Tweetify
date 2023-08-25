@@ -115,8 +115,8 @@ function generateRandomSentences(sentencesCount: number) {
     return res
 }
 
-function getJoinedDateFormat() {
-    const currentDate = new Date()
+function getJoinedDateFormat(timestamp?: number) {
+    const currentDate = (timestamp) ? new Date(timestamp) : new Date();
     let month = currentDate.getMonth() + 1
     const year = currentDate.getFullYear()
     return `${month < 10 ? '0' + month : month}/${year}`

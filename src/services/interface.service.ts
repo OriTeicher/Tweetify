@@ -37,8 +37,8 @@ export interface User {
     description: string;
     postsId: string[];
     displayName: string;
-    profileBgUrl?: string;
-    profileImgUrl?: string;
+    profileBgUrl: string;
+    profileImgUrl: string;
 }
 
 export interface CreateUserDto {

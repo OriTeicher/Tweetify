@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../app/store'
 import { Avatar } from '@mui/material'
 import { constsService } from '../services/consts.service'
+import { utilService } from '../services/util.service'
 
 export default function ProfilePage() {
     const [selectedImgUrl, setSelectedImgUrl] = useState('')
@@ -14,6 +15,8 @@ export default function ProfilePage() {
     const { loggedInUser } = useSelector((state: RootState) => {
         return state.user
     })
+
+    const formattedDate: string = (typeof loggedInUser.createdAt === 'number') ? utilService.getJoinedDateFormat(loggedInUser.createdAt) : loggedInUser.createdAt;
 
     return (
         <section className="feed-index profile-container">
@@ -41,7 +44,7 @@ export default function ProfilePage() {
                     <p>{loggedInUser.description}</p>
                 </div>
                 <h2>
-                    joined at: {loggedInUser.joinedAt} <DateRange />
+                    joined at: {formattedDate} <DateRange />
                 </h2>
                 <div className="followers-container">
                     <p>
