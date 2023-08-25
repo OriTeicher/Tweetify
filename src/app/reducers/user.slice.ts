@@ -11,7 +11,7 @@ interface UserState {
         password: string
         description: string
         profileImgUrl: string
-        bgImgUrl: string
+        profileBgUrl: string
         followers: []
         following: []
         joinedAt: string
@@ -29,7 +29,7 @@ export const initialState: UserState = {
         followers: [],
         following: [],
         profileImgUrl: '',
-        bgImgUrl: '',
+        profileBgUrl: '',
         joinedAt: '06/23'
     }
 }
@@ -39,7 +39,6 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         onLoginUser: (state, action: PayloadAction<any>) => {
-            console.log(action.payload)
             state.loggedInUser = action.payload
         },
         onLogoutUser: (state, action: PayloadAction<any>) => {

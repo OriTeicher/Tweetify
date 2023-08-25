@@ -6,7 +6,8 @@ export const utilService = {
     generateRandomSentences,
     generateId,
     getJoinedDateFormat,
-    debounce
+    debounce,
+    objectAssignExact
 }
 
 function generateId(idLength: number = 5) {
@@ -134,4 +135,11 @@ function debounce(func: Function, delay: any) {
             timeoutId = null
         }, delay)
     }
+}
+
+function objectAssignExact(source: any, target: any) {
+    Object.getOwnPropertyNames(target).forEach(name => {
+        target[name] = source[name];
+    })
+    return target;
 }

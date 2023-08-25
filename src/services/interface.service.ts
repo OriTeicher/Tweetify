@@ -25,9 +25,28 @@ export interface Owner {
     isVerified: boolean
 }
 
+export interface User {
+    id: string;
+    email: string;
+    createdAt: number | string;
+    followers: string[];
+    following: string[];
+    isAdmin: boolean;
+    isVerified: boolean;
+    username: string;
+    description: string;
+    postsId: string[];
+    displayName: string;
+    profileBgUrl?: string;
+    profileImgUrl?: string;
+}
+
 export interface CreateUserDto {
     email: string
     username: string
     password: string
+    description: string;
     displayName: string
+    profileImgUrl?: string
+    profileBgUrl?: string
 }

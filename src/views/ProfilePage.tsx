@@ -20,8 +20,8 @@ export default function ProfilePage() {
             <img
                 alt="NOTHING HERE"
                 className="profile-bgc-img"
-                src={loggedInUser.bgImgUrl || `${constsService.NO_BG_WALLPAPER}`}
-                onClick={() => setSelectedImgUrl(loggedInUser.bgImgUrl)}
+                src={loggedInUser.profileBgUrl || `${constsService.NO_BG_WALLPAPER_URL}`}
+                onClick={() => setSelectedImgUrl(loggedInUser.profileBgUrl)}
             />
             <div className="user-cred">
                 <div className="profile-img-container">

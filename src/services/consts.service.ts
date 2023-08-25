@@ -13,9 +13,12 @@ const LIKES_FIELD = 'like'
 const COMMENTS_FIELD = 'comment'
 
 // * USERS
-const NO_BG_WALLPAPER =
-    'https://t3.ftcdn.net/jpg/04/21/50/96/360_F_421509616_AW4LfRfbYST8T2ZT9gFGxGWfrCwr4qm4.jpg'
+const NO_PROFILE_IMG_URL = 'https://source.boringavatars.com/beam/120/Stefan?colors=1DB954'
+const NO_BG_WALLPAPER_URL =
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU1bTnHSbBRSJZCtgfSdOM2dt8kRhncXuLlg&usqp=CAU'
 
+// 'https://source.boringavatars.com/beam/120/Stefan?colors=1DB954'
+//
 // * UTIL FUNCTIONS
 const DEBOUNCE_DELAY = 1200 // ? in ms
 
@@ -26,7 +29,8 @@ export const constsService = {
     LIKES_FIELD,
     GUEST_ID,
     ID_LENGTH,
-    NO_BG_WALLPAPER,
+    NO_PROFILE_IMG_URL,
+    NO_BG_WALLPAPER_URL,
     COMMENTS_FIELD,
     DEBOUNCE_DELAY,
     MAIN_BG_COLOR
