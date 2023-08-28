@@ -9,9 +9,7 @@ interface AppProps {
 
 export function AppCenterDynamicCmp(props: AppProps) {
     const [topBarOption, setTopBarOption] = useState('Home')
-
     const DynamicComponent = props.cmp || FeedIndex
-
     const handleOptionChange = (option: string) => setTopBarOption(option)
 
     return (

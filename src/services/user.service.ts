@@ -3,9 +3,7 @@ export const userService = {
     getEmptyUser
 }
 
-// TODO: sign up function
 
-// TODO: get empty user function
 function getEmptyUser() {
     return {
         isAdmin: false,

@@ -15,6 +15,7 @@ interface FeedPreviewIconProps {
 
 export default function FeedPreviewIcons(props: FeedPreviewIconProps) {
     const [isLiked, setIsLiked] = useState(false)
+    const [likesCounter, setLikesCounter] = useState(props.likesNum)
 
     // TODO: handle comment click prop function
     const handleCommentClick = () => {
@@ -23,6 +24,8 @@ export default function FeedPreviewIcons(props: FeedPreviewIconProps) {
     // TODO: handle like click prop function
     const handleLikeClick = () => {
         setIsLiked(!isLiked)
+        setLikesCounter((prevLikesCounter) => (isLiked ? --prevLikesCounter : ++prevLikesCounter))
+        console.log(likesCounter)
         props.onIconClick('like', isLiked)
     }
 
@@ -49,7 +52,7 @@ export default function FeedPreviewIcons(props: FeedPreviewIconProps) {
                             className="unliked"
                         />
                     )}
-                    <p>{props.likesNum !== 0 && props.likesNum}</p>
+                    <p>{likesCounter !== 0 && likesCounter}</p>
                 </div>
                 <div className="icon-container">
                     <Loop fontSize="small" />

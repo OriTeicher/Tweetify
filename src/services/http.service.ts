@@ -54,13 +54,13 @@ export function SilentLogin() {
                     try {
                         const user = await post('/auth/refresh', () => {})
                         dispatch(userReducer.onLoginUser(user?.data))
-                        navigate('/home')
+                        // ! navigate('/home')
                     } catch (refreshError) {
                         dispatch(userReducer.onLoginUser(initialState.loggedInUser))
-                        navigate('/home')
+                        // ! navigate('/home')
                     }
                 } else {
-                    navigate('/home')
+                    // ! navigate('/home')
                 }
             }
         })()

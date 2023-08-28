@@ -43,7 +43,7 @@ export default function ReplySqueakPage() {
                 <div className="comments-list">
                     {selectedSqueak?.comments &&
                         selectedSqueak.comments.map((comment, idx) => (
-                            <>
+                            <> 
                                 <FeedPreview
                                     key={idx}
                                     id={comment.id}
