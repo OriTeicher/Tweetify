@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
+import Loader from '../cmps/utils/Loader'
 import { Avatar } from '@mui/material'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../app/store'
-import Loader from '../cmps/utils/Loader'
 import { userActions } from '../app/actions/user.actions'
 import { userService } from '../services/user.service'
 import { feedService } from '../services/feed.service'
+import { constsService } from '../services/consts.service'
 
 export default function CreateProfilePage() {
-    const [description] = useState('')
-    const [displayName] = useState('')
+    // email & password needs to
     const [editedDescription, setEditedDescription] = useState('')
     const [editedDisplayName, setEditedDisplayName] = useState('')
     const [profileImage, setProfileImage] = useState('')
@@ -19,13 +19,13 @@ export default function CreateProfilePage() {
     const [profileBgImgFile, setProfileBgImgFile] = useState<File | null>(null)
     const [isLoaderOn, setIsLoaderOn] = useState(false)
 
-    const { loggedInUser } = useSelector((state: RootState) => state.user)
-
     const dispatch: any = useDispatch()
     const location = useLocation()
     const navigate = useNavigate()
 
+    const { loggedInUser } = useSelector((state: RootState) => state.user)
     const { username, password, email } = location?.state ? location.state : feedService.getEmptyUserCred()
+    console.log(username, password, email)
 
     useEffect(() => {
         if (!loggedInUser) return
@@ -41,15 +41,30 @@ export default function CreateProfilePage() {
         setEditedDisplayName(event.target.value)
     }
 
-    const handleSaveProfile = async (isPost: boolean) => {
+    const handleSaveProfile = async () => {
         setIsLoaderOn(true)
         const newUser = userService.getEmptyCreateUserDto()
         newUser.username = username
         newUser.password = password
-        newUser.description = description
-        newUser.displayName = displayName
+        newUser.description = editedDescription
+        newUser.displayName = editedDisplayName
         newUser.email = email
-        await dispatch(userActions.signUp(newUser, profileImgFile, profileBgImgFile, isPost))
+        await dispatch(userActions.signUp(newUser, profileImgFile, profileBgImgFile, true))
+        setIsLoaderOn(false)
+        navigate('/home')
+    }
+
+
+    // TODO: continue from here
+    const handleEditProfile = async () => {
+        setIsLoaderOn(true)
+        const newUser = userService.getEmptyCreateUserDto()
+        newUser.username = username
+        newUser.password = password
+        newUser.description = editedDescription
+        newUser.displayName = editedDisplayName
+        newUser.email = email
+        await dispatch(userActions.signUp(newUser, profileImgFile, profileBgImgFile, false))
         setIsLoaderOn(false)
         navigate('/home')
     }
@@ -67,7 +82,7 @@ export default function CreateProfilePage() {
     return (
         <section className="feed-index profile-container">
             <label htmlFor="bgc-img-upload">
-                <img className="profile-bgc-img" src={loggedInUser ? loggedInUser.profileBgUrl : profileBgImgUrl || 'https://i0.wp.com/css-tricks.com/wp-content/uploads/2015/11/drag-drop-upload-2.gif'} alt="Profile Background" />
+                <img className="profile-bgc-img" src={loggedInUser ? loggedInUser.profileBgUrl : profileBgImgUrl ? profileBgImgUrl : constsService.NO_BG_WALLPAPER_URL} alt="Profile Background" />
             </label>
             <div className="user-cred">
                 <div className="profile-img-container">
@@ -77,7 +92,7 @@ export default function CreateProfilePage() {
                         </label>
                         <input id="img-upload" type="file" accept="image/*" onChange={handleProfileImgChange} style={{ display: 'none' }} />
                         <input id="bgc-img-upload" type="file" accept="image/*" onChange={handleBgImgChange} style={{ display: 'none' }} />
-                        <button onClick={() => handleSaveProfile(false)} className="save-profile-btn">
+                        <button onClick={loggedInUser ? () => handleEditProfile() : () => handleSaveProfile()} className="save-profile-btn">
                             Save Profile
                         </button>
                     </div>
