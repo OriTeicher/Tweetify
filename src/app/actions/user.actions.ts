@@ -42,17 +42,26 @@ function signUp(user: any, profileImgFile: File | null, profileBgFile: File | nu
 
             if (isPost) {
                 newUser = (
-                    await httpService.post('/auth/sign-up', () => {
-                        return utilService.objectAssignExact(user, userService.getEmptyCreateUserDto())
-                    }, true)
+                    await httpService.post(
+                        '/auth/sign-up',
+                        () => {
+                            return utilService.objectAssignExact(user, userService.getEmptyCreateUserDto())
+                        },
+                        true
+                    )
                 ).data
             } else {
                 newUser = (
-                    await httpService.patch('/auth/sign-up', () => {
-                        return utilService.objectAssignExact(user, userService.getEmptyCreateUserDto())
-                    }, true)
+                    await httpService.patch(
+                        '/auth/sign-up',
+                        () => {
+                            return utilService.objectAssignExact(user, userService.getEmptyCreateUserDto())
+                        },
+                        true
+                    )
                 ).data
             }
+            console.log('newUser', newUser)
             dispatch(userReducer.onUserChange(newUser))
         } catch (error) {
             console.log('Login Failed.' + error)

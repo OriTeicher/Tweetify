@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { Avatar } from '@mui/material'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { userActions } from '../app/actions/user.actions'
-import { userService } from '../services/user.service'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../app/store'
 import Loader from '../cmps/utils/Loader'
+import { userActions } from '../app/actions/user.actions'
+import { userService } from '../services/user.service'
 import { feedService } from '../services/feed.service'
 
 export default function CreateProfilePage() {
-    const [description, setDescription] = useState('')
-    const [displayName, setDisplayName] = useState('')
+    const [description] = useState('')
+    const [displayName] = useState('')
     const [editedDescription, setEditedDescription] = useState('')
     const [editedDisplayName, setEditedDisplayName] = useState('')
     const [profileImage, setProfileImage] = useState('')
@@ -30,15 +30,15 @@ export default function CreateProfilePage() {
     useEffect(() => {
         if (!loggedInUser) return
         setEditedDescription(loggedInUser.description || '')
-        setEditedDisplayName(loggedInUser.username || '')
+        setEditedDisplayName(loggedInUser.displayName || '')
     }, [loggedInUser])
 
-    const handleParagraphChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-        setDescription(event.target.value)
+    const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+        setEditedDescription(event.target.value)
     }
 
     const handleDisplayNameChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-        setDisplayName(event.target.value)
+        setEditedDisplayName(event.target.value)
     }
 
     const handleSaveProfile = async (isPost: boolean) => {
@@ -81,10 +81,11 @@ export default function CreateProfilePage() {
                             Save Profile
                         </button>
                     </div>
-                    <input type="text" onChange={handleDisplayNameChange} value={editedDisplayName} placeholder="Display name..." /> <h2>{'@' + (loggedInUser ? loggedInUser.username : username)}</h2>
+                    <input type="text" onChange={handleDisplayNameChange} value={editedDisplayName} placeholder="Display name..." />
+                    <h2>{'@' + (loggedInUser ? loggedInUser.username : username)}</h2>
                 </div>
                 <div>
-                    <textarea onChange={handleParagraphChange} placeholder="Click here to enter your profile description..." value={editedDescription} />{' '}
+                    <textarea onChange={handleDescriptionChange} placeholder="Click here to enter your profile description..." value={editedDescription} />{' '}
                 </div>
                 {isLoaderOn ? (
                     <div className="new-profile-loader-container">
