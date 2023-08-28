@@ -2,24 +2,27 @@ import { createSlice } from '@reduxjs/toolkit'
 import { PayloadAction } from '@reduxjs/toolkit'
 import { User } from '../../services/interface.service'
 import { userService } from '../../services/user.service'
+import { utilService } from '../../services/util.service'
 
 interface UserState {
     loggedInUser: User
 }
 
 export const initialState: UserState = {
-    loggedInUser: userService.getEmptyUser()
+    loggedInUser: {
+        ...userService.getEmptyUser(),
+        username: 'G-' + utilService.generateId(5),
+        displayName: 'Guest',
+        createdAt: '06/23',
+        description: 'This is a guest account, you should create your own user...'
+    }
 }
 
 const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        onLoginUser: (state, action: PayloadAction<any>) => {
-            console.log(action.payload)
-            state.loggedInUser = action.payload
-        },
-        onLogoutUser: (state, action: PayloadAction<any>) => {
+        onUserChange: (state, action: PayloadAction<any>) => {
             state.loggedInUser = action.payload
         }
     }

@@ -21,7 +21,7 @@ function loginUser(email: string, password: string): AppThunk {
                     password
                 }
             })
-            dispatch(userReducer.onLoginUser(loggedInUser?.data))
+            dispatch(userReducer.onUserChange(loggedInUser?.data))
         } catch (error) {
             console.log('Login Failed.' + error)
         }
@@ -41,7 +41,7 @@ function signUp(user: any, profileImgFile: File | null, profileBgFile: File | nu
             const { data: newUser } = await httpService.post('/auth/sign-up', () => {
                 return utilService.objectAssignExact(user, userService.getEmptyCreateUserDto())
             })
-            dispatch(userReducer.onLoginUser(newUser))
+            dispatch(userReducer.onUserChange(newUser))
         } catch (error) {
             console.log('Login Failed.' + error)
         }
@@ -52,7 +52,7 @@ function logOutUser(): AppThunk {
     return async (dispatch) => {
         try {
             await httpService.post('auth/sign-out', () => {})
-            dispatch(userReducer.onLoginUser(initialState.loggedInUser))
+            dispatch(userReducer.onUserChange(initialState.loggedInUser))
         } catch (error) {
             console.log('Login Failed.' + error)
         }

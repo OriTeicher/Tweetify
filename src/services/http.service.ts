@@ -79,7 +79,7 @@ export function SilentLogin() {
                     }
                 }
             } finally {
-                dispatch(userReducer.onLoginUser(user?.data || initialState.loggedInUser))
+                dispatch(userReducer.onUserChange(user?.data || initialState.loggedInUser))
                 navigate('/home')
             }
         })()
