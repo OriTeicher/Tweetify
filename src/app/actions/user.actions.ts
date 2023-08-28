@@ -5,6 +5,7 @@ import { httpService } from '../../services/http.service'
 import { constsService } from '../../services/consts.service'
 import { utilService } from '../../services/util.service'
 import { userService } from '../../services/user.service'
+import { User } from '../../services/interface.service'
 
 export const userActions = {
     loginUser,
@@ -28,40 +29,22 @@ function loginUser(email: string, password: string): AppThunk {
     }
 }
 
-function signUp(user: any, profileImgFile: File | null, profileBgFile: File | null, isPost?: boolean): AppThunk {
+function signUp(user: Partial<User>, profileImgFile: File | null, profileBgFile: File | null, isPost?: boolean): AppThunk {
     return async (dispatch) => {
         try {
             let newUser = null
-            if (profileBgFile && profileImgFile) {
-                user.profileImgUrl = await cloudinaryService.uploadImgToCloud(profileBgFile)
-                user.profileBgUrl = await cloudinaryService.uploadImgToCloud(profileImgFile)
-            } else {
-                user.profileImgUrl = constsService.NO_PROFILE_IMG_URL
-                user.profileBgUrl = constsService.NO_BG_WALLPAPER_URL
+            if (profileImgFile) {
+                user.profileImgUrl = await cloudinaryService.uploadImgToCloud(profileImgFile)
+            }
+            if (profileBgFile) {
+                user.profileBgUrl = await cloudinaryService.uploadImgToCloud(profileBgFile)
             }
 
             if (isPost) {
-                newUser = (
-                    await httpService.post(
-                        '/auth/sign-up',
-                        () => {
-                            return utilService.objectAssignExact(user, userService.getEmptyCreateUserDto())
-                        },
-                        true
-                    )
-                ).data
+                newUser = (await httpService.post('/auth/sign-up', () => utilService.objectAssignExact(user, userService.getEmptyCreateUserDto()), true)).data
             } else {
-                newUser = (
-                    await httpService.patch(
-                        '/auth/sign-up',
-                        () => {
-                            return utilService.objectAssignExact(user, userService.getEmptyCreateUserDto())
-                        },
-                        true
-                    )
-                ).data
+                newUser = (await httpService.patch(`/users/${user?.id}`, () => utilService.objectAssignExact(user, userService.getEmptyUpdateUserDto()), true)).data
             }
-            console.log('newUser', newUser)
             dispatch(userReducer.onUserChange(newUser))
         } catch (error) {
             console.log('Login Failed.' + error)

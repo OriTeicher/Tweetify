@@ -14,7 +14,7 @@ export default function ProfilePage() {
     const { loggedInUser } = useSelector((state: RootState) => state.user)
 
     const handleEditProfile = () => {
-        if (!loggedInUser.id) return
+        if (!loggedInUser) return
         navigate(`/newprofile/${loggedInUser.id}`)
     }
 

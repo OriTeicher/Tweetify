@@ -1,10 +1,10 @@
-import { CreateUserDto, User } from './interface.service'
+import { CreateUserDto, UpdateUserDto, User } from './interface.service'
 import { utilService } from './util.service'
 export const userService = {
     getEmptyUser,
-    getEmptyCreateUserDto
+    getEmptyCreateUserDto,
+    getEmptyUpdateUserDto
 }
-
 
 // TODO: get empty user function
 function getEmptyUser(): User {
@@ -33,6 +33,15 @@ function getEmptyCreateUserDto(): CreateUserDto {
         description: '',
         email: '',
         profileImgUrl: '',
-        profileBgUrl: '',
+        profileBgUrl: ''
+    }
+}
+
+function getEmptyUpdateUserDto(): UpdateUserDto {
+    return {
+        displayName: '',
+        description: '',
+        profileImgUrl: '',
+        profileBgUrl: ''
     }
 }
