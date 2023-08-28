@@ -1,41 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { DateRange } from '@mui/icons-material'
 import ImgModal from '../cmps/utils/ImgModal'
-import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../app/store'
 import { Avatar } from '@mui/material'
 import { constsService } from '../services/consts.service'
 import { utilService } from '../services/util.service'
+import { useNavigate } from 'react-router-dom'
 
 export default function ProfilePage() {
+    const navigate = useNavigate()
     const [selectedImgUrl, setSelectedImgUrl] = useState('')
+    const { loggedInUser } = useSelector((state: RootState) => state.user)
 
-    // * LOGGED IN USER *
-    const { loggedInUser } = useSelector((state: RootState) => {
-        return state.user
-    })
+    const handleEditProfile = () => {
+        if (!loggedInUser.id) return
+        navigate(`/newprofile/${loggedInUser.id}`)
+    }
 
-    const formattedDate: string = (typeof loggedInUser.createdAt === 'number') ? utilService.getJoinedDateFormat(loggedInUser.createdAt) : loggedInUser.createdAt;
+    const formattedDate: string = typeof loggedInUser.createdAt === 'number' ? utilService.getJoinedDateFormat(loggedInUser.createdAt) : loggedInUser.createdAt
 
     return (
         <section className="feed-index profile-container">
-            <img
-                alt="NOTHING HERE"
-                className="profile-bgc-img"
-                src={loggedInUser.profileBgUrl || `${constsService.NO_BG_WALLPAPER_URL}`}
-                onClick={() => setSelectedImgUrl(loggedInUser.profileBgUrl)}
-            />
+            <img alt="NOTHING HERE" className="profile-bgc-img" src={loggedInUser.profileBgUrl || `${constsService.NO_BG_WALLPAPER_URL}`} onClick={() => setSelectedImgUrl(loggedInUser.profileBgUrl)} />
             <div className="user-cred">
                 <div className="profile-img-container">
                     <div className="edit-container">
-                        <Avatar
-                            className="profile-img"
-                            src={loggedInUser.profileImgUrl}
-                            alt="profile-pic"
-                            onClick={() => setSelectedImgUrl(loggedInUser.profileImgUrl)}
-                        />
-                        <button>Edit Profile</button>
+                        <Avatar className="profile-img" src={loggedInUser.profileImgUrl} alt="profile-pic" onClick={() => setSelectedImgUrl(loggedInUser.profileImgUrl)} />
+                        <button onClick={handleEditProfile}>Edit Profile</button>
                     </div>
                     <h1>{loggedInUser.displayName}</h1>
                     <h2>@{loggedInUser.username}</h2>
@@ -55,9 +47,7 @@ export default function ProfilePage() {
                     </p>
                 </div>
             </div>
-            {selectedImgUrl && (
-                <ImgModal imgUrl={selectedImgUrl} onCloseModal={() => setSelectedImgUrl('')} />
-            )}
+            {selectedImgUrl && <ImgModal imgUrl={selectedImgUrl} onCloseModal={() => setSelectedImgUrl('')} />}
         </section>
     )
 }

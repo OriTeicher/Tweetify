@@ -25,22 +25,10 @@ export const feedService = {
     getRandomProfilePhoto() {
         const randomNum = utilService.getRandomIntInclusive(1, 25)
         const randomGender = utilService.getRandomIntInclusive(1, 2) % 2 === 0 ? 'male' : 'female'
-        if (randomNum % 2 === 0)
-            return `https://xsgames.co/randomusers/assets/avatars/${randomGender}/${randomNum}.jpg`
+        if (randomNum % 2 === 0) return `https://xsgames.co/randomusers/assets/avatars/${randomGender}/${randomNum}.jpg`
     },
     getRandomPosts(postsCount: number) {
-        const names = [
-            'Jermia Defoe',
-            'Gabriel Jesus Christ',
-            'Mike Johnson',
-            'Kevin Davies',
-            'Barry Kane',
-            'Gareth Snale',
-            'Cristi Ronalda',
-            'Lya Messica',
-            'Luka Nordic',
-            'Timmo Cookie'
-        ]
+        const names = ['Jermia Defoe', 'Gabriel Jesus Christ', 'Mike Johnson', 'Kevin Davies', 'Barry Kane', 'Gareth Snale', 'Cristi Ronalda', 'Lya Messica', 'Luka Nordic', 'Timmo Cookie']
         const posts = []
 
         for (let i = 0; i < postsCount; i++) {
@@ -48,15 +36,11 @@ export const feedService = {
             const id = 'P-' + utilService.generateId(5)
             const displayName = names[utilService.getRandomIntInclusive(0, names.length - 1)]
             const username = displayName.toLowerCase().replace(/\s/g, '')
-            const content = utilService.generateRandomSentences(
-                utilService.getRandomIntInclusive(1, 4)
-            )
+            const content = utilService.generateRandomSentences(utilService.getRandomIntInclusive(1, 4))
             const owner = {
                 displayName,
                 username,
-                profileImgUrl:
-                    this.getRandomProfilePhoto() ||
-                    `https://source.boringavatars.com/beam/120/Stefan?colors=${randomColor}`,
+                profileImgUrl: this.getRandomProfilePhoto() || `https://source.boringavatars.com/beam/120/Stefan?colors=${randomColor}`,
                 isVerified: Math.random() < 0.5
             }
 
@@ -100,11 +84,15 @@ export const feedService = {
             username: 'demo-user',
             isVerified: true
         }
-        const comment = this.getEmptyPost(
-            owner,
-            utilService.generateRandomSentences(utilService.getRandomIntInclusive(1, 3))
-        )
+        const comment = this.getEmptyPost(owner, utilService.generateRandomSentences(utilService.getRandomIntInclusive(1, 3)))
         return comment
+    },
+    getEmptyUserCred() {
+        return {
+            username: '',
+            password: '',
+            email: ''
+        }
     }
 }
 

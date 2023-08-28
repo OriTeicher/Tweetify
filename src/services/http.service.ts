@@ -7,7 +7,8 @@ import { initialState, userReducer } from '../app/reducers/user.slice'
 
 export const httpService = {
     get,
-    post
+    post,
+    patch
 }
 
 const axiosInstance = axios.create({
@@ -48,6 +49,24 @@ async function post(url: string, cb: () => unknown, shouldRefresh?: boolean) {
         }
         console.log('here', cb())
         const res = await axiosInstance.post(url, cb(), {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        return res
+    } catch (error) {
+        if (error instanceof AxiosError) console.log(error.response?.data)
+        throw error
+    }
+}
+
+async function patch(url: string, cb: () => unknown, shouldRefresh?: boolean) {
+    try {
+        if (shouldRefresh) {
+            refresh()
+        }
+        console.log('here patch', cb())
+        const res = await axiosInstance.patch(url, cb(), {
             headers: {
                 'Content-Type': 'application/json'
             }

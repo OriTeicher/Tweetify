@@ -28,9 +28,10 @@ function loginUser(email: string, password: string): AppThunk {
     }
 }
 
-function signUp(user: any, profileImgFile: File | null, profileBgFile: File | null): AppThunk {
+function signUp(user: any, profileImgFile: File | null, profileBgFile: File | null, isPost?: boolean): AppThunk {
     return async (dispatch) => {
         try {
+            let newUser = null
             if (profileBgFile && profileImgFile) {
                 user.profileImgUrl = await cloudinaryService.uploadImgToCloud(profileBgFile)
                 user.profileBgUrl = await cloudinaryService.uploadImgToCloud(profileImgFile)
@@ -38,9 +39,20 @@ function signUp(user: any, profileImgFile: File | null, profileBgFile: File | nu
                 user.profileImgUrl = constsService.NO_PROFILE_IMG_URL
                 user.profileBgUrl = constsService.NO_BG_WALLPAPER_URL
             }
-            const { data: newUser } = await httpService.post('/auth/sign-up', () => {
-                return utilService.objectAssignExact(user, userService.getEmptyCreateUserDto())
-            })
+
+            if (isPost) {
+                newUser = (
+                    await httpService.post('/auth/sign-up', () => {
+                        return utilService.objectAssignExact(user, userService.getEmptyCreateUserDto())
+                    }, true)
+                ).data
+            } else {
+                newUser = (
+                    await httpService.patch('/auth/sign-up', () => {
+                        return utilService.objectAssignExact(user, userService.getEmptyCreateUserDto())
+                    }, true)
+                ).data
+            }
             dispatch(userReducer.onUserChange(newUser))
         } catch (error) {
             console.log('Login Failed.' + error)

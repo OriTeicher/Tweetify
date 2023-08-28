@@ -23,6 +23,10 @@ function App() {
                     path="/newprofile"
                     element={<AppCenterDynamicCmp cmp={CreateProfilePage} />}
                 />
+                <Route
+                    path="/newprofile/:id"
+                    element={<AppCenterDynamicCmp cmp={CreateProfilePage} />}
+                />
             </Routes>
         </BrowserRouter>
     )

@@ -1,24 +1,37 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Avatar } from '@mui/material'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { userActions } from '../app/actions/user.actions'
 import { userService } from '../services/user.service'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../app/store'
 import Loader from '../cmps/utils/Loader'
+import { feedService } from '../services/feed.service'
 
 export default function CreateProfilePage() {
     const [description, setDescription] = useState('')
     const [displayName, setDisplayName] = useState('')
+    const [editedDescription, setEditedDescription] = useState('')
+    const [editedDisplayName, setEditedDisplayName] = useState('')
     const [profileImage, setProfileImage] = useState('')
     const [profileBgImgUrl, setProfileBgUrl] = useState('')
     const [profileImgFile, setProfileImgFile] = useState<File | null>(null)
     const [profileBgImgFile, setProfileBgImgFile] = useState<File | null>(null)
     const [isLoaderOn, setIsLoaderOn] = useState(false)
 
+    const { loggedInUser } = useSelector((state: RootState) => state.user)
+
     const dispatch: any = useDispatch()
     const location = useLocation()
     const navigate = useNavigate()
-    const { username, password, email } = location.state
+
+    const { username, password, email } = location?.state ? location.state : feedService.getEmptyUserCred()
+
+    useEffect(() => {
+        if (!loggedInUser) return
+        setEditedDescription(loggedInUser.description || '')
+        setEditedDisplayName(loggedInUser.username || '')
+    }, [loggedInUser])
 
     const handleParagraphChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
         setDescription(event.target.value)
@@ -28,7 +41,7 @@ export default function CreateProfilePage() {
         setDisplayName(event.target.value)
     }
 
-    const handleSaveProfile = async () => {
+    const handleSaveProfile = async (isPost: boolean) => {
         setIsLoaderOn(true)
         const newUser = userService.getEmptyCreateUserDto()
         newUser.username = username
@@ -36,7 +49,7 @@ export default function CreateProfilePage() {
         newUser.description = description
         newUser.displayName = displayName
         newUser.email = email
-        await dispatch(userActions.signUp(newUser, profileImgFile, profileBgImgFile))
+        await dispatch(userActions.signUp(newUser, profileImgFile, profileBgImgFile, isPost))
         setIsLoaderOn(false)
         navigate('/home')
     }
@@ -54,25 +67,24 @@ export default function CreateProfilePage() {
     return (
         <section className="feed-index profile-container">
             <label htmlFor="bgc-img-upload">
-                <img className="profile-bgc-img" src={profileBgImgUrl || 'https://i0.wp.com/css-tricks.com/wp-content/uploads/2015/11/drag-drop-upload-2.gif'} alt="Profile Background" />
+                <img className="profile-bgc-img" src={loggedInUser ? loggedInUser.profileBgUrl : profileBgImgUrl || 'https://i0.wp.com/css-tricks.com/wp-content/uploads/2015/11/drag-drop-upload-2.gif'} alt="Profile Background" />
             </label>
             <div className="user-cred">
                 <div className="profile-img-container">
                     <div className="edit-container">
                         <label htmlFor="img-upload">
-                            <Avatar className="new-profile-img" src={profileImage} />
+                            <Avatar className="new-profile-img" src={loggedInUser ? loggedInUser.profileImgUrl : profileImage} />
                         </label>
                         <input id="img-upload" type="file" accept="image/*" onChange={handleProfileImgChange} style={{ display: 'none' }} />
                         <input id="bgc-img-upload" type="file" accept="image/*" onChange={handleBgImgChange} style={{ display: 'none' }} />
-                        <button onClick={handleSaveProfile} className="save-profile-btn">
+                        <button onClick={() => handleSaveProfile(false)} className="save-profile-btn">
                             Save Profile
                         </button>
                     </div>
-                    <input type="text" onChange={handleDisplayNameChange} placeholder="Display name..." />
-                    <h2>{'@' + username}</h2>
+                    <input type="text" onChange={handleDisplayNameChange} value={editedDisplayName} placeholder="Display name..." /> <h2>{'@' + (loggedInUser ? loggedInUser.username : username)}</h2>
                 </div>
                 <div>
-                    <textarea onChange={handleParagraphChange} placeholder="Click here to enter your profile description..." />
+                    <textarea onChange={handleParagraphChange} placeholder="Click here to enter your profile description..." value={editedDescription} />{' '}
                 </div>
                 {isLoaderOn ? (
                     <div className="new-profile-loader-container">
