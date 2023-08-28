@@ -18,7 +18,7 @@ function App() {
                 <Route path="/home/:id" element={<AppCenterDynamicCmp cmp={ReplySqueakPage} />} />
                 <Route path="/*" element={<AppCenterDynamicCmp cmp={FeedIndex} />} />
                 <Route path="/edit" element={<EditSqueakPage />} />
-                <Route path="/profile/:id" element={<AppCenterDynamicCmp cmp={ProfilePage} />} />
+                <Route path="/profile" element={<AppCenterDynamicCmp cmp={ProfilePage} />} />
                 <Route
                     path="/newprofile"
                     element={<AppCenterDynamicCmp cmp={CreateProfilePage} />}

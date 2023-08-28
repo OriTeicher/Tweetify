@@ -30,7 +30,7 @@ export default function CreateProfilePage() {
 
     const handleSaveProfile = async () => {
         setIsLoaderOn(true)
-        const newUser = userService.getEmptyUser()
+        const newUser = userService.getEmptyCreateUserDto()
         newUser.username = username
         newUser.password = password
         newUser.description = description

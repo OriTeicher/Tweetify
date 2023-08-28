@@ -2,7 +2,9 @@ import { AppThunk } from '../store'
 import { initialState, userReducer } from '../reducers/user.slice'
 import { cloudinaryService } from '../../services/cloudinary.service'
 import { httpService } from '../../services/http.service'
-import { CreateUserDto } from '../../services/interface.service'
+import { constsService } from '../../services/consts.service'
+import { utilService } from '../../services/util.service'
+import { userService } from '../../services/user.service'
 
 export const userActions = {
     loginUser,
@@ -30,22 +32,16 @@ function signUp(user: any, profileImgFile: File | null, profileBgFile: File | nu
     return async (dispatch) => {
         try {
             if (profileBgFile && profileImgFile) {
-                var profileImgUrl = await cloudinaryService.uploadImgToCloud(profileImgFile)
-                var profileBgUrl = await cloudinaryService.uploadImgToCloud(profileBgFile)
+                user.profileImgUrl = await cloudinaryService.uploadImgToCloud(profileBgFile)
+                user.profileBgUrl = await cloudinaryService.uploadImgToCloud(profileImgFile)
+            } else {
+                user.profileImgUrl = constsService.NO_PROFILE_IMG_URL
+                user.profileBgUrl = constsService.NO_BG_WALLPAPER_URL
             }
-            // TODO: change to consts
-            user.bgImgUrl = 'https://applicants.mta.ac.il/wp-content/uploads/2019/11/rominazi.png'
-            user.profileImgUrl = 'https://applicants.mta.ac.il/wp-content/uploads/2019/11/yossi.png'
-            await httpService.post('/auth/sign-up', () => {
-                const newUser: CreateUserDto = {
-                    email: user.email,
-                    password: user.password,
-                    username: user.username,
-                    displayName: user.displayName
-                }
-                return newUser
+            const { data: newUser } = await httpService.post('/auth/sign-up', () => {
+                return utilService.objectAssignExact(user, userService.getEmptyCreateUserDto())
             })
-            dispatch(userReducer.onLoginUser(user))
+            dispatch(userReducer.onLoginUser(newUser))
         } catch (error) {
             console.log('Login Failed.' + error)
         }

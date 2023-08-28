@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../app/store'
 import { Avatar } from '@mui/material'
 import { constsService } from '../services/consts.service'
+import { utilService } from '../services/util.service'
 
 export default function ProfilePage() {
     const [selectedImgUrl, setSelectedImgUrl] = useState('')
@@ -15,13 +16,15 @@ export default function ProfilePage() {
         return state.user
     })
 
+    const formattedDate: string = (typeof loggedInUser.createdAt === 'number') ? utilService.getJoinedDateFormat(loggedInUser.createdAt) : loggedInUser.createdAt;
+
     return (
         <section className="feed-index profile-container">
             <img
                 alt="NOTHING HERE"
                 className="profile-bgc-img"
-                src={loggedInUser.bgImgUrl || `${constsService.NO_BG_WALLPAPER}`}
-                onClick={() => setSelectedImgUrl(loggedInUser.bgImgUrl)}
+                src={loggedInUser.profileBgUrl || `${constsService.NO_BG_WALLPAPER_URL}`}
+                onClick={() => setSelectedImgUrl(loggedInUser.profileBgUrl)}
             />
             <div className="user-cred">
                 <div className="profile-img-container">
@@ -41,7 +44,7 @@ export default function ProfilePage() {
                     <p>{loggedInUser.description}</p>
                 </div>
                 <h2>
-                    joined at: {loggedInUser.joinedAt} <DateRange />
+                    joined at: {formattedDate} <DateRange />
                 </h2>
                 <div className="followers-container">
                     <p>
