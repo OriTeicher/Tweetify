@@ -36,20 +36,7 @@ function getRandomColor(): string {
 }
 
 function getCurrentDate(timeStamp: number): string {
-    const months = [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec'
-    ]
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
     const date = new Date(timeStamp)
     const currentDate = new Date()
@@ -110,13 +97,12 @@ function generateRandomSentences(sentencesCount: number) {
         "Swansea City's manager, Bob Bradley, made history when he relegated 200 times (not really) "
     ]
     let res = ''
-    for (let i = 0; i < sentencesCount; i++)
-        res += sentences[getRandomIntInclusive(0, sentences.length - 1)]
+    for (let i = 0; i < sentencesCount; i++) res += sentences[getRandomIntInclusive(0, sentences.length - 1)]
     return res
 }
 
 function getJoinedDateFormat(timestamp?: number) {
-    const currentDate = (timestamp) ? new Date(timestamp) : new Date();
+    const currentDate = timestamp ? new Date(timestamp) : new Date()
     let month = currentDate.getMonth() + 1
     const year = currentDate.getFullYear()
     return `${month < 10 ? '0' + month : month}/${year}`
@@ -138,8 +124,8 @@ function debounce(func: Function, delay: any) {
 }
 
 function objectAssignExact(source: any, target: any) {
-    Object.getOwnPropertyNames(target).forEach(name => {
-        target[name] = source[name];
+    Object.getOwnPropertyNames(target).forEach((name) => {
+        if (source[name]) target[name] = source[name]
     })
-    return target;
+    return target
 }

@@ -16,7 +16,7 @@ const axiosInstance = axios.create({
     withCredentials: true
 })
 
-async function get(url: string, shouldRefresh?: boolean): Promise<unknown> {
+async function get(url: string, shouldRefresh?: boolean) {
     try {
         if (shouldRefresh) {
             refresh()
@@ -47,7 +47,6 @@ async function post(url: string, cb: () => unknown, shouldRefresh?: boolean) {
         if (shouldRefresh) {
             refresh()
         }
-        console.log('here', cb())
         const res = await axiosInstance.post(url, cb(), {
             headers: {
                 'Content-Type': 'application/json'

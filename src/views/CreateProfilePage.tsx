@@ -30,7 +30,6 @@ export default function CreateProfilePage() {
         if (!loggedInUser) return
         setEditedDescription(loggedInUser.description || '')
         setEditedDisplayName(loggedInUser.displayName || '')
-        console.log(loggedInUser)
         setProfileBgUrl(loggedInUser.profileBgUrl || constsService.NO_BG_WALLPAPER_URL)
         setProfileImage(loggedInUser.profileImgUrl || constsService.NO_PROFILE_IMG_URL)
     }, [loggedInUser])

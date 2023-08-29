@@ -1,11 +1,13 @@
 import { feedReducers } from '../reducers/feed.slice'
 import { dbService } from '../../services/db.service'
-import { AppThunk } from '../store'
+import store, { AppThunk } from '../store'
 import { feedService } from '../../services/feed.service'
 import { cloudinaryService } from '../../services/cloudinary.service'
 import { loaderReducers } from '../reducers/loader.slice'
 import { constsService } from '../../services/consts.service'
-import { FeedPost } from '../../services/interface.service'
+import { CreatePostDto, FeedPost, User } from '../../services/interface.service'
+import { httpService } from '../../services/http.service'
+import { utilService } from '../../services/util.service'
 
 export const feedActions = {
     queryFeedPosts,
@@ -20,11 +22,10 @@ function queryFeedPosts(): AppThunk {
     return async (dispatch) => {
         try {
             dispatch(loaderReducers.toggleAppLoader())
-            let feedPostsDB = await dbService.getCollectionFromDB(dbService.POSTS_DB_COLLECTION)
-            if (feedPostsDB.length < dbService.MIN_POST_NUM) {
-                await dbService.setDemoDB(constsService.DEMO_POSTS_NUM)
-                feedPostsDB = await dbService.getCollectionFromDB(dbService.POSTS_DB_COLLECTION)
-            }
+            const feedPosts = store.getState().feed.feedPosts
+            const paginationQuery = feedPosts.length > 0 ? `?limit=${10}&startAt=${feedPosts?.at(feedPosts?.length - 1)?.id}` : `?limit=${10}`
+            const { data: feedPostsDB } = await httpService.get(`/posts${paginationQuery}`, true)
+
             dispatch(feedReducers.queryFeedPostsSuccess(feedPostsDB))
             dispatch(loaderReducers.toggleAppLoader())
         } catch (error) {
@@ -33,27 +34,16 @@ function queryFeedPosts(): AppThunk {
     }
 }
 
-function addFeedPost(
-    loggedInUser: any,
-    postContent: string,
-    file: File | null,
-    gifUrl: string = ''
-): AppThunk {
+function addFeedPost(loggedInUser: User, postContent: string, file: File | null, gifUrl: string = ''): AppThunk {
     return async (dispatch) => {
         try {
             dispatch(loaderReducers.toggleNewPostLoader())
             const newPost = feedService.getEmptyPost(loggedInUser, postContent)
-
             newPost.imgUrl = file ? await cloudinaryService.uploadImgToCloud(file) : gifUrl
 
-            await dbService.addItemToCollection(newPost, newPost.id, dbService.POSTS_DB_COLLECTION)
-            await dbService.pushStringToArrayField(
-                loggedInUser.id,
-                dbService.USER_DB_COLLECTION,
-                dbService.POSTS_ID_FIELD,
-                newPost.id
-            )
-            dispatch(feedReducers.addFeedPostSuccess(newPost))
+            const { data } = await httpService.post('/posts', () => utilService.objectAssignExact(newPost, { ...feedService.getEmptyCreatePostDto(), userId: loggedInUser.id }), true)
+
+            dispatch(feedReducers.addFeedPostSuccess(data))
             dispatch(loaderReducers.toggleNewPostLoader())
         } catch (error) {
             console.log('Cannot add post. ', error)
@@ -78,12 +68,19 @@ function toggleStats(postId: string, isIncrease: boolean): AppThunk {
     return async (dispatch) => {
         try {
             dispatch(feedReducers.toggleStatsSuccess())
-            await dbService.updateFieldInCollection(
-                postId,
-                constsService.LIKES_FIELD,
-                dbService.POSTS_DB_COLLECTION,
-                isIncrease ? constsService.LIKE : constsService.UNLIKE
-            )
+            const postToUpdate = store.getState().feed.feedPosts.find((post) => post.id === postId)
+
+            if (postToUpdate) {
+                const { data } = await httpService.patch(
+                    `/posts/${postId}`,
+                    () =>
+                        ({
+                            ...utilService.objectAssignExact(postToUpdate, feedService.getEmptyCreatePostDto()),
+                            likes: postToUpdate?.likes + (isIncrease ? 1 : -1),
+                            userId: postToUpdate.owner.id
+                        } satisfies CreatePostDto)
+                )
+            }
         } catch (error) {
             console.log('Cannot toggle likes. ', error)
         }
@@ -95,10 +92,7 @@ function setFilterBy(newFilterBy: string): AppThunk {
         try {
             dispatch(loaderReducers.toggleAppLoader())
             dispatch(feedReducers.setFilterBySuccess(newFilterBy))
-            const feedPostsDB = await dbService.getCollectionFromDB(
-                dbService.POSTS_DB_COLLECTION,
-                newFilterBy
-            )
+            const feedPostsDB = await dbService.getCollectionFromDB(dbService.POSTS_DB_COLLECTION, newFilterBy)
             dispatch(feedReducers.queryFeedPostsSuccess(feedPostsDB))
             dispatch(loaderReducers.toggleAppLoader())
         } catch (error) {
@@ -110,7 +104,7 @@ function setFilterBy(newFilterBy: string): AppThunk {
 function setSelectedSqueak(selectedSqueak: FeedPost): AppThunk {
     return async (dispatch) => {
         try {
-            console.log('setSelec',selectedSqueak)
+            console.log('setSelec', selectedSqueak)
             dispatch(feedReducers.setSelectedSqueak(selectedSqueak))
         } catch (error) {
             console.log('Cannot set filter by. ', error)

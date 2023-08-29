@@ -1,13 +1,13 @@
 import { utilService } from './util.service'
-import { FeedPost, Owner } from './interface.service'
+import { CreatePostDto, FeedPost, User, UserForPost } from './interface.service'
 import { constsService } from './consts.service'
 
 export const feedService = {
-    getEmptyPost(user: Owner, content: string = '...'): FeedPost {
+    getEmptyPost(user: UserForPost, content: string = '...'): FeedPost {
         return {
             id: 'P-' + utilService.generateId(constsService.ID_LENGTH),
             owner: {
-                userId: user.userId ? user.userId : constsService.GUEST_ID,
+                id: user?.id ? user.id : constsService.GUEST_ID,
                 isVerified: user.isVerified,
                 displayName: user.displayName,
                 username: user.username,
@@ -62,7 +62,7 @@ export const feedService = {
     },
 
     getEmptyUser() {
-        return {} as Owner
+        return {} as User
     },
 
     getRandomComments(length: number) {
@@ -77,8 +77,8 @@ export const feedService = {
     getRandomComment(displayName: string = 'Guest'): object {
         const names = ['John Doe', 'Jane Smith', 'Mike Johnson', 'Emily Brown']
         const randomColor = utilService.getRandomColor()
-        const owner: Owner = {
-            userId: 'U' + utilService.generateId(5),
+        const owner: UserForPost = {
+            id: 'U' + utilService.generateId(5),
             displayName: names[utilService.getRandomIntInclusive(0, 3)],
             profileImgUrl: `https://source.boringavatars.com/beam/120/Stefan?colors=${randomColor}`,
             username: 'demo-user',
@@ -92,6 +92,13 @@ export const feedService = {
             username: '',
             password: '',
             email: ''
+        }
+    },
+    getEmptyCreatePostDto(): CreatePostDto {
+        return {
+            userId: '',
+            content: '',
+            imgUrl: ''
         }
     }
 }

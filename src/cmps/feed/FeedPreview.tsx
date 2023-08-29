@@ -4,21 +4,26 @@ import FeedContentPreview from './FeedContentPreview'
 import Loader from '../utils/Loader'
 import { Avatar } from '@mui/material'
 import { FeedPost } from '../../services/interface.service'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../app/store'
 import { constsService } from '../../services/consts.service'
 import { eventBus } from '../../services/event.bus.service'
 import FeedPreviewIcons from './FeedPreviewIcons'
+import { Action, ThunkDispatch } from '@reduxjs/toolkit'
+import { feedActions } from '../../app/actions/feed.actions'
 
 export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
     const { isPostLoading } = useSelector((state: RootState) => {
         return state.loader
     })
 
+    const dispatch: ThunkDispatch<RootState, undefined, Action<string>> = useDispatch()
+
     // TODO: handle icon click function - switch function
     const handleIconClick = (selectedIcon: string) => {
         switch (selectedIcon) {
             case constsService.LIKES_FIELD:
+                dispatch(feedActions.toggleStats(props.id, true))
                 break
             case constsService.COMMENTS_FIELD:
                 handleSelectedSqueak(props)
@@ -52,12 +57,7 @@ export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
                                 imgUrl={props.imgUrl}
                                 onReadPost={() => handleSelectedSqueak(props)}
                             />
-                            <FeedPreviewIcons
-                                likesNum={props.likes}
-                                commentsNum={props.comments.length}
-                                resqueaksNum={props.resqueaks}
-                                onIconClick={handleIconClick}
-                            />
+                            <FeedPreviewIcons likesNum={props.likes} commentsNum={props.comments.length} resqueaksNum={props.resqueaks} onIconClick={handleIconClick} />
                         </div>
                     </div>
                 )}

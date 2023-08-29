@@ -1,8 +1,10 @@
 // ? CONTAINS RE-USABLE INTERFACES
 
+export type UserForPost = Pick<User, 'id' | 'displayName' | 'username' | 'profileImgUrl' | 'isVerified'>
+
 export interface FeedPost {
     id: string
-    owner: Owner
+    owner: UserForPost
     content: string
     imgUrl?: string
     createdAt: number
@@ -15,14 +17,6 @@ export interface Trend {
     category: string
     title: string
     tweetsCount: number
-}
-
-export interface Owner {
-    userId: string
-    displayName: string
-    username: string
-    profileImgUrl?: string
-    isVerified: boolean
 }
 
 export interface User {
@@ -56,4 +50,10 @@ export interface UpdateUserDto {
     displayName: string
     profileImgUrl?: string
     profileBgUrl?: string
+}
+
+export interface CreatePostDto {
+    userId: string
+    content: string
+    imgUrl?: string
 }
