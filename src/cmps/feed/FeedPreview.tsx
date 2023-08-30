@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import FeedContentPreview from './FeedContentPreview'
 import Loader from '../utils/Loader'
@@ -40,32 +39,30 @@ export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
     }
 
     return (
-        <>
-            <section className="post-preview">
-                {isPostLoading ? (
-                    <Loader />
-                ) : (
-                    <div className="top-preview">
-                        <div className="avatar-container">
-                            <Avatar src={props.owner?.profileImgUrl} className="user-avatar" />
-                            <div className="link-line"></div>
-                        </div>
-                        <div className="  ">
-                            <FeedContentPreview
-                                id={props.id}
-                                displayName={props.owner.displayName}
-                                username={props.owner.username}
-                                verified={props.owner.isVerified}
-                                createdAt={props.createdAt}
-                                content={props.content}
-                                imgUrl={props.imgUrl}
-                                onReadPost={() => handleSelectedSqueak(props)}
-                            />
-                            <FeedPreviewIcons isLiked={didLike} likesNum={props.likes} commentsNum={props.comments.length} resqueaksNum={props.resqueaks} onIconClick={handleIconClick} />
-                        </div>
+        <section className="post-preview">
+            {isPostLoading ? (
+                <Loader />
+            ) : (
+                <div className="top-preview">
+                    <div className="avatar-container">
+                        <Avatar src={props.owner?.profileImgUrl} className="user-avatar" />
+                        <div className="link-line"></div>
                     </div>
-                )}
-            </section>
-        </>
+                    <div className="  ">
+                        <FeedContentPreview
+                            id={props.id}
+                            displayName={props.owner.displayName}
+                            username={props.owner.username}
+                            verified={props.owner.isVerified}
+                            createdAt={props.createdAt}
+                            content={props.content}
+                            imgUrl={props.imgUrl}
+                            onReadPost={() => handleSelectedSqueak(props)}
+                        />
+                        <FeedPreviewIcons isLiked={didLike} likesNum={props.likes} commentsNum={props.comments.length} resqueaksNum={props.resqueaks} onIconClick={handleIconClick} />
+                    </div>
+                </div>
+            )}
+        </section>
     )
 }

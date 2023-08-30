@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { DateRange } from '@mui/icons-material'
 import ImgModal from '../cmps/utils/ImgModal'
+import { DateRange } from '@mui/icons-material'
 import { useSelector } from 'react-redux'
 import { RootState } from '../app/store'
 import { Avatar } from '@mui/material'
@@ -9,10 +9,13 @@ import { utilService } from '../services/util.service'
 import { useNavigate } from 'react-router-dom'
 
 export default function ProfilePage() {
-    const navigate = useNavigate()
     const [selectedImgUrl, setSelectedImgUrl] = useState('')
-    const { loggedInUser } = useSelector((state: RootState) => state.user)
     const [isBeingEdited, setIsBeingEdited] = useState<boolean>(false)
+
+    const { loggedInUser } = useSelector((state: RootState) => state.user)
+    const isGuestUserLoggedIn = loggedInUser.email ? false : true
+
+    const navigate = useNavigate()
 
     const handleEditProfile = () => {
         if (!loggedInUser) return
@@ -23,7 +26,6 @@ export default function ProfilePage() {
             }
         })
     }
-
     const formattedDate: string = typeof loggedInUser.createdAt === 'number' ? utilService.getJoinedDateFormat(loggedInUser.createdAt) : loggedInUser.createdAt
 
     return (
@@ -33,7 +35,7 @@ export default function ProfilePage() {
                 <div className="profile-img-container">
                     <div className="edit-container">
                         <Avatar className="profile-img" src={loggedInUser.profileImgUrl} alt="profile-pic" onClick={() => setSelectedImgUrl(loggedInUser.profileImgUrl)} />
-                        <button onClick={handleEditProfile}>Edit Profile</button>
+                        {isGuestUserLoggedIn && <button onClick={handleEditProfile}>Edit Profile</button>}
                     </div>
                     <h1>{loggedInUser.displayName}</h1>
                     <h2>@{loggedInUser.username}</h2>
