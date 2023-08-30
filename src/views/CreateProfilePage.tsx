@@ -42,6 +42,8 @@ export default function CreateProfilePage() {
         setEditedDisplayName(event.target.value)
     }
 
+    console.log(loggedInUser)
+
     const handleSaveProfile = async () => {
         setIsLoaderOn(true)
         const newUser = userService.getEmptyCreateUserDto()
@@ -52,7 +54,7 @@ export default function CreateProfilePage() {
         newUser.profileBgUrl = constsService.NO_BG_WALLPAPER_URL
         newUser.profileImgUrl = constsService.NO_PROFILE_IMG_URL
         newUser.email = email
-        await dispatch(userActions.signUp(newUser, profileImgFile, profileBgImgFile))
+        await dispatch(userActions.signUp(newUser, profileImgFile, profileBgImgFile, true))
         setIsLoaderOn(false)
         navigate('/home')
     }
@@ -95,7 +97,7 @@ export default function CreateProfilePage() {
                         </label>
                         <input id="img-upload" type="file" accept="image/*" onChange={handleProfileImgChange} style={{ display: 'none' }} />
                         <input id="bgc-img-upload" type="file" accept="image/*" onChange={handleBgImgChange} style={{ display: 'none' }} />
-                        <button onClick={loggedInUser ? handleEditProfile : handleSaveProfile} className="save-profile-btn">
+                        <button onClick={loggedInUser.email !== '' ? handleEditProfile : handleSaveProfile} className="save-profile-btn">
                             Save Profile
                         </button>
                     </div>

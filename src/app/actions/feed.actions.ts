@@ -4,7 +4,6 @@ import store, { AppThunk } from '../store'
 import { feedService } from '../../services/feed.service'
 import { cloudinaryService } from '../../services/cloudinary.service'
 import { loaderReducers } from '../reducers/loader.slice'
-import { constsService } from '../../services/consts.service'
 import { CreatePostDto, FeedPost, User } from '../../services/interface.service'
 import { httpService } from '../../services/http.service'
 import { utilService } from '../../services/util.service'
@@ -23,7 +22,7 @@ function queryFeedPosts(): AppThunk {
         try {
             dispatch(loaderReducers.toggleAppLoader())
             const feedPosts = store.getState().feed.feedPosts
-            const paginationQuery = feedPosts.length > 0 ? `?limit=${10}&startAt=${feedPosts?.at(feedPosts?.length - 1)?.id}` : `?limit=${10}`
+            const paginationQuery = feedPosts.length > 0 ? `?limit=${25}&startAt=${feedPosts?.at(feedPosts?.length - 1)?.id}` : `?limit=${25}`
             const { data: feedPostsDB } = await httpService.get(`/posts${paginationQuery}`, true)
 
             dispatch(feedReducers.queryFeedPostsSuccess(feedPostsDB))

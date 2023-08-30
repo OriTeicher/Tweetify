@@ -29,7 +29,7 @@ function loginUser(email: string, password: string): AppThunk {
     }
 }
 
-function signUp(user: Partial<User>, profileImgFile: File | null, profileBgFile: File | null, isPost?: boolean): AppThunk {
+function signUp(user: Partial<User>, profileImgFile: File | null, profileBgFile: File | null, isPost: boolean): AppThunk {
     return async (dispatch) => {
         try {
             let newUser = null
@@ -40,8 +40,11 @@ function signUp(user: Partial<User>, profileImgFile: File | null, profileBgFile:
                 user.profileBgUrl = await cloudinaryService.uploadImgToCloud(profileBgFile)
             }
 
+            console.log(isPost)
             if (isPost) {
+                console.log('here')
                 newUser = (await httpService.post('/auth/sign-up', () => utilService.objectAssignExact(user, userService.getEmptyCreateUserDto()), true)).data
+                console.log('newUser', newUser)
             } else {
                 newUser = (await httpService.patch(`/users/${user?.id}`, () => utilService.objectAssignExact(user, userService.getEmptyUpdateUserDto()), true)).data
             }
