@@ -7,7 +7,8 @@ export const utilService = {
     generateId,
     getJoinedDateFormat,
     debounce,
-    objectAssignExact
+    objectAssignExact,
+    getRandomBool,
 }
 
 function generateId(idLength: number = 5) {
@@ -25,13 +26,16 @@ function getRandomIntInclusive(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
-function getRandomColor(): string {
+function getRandomColor() {
+    const defaultColor = '109'
     const red = Math.floor(Math.random() * 256)
     const green = Math.floor(Math.random() * 256)
     const blue = Math.floor(Math.random() * 256)
-
     const color = `${red.toString(16)}${green.toString(16)}${blue.toString(16)}`
-
+    // ? Calculation of the brightness of the color to know if its like the page bgc
+    const brightness = (red * 299 + green * 587 + blue * 114) / 1000
+    const threshold = 50
+    if (brightness <= threshold) return defaultColor
     return color
 }
 
@@ -128,4 +132,9 @@ function objectAssignExact(source: any, target: any) {
         if (source[name]) target[name] = source[name]
     })
     return target
+}
+
+function getRandomBool() {
+    const randomNum = getRandomIntInclusive(1, 2)
+    return randomNum === 1
 }

@@ -12,6 +12,7 @@ export const feedService = {
     getEmptyUserCred,
     getEmptyCreatePostDto
 }
+
 function getEmptyPost(user: UserForPost, content: string = '...'): FeedPost {
     return {
         id: 'P-' + utilService.generateId(constsService.ID_LENGTH),
@@ -34,40 +35,36 @@ function getEmptyPost(user: UserForPost, content: string = '...'): FeedPost {
 function getRandomProfilePhoto() {
     const randomNum = utilService.getRandomIntInclusive(1, 25)
     const randomGender = utilService.getRandomIntInclusive(1, 2) % 2 === 0 ? 'male' : 'female'
-    if (randomNum % 2 === 0) return `https://xsgames.co/randomusers/assets/avatars/${randomGender}/${randomNum}.jpg`
+    const avatarUrl = `https://xsgames.co/randomusers/assets/avatars/${randomGender}/${randomNum}.jpg`
+    if (randomNum % 2 === 0) return avatarUrl
 }
+
 function getRandomPosts(postsCount: number) {
-    const names = ['Jermia Defoe', 'Gabriel Jesus Christ', 'Mike Johnson', 'Kevin Davies', 'Barry Kane', 'Gareth Snale', 'Cristi Ronalda', 'Lya Messica', 'Luka Nordic', 'Timmo Cookie']
     const posts = []
-
     for (let i = 0; i < postsCount; i++) {
-        const randomColor = utilService.getRandomColor()
-        const id = 'P-' + utilService.generateId(5)
-        const displayName = names[utilService.getRandomIntInclusive(0, names.length - 1)]
-        const username = displayName.toLowerCase().replace(/\s/g, '')
-        const content = utilService.generateRandomSentences(utilService.getRandomIntInclusive(1, 4))
-        const owner = {
-            displayName,
-            username,
-            profileImgUrl: this.getRandomProfilePhoto() || `https://source.boringavatars.com/beam/120/Stefan?colors=${randomColor}`,
-            isVerified: Math.random() < 0.5
-        }
-
-        const imgUrl = demoPhotos[utilService.getRandomIntInclusive(0, demoPhotos.length - 1)]
-        const createdAt = Date.now()
-        const post = {
-            id,
-            owner,
-            content,
-            imgUrl,
-            createdAt,
-            likes: utilService.getRandomIntInclusive(0, 500),
-            comments: this.getRandomComments(utilService.getRandomIntInclusive(0, 7)),
-            resqueaks: utilService.getRandomIntInclusive(0, 50)
-        }
-        posts.push(post)
+        posts.push(getRandomPost())
     }
     return posts
+}
+
+function getRandomPost() {
+    const randomDisplayName = constsService.RANDOM_NAMES[utilService.getRandomIntInclusive(0, 9)]
+    const imgUrl = constsService.DEMO_PHOTOS[utilService.getRandomIntInclusive(0, constsService.DEMO_PHOTOS.length - 1)]
+    return {
+        id: 'P-' + utilService.generateId(5),
+        imgUrl,
+        content: utilService.generateRandomSentences(utilService.getRandomIntInclusive(1, 4)),
+        owner: {
+            displayName: randomDisplayName,
+            username: randomDisplayName.toLowerCase(),
+            profileImgUrl: getRandomProfilePhoto(),
+            isVerified: Math.random() < 0.5
+        },
+        likes: utilService.getRandomIntInclusive(0, 500),
+        comments: getRandomComments(utilService.getRandomIntInclusive(0, 7)),
+        resqueaks: utilService.getRandomIntInclusive(0, 50),
+        createdAt: Date.now()
+    }
 }
 
 function getEmptyUser() {
@@ -77,25 +74,25 @@ function getEmptyUser() {
 function getRandomComments(length: number) {
     let comments = []
     for (let i = 0; i < length; i++) {
-        let randomComment: object = this.getRandomComment()
+        let randomComment = getRandomComment()
         comments.push(randomComment)
     }
     return comments
 }
 
 function getRandomComment(displayName: string = 'Guest'): object {
-    const names = ['John Doe', 'Jane Smith', 'Mike Johnson', 'Emily Brown']
     const randomColor = utilService.getRandomColor()
     const owner: UserForPost = {
         id: 'U' + utilService.generateId(5),
-        displayName: names[utilService.getRandomIntInclusive(0, 3)],
+        displayName: constsService.RANDOM_NAMES[utilService.getRandomIntInclusive(0, 3)],
         profileImgUrl: `https://source.boringavatars.com/beam/120/Stefan?colors=${randomColor}`,
         username: 'demo-user',
-        isVerified: true
+        isVerified: utilService.getRandomBool()
     }
-    const comment = this.getEmptyPost(owner, utilService.generateRandomSentences(utilService.getRandomIntInclusive(1, 3)))
+    const comment = getEmptyPost(owner, utilService.generateRandomSentences(utilService.getRandomIntInclusive(1, 3)))
     return comment
 }
+
 function getEmptyUserCred() {
     return {
         username: '',
@@ -110,21 +107,3 @@ function getEmptyCreatePostDto(): CreatePostDto {
         imgUrl: ''
     }
 }
-const demoPhotos = [
-    'https://picsum.photos/518/288',
-    'https://picsum.photos/522/292',
-    'https://picsum.photos/516/298',
-    'https://picsum.photos/516/258',
-    'http://i.stack.imgur.com/SBv4T.gif',
-    'https://static.scientificamerican.com/sciam/assets/Image/2019/spinningblackhole.gif',
-    'https://media1.giphy.com/media/3oEjI4sFlp73fvEYgw/giphy.gif',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    ''
-]
