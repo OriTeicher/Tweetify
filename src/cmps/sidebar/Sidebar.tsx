@@ -76,35 +76,14 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
     return (
         <>
             <section className="left-menu">
-                <div
-                    className={`sidebar-container  ${
-                        isSmallScreen ? 'mobile' : null
-                    }`}
-                >
+                <div className={`sidebar-container  ${isSmallScreen ? 'mobile' : null}`}>
                     {renderSidebarOptions()}
 
-                    <button
-                        className={`squeak-btn ${
-                            isSmallScreen ? 'mobile' : 'null'
-                        }`}
-                        onClick={handleSiderbarSqueak}
-                    >
+                    <button className={`squeak-btn ${isSmallScreen ? 'mobile' : 'null'}`} onClick={handleSiderbarSqueak}>
                         {isSmallScreen ? '+' : 'Squeak'}
                     </button>
-
-                    <LoggedAcount
-                        displayName={loggedInUser.displayName}
-                        username={loggedInUser.username}
-                        profileImg={loggedInUser.profileImgUrl}
-                        setIsLoginModalOpen={(isOpen: boolean) =>
-                            setLoginModal(isOpen)
-                        }
-                    />
-
-                    <LoginModal
-                        isOpen={isLoginModalOpen}
-                        setIsOpen={(isOpen: boolean) => setLoginModal(isOpen)}
-                    />
+                    <LoggedAcount displayName={loggedInUser.displayName} username={loggedInUser.username} profileImg={loggedInUser.profileImgUrl} setIsLoginModalOpen={(isOpen: boolean) => setLoginModal(isOpen)} />
+                    <LoginModal isOpen={isLoginModalOpen} setIsOpen={(isOpen: boolean) => setLoginModal(isOpen)} />
                 </div>
             </section>
         </>

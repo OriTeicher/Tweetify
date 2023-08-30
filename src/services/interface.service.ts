@@ -1,4 +1,4 @@
-// ? CONTAINS RE-USABLE INTERFACES
+// ? CONTAINS GLOBAL INTERFACES
 
 export type UserForPost = Pick<User, 'id' | 'displayName' | 'username' | 'profileImgUrl' | 'isVerified'>
 

@@ -24,6 +24,7 @@ export default function CreateProfilePage() {
     const navigate = useNavigate()
 
     const { loggedInUser } = useSelector((state: RootState) => state.user)
+    const isGuestUser = loggedInUser.email ? false : true
     const { username, password, email } = location?.state ? location.state : feedService.getEmptyUserCred()
 
     useEffect(() => {
@@ -44,7 +45,7 @@ export default function CreateProfilePage() {
 
     console.log(loggedInUser)
 
-    const handleSaveProfile = async () => {
+    const handleCreateNewProfile = async () => {
         setIsLoaderOn(true)
         const newUser = userService.getEmptyCreateUserDto()
         newUser.username = username
@@ -60,7 +61,7 @@ export default function CreateProfilePage() {
     }
 
     // TODO: continue from here
-    const handleEditProfile = async () => {
+    const handleUpdateProfile = async () => {
         setIsLoaderOn(true)
         const updatedUser = userService.getEmptyUser()
         updatedUser.username = username
@@ -87,7 +88,7 @@ export default function CreateProfilePage() {
     return (
         <section className="feed-index profile-container">
             <label htmlFor="bgc-img-upload">
-                <img className="profile-bgc-img" src={profileBgImgUrl || 'https://i0.wp.com/css-tricks.com/wp-content/uploads/2015/11/drag-drop-upload-2.gif'} alt="Profile Background" />
+                <img className="profile-bgc-img" src={profileBgImgUrl} alt="Profile Background" />
             </label>
             <div className="user-cred">
                 <div className="profile-img-container">
@@ -97,9 +98,11 @@ export default function CreateProfilePage() {
                         </label>
                         <input id="img-upload" type="file" accept="image/*" onChange={handleProfileImgChange} style={{ display: 'none' }} />
                         <input id="bgc-img-upload" type="file" accept="image/*" onChange={handleBgImgChange} style={{ display: 'none' }} />
-                        <button onClick={loggedInUser.email !== '' ? handleEditProfile : handleSaveProfile} className="save-profile-btn">
-                            Save Profile
-                        </button>
+                        {isGuestUser && (
+                            <button onClick={loggedInUser.email !== '' ? handleUpdateProfile : handleCreateNewProfile} className="save-profile-btn">
+                                Save Profile
+                            </button>
+                        )}
                     </div>
                     <input type="text" onChange={handleDisplayNameChange} value={editedDisplayName} placeholder="Display name..." />
                     <h2>{'@' + username}</h2>

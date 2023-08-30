@@ -58,7 +58,7 @@ function getRandomPost() {
             displayName: randomDisplayName,
             username: randomDisplayName.toLowerCase(),
             profileImgUrl: getRandomProfilePhoto(),
-            isVerified: Math.random() < 0.5
+            isVerified: utilService.getRandomBool()
         },
         likes: utilService.getRandomIntInclusive(0, 500),
         comments: getRandomComments(utilService.getRandomIntInclusive(0, 7)),
