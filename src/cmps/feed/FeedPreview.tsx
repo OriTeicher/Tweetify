@@ -20,13 +20,13 @@ export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
         return state.user
     })
     const dispatch: ThunkDispatch<RootState, undefined, Action<string>> = useDispatch()
-    const didLike = props.likedId?.includes(loggedInUser.id) || false
+    const isLiked = props.likedId?.includes(loggedInUser.id) || false
 
     // TODO: handle icon click function - switch function
     const handleIconClick = (selectedIcon: string) => {
         switch (selectedIcon) {
             case constsService.LIKES_FIELD:
-                dispatch(feedActions.toggleStats(props.id, didLike))
+                dispatch(feedActions.toggleStats(props.id, isLiked))
                 break
             case constsService.COMMENTS_FIELD:
                 handleSelectedSqueak(props)

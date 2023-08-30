@@ -63,7 +63,7 @@ function removeFeedPost(postId: string): AppThunk {
     }
 }
 
-function toggleStats(postId: string, isIncrease: boolean): AppThunk {
+function toggleStats(postId: string, isLiked: boolean): AppThunk {
     return async (dispatch) => {
         try {
             dispatch(feedReducers.toggleStatsSuccess())
@@ -75,7 +75,7 @@ function toggleStats(postId: string, isIncrease: boolean): AppThunk {
                     () =>
                         ({
                             ...utilService.objectAssignExact(postToUpdate, feedService.getEmptyCreatePostDto()),
-                            likes: postToUpdate?.likes + (isIncrease ? -1 : 1),
+                            likes: postToUpdate?.likes + (isLiked ? -1 : 1),
                             userId: postToUpdate.owner.id
                         } satisfies CreatePostDto)
                 )
