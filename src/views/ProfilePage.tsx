@@ -12,10 +12,16 @@ export default function ProfilePage() {
     const navigate = useNavigate()
     const [selectedImgUrl, setSelectedImgUrl] = useState('')
     const { loggedInUser } = useSelector((state: RootState) => state.user)
+    const [isBeingEdited, setIsBeingEdited] = useState<boolean>(false)
 
     const handleEditProfile = () => {
         if (!loggedInUser) return
-        navigate(`/newprofile/${loggedInUser.id}`)
+        navigate(`/newprofile/${loggedInUser.id}`, {
+            state: {
+                isBeingEdited,
+                setIsBeingEdited
+            }
+        })
     }
 
     const formattedDate: string = typeof loggedInUser.createdAt === 'number' ? utilService.getJoinedDateFormat(loggedInUser.createdAt) : loggedInUser.createdAt
