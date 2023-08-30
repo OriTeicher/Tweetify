@@ -17,13 +17,17 @@ export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
         return state.loader
     })
 
+    const { loggedInUser } = useSelector((state: RootState) => {
+        return state.user
+    })
     const dispatch: ThunkDispatch<RootState, undefined, Action<string>> = useDispatch()
+    const didLike = props.likedId?.includes(loggedInUser.id) || false
 
     // TODO: handle icon click function - switch function
     const handleIconClick = (selectedIcon: string) => {
         switch (selectedIcon) {
             case constsService.LIKES_FIELD:
-                dispatch(feedActions.toggleStats(props.id, true))
+                dispatch(feedActions.toggleStats(props.id, didLike))
                 break
             case constsService.COMMENTS_FIELD:
                 handleSelectedSqueak(props)
@@ -57,7 +61,7 @@ export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
                                 imgUrl={props.imgUrl}
                                 onReadPost={() => handleSelectedSqueak(props)}
                             />
-                            <FeedPreviewIcons likesNum={props.likes} commentsNum={props.comments.length} resqueaksNum={props.resqueaks} onIconClick={handleIconClick} />
+                            <FeedPreviewIcons isLiked={didLike} likesNum={props.likes} commentsNum={props.comments.length} resqueaksNum={props.resqueaks} onIconClick={handleIconClick} />
                         </div>
                     </div>
                 )}

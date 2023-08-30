@@ -42,6 +42,7 @@ const FeedList: React.FC<FeedListProps> = (props: FeedListProps) => {
                         likes={squeak.likes}
                         comments={squeak.comments}
                         resqueaks={squeak.resqueaks}
+                        likedId={squeak.likedId}
                     />
                 ))
             ) : (

@@ -42,9 +42,7 @@ function signUp(user: Partial<User>, profileImgFile: File | null, profileBgFile:
 
             console.log(isPost)
             if (isPost) {
-                console.log('here')
                 newUser = (await httpService.post('/auth/sign-up', () => utilService.objectAssignExact(user, userService.getEmptyCreateUserDto()), true)).data
-                console.log('newUser', newUser)
             } else {
                 newUser = (await httpService.patch(`/users/${user?.id}`, () => utilService.objectAssignExact(user, userService.getEmptyUpdateUserDto()), true)).data
             }

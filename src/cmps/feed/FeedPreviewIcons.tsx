@@ -11,16 +11,18 @@ interface FeedPreviewIconProps {
     resqueaksNum: number
     likesNum: number
     onIconClick: Function
+    isLiked: boolean
 }
 
 export default function FeedPreviewIcons(props: FeedPreviewIconProps) {
-    const [isLiked, setIsLiked] = useState(false)
+    const [isLiked, setIsLiked] = useState(props.isLiked)
     const [likesCounter, setLikesCounter] = useState(props.likesNum)
 
     // TODO: handle comment click prop function
     const handleCommentClick = () => {
         props.onIconClick('comment')
     }
+
     // TODO: handle like click prop function
     const handleLikeClick = () => {
         setIsLiked(!isLiked)
@@ -39,18 +41,10 @@ export default function FeedPreviewIcons(props: FeedPreviewIconProps) {
                 <div className="icon-container">
                     {isLiked ? (
                         // TODO: fix the on click
-                        <FavoriteIcon
-                            fontSize="small"
-                            onClick={() => handleLikeClick()}
-                            className="liked"
-                        />
+                        <FavoriteIcon fontSize="small" onClick={() => handleLikeClick()} className="liked" />
                     ) : (
                         // TODO: fix the on click
-                        <FavoriteBorderIcon
-                            fontSize="small"
-                            onClick={() => handleLikeClick()}
-                            className="unliked"
-                        />
+                        <FavoriteBorderIcon fontSize="small" onClick={() => handleLikeClick()} className="unliked" />
                     )}
                     <p>{likesCounter !== 0 && likesCounter}</p>
                 </div>

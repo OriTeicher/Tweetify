@@ -75,10 +75,12 @@ function toggleStats(postId: string, isIncrease: boolean): AppThunk {
                     () =>
                         ({
                             ...utilService.objectAssignExact(postToUpdate, feedService.getEmptyCreatePostDto()),
-                            likes: postToUpdate?.likes + (isIncrease ? 1 : -1),
+                            likes: postToUpdate?.likes + (isIncrease ? -1 : 1),
                             userId: postToUpdate.owner.id
                         } satisfies CreatePostDto)
                 )
+                dispatch(feedReducers.removeFeedPostSuccess(data.id))
+                dispatch(feedReducers.addFeedPostSuccess(data))
             }
         } catch (error) {
             console.log('Cannot toggle likes. ', error)

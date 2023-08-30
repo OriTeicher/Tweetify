@@ -11,6 +11,7 @@ export interface FeedPost {
     likes: number
     comments: FeedPost[]
     resqueaks: number
+    likedId?: string[]
 }
 
 export interface Trend {
