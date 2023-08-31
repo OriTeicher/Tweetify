@@ -23,7 +23,8 @@ function queryFeedPosts(): AppThunk {
             dispatch(loaderReducers.toggleAppLoader())
             const feedPosts = store.getState().feed.feedPosts
             const paginationQuery = feedPosts.length > 0 ? `?limit=${25}&startAt=${feedPosts?.at(feedPosts?.length - 1)?.id}` : `?limit=${25}`
-            const { data: feedPostsDB } = await httpService.get(`/posts${paginationQuery}`, true)
+            if (feedPosts.length === 0) await dbService.setDemoDB(25)
+            let { data: feedPostsDB } = await httpService.get(`/posts${paginationQuery}`, true)
             dispatch(feedReducers.queryFeedPostsSuccess(feedPostsDB))
             dispatch(loaderReducers.toggleAppLoader())
         } catch (error) {

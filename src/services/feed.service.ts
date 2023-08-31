@@ -62,6 +62,7 @@ function getRandomPost() {
             isVerified: utilService.getRandomBool(),
             id: 'DEMO-P-' + utilService.generateId(5)
         },
+        likedId: [],
         likes: utilService.getRandomIntInclusive(0, 500),
         comments: getRandomComments(utilService.getRandomIntInclusive(0, 7)),
         resqueaks: utilService.getRandomIntInclusive(0, 50),

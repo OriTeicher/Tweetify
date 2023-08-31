@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/no-redeclare */
-import React, { useState } from 'react'
 import { Verified, MoreHoriz, MoreVert } from '@mui/icons-material'
+import React, { useState } from 'react'
 import { utilService } from '../../services/util.service'
 import { RootState } from '../../app/store'
 import { Action } from '@reduxjs/toolkit'
 import { feedActions } from '../../app/actions/feed.actions'
 import { ThunkDispatch } from 'redux-thunk'
 import { useSelector, useDispatch } from 'react-redux'
+import { UserForPost } from '../../services/interface.service'
 import ImgModal from '../utils/ImgModal'
 import OptionsDropdown from '../utils/OptionsDropdown'
 
 interface FeedContentPreview {
     id: string
-    displayName: string
-    username: string
+    owner: UserForPost
     verified: boolean
     createdAt: number
     content?: string
@@ -47,8 +47,7 @@ const FeedContentPreview: React.FC<FeedContentPreview> = (props: FeedContentPrev
         setIsImgModalOpen(isOpen)
     }
 
-    const truncatedUsername =
-        props.username.length > 15 ? props.username.slice(0, 3) + '...' : props.username
+    const truncatedUsername = props.owner.username.length > 15 ? props.owner.username.slice(0, 3) + '...' : props.owner.username
 
     const highlightMatchedTxt = (text: string, filterBy: string) => {
         const regex = new RegExp(`(${filterBy})`, 'gi')
@@ -58,11 +57,11 @@ const FeedContentPreview: React.FC<FeedContentPreview> = (props: FeedContentPrev
     const markedDisplayName = truncatedUsername.includes(filterBy) ? (
         <span
             dangerouslySetInnerHTML={{
-                __html: highlightMatchedTxt(props.displayName, filterBy)
+                __html: highlightMatchedTxt(props.owner.displayName, filterBy)
             }}
         ></span>
     ) : (
-        props.displayName
+        props.owner.displayName
     )
 
     const markedUsername = truncatedUsername.includes(filterBy) ? (
@@ -72,7 +71,7 @@ const FeedContentPreview: React.FC<FeedContentPreview> = (props: FeedContentPrev
             }}
         ></span>
     ) : (
-        props.username
+        props.owner.username
     )
 
     const markedTxt = props.content ? (
@@ -92,33 +91,13 @@ const FeedContentPreview: React.FC<FeedContentPreview> = (props: FeedContentPrev
                 <h2>@{markedUsername}</h2>
                 <h3>.</h3>
                 <p className="post-date">{utilService.getCurrentDate(props.createdAt)}</p>
-                <MoreHoriz
-                    className="more-icon"
-                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                />
-                <MoreVert
-                    className="more-icon mobile"
-                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                />
-                {isDropdownOpen && (
-                    <OptionsDropdown
-                        setDropdownOption={handleDropdownSelect}
-                        options={dropdownOptions}
-                    />
-                )}
+                <MoreHoriz className="more-icon" onClick={() => setIsDropdownOpen(!isDropdownOpen)} />
+                <MoreVert className="more-icon mobile" onClick={() => setIsDropdownOpen(!isDropdownOpen)} />
+                {isDropdownOpen && <OptionsDropdown setDropdownOption={handleDropdownSelect} options={dropdownOptions} />}
             </div>
             {markedTxt}
-            {props.imgUrl && (
-                <img
-                    src={props.imgUrl}
-                    className="post-photo"
-                    alt="🖼️"
-                    onClick={() => handleImageClick(true)}
-                ></img>
-            )}
-            {isImgModalOpen && (
-                <ImgModal imgUrl={props.imgUrl} onCloseModal={() => handleImageClick(false)} />
-            )}
+            {props.imgUrl && <img src={props.imgUrl} className="post-photo" alt="🖼️" onClick={() => handleImageClick(true)}></img>}
+            {isImgModalOpen && <ImgModal imgUrl={props.imgUrl} onCloseModal={() => handleImageClick(false)} />}
         </section>
     )
 }

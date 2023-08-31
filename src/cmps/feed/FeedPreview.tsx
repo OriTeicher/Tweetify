@@ -51,8 +51,7 @@ export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
                     <div className="  ">
                         <FeedContentPreview
                             id={props.id}
-                            displayName={props.owner?.displayName}
-                            username={props.owner?.username}
+                            owner={props?.owner}
                             verified={props.owner?.isVerified}
                             createdAt={props.createdAt}
                             content={props.content}
