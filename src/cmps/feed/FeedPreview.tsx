@@ -51,15 +51,15 @@ export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
                     <div className="  ">
                         <FeedContentPreview
                             id={props.id}
-                            displayName={props.owner.displayName}
-                            username={props.owner.username}
-                            verified={props.owner.isVerified}
+                            displayName={props.owner?.displayName}
+                            username={props.owner?.username}
+                            verified={props.owner?.isVerified}
                             createdAt={props.createdAt}
                             content={props.content}
                             imgUrl={props.imgUrl}
                             onReadPost={() => handleSelectedSqueak(props)}
                         />
-                        <FeedPreviewIcons isLiked={didLike} likesNum={props.likes} commentsNum={props.comments.length} resqueaksNum={props.resqueaks} onIconClick={handleIconClick} />
+                        <FeedPreviewIcons isLiked={isLiked} likesNum={props.likes} commentsNum={props.comments?.length} resqueaksNum={props.resqueaks} onIconClick={handleIconClick} />
                     </div>
                 </div>
             )}

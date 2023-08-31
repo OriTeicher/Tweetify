@@ -55,6 +55,8 @@ const FeedIndex: React.FC<FeedIndexProps> = (props: FeedIndexProps) => {
         dispatch(feedActions.addFeedPost(loggedInUser, postContent, file, gifUrl))
     }
 
+    console.log(feedPosts)
+
     return (
         <section className="feed-index">
             <MobileTopbar />
