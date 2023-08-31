@@ -23,6 +23,7 @@ async function get(url: string, shouldRefresh?: boolean) {
         }
         return await axiosInstance.get(url)
     } catch (error) {
+        console.log(`GET ERROR for ${url}`)
         throw error
     }
 }
@@ -35,6 +36,7 @@ async function refresh() {
             try {
                 await post('/auth/refresh', () => {})
             } catch (refreshError) {
+                console.log('REFRESH ERROR')
                 if (err instanceof AxiosError) console.log(err.message)
                 else console.log(err)
             }
@@ -54,6 +56,7 @@ async function post(url: string, cb: () => unknown, shouldRefresh?: boolean) {
         })
         return res
     } catch (error) {
+        console.log('POST ERROR')
         if (error instanceof AxiosError) console.log(error.response?.data)
         throw error
     }
@@ -64,7 +67,6 @@ async function patch(url: string, cb: () => unknown, shouldRefresh?: boolean) {
         if (shouldRefresh) {
             refresh()
         }
-        console.log('here patch', cb())
         const res = await axiosInstance.patch(url, cb(), {
             headers: {
                 'Content-Type': 'application/json'
@@ -72,6 +74,7 @@ async function patch(url: string, cb: () => unknown, shouldRefresh?: boolean) {
         })
         return res
     } catch (error) {
+        console.log('PATCH ERROR')
         if (error instanceof AxiosError) console.log(error.response?.data)
         throw error
     }

@@ -59,7 +59,7 @@ export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
                             imgUrl={props.imgUrl}
                             onReadPost={() => handleSelectedSqueak(props)}
                         />
-                        <FeedPreviewIcons isLiked={didLike} likesNum={props.likes} commentsNum={props.comments.length} resqueaksNum={props.resqueaks} onIconClick={handleIconClick} />
+                        <FeedPreviewIcons isLiked={isLiked} likesNum={props.likes} commentsNum={props.comments.length} resqueaksNum={props.resqueaks} onIconClick={handleIconClick} />
                     </div>
                 </div>
             )}

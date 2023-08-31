@@ -1,21 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../app/store'
-import { Action } from '@reduxjs/toolkit'
-import { feedActions } from '../app/actions/feed.actions'
-import { ThunkDispatch } from '@reduxjs/toolkit'
 import FeedTopbar from '../cmps/feed/FeedTopbar'
 import FeedList from '../cmps/feed/FeedList'
 import SqueakBox from '../cmps/feed/SqueakBox'
 import MobileTopbar from '../cmps/feed/MobileTopbar'
 import Loader from '../cmps/utils/Loader'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../app/store'
+import { Action, ThunkDispatch } from '@reduxjs/toolkit'
+import { feedActions } from '../app/actions/feed.actions'
 import { useNavigate } from 'react-router-dom'
 import { eventBus } from '../services/event.bus.service'
 import { FeedPost } from '../services/interface.service'
 
 export interface FeedIndexProps {
-    // TODO: fix top bar option -> set it in store
     topBarOption: string
 }
 

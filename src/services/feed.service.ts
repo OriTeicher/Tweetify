@@ -1,6 +1,6 @@
 import { utilService } from './util.service'
-import { CreatePostDto, FeedPost, User, UserForPost } from './interface.service'
 import { constsService } from './consts.service'
+import { CreatePostDto, FeedPost, User, UserForPost } from './interface.service'
 
 export const feedService = {
     getEmptyPost,
@@ -32,11 +32,12 @@ function getEmptyPost(user: UserForPost, content: string = '...'): FeedPost {
     }
 }
 
-function getRandomProfilePhoto() {
+function getRandomProfilePhoto(): string {
     const randomNum = utilService.getRandomIntInclusive(1, 25)
     const randomGender = utilService.getRandomIntInclusive(1, 2) % 2 === 0 ? 'male' : 'female'
     const avatarUrl = `https://xsgames.co/randomusers/assets/avatars/${randomGender}/${randomNum}.jpg`
     if (randomNum % 2 === 0) return avatarUrl
+    else return ''
 }
 
 function getRandomPosts(postsCount: number) {
@@ -50,7 +51,7 @@ function getRandomPosts(postsCount: number) {
 function getRandomPost() {
     const randomDisplayName = constsService.RANDOM_NAMES[utilService.getRandomIntInclusive(0, 9)]
     const imgUrl = constsService.DEMO_PHOTOS[utilService.getRandomIntInclusive(0, constsService.DEMO_PHOTOS.length - 1)]
-    return {
+    const newRandomPost: FeedPost = {
         id: 'P-' + utilService.generateId(5),
         imgUrl,
         content: utilService.generateRandomSentences(utilService.getRandomIntInclusive(1, 4)),
@@ -58,13 +59,16 @@ function getRandomPost() {
             displayName: randomDisplayName,
             username: randomDisplayName.toLowerCase(),
             profileImgUrl: getRandomProfilePhoto(),
-            isVerified: utilService.getRandomBool()
+            isVerified: utilService.getRandomBool(),
+            id: 'DEMO-P-' + utilService.generateId(5)
         },
         likes: utilService.getRandomIntInclusive(0, 500),
         comments: getRandomComments(utilService.getRandomIntInclusive(0, 7)),
         resqueaks: utilService.getRandomIntInclusive(0, 50),
         createdAt: Date.now()
     }
+    console.log('randomPost.content',newRandomPost.content)
+    return newRandomPost
 }
 
 function getEmptyUser() {
@@ -80,7 +84,7 @@ function getRandomComments(length: number) {
     return comments
 }
 
-function getRandomComment(displayName: string = 'Guest'): object {
+function getRandomComment(displayName: string = 'Guest'): FeedPost {
     const randomColor = utilService.getRandomColor()
     const owner: UserForPost = {
         id: 'U' + utilService.generateId(5),
