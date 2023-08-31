@@ -4,7 +4,7 @@ import { dbService } from '../../services/db.service'
 import { feedService } from '../../services/feed.service'
 import { cloudinaryService } from '../../services/cloudinary.service'
 import { loaderReducers } from '../reducers/loader.slice'
-import { CreatePostDto, FeedPost, User } from '../../services/interface.service'
+import { FeedPost, User } from '../../services/interface.service'
 import { httpService } from '../../services/http.service'
 import { utilService } from '../../services/util.service'
 
@@ -17,14 +17,15 @@ export const feedActions = {
     setSelectedSqueak
 }
 
-function queryFeedPosts(): AppThunk {
+function queryFeedPosts(feedPosts: FeedPost[]): AppThunk {
     return async (dispatch) => {
         try {
             dispatch(loaderReducers.toggleAppLoader())
-            const feedPosts = store.getState().feed.feedPosts
             const paginationQuery = feedPosts.length > 0 ? `?limit=${25}&startAt=${feedPosts?.at(feedPosts?.length - 1)?.id}` : `?limit=${25}`
-            if (feedPosts.length === 0) await dbService.setDemoDB(25)
             let { data: feedPostsDB } = await httpService.get(`/posts${paginationQuery}`, true)
+            if (feedPostsDB.length === 0) {
+                await dbService.setDemoDB(3)
+            }
             dispatch(feedReducers.queryFeedPostsSuccess(feedPostsDB))
             dispatch(loaderReducers.toggleAppLoader())
         } catch (error) {
@@ -67,19 +68,11 @@ function toggleStats(postId: string, isLiked: boolean): AppThunk {
     return async (dispatch) => {
         try {
             dispatch(feedReducers.toggleStatsSuccess())
-            const postToUpdate = store.getState().feed.feedPosts.find((post) => post.id === postId)
-
-            if (postToUpdate) {
-                let data
-
-                if (!isLiked) {
-                    data = (await httpService.post(`/posts/${postId}/like`, () => {})).data
-                } else {
-                    data = (await httpService.post(`/posts/${postId}/dislike`, () => {})).data
-                }
-                dispatch(feedReducers.removeFeedPostSuccess(data.id))
-                dispatch(feedReducers.addFeedPostSuccess(data))
-            }
+            let data
+            if (!isLiked) data = (await httpService.post(`/posts/${postId}/like`, () => {})).data
+            else data = (await httpService.post(`/posts/${postId}/dislike`, () => {})).data
+            dispatch(feedReducers.removeFeedPostSuccess(data.id))
+            dispatch(feedReducers.addFeedPostSuccess(data))
         } catch (error) {
             console.log('Cannot toggle likes. ', error)
         }
@@ -103,7 +96,6 @@ function setFilterBy(newFilterBy: string): AppThunk {
 function setSelectedSqueak(selectedSqueak: FeedPost): AppThunk {
     return async (dispatch) => {
         try {
-            console.log('setSelec', selectedSqueak)
             dispatch(feedReducers.setSelectedSqueak(selectedSqueak))
         } catch (error) {
             console.log('Cannot set filter by.', error)

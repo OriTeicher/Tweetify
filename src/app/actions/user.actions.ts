@@ -40,7 +40,6 @@ function signUp(user: Partial<User>, profileImgFile: File | null, profileBgFile:
                 user.profileBgUrl = await cloudinaryService.uploadImgToCloud(profileBgFile)
             }
 
-            console.log(isPost)
             if (isPost) {
                 newUser = (await httpService.post('/auth/sign-up', () => utilService.objectAssignExact(user, userService.getEmptyCreateUserDto()), true)).data
             } else {

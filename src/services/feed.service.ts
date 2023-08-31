@@ -68,7 +68,6 @@ function getRandomPost() {
         resqueaks: utilService.getRandomIntInclusive(0, 50),
         createdAt: Date.now()
     }
-    console.log('randomPost.content',newRandomPost.content)
     return newRandomPost
 }
 

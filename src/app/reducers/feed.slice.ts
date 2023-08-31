@@ -20,9 +20,9 @@ const feedSlice = createSlice({
     initialState,
     reducers: {
         queryFeedPostsSuccess: (state, action: PayloadAction<FeedPost[]>) => {
-            state.feedPosts = action.payload.sort((a, b) => b.createdAt - a.createdAt)
+            state.feedPosts = [...action.payload]
         },
-
+        
         addFeedPostSuccess: (state, action: PayloadAction<FeedPost>) => {
             state.feedPosts = [action.payload, ...state.feedPosts]
         },

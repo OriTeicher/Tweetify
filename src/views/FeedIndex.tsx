@@ -40,7 +40,7 @@ const FeedIndex: React.FC<FeedIndexProps> = (props: FeedIndexProps) => {
     const dispatch: ThunkDispatch<RootState, undefined, Action<string>> = useDispatch()
 
     useEffect(() => {
-        dispatch(feedActions.queryFeedPosts())
+        dispatch(feedActions.queryFeedPosts(feedPosts))
         const cb = (selectedSqueak: [FeedPost]) => {
             dispatch(feedActions.setSelectedSqueak(...selectedSqueak))
             handleSelectedSqueak(...selectedSqueak)
@@ -52,8 +52,6 @@ const FeedIndex: React.FC<FeedIndexProps> = (props: FeedIndexProps) => {
     const handleAddPost = async (postContent: string, file: File | null, gifUrl: string) => {
         dispatch(feedActions.addFeedPost(loggedInUser, postContent, file, gifUrl))
     }
-
-    console.log(feedPosts)
 
     return (
         <section className="feed-index">

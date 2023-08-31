@@ -1,10 +1,9 @@
 import React from 'react'
+import LoginModal from '../utils/LoginModal'
 import { useState } from 'react'
 import { Avatar } from '@mui/material'
 import { Twitter as TwitterIcon } from '@mui/icons-material'
-import LoginModal from '../utils/LoginModal'
-import { useDispatch, useSelector } from 'react-redux'
-
+import { useSelector } from 'react-redux'
 import { RootState } from '../../app/store'
 
 export default function MobileTopbar() {

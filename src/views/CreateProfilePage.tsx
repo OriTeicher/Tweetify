@@ -43,7 +43,6 @@ export default function CreateProfilePage() {
         setEditedDisplayName(event.target.value)
     }
 
-    console.log(loggedInUser)
 
     const handleCreateNewProfile = async () => {
         setIsLoaderOn(true)

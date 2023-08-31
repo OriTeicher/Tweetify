@@ -27,7 +27,6 @@ export default function FeedPreviewIcons(props: FeedPreviewIconProps) {
     const handleLikeClick = () => {
         setIsLiked(!isLiked)
         setLikesCounter((prevLikesCounter) => (isLiked ? --prevLikesCounter : ++prevLikesCounter))
-        console.log(likesCounter)
         props.onIconClick('like', isLiked)
     }
 
