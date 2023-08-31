@@ -37,7 +37,7 @@ function addFeedPost(loggedInUser: User, postContent: string, file: File | null,
         try {
             dispatch(loaderReducers.toggleNewPostLoader())
             const newPost = feedService.getEmptyPost(loggedInUser, postContent)
-            newPost.imgUrl = file ? await cloudinaryService.uploadImgToCloud(file) : gifUrl
+            newPost.imgUrl = file ? await cloudinaryService.uploadImgToCloud(file) : gifUrl !== '' ? gifUrl : null
 
             const { data } = await httpService.post('/posts', () => utilService.objectAssignExact(newPost, { ...feedService.getEmptyCreatePostDto(), userId: loggedInUser.id }), true)
 
@@ -69,15 +69,13 @@ function toggleStats(postId: string, isLiked: boolean): AppThunk {
             const postToUpdate = store.getState().feed.feedPosts.find((post) => post.id === postId)
 
             if (postToUpdate) {
-                const { data } = await httpService.patch(
-                    `/posts/${postId}`,
-                    () =>
-                        ({
-                            ...utilService.objectAssignExact(postToUpdate, feedService.getEmptyCreatePostDto()),
-                            likes: postToUpdate?.likes + (isLiked ? -1 : 1),
-                            userId: postToUpdate.owner.id
-                        } satisfies CreatePostDto)
-                )
+                let data
+
+                if (!isLiked) {
+                    data = (await httpService.post(`/posts/${postId}/like`, () => {})).data
+                } else {
+                    data = (await httpService.post(`/posts/${postId}/dislike`, () => {})).data
+                }
                 dispatch(feedReducers.removeFeedPostSuccess(data.id))
                 dispatch(feedReducers.addFeedPostSuccess(data))
             }
@@ -107,7 +105,7 @@ function setSelectedSqueak(selectedSqueak: FeedPost): AppThunk {
             console.log('setSelec', selectedSqueak)
             dispatch(feedReducers.setSelectedSqueak(selectedSqueak))
         } catch (error) {
-            console.log('Cannot set filter by. ', error)
+            console.log('Cannot set filter by.', error)
         }
     }
 }

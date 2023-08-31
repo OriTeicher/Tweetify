@@ -108,6 +108,6 @@ function getEmptyCreatePostDto(): CreatePostDto {
     return {
         userId: '',
         content: '',
-        imgUrl: ''
+        imgUrl: null
     }
 }

@@ -56,5 +56,5 @@ export interface UpdateUserDto {
 export interface CreatePostDto {
     userId: string
     content: string
-    imgUrl?: string
+    imgUrl?: string | null
 }
