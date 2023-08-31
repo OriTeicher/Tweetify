@@ -22,16 +22,14 @@ const feedSlice = createSlice({
         queryFeedPostsSuccess: (state, action: PayloadAction<FeedPost[]>) => {
             state.feedPosts = [...action.payload]
         },
-        
+
         addFeedPostSuccess: (state, action: PayloadAction<FeedPost>) => {
-            state.feedPosts = [action.payload, ...state.feedPosts]
+            state.feedPosts = [action.payload, ...state.feedPosts].sort((a, b) => b.createdAt - a.createdAt)
         },
 
         removeFeedPostSuccess: (state, action: PayloadAction<string>) => {
             state.feedPosts = state.feedPosts.filter((post) => post.id !== action.payload)
         },
-
-        toggleStatsSuccess: () => {},
 
         setFilterBySuccess: (state, action: PayloadAction<string>) => {
             state.filterBy = action.payload

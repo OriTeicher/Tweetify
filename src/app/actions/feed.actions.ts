@@ -67,7 +67,6 @@ function removeFeedPost(postId: string): AppThunk {
 function toggleStats(postId: string, isLiked: boolean): AppThunk {
     return async (dispatch) => {
         try {
-            dispatch(feedReducers.toggleStatsSuccess())
             let data
             if (!isLiked) data = (await httpService.post(`/posts/${postId}/like`, () => {})).data
             else data = (await httpService.post(`/posts/${postId}/dislike`, () => {})).data
