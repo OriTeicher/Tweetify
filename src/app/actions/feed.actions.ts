@@ -66,14 +66,22 @@ function removeFeedPost(postId: string): AppThunk {
 
 function toggleStats(postId: string, isLiked: boolean): AppThunk {
     return async (dispatch) => {
-        try {
-            let data
-            if (!isLiked) data = (await httpService.post(`/posts/${postId}/like`, () => {})).data
-            else data = (await httpService.post(`/posts/${postId}/dislike`, () => {})).data
-            dispatch(feedReducers.removeFeedPostSuccess(data.id))
-            dispatch(feedReducers.addFeedPostSuccess(data))
-        } catch (error) {
-            console.log('Cannot toggle likes. ', error)
+        if (isLiked) {
+            httpService
+                .post(`/posts/${postId}/like`, () => {})
+                .then(({ data }) => {
+                    dispatch(feedReducers.removeFeedPostSuccess(data.id))
+                    dispatch(feedReducers.addFeedPostSuccess(data))
+                })
+                .catch((error) => console.log('Cannot toggle likes. ', error))
+        } else {
+            httpService
+                .post(`/posts/${postId}/dislike`, () => {})
+                .then(({ data }) => {
+                    dispatch(feedReducers.removeFeedPostSuccess(data.id))
+                    dispatch(feedReducers.addFeedPostSuccess(data))
+                })
+                .catch((error) => console.log('Cannot toggle likes. ', error))
         }
     }
 }

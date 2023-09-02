@@ -25,7 +25,7 @@ export default function FeedPreviewIcons(props: FeedPreviewIconProps) {
 
     // TODO: handle like click prop function
     const handleLikeClick = () => {
-        setIsLiked(!isLiked)
+        setIsLiked((prev) => !prev)
         setLikesCounter((prevLikesCounter) => (isLiked ? --prevLikesCounter : ++prevLikesCounter))
         props.onIconClick('like', isLiked)
     }
@@ -40,10 +40,10 @@ export default function FeedPreviewIcons(props: FeedPreviewIconProps) {
                 <div className="icon-container">
                     {isLiked ? (
                         // TODO: fix the on click
-                        <FavoriteIcon fontSize="small" onClick={() => handleLikeClick()} className="liked" />
+                        <FavoriteIcon fontSize="small" onClick={handleLikeClick} className="liked" />
                     ) : (
                         // TODO: fix the on click
-                        <FavoriteBorderIcon fontSize="small" onClick={() => handleLikeClick()} className="unliked" />
+                        <FavoriteBorderIcon fontSize="small" onClick={handleLikeClick} className="unliked" />
                     )}
                     <p>{likesCounter !== 0 && likesCounter}</p>
                 </div>

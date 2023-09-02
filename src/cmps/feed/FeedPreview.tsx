@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import FeedContentPreview from './FeedContentPreview'
 import Loader from '../utils/Loader'
 import { Avatar } from '@mui/material'
@@ -19,13 +19,15 @@ export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
     const { loggedInUser } = useSelector((state: RootState) => {
         return state.user
     })
+
+    let isLiked = props.likedId?.includes(loggedInUser.id) || false
     const dispatch: ThunkDispatch<RootState, undefined, Action<string>> = useDispatch()
-    const isLiked = props.likedId?.includes(loggedInUser.id) || false
 
     // TODO: handle icon click function - switch function
     const handleIconClick = (selectedIcon: string) => {
         switch (selectedIcon) {
             case constsService.LIKES_FIELD:
+                isLiked = !isLiked
                 dispatch(feedActions.toggleStats(props.id, isLiked))
                 break
             case constsService.COMMENTS_FIELD:
@@ -49,15 +51,7 @@ export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
                         <div className="link-line"></div>
                     </div>
                     <div className="  ">
-                        <FeedContentPreview
-                            id={props.id}
-                            owner={props?.owner}
-                            verified={props.owner?.isVerified}
-                            createdAt={props.createdAt}
-                            content={props.content}
-                            imgUrl={props.imgUrl}
-                            onReadPost={() => handleSelectedSqueak(props)}
-                        />
+                        <FeedContentPreview id={props.id} owner={props?.owner} verified={props.owner?.isVerified} createdAt={props.createdAt} content={props.content} imgUrl={props.imgUrl} onReadPost={() => handleSelectedSqueak(props)} />
                         <FeedPreviewIcons isLiked={isLiked} likesNum={props.likes} commentsNum={props.comments?.length} resqueaksNum={props.resqueaks} onIconClick={handleIconClick} />
                     </div>
                 </div>

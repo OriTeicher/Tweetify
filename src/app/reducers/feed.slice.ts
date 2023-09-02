@@ -24,7 +24,8 @@ const feedSlice = createSlice({
         },
 
         addFeedPostSuccess: (state, action: PayloadAction<FeedPost>) => {
-            state.feedPosts = [action.payload, ...state.feedPosts].sort((a, b) => b.createdAt - a.createdAt)
+            state.feedPosts.push(action.payload)
+            state.feedPosts.sort((a, b) => b.createdAt - a.createdAt)
         },
 
         removeFeedPostSuccess: (state, action: PayloadAction<string>) => {
