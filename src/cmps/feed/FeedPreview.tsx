@@ -10,6 +10,7 @@ import { eventBus } from '../../services/event.bus.service'
 import FeedPreviewIcons from './FeedPreviewIcons'
 import { Action, ThunkDispatch } from '@reduxjs/toolkit'
 import { feedActions } from '../../app/actions/feed.actions'
+import { utilService } from '../../services/util.service'
 
 export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
     const { isPostLoading } = useSelector((state: RootState) => {
@@ -20,15 +21,17 @@ export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
         return state.user
     })
 
-    let isLiked = props.likedId?.includes(loggedInUser.id) || false
+    const [isLiked, setIsLiked] = useState(props.likedId?.includes(loggedInUser.id) || false)
+
     const dispatch: ThunkDispatch<RootState, undefined, Action<string>> = useDispatch()
 
     // TODO: handle icon click function - switch function
     const handleIconClick = (selectedIcon: string) => {
         switch (selectedIcon) {
             case constsService.LIKES_FIELD:
-                isLiked = !isLiked
-                dispatch(feedActions.toggleStats(props.id, isLiked))
+                const currentIsLiked = !isLiked
+                setIsLiked(currentIsLiked)
+                dispatch(feedActions.toggleStats(props.id, currentIsLiked))
                 break
             case constsService.COMMENTS_FIELD:
                 handleSelectedSqueak(props)
@@ -52,7 +55,7 @@ export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
                     </div>
                     <div className="  ">
                         <FeedContentPreview id={props.id} owner={props?.owner} verified={props.owner?.isVerified} createdAt={props.createdAt} content={props.content} imgUrl={props.imgUrl} onReadPost={() => handleSelectedSqueak(props)} />
-                        <FeedPreviewIcons isLiked={isLiked} likesNum={props.likes} commentsNum={props.comments?.length} resqueaksNum={props.resqueaks} onIconClick={handleIconClick} />
+                        <FeedPreviewIcons isLiked={isLiked} likesNum={props.likes} commentsNum={props.comments?.length} resqueaksNum={props.resqueaks} onIconClick={utilService.debounce(handleIconClick, 500)} />
                     </div>
                 </div>
             )}
