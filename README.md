@@ -1,4 +1,4 @@
-# Twitter clone using React, Nest.js, Firebase, Redux, MUI
+# Twitter & Spotify combination clone 
+#### React, Nest.js, Firebase, Redux, MUI
 ### Currently in development... 
-### Progress:
-![stat](https://github.com/OriTeicher/Squeaker/assets/101281765/9d2f8046-63ea-4ed6-ac01-e7e03c13132e)
+![image](https://github.com/OriTeicher/Tweetify/assets/101281765/5a2e5201-ca67-4113-8a19-5e0e183aeca3)
