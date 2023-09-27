@@ -5,9 +5,10 @@ import { feedService } from '../../services/feed.service'
 import { cloudinaryService } from '../../services/cloudinary.service'
 import { loaderReducers } from '../reducers/loader.slice'
 import { FeedPost, User } from '../../services/interface.service'
-import { httpService } from '../../services/http.service'
-import { utilService } from '../../services/util.service'
 import { constsService } from '../../services/consts.service'
+// import { httpService } from '../../services/http.service'
+// import { utilService } from '../../services/util.service'
+
 export const feedActions = {
     queryFeedPosts,
     addFeedPost,

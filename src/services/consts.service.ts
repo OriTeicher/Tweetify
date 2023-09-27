@@ -36,7 +36,7 @@ const NO_BG_WALLPAPER_URL = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd
 // 'https://source.boringavatars.com/beam/120/Stefan?colors=1DB954'
 //
 // * UTIL FUNCTIONS
-const DEBOUNCE_DELAY = 1200 // ? in ms
+const DEBOUNCE_DELAY = 0 // ? in ms
 
 export const constsService = {
     DEMO_POSTS_NUM,

@@ -85,11 +85,11 @@ function getRandomComments(length: number) {
 }
 
 function getRandomComment(displayName: string = 'Guest'): FeedPost {
-    const randomColor = utilService.getRandomColor()
+    // const randomColor = utilService.getRandomColor()
     const owner: UserForPost = {
         id: 'U' + utilService.generateId(5),
         displayName: constsService.RANDOM_NAMES[utilService.getRandomIntInclusive(0, 3)],
-        profileImgUrl: `https://source.boringavatars.com/beam/120/Stefan?colors=${randomColor}`,
+        profileImgUrl: `https://source.boringavatars.com/`,
         username: 'demo-user',
         isVerified: utilService.getRandomBool()
     }

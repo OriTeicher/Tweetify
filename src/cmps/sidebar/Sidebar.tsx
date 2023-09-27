@@ -20,7 +20,7 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
     const [selectedSidebarOption, setSelectedSidebarOption] = useState('Home')
-    const [isSmallScreen, setIsSmallScreen] = useState(false)
+    const [isMobileScreen, setisMobileScreen] = useState(false)
     const [isLoginModalOpen, setLoginModal] = useState(false)
     const navigate = useNavigate()
 
@@ -30,7 +30,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
 
     useEffect(() => {
         const handleResize = () => {
-            setIsSmallScreen(window.innerWidth <= 768)
+            setisMobileScreen(window.innerWidth <= 768)
         }
         window.addEventListener('resize', handleResize)
         handleResize()
@@ -66,7 +66,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
                 key={txt}
                 Icon={Icon}
                 // ? hides the irrelevant sidebar icons in mobile
-                txt={isSmallScreen ? '' : txt}
+                txt={isMobileScreen ? '' : txt}
                 isActive={selectedSidebarOption === txt}
                 onClick={() => handleOptionClick(txt)}
             />
@@ -76,11 +76,11 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
     return (
         <>
             <section className="left-menu">
-                <div className={`sidebar-container  ${isSmallScreen ? 'mobile' : null}`}>
+                <div className={`sidebar-container  ${isMobileScreen ? 'mobile' : null}`}>
                     {renderSidebarOptions()}
 
-                    <button className={`squeak-btn ${isSmallScreen ? 'mobile' : 'null'}`} onClick={handleSiderbarSqueak}>
-                        {isSmallScreen ? '+' : 'Squeak'}
+                    <button className={`squeak-btn ${isMobileScreen ? 'mobile' : 'null'}`} onClick={handleSiderbarSqueak}>
+                        {isMobileScreen ? '+' : 'Squeak'}
                     </button>
                     <LoggedAcount displayName={loggedInUser.displayName} username={loggedInUser.username} profileImg={loggedInUser.profileImgUrl} setIsLoginModalOpen={(isOpen: boolean) => setLoginModal(isOpen)} />
                     <LoginModal isOpen={isLoginModalOpen} setIsOpen={(isOpen: boolean) => setLoginModal(isOpen)} />
