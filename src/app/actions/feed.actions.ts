@@ -1,4 +1,4 @@
-import store, { AppThunk } from '../store'
+import { AppThunk } from '../store'
 import { feedReducers } from '../reducers/feed.slice'
 import { dbService } from '../../services/db.service'
 import { feedService } from '../../services/feed.service'
@@ -7,7 +7,7 @@ import { loaderReducers } from '../reducers/loader.slice'
 import { FeedPost, User } from '../../services/interface.service'
 import { httpService } from '../../services/http.service'
 import { utilService } from '../../services/util.service'
-
+import { constsService } from '../../services/consts.service'
 export const feedActions = {
     queryFeedPosts,
     addFeedPost,
@@ -21,11 +21,20 @@ function queryFeedPosts(feedPosts: FeedPost[]): AppThunk {
     return async (dispatch) => {
         try {
             dispatch(loaderReducers.toggleAppLoader())
-            const paginationQuery = feedPosts.length > 0 ? `?limit=${25}&startAt=${feedPosts?.at(feedPosts?.length - 1)?.id}` : `?limit=${25}`
-            let { data: feedPostsDB } = await httpService.get(`/posts${paginationQuery}`, true)
-            if (feedPostsDB.length === 0) {
-                await dbService.setDemoDB(3)
+            // ! backend DONT DELETE!
+            // const paginationQuery = feedPosts.length > 0 ? `?limit=${25}&startAt=${feedPosts?.at(feedPosts?.length - 1)?.id}` : `?limit=${25}`
+            // let { data: feedPostsDB } = await httpService.get(`/posts${paginationQuery}`, true)
+            // if (feedPostsDB.length === 0) {
+            //     await dbService.setDemoDB(3)
+            // }
+
+            // ! frontend only  DONT DELETE!
+            let feedPostsDB = await dbService.getCollectionFromDB(dbService.POSTS_DB_COLLECTION)
+            if (feedPostsDB.length < dbService.MIN_POST_NUM) {
+                await dbService.setDemoDB(constsService.DEMO_POSTS_NUM)
+                feedPostsDB = await dbService.getCollectionFromDB(dbService.POSTS_DB_COLLECTION)
             }
+
             dispatch(feedReducers.queryFeedPostsSuccess(feedPostsDB))
             dispatch(loaderReducers.toggleAppLoader())
         } catch (error) {
@@ -40,10 +49,12 @@ function addFeedPost(loggedInUser: User, postContent: string, file: File | null,
             dispatch(loaderReducers.toggleNewPostLoader())
             const newPost = feedService.getEmptyPost(loggedInUser, postContent)
             newPost.imgUrl = file ? await cloudinaryService.uploadImgToCloud(file) : gifUrl !== '' ? gifUrl : null
-
-            const { data } = await httpService.post('/posts', () => utilService.objectAssignExact(newPost, { ...feedService.getEmptyCreatePostDto(), userId: loggedInUser.id }), true)
-
-            dispatch(feedReducers.addFeedPostSuccess(data))
+            await dbService.addItemToCollection(newPost, newPost.id, dbService.POSTS_DB_COLLECTION)
+            await dbService.pushStringToArrayField(loggedInUser.id, dbService.USER_DB_COLLECTION, dbService.POSTS_ID_FIELD, newPost.id)
+            dispatch(feedReducers.addFeedPostSuccess(newPost))
+            // ! backend DONT DELETE!
+            // const { data } = await httpService.post('/posts', () => utilService.objectAssignExact(newPost, { ...feedService.getEmptyCreatePostDto(), userId: loggedInUser.id }), true)
+            // dispatch(feedReducers.addFeedPostSuccess(data))
             dispatch(loaderReducers.toggleNewPostLoader())
         } catch (error) {
             console.log('Cannot add post. ', error)
@@ -64,25 +75,28 @@ function removeFeedPost(postId: string): AppThunk {
     }
 }
 
-function toggleStats(postId: string, isLiked: boolean): AppThunk {
+function toggleStats(postId: string, isLike: boolean): AppThunk {
     return async (dispatch) => {
-        if (isLiked) {
-            httpService
-                .post(`/posts/${postId}/like`, () => {})
-                .then(({ data }) => {
-                    dispatch(feedReducers.removeFeedPostSuccess(data.id))
-                    dispatch(feedReducers.addFeedPostSuccess(data))
-                })
-                .catch((error) => console.log('Cannot toggle likes. ', error))
-        } else {
-            httpService
-                .post(`/posts/${postId}/dislike`, () => {})
-                .then(({ data }) => {
-                    dispatch(feedReducers.removeFeedPostSuccess(data.id))
-                    dispatch(feedReducers.addFeedPostSuccess(data))
-                })
-                .catch((error) => console.log('Cannot toggle likes. ', error))
-        }
+        //! backend DONT DELETE!
+        // if (isLike) {
+        //     httpService
+        //         .post(`/posts/${postId}/like`, () => {})
+        //         .then(({ data }) => {
+        //             dispatch(feedReducers.removeFeedPostSuccess(data.id))
+        //             dispatch(feedReducers.addFeedPostSuccess(data))
+        //         })
+        //         .catch((error) => console.log('Cannot toggle likes. ', error))
+        // } else {
+        //     httpService
+        //         .post(`/posts/${postId}/dislike`, () => {})
+        //         .then(({ data }) => {
+        //             dispatch(feedReducers.removeFeedPostSuccess(data.id))
+        //             dispatch(feedReducers.addFeedPostSuccess(data))
+        //         })
+        //         .catch((error) => console.log('Cannot toggle likes. ', error))
+        // }
+        const diff = isLike ? constsService.LIKE : constsService.UNLIKE
+        await dbService.updateFieldInCollection(postId, constsService.LIKES_FIELD, dbService.POSTS_DB_COLLECTION, diff)
     }
 }
 
