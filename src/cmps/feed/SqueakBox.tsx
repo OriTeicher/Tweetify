@@ -10,6 +10,7 @@ import { apiService } from '../../services/api.service'
 import { Theme } from 'gif-picker-react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../app/store'
+import { EMPTY_STR } from '../../services/consts.service'
 
 interface SqueakBoxProps {
     addPost: (content: string, file: File | null, gifUrl: string) => void
@@ -18,12 +19,12 @@ interface SqueakBoxProps {
 
 export default function SqueakBox({ addPost, loggedInUser }: SqueakBoxProps) {
     const txtAreaRef = useRef<HTMLTextAreaElement>(null)
-    const [msg, setMsg] = useState('')
-    const [fileUrl, setFileUrl] = useState('')
+    const [msg, setMsg] = useState(EMPTY_STR)
+    const [fileUrl, setFileUrl] = useState(EMPTY_STR)
     const [file, setFile] = useState<File | null>(null)
     const [isEmojiMenuOpen, setIsEmojiMenuOpen] = useState(false)
     const [isGifMenuOpen, setIsGifMenuOpen] = useState(false)
-    const [selectedImgUrl, setSelectedImgUrl] = useState('')
+    const [selectedImgUrl, setSelectedImgUrl] = useState(EMPTY_STR)
 
     const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -47,8 +48,8 @@ export default function SqueakBox({ addPost, loggedInUser }: SqueakBoxProps) {
         addPost(msg, file, fileUrl)
         setIsEmojiMenuOpen(false)
         setIsGifMenuOpen(false)
-        setMsg('')
-        setFileUrl('')
+        setMsg(EMPTY_STR)
+        setFileUrl(EMPTY_STR)
     }
 
     const resizeTextarea = () => {
@@ -78,7 +79,7 @@ export default function SqueakBox({ addPost, loggedInUser }: SqueakBoxProps) {
 
     const handleRemovePhoto = (ev: React.FormEvent) => {
         ev.preventDefault()
-        setFileUrl('')
+        setFileUrl(EMPTY_STR)
         setFile(null)
     }
 
@@ -106,28 +107,12 @@ export default function SqueakBox({ addPost, loggedInUser }: SqueakBoxProps) {
                         <Loader />
                     ) : (
                         <div className="post-content">
-                            <textarea
-                                ref={txtAreaRef}
-                                className="squeak-textarea"
-                                placeholder="What is happening?!"
-                                value={msg}
-                                onChange={handleInputChange}
-                                onKeyDown={handleKeyDown}
-                            />
+                            <textarea ref={txtAreaRef} className="squeak-textarea" placeholder="What is happening?!" value={msg} onChange={handleInputChange} onKeyDown={handleKeyDown} />
                             {fileUrl && (
                                 <>
                                     <div className="img-container">
-                                        <img
-                                            onClick={() => setSelectedImgUrl(fileUrl)}
-                                            className="squeakbox-img"
-                                            src={fileUrl}
-                                            alt="file"
-                                        />
-                                        <button
-                                            className="remove-photo-btn"
-                                            type="submit"
-                                            onClick={handleRemovePhoto}
-                                        >
+                                        <img onClick={() => setSelectedImgUrl(fileUrl)} className="squeakbox-img" src={fileUrl} alt="file" />
+                                        <button className="remove-photo-btn" type="submit" onClick={handleRemovePhoto}>
                                             x
                                         </button>
                                     </div>
@@ -144,33 +129,16 @@ export default function SqueakBox({ addPost, loggedInUser }: SqueakBoxProps) {
                         <label htmlFor="file-upload" className="file-upload-label">
                             <ImageOutlined className="icon" onMouseDown={handleAddImgClick} />
                         </label>
-                        <input
-                            type="file"
-                            id="file-upload"
-                            className="file-upload-input"
-                            ref={fileInputRef}
-                            onChange={handleFileChange}
-                            style={{ display: 'none' }}
-                        />
+                        <input type="file" id="file-upload" className="file-upload-input" ref={fileInputRef} onChange={handleFileChange} style={{ display: 'none' }} />
                         <GifBoxOutlined className="icon" onClick={handleGifMenuClicked} />
                         <TagFacesOutlined onClick={handleEmojiMenuClicked} className="icon" />
                     </div>
                 </div>
             </form>
-            {selectedImgUrl && (
-                <ImgModal onCloseModal={() => setSelectedImgUrl('')} imgUrl={selectedImgUrl} />
-            )}
+            {selectedImgUrl && <ImgModal onCloseModal={() => setSelectedImgUrl(EMPTY_STR)} imgUrl={selectedImgUrl} />}
             <div className="menu-container">
-                {isEmojiMenuOpen && (
-                    <EmojiPicker onEmojiClick={handleEmojiClicked} theme={Theme.DARK} />
-                )}
-                {isGifMenuOpen && (
-                    <GifPicker
-                        tenorApiKey={apiService.TENOR_API_KEY}
-                        onGifClick={handleGifPick}
-                        theme={Theme.DARK}
-                    />
-                )}
+                {isEmojiMenuOpen && <EmojiPicker onEmojiClick={handleEmojiClicked} theme={Theme.DARK} />}
+                {isGifMenuOpen && <GifPicker tenorApiKey={apiService.TENOR_API_KEY} onGifClick={handleGifPick} theme={Theme.DARK} />}
             </div>
         </section>
     )

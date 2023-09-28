@@ -1,3 +1,7 @@
+// * UTILS
+export const EMPTY_STR = ''
+export const SPACE = ' '
+
 // * ID'S
 const GUEST_ID = 'GUEST'
 const ID_LENGTH = 5
@@ -19,15 +23,15 @@ const DEMO_PHOTOS = [
     'https://picsum.photos/516/258',
     'https://static.scientificamerican.com/sciam/assets/Image/2019/spinningblackhole.gif',
     'https://media1.giphy.com/media/3oEjI4sFlp73fvEYgw/giphy.gif',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    ''
+    EMPTY_STR,
+    EMPTY_STR,
+    EMPTY_STR,
+    EMPTY_STR,
+    EMPTY_STR,
+    EMPTY_STR,
+    EMPTY_STR,
+    EMPTY_STR,
+    EMPTY_STR
 ]
 // * USERS
 const NO_PROFILE_IMG_URL = 'https://source.boringavatars.com/beam/120/Stefan?colors=1DB954'
@@ -37,6 +41,9 @@ const NO_BG_WALLPAPER_URL = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd
 //
 // * UTIL FUNCTIONS
 const DEBOUNCE_DELAY = 0 // ? in ms
+
+// * TRENDS NUMBER
+const TRENDS_NUMBER = 5
 
 export const constsService = {
     DEMO_POSTS_NUM,
@@ -51,5 +58,6 @@ export const constsService = {
     DEBOUNCE_DELAY,
     MAIN_BG_COLOR,
     DEMO_PHOTOS,
-    RANDOM_NAMES
+    RANDOM_NAMES,
+    TRENDS_NUMBER
 }

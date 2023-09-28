@@ -5,7 +5,8 @@ import { feedService } from '../../services/feed.service'
 import { cloudinaryService } from '../../services/cloudinary.service'
 import { loaderReducers } from '../reducers/loader.slice'
 import { FeedPost, User } from '../../services/interface.service'
-import { constsService } from '../../services/consts.service'
+import { EMPTY_STR, constsService } from '../../services/consts.service'
+import { trendsActions } from './trends.actions'
 // import { httpService } from '../../services/http.service'
 // import { utilService } from '../../services/util.service'
 
@@ -36,6 +37,7 @@ function queryFeedPosts(feedPosts: FeedPost[]): AppThunk {
                 feedPostsDB = await dbService.getCollectionFromDB(dbService.POSTS_DB_COLLECTION)
             }
 
+            dispatch(trendsActions.getTrends(feedPostsDB))
             dispatch(feedReducers.queryFeedPostsSuccess(feedPostsDB))
             dispatch(loaderReducers.toggleAppLoader())
         } catch (error) {
@@ -44,12 +46,12 @@ function queryFeedPosts(feedPosts: FeedPost[]): AppThunk {
     }
 }
 
-function addFeedPost(loggedInUser: User, postContent: string, file: File | null, gifUrl: string = ''): AppThunk {
+function addFeedPost(loggedInUser: User, postContent: string, file: File | null, gifUrl: string = EMPTY_STR): AppThunk {
     return async (dispatch) => {
         try {
             dispatch(loaderReducers.toggleNewPostLoader())
             const newPost = feedService.getEmptyPost(loggedInUser, postContent)
-            newPost.imgUrl = file ? await cloudinaryService.uploadImgToCloud(file) : gifUrl !== '' ? gifUrl : null
+            newPost.imgUrl = file ? await cloudinaryService.uploadImgToCloud(file) : gifUrl !== EMPTY_STR ? gifUrl : null
             await dbService.addItemToCollection(newPost, newPost.id, dbService.POSTS_DB_COLLECTION)
             await dbService.pushStringToArrayField(loggedInUser.id, dbService.USER_DB_COLLECTION, dbService.POSTS_ID_FIELD, newPost.id)
             dispatch(feedReducers.addFeedPostSuccess(newPost))
@@ -129,7 +131,7 @@ function setSelectedSqueak(selectedSqueak: FeedPost): AppThunk {
 // function addFeedComment(
 //     postContent: string,
 //     file: File | null,
-//     gifUrl: string = '',
+//     gifUrl: string = EMPTY_STR,
 //     postId: string
 // ): AppThunk {
 //     return async (dispatch) => {
@@ -138,15 +140,15 @@ function setSelectedSqueak(selectedSqueak: FeedPost): AppThunk {
 //             const newComment = feedService.getEmptyPost(
 //                 'Pukki Blinders',
 //                 'pukki123',
-//                 '',
-//                 ''
+//                 EMPTY_STR,
+//                 EMPTY_STR
 //             )
 //             newComment.content = postContent
 //             newComment.imgUrl = file
 //                 -? await cloudinaryService.uploadImgToCloud(file)
 //                 : gifUrl
 //                 -? gifUrl
-//                 : ''
+//                 : EMPTY_STR
 
 //             const updatedPost = await dbService.getPostByIdFromDb(
 //                 postId,

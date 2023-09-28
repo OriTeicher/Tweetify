@@ -15,7 +15,6 @@ const ImgModal: React.FC<ImgModalProps> = ({ imgUrl, onCloseModal }) => {
             const imgElement = imgRef.current
             if (imgElement) {
                 imgElement.classList.add('scale-animation')
-
                 setTimeout(() => {
                     imgElement.classList.remove('scale-animation')
                 }, 1500)
@@ -26,17 +25,8 @@ const ImgModal: React.FC<ImgModalProps> = ({ imgUrl, onCloseModal }) => {
     }, [])
     return (
         <>
-            <Modal
-                className="img-modal-container"
-                open={true}
-                onClose={handleCloseClick}
-            >
-                <img
-                    alt="nothing here... :("
-                    className="img-modal scale-animation"
-                    ref={imgRef}
-                    src={imgUrl}
-                />
+            <Modal className="img-modal-container" open={true} onClose={handleCloseClick}>
+                <img alt="nothing here... :(" className="img-modal scale-animation" ref={imgRef} src={imgUrl} />
             </Modal>
         </>
     )

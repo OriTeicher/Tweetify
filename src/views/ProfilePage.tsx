@@ -4,12 +4,12 @@ import { DateRange } from '@mui/icons-material'
 import { useSelector } from 'react-redux'
 import { RootState } from '../app/store'
 import { Avatar } from '@mui/material'
-import { constsService } from '../services/consts.service'
+import { EMPTY_STR, constsService } from '../services/consts.service'
 import { utilService } from '../services/util.service'
 import { useNavigate } from 'react-router-dom'
 
 export default function ProfilePage() {
-    const [selectedImgUrl, setSelectedImgUrl] = useState('')
+    const [selectedImgUrl, setSelectedImgUrl] = useState(EMPTY_STR)
     const [isBeingEdited, setIsBeingEdited] = useState<boolean>(false)
 
     const { loggedInUser } = useSelector((state: RootState) => state.user)
@@ -55,7 +55,7 @@ export default function ProfilePage() {
                     </p>
                 </div>
             </div>
-            {selectedImgUrl && <ImgModal imgUrl={selectedImgUrl} onCloseModal={() => setSelectedImgUrl('')} />}
+            {selectedImgUrl && <ImgModal imgUrl={selectedImgUrl} onCloseModal={() => setSelectedImgUrl(EMPTY_STR)} />}
         </section>
     )
 }

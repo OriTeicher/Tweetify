@@ -6,6 +6,7 @@ import { userActions } from '../../app/actions/user.actions'
 import { Action, ThunkDispatch } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store'
 import { useDispatch } from 'react-redux'
+import { EMPTY_STR, SPACE } from '../../services/consts.service'
 
 export interface LoginModalState {
     isOpen: boolean
@@ -14,20 +15,20 @@ export interface LoginModalState {
 
 const LoginModal: React.FC<LoginModalState> = ({ isOpen, setIsOpen }) => {
     const [isSignInMode, setIsSignInMode] = useState(true)
-    const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [passwordConfirm, setPasswordConfirm] = useState('')
+    const [username, setUsername] = useState(EMPTY_STR)
+    const [email, setEmail] = useState(EMPTY_STR)
+    const [password, setPassword] = useState(EMPTY_STR)
+    const [passwordConfirm, setPasswordConfirm] = useState(EMPTY_STR)
     const navigate = useNavigate()
     const dispatch: ThunkDispatch<RootState, undefined, Action<string>> = useDispatch()
 
     // TODO: reset data function
 
     const resetData = () => {
-        setUsername('')
-        setPassword('')
-        setPasswordConfirm('')
-        setEmail('')
+        setUsername(EMPTY_STR)
+        setPassword(EMPTY_STR)
+        setPasswordConfirm(EMPTY_STR)
+        setEmail(EMPTY_STR)
     }
 
     useEffect(() => {
@@ -62,7 +63,7 @@ const LoginModal: React.FC<LoginModalState> = ({ isOpen, setIsOpen }) => {
     }
 
     const preventSpaceKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === ' ') event.preventDefault()
+        if (event.key === SPACE) event.preventDefault()
     }
 
     return (
@@ -71,10 +72,7 @@ const LoginModal: React.FC<LoginModalState> = ({ isOpen, setIsOpen }) => {
                 <Box className="modal-content">
                     <Twitter className="twitter-icon" />
                     <h2>{isSignInMode ? 'Log-in' : 'Sign up'} to Squeaker</h2>
-                    <form
-                        className="flex column login-form"
-                        onSubmit={isSignInMode ? handleSignUp : handleSignUp}
-                    >
+                    <form className="flex column login-form" onSubmit={isSignInMode ? handleSignUp : handleSignUp}>
                         <input
                             onKeyDown={preventSpaceKeyPress}
                             type="text"
@@ -131,9 +129,7 @@ const LoginModal: React.FC<LoginModalState> = ({ isOpen, setIsOpen }) => {
                     </form>
                     <p>
                         {isSignInMode ? "Don't have an account yet? " : 'Already have an account? '}
-                        <span onClick={handleModeToggle}>
-                            {isSignInMode ? 'Sign up!' : 'Sign in!'}
-                        </span>
+                        <span onClick={handleModeToggle}>{isSignInMode ? 'Sign up!' : 'Sign in!'}</span>
                     </p>
                 </Box>
             </Modal>

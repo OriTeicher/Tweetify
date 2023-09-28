@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import FeedContentPreview from './FeedContentPreview'
 import Loader from '../utils/Loader'
 import { Avatar } from '@mui/material'

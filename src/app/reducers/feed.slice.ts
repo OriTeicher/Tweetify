@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { FeedPost } from '../../services/interface.service'
+import { EMPTY_STR } from '../../services/consts.service'
 
 export interface FeedState {
     feedPosts: FeedPost[]
@@ -11,7 +12,7 @@ export interface FeedState {
 export const initialState: FeedState = {
     feedPosts: [],
     currPageName: 'home',
-    filterBy: '',
+    filterBy: EMPTY_STR,
     selectedSqueak: {} as FeedPost
 }
 
@@ -24,7 +25,7 @@ const feedSlice = createSlice({
         },
 
         addFeedPostSuccess: (state, action: PayloadAction<FeedPost>) => {
-            state.feedPosts.push(action.payload)
+            state.feedPosts.push({ ...action.payload })
             state.feedPosts.sort((a, b) => b.createdAt - a.createdAt)
         },
 
@@ -35,7 +36,10 @@ const feedSlice = createSlice({
         setFilterBySuccess: (state, action: PayloadAction<string>) => {
             state.filterBy = action.payload
         },
-
+        toggleLikesSuccess: (state, action: PayloadAction<{ isLike: boolean; postId: string }>) => {
+            const { isLike, postId } = action.payload
+            console.log(isLike, postId)
+        },
         addCommentSuccess: (state, action: PayloadAction<FeedPost[]>) => {
             const idx = state.feedPosts.findIndex((post) => post.id === action.payload[0].id)
             const updatedPost = state.feedPosts[idx]

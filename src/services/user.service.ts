@@ -1,3 +1,4 @@
+import { EMPTY_STR } from './consts.service'
 import { CreateUserDto, UpdateUserDto, User } from './interface.service'
 import { utilService } from './util.service'
 export const userService = {
@@ -12,12 +13,12 @@ function getEmptyUser(): User {
         isAdmin: false,
         isVerified: false,
         id: 'U-' + utilService.generateId(5),
-        username: '',
-        displayName: '',
-        description: '',
-        email: '',
-        profileImgUrl: '',
-        profileBgUrl: '',
+        username: EMPTY_STR,
+        displayName: EMPTY_STR,
+        description: EMPTY_STR,
+        email: EMPTY_STR,
+        profileImgUrl: EMPTY_STR,
+        profileBgUrl: EMPTY_STR,
         postsId: [],
         followers: [],
         following: [],
@@ -27,21 +28,21 @@ function getEmptyUser(): User {
 
 function getEmptyCreateUserDto(): CreateUserDto {
     return {
-        username: '',
-        password: '',
-        displayName: '',
-        description: '',
-        email: '',
-        profileImgUrl: '',
-        profileBgUrl: ''
+        username: EMPTY_STR,
+        password: EMPTY_STR,
+        displayName: EMPTY_STR,
+        description: EMPTY_STR,
+        email: EMPTY_STR,
+        profileImgUrl: EMPTY_STR,
+        profileBgUrl: EMPTY_STR
     }
 }
 
 function getEmptyUpdateUserDto(): UpdateUserDto {
     return {
-        displayName: '',
-        description: '',
-        profileImgUrl: '',
-        profileBgUrl: ''
+        displayName: EMPTY_STR,
+        description: EMPTY_STR,
+        profileImgUrl: EMPTY_STR,
+        profileBgUrl: EMPTY_STR
     }
 }

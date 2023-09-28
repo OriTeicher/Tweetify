@@ -9,6 +9,8 @@
 /coverage
 firebase.ts
 src/services/api.service.ts
+src/services/consts.service.ts
+src/services/db.service.ts
 # production
 /build
 node_modules

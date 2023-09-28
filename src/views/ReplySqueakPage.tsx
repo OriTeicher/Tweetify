@@ -1,10 +1,11 @@
 import React from 'react'
+import SqueakBox from '../cmps/feed/SqueakBox'
 import { useSelector } from 'react-redux'
 import { RootState } from '../app/store'
 import { useNavigate } from 'react-router-dom'
 import { FeedPreview } from '../cmps/feed/FeedPreview'
 import { ArrowBackRounded } from '@mui/icons-material'
-import SqueakBox from '../cmps/feed/SqueakBox'
+
 export default function ReplySqueakPage() {
     const { selectedSqueak } = useSelector((state: RootState) => {
         return state.feed
@@ -14,7 +15,6 @@ export default function ReplySqueakPage() {
     })
 
     const navigate = useNavigate()
-
     const handleGoBack = () => navigate('/home')
 
     return (
@@ -43,7 +43,7 @@ export default function ReplySqueakPage() {
                 <div className="comments-list">
                     {selectedSqueak?.comments &&
                         selectedSqueak.comments.map((comment, idx) => (
-                            <> 
+                            <>
                                 <FeedPreview
                                     key={idx}
                                     id={comment.id}

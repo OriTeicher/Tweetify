@@ -1,5 +1,5 @@
 import { utilService } from './util.service'
-import { constsService } from './consts.service'
+import { EMPTY_STR, constsService } from './consts.service'
 import { CreatePostDto, FeedPost, User, UserForPost } from './interface.service'
 
 export const feedService = {
@@ -24,7 +24,7 @@ function getEmptyPost(user: UserForPost, content: string = '...'): FeedPost {
             profileImgUrl: user.profileImgUrl
         },
         content,
-        imgUrl: '',
+        imgUrl: EMPTY_STR,
         createdAt: Date.now(),
         likes: 0,
         resqueaks: 0,
@@ -37,7 +37,7 @@ function getRandomProfilePhoto(): string {
     const randomGender = utilService.getRandomIntInclusive(1, 2) % 2 === 0 ? 'male' : 'female'
     const avatarUrl = `https://xsgames.co/randomusers/assets/avatars/${randomGender}/${randomNum}.jpg`
     if (randomNum % 2 === 0) return avatarUrl
-    else return ''
+    else return EMPTY_STR
 }
 
 function getRandomPosts(postsCount: number) {
@@ -89,7 +89,7 @@ function getRandomComment(displayName: string = 'Guest'): FeedPost {
     const owner: UserForPost = {
         id: 'U' + utilService.generateId(5),
         displayName: constsService.RANDOM_NAMES[utilService.getRandomIntInclusive(0, 3)],
-        profileImgUrl: `https://source.boringavatars.com/`,
+        profileImgUrl: getRandomProfilePhoto(),
         username: 'demo-user',
         isVerified: utilService.getRandomBool()
     }
@@ -99,15 +99,15 @@ function getRandomComment(displayName: string = 'Guest'): FeedPost {
 
 function getEmptyUserCred() {
     return {
-        username: '',
-        password: '',
-        email: ''
+        username: EMPTY_STR,
+        password: EMPTY_STR,
+        email: EMPTY_STR
     }
 }
 function getEmptyCreatePostDto(): CreatePostDto {
     return {
-        userId: '',
-        content: '',
+        userId: EMPTY_STR,
+        content: EMPTY_STR,
         imgUrl: null
     }
 }

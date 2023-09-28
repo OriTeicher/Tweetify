@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { SearchOutlined as SearchIcon } from '@mui/icons-material'
 import { utilService } from '../../services/util.service'
-import { constsService } from '../../services/consts.service'
+import { EMPTY_STR, constsService } from '../../services/consts.service'
 
 interface SearchbarProps {
     onSetFilterBy: Function
@@ -24,16 +24,9 @@ export default function Searchbar(props: SearchbarProps) {
     }
 
     return (
-        <section className={`search-container ${isInputFocused ? 'focused' : ''}`}>
-            <SearchIcon className={`search-icon`} id={`${isInputFocused ? 'focused' : ''}`} />
-            <input
-                type="search"
-                className="searchbar"
-                placeholder="Search Squeaker..."
-                onFocus={handleInputFocus}
-                onBlur={handleInputBlur}
-                onChange={handleTxtChange}
-            ></input>
+        <section className={`search-container ${isInputFocused ? 'focused' : EMPTY_STR}`}>
+            <SearchIcon className={`search-icon`} id={`${isInputFocused ? 'focused' : EMPTY_STR}`} />
+            <input type="search" className="searchbar" placeholder="Search Squeaker..." onFocus={handleInputFocus} onBlur={handleInputBlur} onChange={handleTxtChange}></input>
         </section>
     )
 }

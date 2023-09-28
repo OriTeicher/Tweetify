@@ -3,13 +3,14 @@ import { FeedPreview } from './FeedPreview'
 import { FeedPost } from '../../services/interface.service'
 import { apiService } from '../../services/api.service'
 import Loader from '../utils/Loader'
+import { EMPTY_STR } from '../../services/consts.service'
 
 export interface FeedListProps {
     feedPosts: FeedPost[]
 }
 
 const FeedList: React.FC<FeedListProps> = (props: FeedListProps) => {
-    const [randomFact, setRandomFact] = useState('')
+    const [randomFact, setRandomFact] = useState(EMPTY_STR)
     const [isLoadingFact, setIsLoadingFact] = useState(false)
 
     const fetchRandomFact = async () => {

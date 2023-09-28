@@ -1,13 +1,14 @@
-//* Setup *
+//* setup *
 @import 'setup/variables';
 @import 'setup/typography';
 
-// * Basics *
+// * basics *
 @import 'basics/helpers';
 @import 'basics/base';
 
-// * Components *
-// sidebar
+// ? Components
+
+// * sidebar *
 @import 'cmps/sidebar/SidebarOption';
 @import 'cmps/sidebar/Sidebar';
 @import 'cmps/sidebar/LoggedAccount';
@@ -25,10 +26,10 @@
 // * comments *
 @import 'cmps/comments/CommentsList';
 
-// * trending *
-@import 'cmps/trending/TrendingIndex';
-@import 'cmps/trending/TrendingList';
-@import 'cmps/trending/TrendingPreview';
+// * trends *
+@import 'cmps/trending/TrendsIndex';
+@import 'cmps/trending/TrendsList';
+@import 'cmps/trending/TrendsPreview';
 @import 'cmps/trending/Searchbar';
 
 // * profile *

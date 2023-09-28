@@ -87,7 +87,6 @@ export function SilentLogin() {
     useEffect(() => {
         ;(async () => {
             let user = undefined
-
             try {
                 user = await post('/auth/ping', () => {})
             } catch (err) {

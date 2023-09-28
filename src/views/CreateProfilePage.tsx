@@ -7,14 +7,14 @@ import { RootState } from '../app/store'
 import { userActions } from '../app/actions/user.actions'
 import { userService } from '../services/user.service'
 import { feedService } from '../services/feed.service'
-import { constsService } from '../services/consts.service'
+import { EMPTY_STR, constsService } from '../services/consts.service'
 
 export default function CreateProfilePage() {
     // email & password needs to
-    const [editedDescription, setEditedDescription] = useState('')
-    const [editedDisplayName, setEditedDisplayName] = useState('')
-    const [profileImage, setProfileImage] = useState('')
-    const [profileBgImgUrl, setProfileBgUrl] = useState('')
+    const [editedDescription, setEditedDescription] = useState(EMPTY_STR)
+    const [editedDisplayName, setEditedDisplayName] = useState(EMPTY_STR)
+    const [profileImage, setProfileImage] = useState(EMPTY_STR)
+    const [profileBgImgUrl, setProfileBgUrl] = useState(EMPTY_STR)
     const [profileImgFile, setProfileImgFile] = useState<File | null>(null)
     const [profileBgImgFile, setProfileBgImgFile] = useState<File | null>(null)
     const [isLoaderOn, setIsLoaderOn] = useState(false)
@@ -29,8 +29,8 @@ export default function CreateProfilePage() {
 
     useEffect(() => {
         if (!loggedInUser) return
-        setEditedDescription(loggedInUser.description || '')
-        setEditedDisplayName(loggedInUser.displayName || '')
+        setEditedDescription(loggedInUser.description || EMPTY_STR)
+        setEditedDisplayName(loggedInUser.displayName || EMPTY_STR)
         setProfileBgUrl(loggedInUser.profileBgUrl || constsService.NO_BG_WALLPAPER_URL)
         setProfileImage(loggedInUser.profileImgUrl || constsService.NO_PROFILE_IMG_URL)
     }, [loggedInUser])
@@ -42,7 +42,6 @@ export default function CreateProfilePage() {
     const handleDisplayNameChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
         setEditedDisplayName(event.target.value)
     }
-
 
     const handleCreateNewProfile = async () => {
         setIsLoaderOn(true)
@@ -98,7 +97,7 @@ export default function CreateProfilePage() {
                         <input id="img-upload" type="file" accept="image/*" onChange={handleProfileImgChange} style={{ display: 'none' }} />
                         <input id="bgc-img-upload" type="file" accept="image/*" onChange={handleBgImgChange} style={{ display: 'none' }} />
                         {isGuestUser && (
-                            <button onClick={loggedInUser.email !== '' ? handleUpdateProfile : handleCreateNewProfile} className="save-profile-btn">
+                            <button onClick={loggedInUser.email !== EMPTY_STR ? handleUpdateProfile : handleCreateNewProfile} className="save-profile-btn">
                                 Save Profile
                             </button>
                         )}

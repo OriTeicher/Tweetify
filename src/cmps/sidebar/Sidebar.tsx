@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Twitter as TwitterIcon } from '@mui/icons-material'
-import { Home as HomeIcon } from '@mui/icons-material'
-import { Search as SearchIcon } from '@mui/icons-material'
-import { Notifications as NotificationIcon } from '@mui/icons-material'
-import { Mail as MsgIcon } from '@mui/icons-material'
-import { Bookmarks as BookmarkIcon } from '@mui/icons-material'
-import { Person as ProfileIcon } from '@mui/icons-material'
-import { MoreHoriz as MoreIcon } from '@mui/icons-material'
 import SidebarOption from './SidebarOption'
 import LoggedAcount from './LoggedAcount'
 import LoginModal from '../utils/LoginModal'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../app/store'
+import { Twitter as TwitterIcon, Home as HomeIcon, Search as SearchIcon, Notifications as NotificationIcon, Bookmarks as BookmarkIcon, Person as ProfileIcon, QueueMusic as Spotify, Mail as MsgIcon } from '@mui/icons-material'
+import { EMPTY_STR } from '../../services/consts.service'
 
 interface SidebarProps {
     onOptionChange: Function
@@ -20,7 +14,7 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
     const [selectedSidebarOption, setSelectedSidebarOption] = useState('Home')
-    const [isMobileScreen, setisMobileScreen] = useState(false)
+    const [isMobileScreen, setIsMobileScreen] = useState(false)
     const [isLoginModalOpen, setLoginModal] = useState(false)
     const navigate = useNavigate()
 
@@ -30,7 +24,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
 
     useEffect(() => {
         const handleResize = () => {
-            setisMobileScreen(window.innerWidth <= 768)
+            setIsMobileScreen(window.innerWidth <= 768)
         }
         window.addEventListener('resize', handleResize)
         handleResize()
@@ -51,22 +45,22 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
 
     const renderSidebarOptions = () => {
         const optionsData = [
-            { Icon: TwitterIcon, txt: '' },
-            { Icon: HomeIcon, txt: 'Home' },
-            { Icon: SearchIcon, txt: 'Explore' },
-            { Icon: NotificationIcon, txt: 'Notifications' },
-            { Icon: MsgIcon, txt: 'Messages' },
-            { Icon: BookmarkIcon, txt: 'Bookmarks' },
-            { Icon: ProfileIcon, txt: 'Profile' },
-            { Icon: MoreIcon, txt: 'More' }
+            { Icon: TwitterIcon, txt: EMPTY_STR, className: EMPTY_STR },
+            { Icon: HomeIcon, txt: 'Home', className: EMPTY_STR },
+            { Icon: SearchIcon, txt: 'Explore', className: EMPTY_STR },
+            { Icon: NotificationIcon, txt: 'Notifications', className: EMPTY_STR },
+            { Icon: MsgIcon, txt: 'Messages', className: EMPTY_STR },
+            { Icon: BookmarkIcon, txt: 'Bookmarks', className: EMPTY_STR },
+            { Icon: ProfileIcon, txt: 'Profile', className: EMPTY_STR },
+            { Icon: Spotify, txt: 'Tweetify', className: EMPTY_STR }
         ]
 
-        return optionsData.map(({ Icon, txt }) => (
+        return optionsData.map(({ Icon, txt, className }) => (
             <SidebarOption
                 key={txt}
                 Icon={Icon}
                 // ? hides the irrelevant sidebar icons in mobile
-                txt={isMobileScreen ? '' : txt}
+                txt={isMobileScreen ? EMPTY_STR : txt}
                 isActive={selectedSidebarOption === txt}
                 onClick={() => handleOptionClick(txt)}
             />
@@ -78,7 +72,6 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
             <section className="left-menu">
                 <div className={`sidebar-container  ${isMobileScreen ? 'mobile' : null}`}>
                     {renderSidebarOptions()}
-
                     <button className={`squeak-btn ${isMobileScreen ? 'mobile' : 'null'}`} onClick={handleSiderbarSqueak}>
                         {isMobileScreen ? '+' : 'Squeak'}
                     </button>

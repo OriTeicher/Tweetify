@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Sidebar from '../cmps/sidebar/Sidebar'
-import TrendingIndex from '../cmps/trending/TrendingIndex'
+import TrendingIndex from '../cmps/trending/TrendsIndex'
 import FeedIndex from './FeedIndex'
 
 interface AppProps {

@@ -1,18 +1,9 @@
-import {
-    collection,
-    doc,
-    updateDoc,
-    getDocs,
-    deleteDoc,
-    setDoc,
-    increment,
-    arrayUnion
-} from 'firebase/firestore'
+import { collection, doc, updateDoc, getDocs, deleteDoc, setDoc, increment, arrayUnion } from 'firebase/firestore'
 import { feedService } from './feed.service'
 import { db } from '../firebase'
+import { EMPTY_STR } from './consts.service'
 
 export const dbService = {
-    // functions
     addItemToCollection,
     getCollectionFromDB,
     removeItemFromDB,
@@ -21,8 +12,6 @@ export const dbService = {
     setDemoDB,
     pushStringToArrayField,
     getPostByIdFromDb,
-
-    // consts
     POSTS_DB_COLLECTION: 'posts',
     USER_DB_COLLECTION: 'users',
     MIN_POST_NUM: 20,
@@ -37,7 +26,7 @@ async function addItemToCollection(item: object, itemId: string, col: string) {
     }
 }
 
-async function getCollectionFromDB(col: string, filterBy: string = '') {
+async function getCollectionFromDB(col: string, filterBy: string = EMPTY_STR) {
     try {
         const querySnapshot = await getDocs(collection(db, col))
         const collectionArr = querySnapshot.docs.map((doc) => ({
@@ -45,7 +34,7 @@ async function getCollectionFromDB(col: string, filterBy: string = '') {
             owner: doc.data().owner,
             username: doc.data().username,
             content: doc.data().content,
-            imgUrl: doc.data().imgUrl || '',
+            imgUrl: doc.data().imgUrl || EMPTY_STR,
             createdAt: doc.data().createdAt || Date.now(),
             likes: doc.data().likes || 0,
             comments: doc.data().comments || [],
@@ -54,10 +43,7 @@ async function getCollectionFromDB(col: string, filterBy: string = '') {
         }))
         if (filterBy) {
             const resArr = collectionArr.filter(
-                (post) =>
-                    post.content.toLowerCase().includes(filterBy.toLowerCase()) ||
-                    post.owner.username.toLowerCase().includes(filterBy.toLowerCase()) ||
-                    post.owner.displayName.toLowerCase().includes(filterBy.toLowerCase())
+                (post) => post.content.toLowerCase().includes(filterBy.toLowerCase()) || post.owner.username.toLowerCase().includes(filterBy.toLowerCase()) || post.owner.displayName.toLowerCase().includes(filterBy.toLowerCase())
             )
             return resArr
         } else return collectionArr
@@ -80,11 +66,7 @@ async function setDemoDB(postsNum: number) {
     const randomPosts = feedService.getRandomPosts(postsNum)
     for (let i = 0; i < postsNum; i++) {
         try {
-            await addItemToCollection(
-                randomPosts[i],
-                randomPosts[i].id,
-                dbService.POSTS_DB_COLLECTION
-            )
+            await addItemToCollection(randomPosts[i], randomPosts[i].id, dbService.POSTS_DB_COLLECTION)
         } catch (error) {
             console.log('cant add demo data', error)
         }
@@ -111,12 +93,7 @@ async function pushStringToArrayField(itemId: string, col: string, field: string
     }
 }
 
-async function updateFieldInCollection(
-    itemId: string,
-    field: string,
-    col: string,
-    updatedInfo: any
-) {
+async function updateFieldInCollection(itemId: string, field: string, col: string, updatedInfo: any) {
     try {
         const colRef = doc(db, col, itemId)
         const updatedItem = { [field]: increment(updatedInfo) }
@@ -134,7 +111,7 @@ async function getPostByIdFromDb(itemId: string, col: string) {
             owner: doc.data().owner,
             username: doc.data().username,
             content: doc.data().content,
-            imgUrl: doc.data().imgUrl || '',
+            imgUrl: doc.data().imgUrl || EMPTY_STR,
             createdAt: doc.data().createdAt || Date.now(),
             likes: doc.data().likes || 0,
             comments: doc.data().comments || [],

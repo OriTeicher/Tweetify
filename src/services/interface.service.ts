@@ -14,12 +14,6 @@ export interface FeedPost {
     likedId?: string[]
 }
 
-export interface Trend {
-    category: string
-    title: string
-    tweetsCount: number
-}
-
 export interface User {
     id: string
     email: string
@@ -57,4 +51,9 @@ export interface CreatePostDto {
     userId: string
     content: string
     imgUrl?: string | null
+}
+
+export interface Trend {
+    title: string
+    tweetsCount: number
 }

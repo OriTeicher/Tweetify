@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
-import TrendingList from './TrendingList'
+import TrendingList from './TrendsList'
 import Searchbar from './Searchbar'
-import { useDispatch } from 'react-redux'
 import { RootState } from '../../app/store'
 import { feedActions } from '../../app/actions/feed.actions'
-import { ThunkDispatch, Action } from '@reduxjs/toolkit'
-import { trendsService } from '../../services/trends.service'
 import { ArrowBackRounded } from '@mui/icons-material'
+import { useDispatch, useSelector } from 'react-redux'
+import { Action, ThunkDispatch } from '@reduxjs/toolkit'
+import { EMPTY_STR } from '../../services/consts.service'
 
-export default function TrendingIndex() {
+export default function TrendsIndex() {
     const [isFilterOn, setIsFilterOn] = useState(false)
-    const trends = trendsService.getRandomTrends(6)
+
+    const { trends } = useSelector((state: RootState) => {
+        return state.trends
+    })
 
     const handleSearchTrend = (searchVal: string) => {
         setIsFilterOn(true)
@@ -18,7 +21,7 @@ export default function TrendingIndex() {
     }
     const handleArrowBackClick = () => {
         setIsFilterOn(false)
-        handleFilterBy('')
+        handleFilterBy(EMPTY_STR)
     }
 
     const dispatch: ThunkDispatch<RootState, undefined, Action<string>> = useDispatch()
