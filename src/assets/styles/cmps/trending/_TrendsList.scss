@@ -10,3 +10,23 @@
     max-height: 80vh;
     overflow: auto;
 }
+
+.go-back-header-container {
+    display: flex;
+    gap: 10px;
+    padding: 5px;
+    margin-top: 10px;
+    width: fit-content;
+    border-radius: 10px;
+    &:hover {
+        cursor: pointer;
+        background-color: $hoverClr3;
+        color: $logoColor;
+    }
+}
+
+.go-back-header {
+    font-size: 20px;
+    font-weight: 400;
+    cursor: pointer;
+}

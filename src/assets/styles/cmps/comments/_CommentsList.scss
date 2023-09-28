@@ -44,11 +44,9 @@
 
 .reply-page-container {
     .selected-post-container {
-        position: sticky;
-        overflow: auto;
-        max-height: 250px;
+        max-height: fit-content;
         top: 0;
-        background-color: $mainColor4;
+        background-color: $hoverClr2;
         z-index: 1;
     }
 }

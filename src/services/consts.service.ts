@@ -16,6 +16,7 @@ const LIKE = 1
 const UNLIKE = -1
 const LIKES_FIELD = 'like'
 const COMMENTS_FIELD = 'comment'
+const BOOKMARKS_FIELD = 'bookmark'
 const DEMO_PHOTOS = [
     'https://picsum.photos/518/288',
     'https://picsum.photos/522/292',
@@ -59,5 +60,6 @@ export const constsService = {
     MAIN_BG_COLOR,
     DEMO_PHOTOS,
     RANDOM_NAMES,
-    TRENDS_NUMBER
+    TRENDS_NUMBER,
+    BOOKMARKS_FIELD
 }

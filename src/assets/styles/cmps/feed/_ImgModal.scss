@@ -7,7 +7,7 @@
 .img-modal {
     height: 288px;
     width: 65vw;
-    height: 60vh;
+    height: fit-content;
     border-radius: 20px;
     margin-left: 5px;
     object-fit: fill;
@@ -15,7 +15,7 @@
     border: none;
     margin-top: 20px;
     outline: $outline1;
-    
+
     @keyframes scaleAnimation {
         0% {
             transform: scale(0);

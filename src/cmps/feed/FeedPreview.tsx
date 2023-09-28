@@ -36,6 +36,8 @@ export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
             case constsService.COMMENTS_FIELD:
                 handleSelectedSqueak(props)
                 break
+            case constsService.BOOKMARKS_FIELD:
+                break
         }
     }
 
@@ -55,7 +57,7 @@ export const FeedPreview: React.FC<FeedPost> = (props: FeedPost) => {
                     </div>
                     <div className="  ">
                         <FeedContentPreview id={props.id} owner={props?.owner} verified={props.owner?.isVerified} createdAt={props.createdAt} content={props.content} imgUrl={props.imgUrl} onReadPost={() => handleSelectedSqueak(props)} />
-                        <FeedPreviewIcons isLiked={isLiked} likesNum={props.likes} commentsNum={props.comments?.length} resqueaksNum={props.resqueaks} onIconClick={utilService.debounce(handleIconClick, 500)} />
+                        <FeedPreviewIcons isLiked={isLiked} isBookmarked={false} likesNum={props.likes} commentsNum={props.comments?.length} resqueaksNum={props.resqueaks} onIconClick={utilService.debounce(handleIconClick, 500)} />
                     </div>
                 </div>
             )}

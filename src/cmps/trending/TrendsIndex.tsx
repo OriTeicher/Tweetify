@@ -34,7 +34,12 @@ export default function TrendsIndex() {
         <section className="trending-index">
             <Searchbar onSetFilterBy={(filterValue: string) => handleFilterBy(filterValue)} />
             <TrendingList trends={trends} onSearchTrend={handleSearchTrend} />
-            {isFilterOn ? <ArrowBackRounded onClick={() => handleArrowBackClick()} className="arrow-back" /> : null}
+            {isFilterOn ? (
+                <div className="flex align-center go-back-header-container" onClick={() => handleArrowBackClick()}>
+                    <ArrowBackRounded />
+                    <h2 className="go-back-header">Back to feed</h2>
+                </div>
+            ) : null}
         </section>
     )
 }

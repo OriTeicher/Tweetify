@@ -4,7 +4,10 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ShareIcon from '@mui/icons-material/Share'
-import { SaveAltRounded } from '@mui/icons-material'
+import MsgModal from '../utils/MsgModal'
+
+import { BookmarkBorder } from '@mui/icons-material'
+import { Bookmark } from '@mui/icons-material'
 
 interface FeedPreviewIconProps {
     commentsNum: number
@@ -12,11 +15,14 @@ interface FeedPreviewIconProps {
     likesNum: number
     onIconClick: Function
     isLiked: boolean
+    isBookmarked: boolean
 }
 
 export default function FeedPreviewIcons(props: FeedPreviewIconProps) {
     const [isLiked, setIsLiked] = useState(props.isLiked)
+    const [isBookmarked, setIsBookmarked] = useState(props.isBookmarked)
     const [likesCounter, setLikesCounter] = useState(props.likesNum)
+    const logoColor = '#1ed760'
 
     // TODO: handle comment click prop function
     const handleCommentClick = () => {
@@ -25,9 +31,14 @@ export default function FeedPreviewIcons(props: FeedPreviewIconProps) {
 
     // TODO: handle like click prop function
     const handleLikeClick = () => {
-        setIsLiked((prev) => !prev)
+        setIsLiked((prevState) => !prevState)
         setLikesCounter((prevLikesCounter) => (isLiked ? --prevLikesCounter : ++prevLikesCounter))
         props.onIconClick('like', isLiked)
+    }
+
+    const handleBookmarkClick = () => {
+        setIsBookmarked((prevState) => !prevState)
+        props.onIconClick('bookmark', isBookmarked)
     }
 
     return (
@@ -38,20 +49,22 @@ export default function FeedPreviewIcons(props: FeedPreviewIconProps) {
                     <p>{props.commentsNum !== 0 && props.commentsNum}</p>
                 </div>
                 <div className="icon-container">
-                    {isLiked ? (
-                        // TODO: fix the on click
-                        <FavoriteIcon fontSize="small" onClick={handleLikeClick} className="liked" />
-                    ) : (
-                        // TODO: fix the on click
-                        <FavoriteBorderIcon fontSize="small" onClick={handleLikeClick} className="unliked" />
-                    )}
+                    {isLiked ? <FavoriteIcon fontSize="small" onClick={handleLikeClick} className="liked" /> : <FavoriteBorderIcon fontSize="small" onClick={handleLikeClick} className="unliked" />}
                     <p>{likesCounter !== 0 && likesCounter}</p>
                 </div>
                 <div className="icon-container">
                     <Loop fontSize="small" />
                     <p>{props.resqueaksNum !== 0 && props.resqueaksNum}</p>
                 </div>
-                <SaveAltRounded />
+                {!isBookmarked ? (
+                    <BookmarkBorder onClick={handleBookmarkClick} />
+                ) : (
+                    <>
+                        <Bookmark style={{ color: logoColor }} onClick={handleBookmarkClick} />
+                        <MsgModal msg="Saved in Bookmarks!" />
+                    </>
+                )}
+
                 <ShareIcon fontSize="small" />
             </div>
         </>

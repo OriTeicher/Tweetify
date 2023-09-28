@@ -1,0 +1,32 @@
+.msg-modal-container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transform: translate(-55%, -70%);
+    width: fit-content;
+    background-color: #101010;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    font-family: $mainFont;
+    outline: 1px solid $mainColor3;
+    h2 {
+        font-size: 20px;
+        font-weight: 500;
+    }
+    button {
+        font-family: $mainFont;
+        font-weight: 700;
+        letter-spacing: 1px;
+        width: fit-content;
+        margin: auto;
+        background-color: $logoColor;
+        &:hover {
+            background-color: $logoColor;
+            filter: brightness(90%);
+        }
+    }
+}

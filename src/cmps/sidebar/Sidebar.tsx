@@ -5,7 +5,7 @@ import LoginModal from '../utils/LoginModal'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../app/store'
-import { Twitter as TwitterIcon, Home as HomeIcon, Search as SearchIcon, Notifications as NotificationIcon, Bookmarks as BookmarkIcon, Person as ProfileIcon, QueueMusic as Spotify, Mail as MsgIcon } from '@mui/icons-material'
+import { Twitter as TwitterIcon, Home as HomeIcon, Bookmark, Search as SearchIcon, Notifications as NotificationIcon, Person as ProfileIcon, MusicNoteOutlined as Spotify, Mail as MsgIcon } from '@mui/icons-material'
 import { EMPTY_STR } from '../../services/consts.service'
 
 interface SidebarProps {
@@ -50,9 +50,9 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
             { Icon: SearchIcon, txt: 'Explore', className: EMPTY_STR },
             { Icon: NotificationIcon, txt: 'Notifications', className: EMPTY_STR },
             { Icon: MsgIcon, txt: 'Messages', className: EMPTY_STR },
-            { Icon: BookmarkIcon, txt: 'Bookmarks', className: EMPTY_STR },
+            { Icon: Bookmark, txt: 'Bookmarks', className: EMPTY_STR },
             { Icon: ProfileIcon, txt: 'Profile', className: EMPTY_STR },
-            { Icon: Spotify, txt: 'Tweetify', className: EMPTY_STR }
+            { Icon: Spotify, txt: 'Tweetify Mode', className: EMPTY_STR }
         ]
 
         return optionsData.map(({ Icon, txt, className }) => (

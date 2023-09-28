@@ -141,6 +141,7 @@
 .post-icons {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
     margin: 20px 0px 0px 0px;
     color: $mainColor2;
@@ -231,6 +232,22 @@
         .post-photo {
             width: 98.5%;
         }
+    }
+    .post-icons {
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    }
+    .post-icons div p {
+        left: calc(100% + 2px);
+    }
+    .post-icons svg:nth-child(4),
+    .post-icons svg:nth-child(5) {
+        width: 0.9em;
+        height: 0.9em;
+    }
+    .post-icons svg:nth-child(5) {
+        margin-inline-end: 10px;
     }
 }
 
