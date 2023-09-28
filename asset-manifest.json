@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Tweetify/static/css/main.04cc03fe.css",
-    "main.js": "/Tweetify/static/js/main.713626a5.js",
+    "main.css": "/Tweetify/static/css/main.09ec6f80.css",
+    "main.js": "/Tweetify/static/js/main.42b9863e.js",
     "static/js/787.324a46fa.chunk.js": "/Tweetify/static/js/787.324a46fa.chunk.js",
     "index.html": "/Tweetify/index.html",
-    "main.04cc03fe.css.map": "/Tweetify/static/css/main.04cc03fe.css.map",
-    "main.713626a5.js.map": "/Tweetify/static/js/main.713626a5.js.map",
+    "main.09ec6f80.css.map": "/Tweetify/static/css/main.09ec6f80.css.map",
+    "main.42b9863e.js.map": "/Tweetify/static/js/main.42b9863e.js.map",
     "787.324a46fa.chunk.js.map": "/Tweetify/static/js/787.324a46fa.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.04cc03fe.css",
-    "static/js/main.713626a5.js"
+    "static/css/main.09ec6f80.css",
+    "static/js/main.42b9863e.js"
   ]
 }
