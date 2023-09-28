@@ -10,10 +10,12 @@
     }
     h3 {
         color: $mainColor2;
-        font-size: 12px;
+        font-size: 15px;
+        font-weight: 100;
     }
     h2 {
         font-size: 18px;
+        letter-spacing: 0.5px;
         font-weight: 400;
     }
     &:hover {

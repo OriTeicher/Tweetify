@@ -9,6 +9,9 @@
     width: 300px;
     max-height: 80vh;
     overflow: auto;
+    h1 {
+        font-weight: 300;
+    }
 }
 
 .go-back-header-container {
@@ -16,7 +19,7 @@
     gap: 10px;
     padding: 5px;
     margin-top: 10px;
-    width: fit-content;
+    width: 157px;
     border-radius: 10px;
     &:hover {
         cursor: pointer;

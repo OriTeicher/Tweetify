@@ -7,6 +7,7 @@ import { ArrowBackRounded } from '@mui/icons-material'
 import { useDispatch, useSelector } from 'react-redux'
 import { Action, ThunkDispatch } from '@reduxjs/toolkit'
 import { EMPTY_STR } from '../../services/consts.service'
+import Loader from '../utils/Loader'
 
 export default function TrendsIndex() {
     const [isFilterOn, setIsFilterOn] = useState(false)
@@ -33,7 +34,7 @@ export default function TrendsIndex() {
     return (
         <section className="trending-index">
             <Searchbar onSetFilterBy={(filterValue: string) => handleFilterBy(filterValue)} />
-            <TrendingList trends={trends} onSearchTrend={handleSearchTrend} />
+            {trends.length === 0 ? <Loader /> : <TrendingList trends={trends} onSearchTrend={handleSearchTrend} />}
             {isFilterOn ? (
                 <div className="flex align-center go-back-header-container" onClick={() => handleArrowBackClick()}>
                     <ArrowBackRounded />

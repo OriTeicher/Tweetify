@@ -28,18 +28,31 @@
 
 .flex {
     display: flex;
-
-    > *.full {
-        flex: 1;
-    }
     &.column {
         flex-direction: column;
     }
-    &.justify-center {
-        justify-content: center;
+    &.align-start {
+        align-items: center;
     }
     &.align-center {
         align-items: center;
     }
+    &.align-end {
+        align-items: end;
+    }
+    &.justify-center {
+        justify-content: center;
+    }
+    &.justify-end {
+        justify-content: end;
+    }
+    &.space-evenly {
+        justify-content: space-evenly;
+    }
+    &.space-between {
+        justify-content: space-between;
+    }
+    &.space-around {
+        justify-content: space-around;
+    }
 }
-

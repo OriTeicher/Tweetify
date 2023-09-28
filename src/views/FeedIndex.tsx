@@ -12,6 +12,7 @@ import { feedActions } from '../app/actions/feed.actions'
 import { useNavigate } from 'react-router-dom'
 import { eventBus } from '../services/event.bus.service'
 import { FeedPost } from '../services/interface.service'
+import PlayBarBottom from '../cmps/spotify/PlayBarBottom'
 
 export interface FeedIndexProps {
     topBarOption: string
@@ -58,7 +59,14 @@ const FeedIndex: React.FC<FeedIndexProps> = (props: FeedIndexProps) => {
             <MobileTopbar />
             <FeedTopbar topBarOption={props.topBarOption} />
             <SqueakBox addPost={handleAddPost} loggedInUser={loggedInUser} />
-            {isAppLoading ? <Loader /> : <FeedList feedPosts={feedPosts} />}
+            {isAppLoading ? (
+                <Loader />
+            ) : (
+                <>
+                    <FeedList feedPosts={feedPosts} />
+                    <PlayBarBottom />
+                </>
+            )}
         </section>
     )
 }
