@@ -1,4 +1,7 @@
 # Twitter & Spotify combination clone 
 #### React, Nest.js, Firebase, Redux, MUI
 ### Currently in development... 
-![image](https://github.com/OriTeicher/Tweetify/assets/101281765/5a2e5201-ca67-4113-8a19-5e0e183aeca3)
+
+<p>See how it goees:  https://oriteicher.github.io/Tweetify/ </p> 
+
+![image](https://github.com/OriTeicher/Tweetify/assets/101281765/ebbf7bd7-8a40-436e-bbd7-6590d924ecff)
