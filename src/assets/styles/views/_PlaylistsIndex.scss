@@ -4,22 +4,21 @@
     justify-content: space-between;
     min-height: 100vh;
     flex: 0.7;
-    height: fit-content;
     border-right: $outline1;
     border-left: $outline1;
     max-height: fit-content;
     p {
         font-size: 25px;
-        margin-top: 20px;
+        margin: 20px 0px;
         text-align: center;
     }
     .playlists-list {
         display: grid;
-        justify-content: center;
+        width: 100%;
+        grid-template-columns: 25% 25% 25% 25%;
+        margin-bottom: 100px;
+        gap: 0px;
         justify-items: center;
-        align-items: center;
-        grid-template-columns: repeat(auto-fit, 165px);
-        gap: 10px;
     }
     .tweetify-player-container {
         bottom: 0;
@@ -34,10 +33,12 @@
         }
         flex: 1;
         .playlists-list {
+            width: 100%;
             display: flex;
+            justify-content: center;
             flex-direction: row;
             flex-wrap: wrap;
-            margin-bottom: 100px;
+            margin-bottom: 200px;
         }
     }
 }
