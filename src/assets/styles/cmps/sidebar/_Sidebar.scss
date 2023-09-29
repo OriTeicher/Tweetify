@@ -50,12 +50,12 @@
     top: unset;
 
     .sidebar-option {
-        font-size: 15px;
+        font-size: 16px;
         margin: 0px;
         &:nth-child(1),
         &:nth-child(6),
-        &:nth-child(7),
         &:nth-child(5),
+        &:nth-child(3),
         &:nth-child(4) {
             display: none;
         }
