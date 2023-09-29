@@ -5,6 +5,7 @@ import FeedList from '../cmps/feed/FeedList'
 import SqueakBox from '../cmps/feed/SqueakBox'
 import MobileTopbar from '../cmps/feed/MobileTopbar'
 import Loader from '../cmps/utils/Loader'
+import MusicControlIndex from '../cmps/spotify/MusicControlIndex'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../app/store'
 import { Action, ThunkDispatch } from '@reduxjs/toolkit'
@@ -12,7 +13,7 @@ import { feedActions } from '../app/actions/feed.actions'
 import { useNavigate } from 'react-router-dom'
 import { eventBus } from '../services/event.bus.service'
 import { FeedPost } from '../services/interface.service'
-import PlayBarBottom from '../cmps/spotify/PlayBarBottom'
+import { MOBILE_SCREEN_WIDTH, constsService } from '../services/consts.service'
 
 export interface FeedIndexProps {
     topBarOption: string
@@ -22,6 +23,7 @@ const FeedIndex: React.FC<FeedIndexProps> = (props: FeedIndexProps) => {
     const navigate = useNavigate()
 
     const { feedPosts } = useSelector((state: RootState) => {
+        console.log(window.screen.width)
         return state.feed
     })
 
@@ -64,9 +66,10 @@ const FeedIndex: React.FC<FeedIndexProps> = (props: FeedIndexProps) => {
             ) : (
                 <>
                     <FeedList feedPosts={feedPosts} />
-                    <PlayBarBottom />
+                    <MusicControlIndex />
                 </>
             )}
+            {window.screen.width < MOBILE_SCREEN_WIDTH && <MusicControlIndex />}
         </section>
     )
 }

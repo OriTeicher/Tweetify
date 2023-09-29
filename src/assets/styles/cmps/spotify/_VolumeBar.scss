@@ -1,0 +1,19 @@
+.volume-bar-container {
+    position: absolute;
+    right: 0;
+    margin-inline-end: 15px;
+    gap: 9px;
+}
+
+.volume-slider {
+    color: $mainColor0;
+    &:hover {
+        color: $logoColor;
+    }
+}
+
+@media (max-width: 1000px) {
+    .volume-bar-container {
+        display: none;
+    }
+}

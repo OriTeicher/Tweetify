@@ -35,7 +35,7 @@
             border: none;
             outline: none;
             padding-left: 10px;
-            &:focus{
+            &:focus {
                 outline: 2px solid $logoColor;
             }
         }
@@ -50,17 +50,16 @@
             margin-top: 20px;
             border-radius: 20px;
             padding: 0px 20px;
-            &:hover{
+            &:hover {
                 cursor: pointer;
                 filter: brightness(90%);
-                
             }
         }
     }
-    p{
-        span{
+    p {
+        span {
             color: $logoColor;
-            &:hover{
+            &:hover {
                 cursor: pointer;
                 text-decoration: underline;
             }
@@ -68,15 +67,13 @@
     }
 }
 
-
-@media (max-width: 768px){
-    .login-modal{
-        .modal-content{
+@media (max-width: 768px) {
+    .login-modal {
+        .modal-content {
             width: 100vw;
             border-radius: 0px;
             height: 100vh;
             transform: translateY(0%);
         }
-
     }
 }

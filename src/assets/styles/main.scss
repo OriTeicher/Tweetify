@@ -36,7 +36,8 @@
 @import 'views/ProfilePage';
 
 // * spotify *
-@import 'cmps/spotify/PlayBarBottom';
+@import 'cmps/spotify/MusicControlIndex';
+@import 'cmps/spotify/VolumeBar';
 
 // * utils *
 @import 'utils/Loader';

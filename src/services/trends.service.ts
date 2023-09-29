@@ -26,7 +26,6 @@ function sortWordsByFrequency(wordFrequency: { [key: string]: number }): [string
 function filterWords(words: string[]): string[] {
     return words.filter((word) => {
         const trendWord = word[word.length - 1] === ',' ? word.slice(0, word.length - 2) : word
-        console.log(trendWord)
         return _isWordValid(trendWord)
     })
 }

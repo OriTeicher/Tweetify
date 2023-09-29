@@ -25,18 +25,16 @@
     margin-top: 20px;
     padding: 10px;
     border: none;
-    &:hover{
+    &:hover {
         cursor: pointer;
         opacity: 0.9;
     }
 }
 .light {
     .dark-mode-btn {
-        background-color: #E9E9E9;
-        
+        background-color: #e9e9e9;
     }
 }
-
 
 @media (max-width: 768px) {
     .trending-index {

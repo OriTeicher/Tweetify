@@ -37,7 +37,7 @@
             right: 0;
             width: 100px;
             height: fit-content;
-            color: white;
+            color: $mainColor0;
             font-weight: 200;
             font-size: 15px;
             background-color: $mainColor4;
@@ -107,7 +107,7 @@
         color: $mainColor2;
         &:hover {
             cursor: pointer;
-            color: white;
+            color: $mainColor0;
         }
     }
     .more-icon.mobile {
@@ -148,7 +148,7 @@
     svg {
         cursor: pointer;
         &:hover {
-            color: white;
+            color: $mainColor0;
         }
     }
     svg.liked {

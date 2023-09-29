@@ -11,13 +11,12 @@
     .no-squeaks-para {
         font-size: 25px;
         text-align: center;
-        color: white;
+        color: $mainColor0;
         &:last-child {
             margin: auto;
             width: 500px;
             padding: 20px;
             outline: 2px solid $mainColor3;
         }
-        
     }
 }

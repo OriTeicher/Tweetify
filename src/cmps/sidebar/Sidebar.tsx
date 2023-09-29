@@ -5,7 +5,7 @@ import LoginModal from '../utils/LoginModal'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../app/store'
-import { Twitter as TwitterIcon, Home as HomeIcon, Bookmark, Search as SearchIcon, Notifications as NotificationIcon, Person as ProfileIcon, MusicNoteOutlined as Spotify, Mail as MsgIcon } from '@mui/icons-material'
+import { Twitter as TwitterIcon, Home as HomeIcon, Bookmark, Search as SearchIcon, Notifications as NotificationIcon, Person as ProfileIcon, MusicNoteOutlined as TweetifyLogo, Mail as MsgIcon } from '@mui/icons-material'
 import { EMPTY_STR } from '../../services/consts.service'
 
 interface SidebarProps {
@@ -45,17 +45,17 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
 
     const renderSidebarOptions = () => {
         const optionsData = [
-            { Icon: TwitterIcon, txt: EMPTY_STR, className: EMPTY_STR },
-            { Icon: HomeIcon, txt: 'Home', className: EMPTY_STR },
-            { Icon: SearchIcon, txt: 'Explore', className: EMPTY_STR },
-            { Icon: NotificationIcon, txt: 'Notifications', className: EMPTY_STR },
-            { Icon: MsgIcon, txt: 'Messages', className: EMPTY_STR },
-            { Icon: Bookmark, txt: 'Bookmarks', className: EMPTY_STR },
-            { Icon: ProfileIcon, txt: 'Profile', className: EMPTY_STR },
-            { Icon: Spotify, txt: 'Tweetify Mode', className: EMPTY_STR }
+            { Icon: TwitterIcon, txt: EMPTY_STR },
+            { Icon: HomeIcon, txt: 'Home' },
+            { Icon: SearchIcon, txt: 'Explore' },
+            { Icon: NotificationIcon, txt: 'Notifications' },
+            { Icon: MsgIcon, txt: 'Messages' },
+            { Icon: Bookmark, txt: 'Bookmarks' },
+            { Icon: ProfileIcon, txt: 'Profile' },
+            { Icon: TweetifyLogo, txt: 'Tweetify' }
         ]
 
-        return optionsData.map(({ Icon, txt, className }) => (
+        return optionsData.map(({ Icon, txt }) => (
             <SidebarOption
                 key={txt}
                 Icon={Icon}
@@ -72,7 +72,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
             <section className="left-menu">
                 <div className={`sidebar-container  ${isMobileScreen ? 'mobile' : null}`}>
                     {renderSidebarOptions()}
-                    <button className={`squeak-btn ${isMobileScreen ? 'mobile' : 'null'}`} onClick={handleSiderbarSqueak}>
+                    <button className={`squeak-btn ${isMobileScreen ? 'mobile' : null}`} onClick={handleSiderbarSqueak}>
                         {isMobileScreen ? '+' : 'Squeak'}
                     </button>
                     <LoggedAcount displayName={loggedInUser.displayName} username={loggedInUser.username} profileImg={loggedInUser.profileImgUrl} setIsLoginModalOpen={(isOpen: boolean) => setLoginModal(isOpen)} />

@@ -1,0 +1,74 @@
+.tweetify-player-container {
+    background-color: $mainColor1;
+    border-top: 1px solid $mainColor3;
+    padding: 20px;
+    padding: 20px;
+    justify-content: space-evenly;
+    position: sticky;
+    bottom: 0;
+    gap: 15px;
+    svg {
+        cursor: pointer;
+        &:hover {
+            filter: brightness(90%);
+            color: $logoColor;
+        }
+    }
+    .song-container {
+        margin: 10px 15px;
+        left: 0;
+        width: fit-content;
+        position: absolute;
+        display: flex;
+        gap: 10px;
+        .song-img {
+            border-radius: 10%;
+            background-color: $mainColor0;
+            width: 40px;
+            height: 40px;
+        }
+        h3 {
+            color: $mainColor0;
+            font-weight: 500;
+            font-size: 15px;
+        }
+        h4 {
+            color: $mainColor0;
+            font-weight: 100;
+            font-size: 12px;
+        }
+    }
+}
+
+.icon-circle {
+    background-color: $mainColor0;
+    border-radius: 50%;
+    color: $mainColor1;
+}
+
+// ? play btn
+svg:nth-child(3) {
+    &:hover {
+        color: $mainColor1;
+    }
+    font-size: 30px;
+    padding: 2px;
+}
+
+@media (max-width: 1000px) {
+    .tweetify-player-container {
+        position: fixed;
+        background-color: #333;
+        z-index: 100;
+        width: fit-content;
+        padding: 13px;
+        background-color: transparent;
+        right: 0;
+
+        .song-container,
+        svg:nth-child(1),
+        svg:nth-child(5) {
+            display: none;
+        }
+    }
+}

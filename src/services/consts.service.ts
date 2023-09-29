@@ -1,7 +1,8 @@
 // * UTILS
 export const EMPTY_STR = ''
 export const SPACE = ' '
-
+export const LOGO_COLOR = '#1ed760'
+export const MOBILE_SCREEN_WIDTH = 1000
 // * ID'S
 const GUEST_ID = 'GUEST'
 const ID_LENGTH = 5

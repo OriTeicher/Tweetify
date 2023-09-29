@@ -29,35 +29,32 @@
         position: fixed;
         right: 0;
         bottom: 0;
-        width: 50px;
-        transform: translateY(-130%) translateX(-25%);
+        width: 45px;
+        height: 45px;
+        transform: translateY(-145%) translateX(-15%);
+        box-shadow: 1px 1px 1px rgb(255, 255, 255);
     }
 }
 
 .sidebar-container.mobile {
     background-color: #333;
-    width: 100vw;
+    width: 100%;
     height: auto;
     position: fixed;
     bottom: 0;
-    left: 0;
     flex-direction: row;
+    justify-content: start;
     border-top: 1px solid $mainColor2;
-    padding: 5px;
+    padding: 5px 5px;
+    gap: 2.5%;
     margin: 0px;
-    justify-content: space-around;
-    gap: 20px;
     top: unset;
 
     .sidebar-option {
         font-size: 15px;
         margin: 0px;
-        &:nth-child(1) {
-            display: none;
-        }
-        &:nth-child(6) {
-            display: none;
-        }
+        &:nth-child(1),
+        &:nth-child(6),
         &:nth-child(7) {
             display: none;
         }
@@ -74,6 +71,6 @@
     background-color: beige;
     img {
         font-size: 30px;
-        color: white;
+        color: $mainColor0;
     }
 }

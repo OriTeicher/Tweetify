@@ -17,11 +17,11 @@
             border: none;
             word-break: break-all;
             background-color: $mainColor1;
-            color: white;
-            font-family: $mainFont, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: $mainColor0;
+            font-family: $mainFont, 'Segoe UI', Tahoma, Verdana, sans-serif;
         }
         .squeak-input:focus {
-            color: white;
+            color: $mainColor0;
         }
     }
     .squeak-box-btns {
@@ -33,7 +33,7 @@
         justify-content: space-between;
         .squeak-btn {
             background-color: $logoColor;
-            color: white;
+            color: $mainColor0;
             border: none !important;
             font-weight: 600;
             text-transform: inherit;
@@ -54,7 +54,7 @@
             align-items: center;
             font-size: 10px;
             gap: 10px;
-            color: white;
+            color: $mainColor0;
             .icon {
                 font-size: 20px;
                 cursor: pointer;

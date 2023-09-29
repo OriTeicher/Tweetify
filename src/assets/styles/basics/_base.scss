@@ -3,10 +3,6 @@
     margin: 0;
     padding: 0;
 }
-
-::selection {
-}
-
 img {
     &:hover {
         cursor: pointer;
@@ -22,38 +18,10 @@ html {
     width: 0; /* Remove scrollbar space */
     background: transparent; /* Optional: just make scrollbar invisible */
 }
-/* Optional: show position indicator in red */
-::-webkit-scrollbar-thumb {
-}
 
 body {
     font-family: $mainFont;
-    color: white;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-}
-
-section,
-main,
-footer {
-}
-
-// img {
-//     width: 100%;
-// }
-
-p {
-}
-
-a {
-}
-a:hover {
+    color: $mainColor0;
 }
 
 .app-container {
@@ -72,4 +40,12 @@ a:hover {
 .dark {
     color: $mainColor0;
     background-color: $mainColor1;
+}
+
+input,
+textarea,
+button,
+select,
+a {
+    -webkit-tap-highlight-color: transparent;
 }
