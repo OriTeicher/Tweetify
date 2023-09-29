@@ -11,7 +11,7 @@ export default function MsgModal(props: MsgModalProps) {
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsOpen(false)
-        }, 1500)
+        }, 3000)
 
         return () => {
             clearTimeout(timer)

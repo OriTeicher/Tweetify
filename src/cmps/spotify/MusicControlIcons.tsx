@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { PlayArrow, Pause, ShuffleOutlined, RepeatTwoTone, SkipNextSharp, SkipPreviousSharp } from '@mui/icons-material'
-import { EMPTY_STR, LOGO_COLOR } from '../../services/consts.service'
+import { EMPTY_STR } from '../../services/consts.service'
 
 export default function MusicControlIcons() {
     const [isPlay, setIsPlay] = useState(true)

@@ -72,6 +72,7 @@
         "@svgr/webpack": "^8.1.0",
         "@types/react-router-dom": "^5.3.3",
         "gh-pages": "^5.0.0",
-        "react-svg-loader": "^3.0.3"
+        "react-svg-loader": "^3.0.3",
+        "svg-url-loader": "^8.0.0"
     }
 }

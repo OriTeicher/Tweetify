@@ -3,7 +3,6 @@
     flex-direction: column;
     justify-content: space-between;
     min-height: 100vh;
-    flex: 0.7;
     border-right: $outline1;
     border-left: $outline1;
     max-height: fit-content;
@@ -14,8 +13,7 @@
     }
     .playlists-list {
         display: grid;
-        width: 100%;
-        grid-template-columns: 25% 25% 25% 25%;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         margin-bottom: 100px;
         gap: 0px;
         justify-items: center;

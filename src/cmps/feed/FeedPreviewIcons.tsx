@@ -33,7 +33,7 @@ export default function FeedPreviewIcons(props: FeedPreviewIconProps) {
     const handleLikeClick = () => {
         setIsLiked((prevState) => !prevState)
         setLikesCounter((prevLikesCounter) => (isLiked ? --prevLikesCounter : ++prevLikesCounter))
-        props.onIconClick('like', isLiked)
+        // props.onIconClick('like', isLiked)
     }
 
     const handleBookmarkClick = () => {

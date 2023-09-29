@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import FeedTopbar from '../cmps/feed/FeedTopbar'
 import FeedList from '../cmps/feed/FeedList'
 import SqueakBox from '../cmps/feed/SqueakBox'
@@ -13,7 +13,7 @@ import { feedActions } from '../app/actions/feed.actions'
 import { useNavigate } from 'react-router-dom'
 import { eventBus } from '../services/event.bus.service'
 import { FeedPost } from '../services/interface.service'
-import { MOBILE_SCREEN_WIDTH, constsService } from '../services/consts.service'
+import MsgModal from '../cmps/utils/MsgModal'
 
 export interface FeedIndexProps {
     topBarOption: string
@@ -21,6 +21,8 @@ export interface FeedIndexProps {
 
 const FeedIndex: React.FC<FeedIndexProps> = (props: FeedIndexProps) => {
     const navigate = useNavigate()
+
+    const [isMusicPlayerOpen, setIsMusicPlayerOpen] = useState(false)
 
     const { feedPosts } = useSelector((state: RootState) => {
         console.log(window.screen.width)
@@ -44,12 +46,22 @@ const FeedIndex: React.FC<FeedIndexProps> = (props: FeedIndexProps) => {
 
     useEffect(() => {
         dispatch(feedActions.queryFeedPosts(feedPosts))
-        const cb = (selectedSqueak: [FeedPost]) => {
+        setTimeout(() => {
+            setIsMusicPlayerOpen(true)
+        }, 1500)
+        const selectedSqueakCb = (selectedSqueak: [FeedPost]) => {
             dispatch(feedActions.setSelectedSqueak(...selectedSqueak))
             handleSelectedSqueak(...selectedSqueak)
         }
-        eventBus.subscribeToEvent('setSelectedSqueak', cb)
-        return () => eventBus.unsubscribeFromEvent('setSelectedSqueak', cb)
+        const toggleMusicPlayerCb = () => {
+            setIsMusicPlayerOpen((prevState) => !prevState)
+        }
+        eventBus.subscribeToEvent('setSelectedSqueak', selectedSqueakCb)
+        eventBus.subscribeToEvent('toggleMusicPlayer', toggleMusicPlayerCb)
+        return () => {
+            eventBus.unsubscribeFromEvent('setSelectedSqueak', selectedSqueakCb)
+            eventBus.unsubscribeFromEvent('toggleMusicPlayer', toggleMusicPlayerCb)
+        }
     }, [])
 
     const handleAddPost = async (postContent: string, file: File | null, gifUrl: string) => {
@@ -66,7 +78,7 @@ const FeedIndex: React.FC<FeedIndexProps> = (props: FeedIndexProps) => {
             ) : (
                 <>
                     <FeedList feedPosts={feedPosts} />
-                    <MusicControlIndex />
+                    <MusicControlIndex isOpen={isMusicPlayerOpen} />
                 </>
             )}
         </section>
