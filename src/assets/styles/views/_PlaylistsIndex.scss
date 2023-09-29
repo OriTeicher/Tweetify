@@ -28,9 +28,16 @@
 
 @media (max-width: 1000px) {
     .playlists-index {
+        p {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
         flex: 1;
         .playlists-list {
-            grid-template-columns: repeat(auto-fit, 1fr);
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            margin-bottom: 100px;
         }
     }
 }

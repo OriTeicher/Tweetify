@@ -30,4 +30,13 @@
 }
 
 @media (max-width: 1000px) {
+    .playlist-preview {
+        width: 46.5vw;
+        &:hover {
+            scale: 1;
+        }
+        img {
+            width: 100%;
+        }
+    }
 }
