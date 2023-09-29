@@ -69,7 +69,6 @@ const FeedIndex: React.FC<FeedIndexProps> = (props: FeedIndexProps) => {
                     <MusicControlIndex />
                 </>
             )}
-            {window.screen.width < MOBILE_SCREEN_WIDTH && <MusicControlIndex />}
         </section>
     )
 }

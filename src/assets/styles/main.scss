@@ -38,6 +38,8 @@
 // * spotify *
 @import 'cmps/spotify/MusicControlIndex';
 @import 'cmps/spotify/VolumeBar';
+@import 'views/PlaylistsIndex';
+@import './cmps/spotify/PlaylistPreview';
 
 // * utils *
 @import 'utils/Loader';

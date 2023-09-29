@@ -33,7 +33,7 @@
             font-size: 15px;
         }
         h4 {
-            color: $mainColor0;
+            color: $mainColor2;
             font-weight: 100;
             font-size: 12px;
         }
@@ -65,10 +65,27 @@ svg:nth-child(3) {
         background-color: transparent;
         right: 0;
 
-        .song-container,
         svg:nth-child(1),
         svg:nth-child(5) {
             display: none;
+        }
+        .song-container {
+            border-radius: 10px;
+            outline: gray 1px solid;
+            position: absolute;
+            transform: translateX(-100%);
+            margin: 0px;
+
+            .song-cred {
+                width: 80px;
+                margin: 0px 0px;
+                h3 {
+                    font-size: 11px;
+                }
+                h4 {
+                    font-size: 10px;
+                }
+            }
         }
     }
 }

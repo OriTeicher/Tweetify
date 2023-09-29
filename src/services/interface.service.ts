@@ -57,3 +57,12 @@ export interface Trend {
     title: string
     tweetsCount: number
 }
+
+// * Spotify
+
+export interface PlaylistCard {
+    title: string
+    artist: string
+    imgUrl: string
+    songs: []
+}

@@ -1,0 +1,33 @@
+.playlist-preview {
+    text-align: center;
+    font-size: 20px;
+    padding: 10px;
+    min-width: 150px;
+    background: linear-gradient($mainColor3, #141517);
+    border: 1px solid $mainColor3;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: scale 0.2s ease-in-out;
+    &:hover {
+        scale: 1.05;
+        cursor: pointer;
+        background: linear-gradient($mainColor3, $mainColor1);
+    }
+    h2 {
+        font-weight: 100;
+        font-size: 15px;
+    }
+    h3 {
+        font-size: 12px;
+        font-weight: 100;
+        color: $mainColor2;
+    }
+    img {
+        width: 140px;
+        height: 140px;
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 1000px) {
+}

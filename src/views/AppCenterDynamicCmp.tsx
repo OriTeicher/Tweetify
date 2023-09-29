@@ -16,6 +16,7 @@ export function AppCenterDynamicCmp(props: AppProps) {
         <section className="app-container">
             <Sidebar onOptionChange={handleOptionChange} />
             <DynamicComponent topBarOption={topBarOption} />
+
             <TrendingIndex />
         </section>
     )

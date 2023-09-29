@@ -1,0 +1,36 @@
+.playlists-index {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    flex: 0.7;
+    height: fit-content;
+    border-right: $outline1;
+    border-left: $outline1;
+    max-height: fit-content;
+    p {
+        font-size: 25px;
+        margin-top: 20px;
+        text-align: center;
+    }
+    .playlists-list {
+        display: grid;
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
+        grid-template-columns: repeat(auto-fit, 165px);
+        gap: 10px;
+    }
+    .tweetify-player-container {
+        bottom: 0;
+    }
+}
+
+@media (max-width: 1000px) {
+    .playlists-index {
+        flex: 1;
+        .playlists-list {
+            grid-template-columns: repeat(auto-fit, 1fr);
+        }
+    }
+}

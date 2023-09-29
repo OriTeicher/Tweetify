@@ -37,7 +37,7 @@ const DEMO_PHOTOS = [
 ]
 // * USERS
 const NO_PROFILE_IMG_URL = 'https://source.boringavatars.com/beam/120/Stefan?colors=1DB954'
-const NO_BG_WALLPAPER_URL = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU1bTnHSbBRSJZCtgfSdOM2dt8kRhncXuLlg&usqp=CAU'
+const NO_BG_WALLPAPER_URL = 'https://wallpapers.com/images/featured/no-0ofqwe6s51ohii2t.jpg'
 
 // 'https://source.boringavatars.com/beam/120/Stefan?colors=1DB954'
 //
@@ -46,6 +46,22 @@ const DEBOUNCE_DELAY = 0 // ? in ms
 
 // * TRENDS NUMBER
 const TRENDS_NUMBER = 5
+
+// * SPOTIFY
+const DEMO_PLAYLISTS = [
+    { title: 'Best of Billie Eilish', artist: 'Billie Eilish', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/2/2f/Billie_Eilish_-_Don%27t_Smile_at_Me.png' },
+    { title: 'MMLP - Eminem', artist: 'Eminem', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/a/ae/The_Marshall_Mathers_LP.jpg' },
+    { title: 'Life Of Pablo', artist: 'Ye', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/4/4d/The_life_of_pablo_alternate.jpg' },
+    {
+        title: 'Ok Computer',
+        artist: 'Radiohead',
+        imgUrl: 'https://upload.wikimedia.org/wikipedia/en/b/ba/Radioheadokcomputer.png'
+    },
+    { title: 'This is Lewis Capaldi', artist: 'Lewis Capaldi', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/d/db/Lewis_Capaldi_-_Divinely_Uninspired_to_a_Hellish_Extent.png' },
+    { title: 'X - Deluxe', artist: 'Ed Sheeran', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/a/ad/X_cover.png' },
+    { title: 'Abbey Road', artist: 'The Beatles', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg' },
+    { title: 'Hotel Califonria', artist: 'The Eagles', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/4/49/Hotelcalifornia.jpg' }
+]
 
 export const constsService = {
     DEMO_POSTS_NUM,
@@ -62,5 +78,6 @@ export const constsService = {
     DEMO_PHOTOS,
     RANDOM_NAMES,
     TRENDS_NUMBER,
-    BOOKMARKS_FIELD
+    BOOKMARKS_FIELD,
+    DEMO_PLAYLISTS
 }

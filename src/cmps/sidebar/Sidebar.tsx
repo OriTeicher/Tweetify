@@ -5,7 +5,7 @@ import LoginModal from '../utils/LoginModal'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../app/store'
-import { Twitter as TwitterIcon, Home as HomeIcon, Bookmark, Search as SearchIcon, Notifications as NotificationIcon, Person as ProfileIcon, MusicNoteOutlined as TweetifyLogo, Mail as MsgIcon } from '@mui/icons-material'
+import { Twitter as TwitterIcon, Home as HomeIcon, Bookmark, Search as SearchIcon, Notifications as NotificationIcon, Person as ProfileIcon, MusicNoteOutlined as TweetifyLogo, Mail as MsgIcon, MoreHoriz } from '@mui/icons-material'
 import { EMPTY_STR } from '../../services/consts.service'
 
 interface SidebarProps {
@@ -43,6 +43,8 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
     }
 
+    const handleMoreClick = () => {}
+
     const renderSidebarOptions = () => {
         const optionsData = [
             { Icon: TwitterIcon, txt: EMPTY_STR },
@@ -52,7 +54,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
             { Icon: MsgIcon, txt: 'Messages' },
             { Icon: Bookmark, txt: 'Bookmarks' },
             { Icon: ProfileIcon, txt: 'Profile' },
-            { Icon: TweetifyLogo, txt: 'Tweetify' }
+            { Icon: TweetifyLogo, txt: 'Playlists' }
         ]
 
         return optionsData.map(({ Icon, txt }) => (
@@ -72,8 +74,8 @@ const Sidebar: React.FC<SidebarProps> = ({ onOptionChange }) => {
             <section className="left-menu">
                 <div className={`sidebar-container  ${isMobileScreen ? 'mobile' : null}`}>
                     {renderSidebarOptions()}
-                    <button className={`squeak-btn ${isMobileScreen ? 'mobile' : null}`} onClick={handleSiderbarSqueak}>
-                        {isMobileScreen ? '+' : 'Squeak'}
+                    <button className={`squeak-btn ${isMobileScreen ? 'mobile' : null} flex justify-center align-center`} onClick={handleSiderbarSqueak}>
+                        {isMobileScreen ? <MoreHoriz onClick={handleMoreClick} /> : 'Squeak'}
                     </button>
                     <LoggedAcount displayName={loggedInUser.displayName} username={loggedInUser.username} profileImg={loggedInUser.profileImgUrl} setIsLoginModalOpen={(isOpen: boolean) => setLoginModal(isOpen)} />
                     <LoginModal isOpen={isLoginModalOpen} setIsOpen={(isOpen: boolean) => setLoginModal(isOpen)} />
