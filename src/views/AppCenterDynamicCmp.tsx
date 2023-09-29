@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Sidebar from '../cmps/sidebar/Sidebar'
 import TrendingIndex from '../cmps/trending/TrendsIndex'
 import FeedIndex from './FeedIndex'
+import FrequentSongsModal from '../cmps/spotify/FrequentSongsModal'
 
 interface AppProps {
     cmp?: React.ComponentType<any>
@@ -16,7 +17,7 @@ export function AppCenterDynamicCmp(props: AppProps) {
         <section className="app-container">
             <Sidebar onOptionChange={handleOptionChange} />
             <DynamicComponent topBarOption={topBarOption} />
-            {topBarOption !== 'Playlists' && <TrendingIndex />}
+            {topBarOption !== 'Playlists' ? <TrendingIndex /> : <FrequentSongsModal />}
         </section>
     )
 }

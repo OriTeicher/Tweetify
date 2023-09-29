@@ -10,6 +10,7 @@ import { EMPTY_STR } from '../../services/consts.service'
 import Loader from '../utils/Loader'
 
 export default function TrendsIndex() {
+    const dispatch: ThunkDispatch<RootState, undefined, Action<string>> = useDispatch()
     const [isFilterOn, setIsFilterOn] = useState(false)
 
     const { trends } = useSelector((state: RootState) => {
@@ -25,15 +26,13 @@ export default function TrendsIndex() {
         handleFilterBy(EMPTY_STR)
     }
 
-    const dispatch: ThunkDispatch<RootState, undefined, Action<string>> = useDispatch()
-
     const handleFilterBy = async (filterValue: string) => {
         dispatch(feedActions.setFilterBy(filterValue))
     }
 
     return (
         <section className="trending-index">
-            <Searchbar onSetFilterBy={(filterValue: string) => handleFilterBy(filterValue)} />
+            <Searchbar placeHolder="Search Squeaks..." onSetFilterBy={(filterValue: string) => handleFilterBy(filterValue)} />
             {trends.length === 0 ? <Loader /> : <TrendingList trends={trends} onSearchTrend={handleSearchTrend} />}
             {isFilterOn ? (
                 <div className="flex align-center go-back-header-container" onClick={() => handleArrowBackClick()}>

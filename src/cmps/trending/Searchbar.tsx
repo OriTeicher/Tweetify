@@ -5,6 +5,7 @@ import { EMPTY_STR, constsService } from '../../services/consts.service'
 
 interface SearchbarProps {
     onSetFilterBy: Function
+    placeHolder: string
 }
 
 export default function Searchbar(props: SearchbarProps) {
@@ -26,7 +27,7 @@ export default function Searchbar(props: SearchbarProps) {
     return (
         <section className={`search-container ${isInputFocused ? 'focused' : EMPTY_STR}`}>
             <SearchIcon className={`search-icon`} id={`${isInputFocused ? 'focused' : EMPTY_STR}`} />
-            <input type="search" className="searchbar" placeholder="Search Squeaker..." onFocus={handleInputFocus} onBlur={handleInputBlur} onChange={handleTxtChange}></input>
+            <input type="search" className="searchbar" placeholder={props.placeHolder} onFocus={handleInputFocus} onBlur={handleInputBlur} onChange={handleTxtChange}></input>
         </section>
     )
 }
