@@ -6,7 +6,7 @@ const MAIN_BG_COLOR = 'rgb(16, 16, 16)'
 export const ICON_COLOR = '#fff'
 export const MOBILE_SCREEN_WIDTH = 1000
 // * ID'S
-const GUEST_ID = 'GUEST'
+const GUEST_ID = 'Guest000'
 const ID_LENGTH = 5
 
 // * FEED

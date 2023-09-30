@@ -11,7 +11,7 @@ interface UserState {
 export const initialState: UserState = {
     loggedInUser: {
         ...userService.getEmptyUser(),
-        username: 'G-' + utilService.generateId(5),
+        username: 'Guest000',
         displayName: 'Guest',
         createdAt: '06/23',
         description: 'This is a guest account, you should create your own user...'

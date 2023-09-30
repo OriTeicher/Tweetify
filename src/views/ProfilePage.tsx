@@ -13,7 +13,7 @@ export default function ProfilePage() {
     const [isBeingEdited, setIsBeingEdited] = useState<boolean>(false)
 
     const { loggedInUser } = useSelector((state: RootState) => state.user)
-    const isGuestUserLoggedIn = loggedInUser.email ? false : true
+    const isGuestUserLoggedIn = loggedInUser.username === constsService.GUEST_ID ? false : true
 
     const navigate = useNavigate()
 
