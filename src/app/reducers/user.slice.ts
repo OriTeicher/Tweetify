@@ -14,7 +14,7 @@ export const initialState: UserState = {
         username: 'Guest000',
         displayName: 'Guest',
         createdAt: '06/23',
-        description: 'This is a guest account, you should create your own user...'
+        description: 'This is a guest account, you should create your own user to edit this page...'
     }
 }
 

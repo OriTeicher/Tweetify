@@ -31,7 +31,7 @@
         bottom: 0;
         width: 45px;
         height: 45px;
-        transform: translateY(-145%) translateX(-15%);
+        transform: translateY(-145%) translateX(-15%) werwer;
         box-shadow: 1px 1px 1px rgb(255, 255, 255);
     }
 }
@@ -52,10 +52,7 @@
     .sidebar-option {
         font-size: 16px;
         margin: 0px;
-        &:nth-child(1),
         &:nth-child(6),
-        &:nth-child(5),
-        &:nth-child(3),
         &:nth-child(4) {
             display: none;
         }

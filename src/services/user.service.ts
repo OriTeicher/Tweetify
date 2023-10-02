@@ -7,12 +7,14 @@ export const userService = {
     getEmptyUpdateUserDto
 }
 
+const ID_LENGTH = 5
+
 // TODO: get empty user function
 function getEmptyUser(): User {
     return {
         isAdmin: false,
         isVerified: false,
-        id: 'U-' + utilService.generateId(5),
+        id: 'U-' + utilService.generateId(ID_LENGTH),
         username: EMPTY_STR,
         displayName: EMPTY_STR,
         description: EMPTY_STR,
