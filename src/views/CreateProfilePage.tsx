@@ -8,6 +8,7 @@ import { userActions } from '../app/actions/user.actions'
 import { userService } from '../services/user.service'
 import { feedService } from '../services/feed.service'
 import { EMPTY_STR, constsService } from '../services/consts.service'
+import { User } from '../services/interface.service'
 
 export default function CreateProfilePage() {
     // email & password needs to
@@ -61,16 +62,21 @@ export default function CreateProfilePage() {
     // TODO: continue from here
     const handleUpdateProfile = async () => {
         setIsLoaderOn(true)
-        const updatedUser = userService.getEmptyUser()
-        updatedUser.username = username
-        updatedUser.displayName = editedDisplayName
-        updatedUser.description = editedDescription
-        updatedUser.profileBgUrl = loggedInUser.profileBgUrl
-        updatedUser.profileImgUrl = loggedInUser.profileImgUrl
-        updatedUser.id = loggedInUser.id
+        let emptyUser = userService.getEmptyUser()
+        let updatedUser = getUpdatedUser(emptyUser)
         await dispatch(userActions.signUp(updatedUser, profileImgFile, profileBgImgFile, false))
         setIsLoaderOn(false)
         navigate('/home')
+    }
+
+    const getUpdatedUser = (user: User) => {
+        user.username = username
+        user.displayName = editedDisplayName
+        user.description = editedDescription
+        user.profileBgUrl = loggedInUser.profileBgUrl
+        user.profileImgUrl = loggedInUser.profileImgUrl
+        user.id = loggedInUser.id
+        return user
     }
 
     const handleBgImgChange = (event: any) => {
