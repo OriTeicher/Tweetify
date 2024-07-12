@@ -3,7 +3,7 @@
     border-top: $outline1;
     padding: 10px 15px;
     font-size: 18px;
-    font-weight: 100;
+    font-weight: 300;
     padding-top: 15px;
     position: relative;
     .link-line-complete {
@@ -86,9 +86,9 @@
         white-space: pre-wrap;
         width: 95%;
         padding-left: 10px;
-        font-size: 18px;
+        font-size: 15px;
         text-align: left;
-        font-family: $mainFont, sans-serif;
+        font-family: 'Montserrat', sans-serif, 'Jost';
     }
     .verified-logo {
         color: $logoColor;

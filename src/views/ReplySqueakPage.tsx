@@ -45,7 +45,7 @@ export default function ReplySqueakPage() {
                         selectedSqueak.comments.map((comment, idx) => (
                             <>
                                 <FeedPreview
-                                    key={idx}
+                                    key={comment.id}
                                     id={comment.id}
                                     owner={comment.owner}
                                     content={comment.content}

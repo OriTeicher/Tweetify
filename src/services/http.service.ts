@@ -80,30 +80,30 @@ async function patch(url: string, cb: () => unknown, shouldRefresh?: boolean) {
     }
 }
 
-export function SilentLogin() {
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
+// export function SilentLogin() {
+//     const navigate = useNavigate()
+//     const dispatch = useDispatch()
 
-    useEffect(() => {
-        ;(async () => {
-            let user = undefined
-            try {
-                user = await post('/auth/ping', () => {})
-            } catch (err) {
-                if (err instanceof AxiosError && err.response?.status === 401) {
-                    try {
-                        user = await post('/auth/refresh', () => {})
-                    } catch (refreshError) {
-                        if (err instanceof AxiosError) console.log(err.message)
-                        else console.log(err)
-                    }
-                }
-            } finally {
-                dispatch(userReducer.onUserChange(user?.data || initialState.loggedInUser))
-                navigate('/home')
-            }
-        })()
-    }, [])
+//     useEffect(() => {
+//         ;(async () => {
+//             let user = undefined
+//             try {
+//                 user = await post('/auth/ping', () => {})
+//             } catch (err) {
+//                 if (err instanceof AxiosError && err.response?.status === 401) {
+//                     try {
+//                         user = await post('/auth/refresh', () => {})
+//                     } catch (refreshError) {
+//                         if (err instanceof AxiosError) console.log(err.message)
+//                         else console.log(err)
+//                     }
+//                 }
+//             } finally {
+//                 dispatch(userReducer.onUserChange(user?.data || initialState.loggedInUser))
+//                 navigate('/home')
+//             }
+//         })()
+//     }, [])
 
-    return null
-}
+//     return null
+// }

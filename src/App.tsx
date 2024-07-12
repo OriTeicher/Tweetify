@@ -6,12 +6,11 @@ import ReplySqueakPage from './views/ReplySqueakPage'
 import PlaylistsIndex from './views/PlaylistsIndex'
 import { AppCenterDynamicCmp } from './views/AppCenterDynamicCmp'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { SilentLogin } from './services/http.service'
+import PlaylistPage from './views/PlaylistPage'
 
 function App() {
     return (
         <BrowserRouter>
-            <SilentLogin />
             <Routes>
                 <Route path="/*" element={<AppCenterDynamicCmp cmp={FeedIndex} />} />
                 <Route path="/home" element={<AppCenterDynamicCmp cmp={FeedIndex} />} />
@@ -20,6 +19,7 @@ function App() {
                 <Route path="/newprofile" element={<AppCenterDynamicCmp cmp={CreateProfilePage} />} />
                 <Route path="/newprofile/:id" element={<AppCenterDynamicCmp cmp={CreateProfilePage} />} />
                 <Route path="/playlists" element={<AppCenterDynamicCmp cmp={PlaylistsIndex} />} />
+                <Route path="/playlists/:albumId" element={<AppCenterDynamicCmp cmp={PlaylistPage} />} />
             </Routes>
         </BrowserRouter>
     )

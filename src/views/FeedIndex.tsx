@@ -25,7 +25,6 @@ const FeedIndex: React.FC<FeedIndexProps> = (props: FeedIndexProps) => {
     const [isMusicPlayerOpen, setIsMusicPlayerOpen] = useState(false)
 
     const { feedPosts } = useSelector((state: RootState) => {
-        console.log(window.screen.width)
         return state.feed
     })
 

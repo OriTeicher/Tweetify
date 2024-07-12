@@ -15,9 +15,9 @@ const FeedList: React.FC<FeedListProps> = (props: FeedListProps) => {
 
     const fetchRandomFact = async () => {
         try {
-            const fact = await apiService.getRandomFact()
-            setRandomFact(fact)
-            setIsLoadingFact(false)
+            // const fact = await apiService.getRandomFact()
+            // setRandomFact(fact)
+            // setIsLoadingFact(false)
         } catch (error) {
             console.error(error)
             setRandomFact('You are sad now...')

@@ -15,13 +15,13 @@ export const userActions = {
 function loginUser(email: string, password: string): AppThunk {
     return async (dispatch) => {
         try {
-            const loggedInUser = await httpService.post('auth/sign-in', () => {
-                return {
-                    email,
-                    password
-                }
-            })
-            dispatch(userReducer.onUserChange(loggedInUser?.data))
+            // const loggedInUser = await httpService.post('auth/sign-in', () => {
+            //     return {
+            //         email,
+            //         password
+            //     }
+            // })
+            // dispatch(userReducer.onUserChange(loggedInUser?.data))
         } catch (error) {
             console.log('Login Failed.' + error)
         }
@@ -54,8 +54,8 @@ function signUp(user: Partial<User>, profileImgFile: File | null, profileBgFile:
 function logOutUser(): AppThunk {
     return async (dispatch) => {
         try {
-            await httpService.post('auth/sign-out', () => {})
-            dispatch(userReducer.onUserChange(initialState.loggedInUser))
+            // await httpService.post('auth/sign-out', () => {})
+            // dispatch(userReducer.onUserChange(initialState.loggedInUser))
         } catch (error) {
             console.log('Login Failed.' + error)
         }

@@ -33,7 +33,7 @@ export default function TrendsIndex() {
     return (
         <section className="trending-index">
             <Searchbar placeHolder="Search Squeaks..." onSetFilterBy={(filterValue: string) => handleFilterBy(filterValue)} />
-            {trends.length === 0 ? <Loader /> : <TrendingList trends={trends} onSearchTrend={handleSearchTrend} />}
+            {!trends ? <Loader /> : <TrendingList trends={trends} onSearchTrend={handleSearchTrend} />}
             {isFilterOn ? (
                 <div className="flex align-center go-back-header-container" onClick={() => handleArrowBackClick()}>
                     <ArrowBackRounded />
