@@ -6,33 +6,36 @@
     font-size: 20px;
     .track-preview {
         display: grid;
-        height: 100%;
-        grid-template-columns: 1fr auto;
+        align-items: center;
+        grid-template-columns: auto 1fr auto;
         border-bottom: 1px solid $mainColor3;
         padding-inline: 20px;
-        align-items: center;
-        justify-content: center;
         position: relative;
         &:hover {
             background-color: #1ed75f65;
+        }
+        img {
+            grid-column: 1;
         }
         cursor: pointer;
         padding: 10px;
         background-color: $hoverClr3;
         .track-header {
+            grid-column: 2;
             font-weight: 200;
+            margin-inline-start: 10px;
         }
         p {
-            grid-column: 1;
+            margin-inline-start: 10px;
+            grid-column: 2;
             font-size: 15px;
             color: gray;
         }
         svg {
+            grid-column: 3;
             background-color: $logoColor;
             border-radius: 50%;
             color: black;
-            grid-row: 1/3;
-            grid-column: 2;
         }
     }
 }

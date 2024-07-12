@@ -14,7 +14,7 @@ const getSpotifyToken = async (): Promise<string> => {
     return response.data.access_token
 }
 
-const getAlbums = async (artistId: string): Promise<any[] | any> => {
+const getAlbumDetails = async (artistId: string | undefined): Promise<any[] | any> => {
     try {
         const accessToken = await getSpotifyToken()
         console.log('token', accessToken)
@@ -56,7 +56,7 @@ const searchAlbum = async (albumName: string, artistName: string): Promise<strin
 
 const getTracks = async (albumId: string | undefined): Promise<any[]> => {
     try {
-        if (!albumId) Promise.reject('no id')
+        if (!albumId) Promise.reject('no id found')
         const accessToken = await getSpotifyToken()
         console.log('Access token:', accessToken)
 
@@ -74,7 +74,7 @@ const getTracks = async (albumId: string | undefined): Promise<any[]> => {
 }
 
 export const spotifyService = {
-    getAlbums,
+    getAlbumDetails,
     getTracks,
     searchAlbum
 }

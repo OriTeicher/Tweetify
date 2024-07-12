@@ -51,7 +51,7 @@ const TRENDS_NUMBER = 5
 // * SPOTIFY
 const DEMO_PLAYLISTS = [
     { title: 'Dont smile at me', artist: 'Billie Eilish', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/2/2f/Billie_Eilish_-_Don%27t_Smile_at_Me.png' },
-    { title: 'MMLP - Eminem', artist: 'Eminem', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/a/ae/The_Marshall_Mathers_LP.jpg' },
+    { title: 'The Marshall Mathers LP', artist: 'Eminem', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/a/ae/The_Marshall_Mathers_LP.jpg' },
     { title: 'Life Of Pablo', artist: 'Kanye West', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/4/4d/The_life_of_pablo_alternate.jpg' },
     {
         title: 'Ok Computer',

@@ -7,7 +7,7 @@ import { PlayArrow } from '@mui/icons-material'
 export default function PlaylistPage() {
     const { albumId } = useParams()
     const [tracks, setTracks] = useState<[] | null | any[]>(null)
-
+    const [trackImg, setTrackImg] = useState<any>('')
     useEffect(() => {
         setAlbumTracks()
         console.log('tracks', tracks)
@@ -16,6 +16,9 @@ export default function PlaylistPage() {
     async function setAlbumTracks() {
         try {
             const tracks = await spotifyService.getTracks(albumId)
+            const album = await spotifyService.getAlbumDetails(albumId)
+            console.log('album', album)
+            setTrackImg(album.images[2].url)
             setTracks(tracks)
         } catch (error) {
             throw error
@@ -27,8 +30,11 @@ export default function PlaylistPage() {
                 <section className="track-list">
                     {tracks.map((track) => (
                         <div className="track-preview" key={track.name}>
-                            <h1 className="track-header">{track.name}</h1>
-                            <p>{track.artists[0].name}</p>
+                            <img src={trackImg} alt={track.artists[0].name} />
+                            <div>
+                                <h1 className="track-header">{track.name}</h1>
+                                <p>{track.artists[0].name}</p>
+                            </div>
                             <PlayArrow />
                         </div>
                     ))}
