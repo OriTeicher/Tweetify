@@ -50,18 +50,18 @@ const TRENDS_NUMBER = 5
 
 // * SPOTIFY
 const DEMO_PLAYLISTS = [
-    { title: 'Dont smile at me', artist: 'Billie Eilish', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/2/2f/Billie_Eilish_-_Don%27t_Smile_at_Me.png' }
-    // { title: 'MMLP - Eminem', artist: 'Eminem', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/a/ae/The_Marshall_Mathers_LP.jpg' },
-    // { title: 'Life Of Pablo', artist: 'Ye', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/4/4d/The_life_of_pablo_alternate.jpg' },
-    // {
-    //     title: 'Ok Computer',
-    //     artist: 'Radiohead',
-    //     imgUrl: 'https://upload.wikimedia.org/wikipedia/en/b/ba/Radioheadokcomputer.png'
-    // },
-    // { title: 'This is Lewis Capaldi', artist: 'Lewis Capaldi', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/d/db/Lewis_Capaldi_-_Divinely_Uninspired_to_a_Hellish_Extent.png' },
-    // { title: 'X - Deluxe', artist: 'Ed Sheeran', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/a/ad/X_cover.png' },
-    // { title: 'Abbey Road', artist: 'The Beatles', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg' },
-    // { title: 'Hotel Califonria', artist: 'The Eagles', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/4/49/Hotelcalifornia.jpg' }
+    { title: 'Dont smile at me', artist: 'Billie Eilish', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/2/2f/Billie_Eilish_-_Don%27t_Smile_at_Me.png' },
+    { title: 'MMLP - Eminem', artist: 'Eminem', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/a/ae/The_Marshall_Mathers_LP.jpg' },
+    { title: 'Life Of Pablo', artist: 'Kanye West', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/4/4d/The_life_of_pablo_alternate.jpg' },
+    {
+        title: 'Ok Computer',
+        artist: 'Radiohead',
+        imgUrl: 'https://upload.wikimedia.org/wikipedia/en/b/ba/Radioheadokcomputer.png'
+    },
+    { title: 'Divinely Uninspired to a Hellish Extent', artist: 'Lewis Capaldi', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/d/db/Lewis_Capaldi_-_Divinely_Uninspired_to_a_Hellish_Extent.png' },
+    { title: 'X - Deluxe', artist: 'Ed Sheeran', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/a/ad/X_cover.png' },
+    { title: 'Abbey Road', artist: 'The Beatles', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg' },
+    { title: 'Hotel California', artist: 'Eagles', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/4/49/Hotelcalifornia.jpg' }
 ]
 
 export const constsService = {
