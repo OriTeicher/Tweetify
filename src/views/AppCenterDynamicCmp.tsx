@@ -3,6 +3,7 @@ import Sidebar from '../cmps/sidebar/Sidebar'
 import TrendingIndex from '../cmps/trending/TrendsIndex'
 import FeedIndex from './FeedIndex'
 import FrequentSongsModal from '../cmps/spotify/FrequentSongsModal'
+import MusicControlIndex from '../cmps/spotify/MusicControlIndex'
 
 interface AppProps {
     cmp?: React.ComponentType<any>

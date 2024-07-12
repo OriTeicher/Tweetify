@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { spotifyService } from '../services/spotify.service'
 import { useParams } from 'react-router-dom'
+import MusicControlIndex from '../cmps/spotify/MusicControlIndex'
 
 export default function PlaylistPage() {
     const { albumId } = useParams()
@@ -19,14 +20,17 @@ export default function PlaylistPage() {
         }
     }
     return (
-        tracks && (
-            <section className="track-list">
-                {tracks.map((track) => (
-                    <div className="track-preview" key={track.name}>
-                        {track.name}
-                    </div>
-                ))}
-            </section>
-        )
+        <section className="feed-index">
+            {tracks && (
+                <section className="track-list">
+                    {tracks.map((track) => (
+                        <div className="track-preview" key={track.name}>
+                            <h1 className="track-header">{track.name}</h1>
+                        </div>
+                    ))}
+                </section>
+            )}
+            <MusicControlIndex isOpen={true} />
+        </section>
     )
 }
