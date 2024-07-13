@@ -22,10 +22,12 @@ const feedSlice = createSlice({
     reducers: {
         queryFeedPostsSuccess: (state, action: PayloadAction<FeedPost[]>) => {
             state.feedPosts = [...action.payload]
+            state.feedPosts = state.feedPosts.sort((a, b) => b.createdAt - a.createdAt)
         },
 
         addFeedPostSuccess: (state, action: PayloadAction<FeedPost>) => {
             state.feedPosts.unshift({ ...action.payload })
+            state.feedPosts = state.feedPosts.sort((a, b) => b.createdAt - a.createdAt)
         },
 
         removeFeedPostSuccess: (state, action: PayloadAction<string>) => {
@@ -35,9 +37,11 @@ const feedSlice = createSlice({
         setFilterBySuccess: (state, action: PayloadAction<string>) => {
             state.filterBy = action.payload
         },
-        toggleLikesSuccess: (state, action: PayloadAction<{ isLike: boolean; postId: string }>) => {
-            const { isLike, postId } = action.payload
-            console.log(isLike, postId)
+        toggleLikesSuccess: (state, action: PayloadAction<{ postId: string; diff: number }>) => {
+            const { diff, postId } = action.payload
+            const postToUpdateIdx = state.feedPosts.findIndex((post) => post.id === postId)
+            if (postToUpdateIdx === -1) return
+            state.feedPosts[postToUpdateIdx].likes += diff
         },
         addCommentSuccess: (state, action: PayloadAction<FeedPost[]>) => {
             const idx = state.feedPosts.findIndex((post) => post.id === action.payload[0].id)

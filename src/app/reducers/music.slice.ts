@@ -2,11 +2,19 @@ import { createSlice } from '@reduxjs/toolkit'
 import { PayloadAction } from '@reduxjs/toolkit'
 
 interface MusicState {
-    selectedSongId: ''
+    selectedSong: {
+        title: string
+        artist: string
+        imgUrl: string
+    }
 }
 
 export const initialState: MusicState = {
-    selectedSongId: ''
+    selectedSong: {
+        title: '',
+        artist: '',
+        imgUrl: ''
+    }
 }
 
 const musicSlice = createSlice({
@@ -14,7 +22,7 @@ const musicSlice = createSlice({
     initialState,
     reducers: {
         setSelectedSong: (state, action: PayloadAction<any>) => {
-            state.selectedSongId = action.payload
+            state.selectedSong = action.payload
         }
     }
 })

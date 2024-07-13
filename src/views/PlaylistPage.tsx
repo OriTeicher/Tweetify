@@ -4,12 +4,19 @@ import { useParams } from 'react-router-dom'
 import MusicControlIndex from '../cmps/spotify/MusicControlIndex'
 import { PlayArrow } from '@mui/icons-material'
 import { youtubeService } from '../services/youtube.service'
+import { musicActions } from '../app/actions/music.actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { Action, ThunkDispatch } from '@reduxjs/toolkit'
+import { RootState } from '../app/store'
 
 export default function PlaylistPage() {
+    const { selectedSong } = useSelector((state: RootState) => {
+        return state.music
+    })
     const { albumId } = useParams()
     const [tracks, setTracks] = useState<[] | null | any[]>(null)
     const [trackImg, setTrackImg] = useState<any>('')
-
+    const dispatch: ThunkDispatch<RootState, undefined, Action<string>> = useDispatch()
     useEffect(() => {
         setAlbumTracks()
     }, [albumId])
@@ -25,8 +32,11 @@ export default function PlaylistPage() {
         }
     }
 
-    async function handlePlaySong(songTitle: string) {
-        await youtubeService.playSong(songTitle)
+    async function handlePlaySong(title: string, artist: string, imgUrl: string) {
+        console.log('title,artist,imgUrl', title, artist, imgUrl)
+        const songDetails = { title, artist, imgUrl }
+        await dispatch(musicActions.setSelectedSong(songDetails))
+        await youtubeService.playSong(title + artist)
     }
 
     return (
@@ -34,7 +44,7 @@ export default function PlaylistPage() {
             {tracks && (
                 <section className="track-list">
                     {tracks.map((track) => (
-                        <div className="track-preview" key={track.name} onClick={() => handlePlaySong(track.name + ' ' + track.artists[0].name)}>
+                        <div className="track-preview" key={track.name} onClick={() => handlePlaySong(track.name, track.artists[0].name, trackImg)}>
                             <img src={trackImg} alt={track.artists[0].name} />
                             <div>
                                 <h1 className="track-header">{track.name}</h1>
@@ -45,7 +55,7 @@ export default function PlaylistPage() {
                     ))}
                 </section>
             )}
-            <MusicControlIndex isOpen={true} />
+            <MusicControlIndex currentSong={selectedSong} isOpen={true} />
         </section>
     )
 }

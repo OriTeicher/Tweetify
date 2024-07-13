@@ -16,7 +16,7 @@ const RANDOM_NAMES = ['Jermia Defoe', 'Gabriel Jesus Christ', 'Mike Johnson', 'K
 // * SQUEAK STATS
 const LIKE = 1
 const UNLIKE = -1
-const LIKES_FIELD = 'like'
+const LIKES_FIELD = 'likes'
 const COMMENTS_FIELD = 'comment'
 const BOOKMARKS_FIELD = 'bookmark'
 const DEMO_PHOTOS = [
@@ -50,7 +50,6 @@ const TRENDS_NUMBER = 5
 const DEMO_PLAYLISTS = [
     { title: 'Dont smile at me', artist: 'Billie Eilish', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/2/2f/Billie_Eilish_-_Don%27t_Smile_at_Me.png' },
     { title: 'The Marshall Mathers LP', artist: 'Eminem', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/a/ae/The_Marshall_Mathers_LP.jpg' },
-    { title: 'Life Of Pablo', artist: 'Kanye West', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/4/4d/The_life_of_pablo_alter nate.jpg' },
     {
         title: 'Ok Computer',
         artist: 'Radiohead',
@@ -59,22 +58,6 @@ const DEMO_PLAYLISTS = [
     { title: 'Divinely Uninspired to a Hellish Extent', artist: 'Lewis Capaldi', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/d/db/Lewis_Capaldi_-_Divinely_Uninspired_to_a_Hellish_Extent.png' },
     { title: 'X', artist: 'Ed Sheeran', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/a/ad/X_cover.png' },
     { title: '÷ (Divide)', artist: 'Ed Sheeran', imgUrl: 'https://i.ebayimg.com/images/g/MuwAAOSw1aJhryZP/s-l1200.webp' },
-    { title: 'Abbey Road', artist: 'The Beatles', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg' },
-    { title: 'Hotel California', artist: 'Eagles', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/4/49/Hotelcalifornia.jpg' },
-    { title: 'The Marshall Mathers LP', artist: 'Eminem', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/a/ae/The_Marshall_Mathers_LP.jpg' },
-    { title: 'Life Of Pablo', artist: 'Kanye West', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/4/4d/The_life_of_pablo_alternate.jpg' },
-    {
-        title: 'Ok Computer',
-        artist: 'Radiohead',
-        imgUrl: 'https://upload.wikimedia.org/wikipedia/en/b/ba/Radioheadokcomputer.png'
-    },
-    { title: 'Divinely Uninspired to a Hellish Extent', artist: 'Lewis Capaldi', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/d/db/Lewis_Capaldi_-_Divinely_Uninspired_to_a_Hellish_Extent.png' },
-    { title: '÷ (Divide)', artist: 'Ed Sheeran', imgUrl: 'https://i.ebayimg.com/images/g/MuwAAOSw1aJhryZP/s-l1200.webp' },
-    { title: 'Abbey Road', artist: 'The Beatles', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg' },
-    { title: 'Hotel California', artist: 'Eagles', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/4/49/Hotelcalifornia.jpg' },
-
-    { title: 'Divinely Uninspired to a Hellish Extent', artist: 'Lewis Capaldi', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/d/db/Lewis_Capaldi_-_Divinely_Uninspired_to_a_Hellish_Extent.png' },
-    { title: 'X - Deluxe', artist: 'Ed Sheeran', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/a/ad/X_cover.png' },
     { title: 'Abbey Road', artist: 'The Beatles', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg' },
     { title: 'Hotel California', artist: 'Eagles', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/4/49/Hotelcalifornia.jpg' }
 ]

@@ -35,6 +35,9 @@ const FeedIndex: React.FC<FeedIndexProps> = (props: FeedIndexProps) => {
     const { loggedInUser } = useSelector((state: RootState) => {
         return state.user
     })
+    const { selectedSong } = useSelector((state: RootState) => {
+        return state.music
+    })
 
     const handleSelectedSqueak = (selectedSqueak: FeedPost) => {
         if (!selectedSqueak) return
@@ -77,7 +80,7 @@ const FeedIndex: React.FC<FeedIndexProps> = (props: FeedIndexProps) => {
             ) : (
                 <>
                     <FeedList feedPosts={feedPosts} />
-                    <MusicControlIndex isOpen={isMusicPlayerOpen} />
+                    <MusicControlIndex currentSong={selectedSong} isOpen={isMusicPlayerOpen} />
                 </>
             )}
         </section>

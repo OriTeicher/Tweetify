@@ -96,6 +96,7 @@ async function pushStringToArrayField(itemId: string, col: string, field: string
 
 async function updateFieldInCollection(itemId: string, field: string, col: string, updatedInfo: any) {
     try {
+        console.log('itemId,field,col,updatedInfo', itemId, field, col, updatedInfo)
         const colRef = doc(db, col, itemId)
         const updatedItem = { [field]: increment(updatedInfo) }
         await updateDoc(colRef, updatedItem)

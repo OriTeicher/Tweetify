@@ -53,11 +53,7 @@ function addFeedPost(loggedInUser: User, postContent: string, file: File | null,
             const newPost = feedService.getEmptyPost(loggedInUser, postContent)
             newPost.imgUrl = file ? await cloudinaryService.uploadImgToCloud(file) : gifUrl !== EMPTY_STR ? gifUrl : null
             await dbService.addItemToCollection(newPost, newPost.id, dbService.POSTS_DB_COLLECTION)
-            // await dbService.pushStringToArrayField(loggedInUser.id, dbService.USER_DB_COLLECTION, dbService.POSTS_ID_FIELD, newPost.id)
             dispatch(feedReducers.addFeedPostSuccess(newPost))
-            // ! backend DONT DELETE!
-            // const { data } = await httpService.post('/posts', () => utilService.objectAssignExact(newPost, { ...feedService.getEmptyCreatePostDto(), userId: loggedInUser.id }), true)
-            // dispatch(feedReducers.addFeedPostSuccess(data))
             dispatch(loaderReducers.toggleNewPostLoader())
         } catch (error) {
             console.log('Cannot add post. ', error)
@@ -79,25 +75,7 @@ function removeFeedPost(postId: string): AppThunk {
 }
 
 function toggleStats(postId: string, isLike: boolean): AppThunk {
-    return async (dispatch) => {
-        //! backend DONT DELETE!
-        // if (isLike) {
-        //     httpService
-        //         .post(`/posts/${postId}/like`, () => {})
-        //         .then(({ data }) => {
-        //             dispatch(feedReducers.removeFeedPostSuccess(data.id))
-        //             dispatch(feedReducers.addFeedPostSuccess(data))
-        //         })
-        //         .catch((error) => console.log('Cannot toggle likes. ', error))
-        // } else {
-        //     httpService
-        //         .post(`/posts/${postId}/dislike`, () => {})
-        //         .then(({ data }) => {
-        //             dispatch(feedReducers.removeFeedPostSuccess(data.id))
-        //             dispatch(feedReducers.addFeedPostSuccess(data))
-        //         })
-        //         .catch((error) => console.log('Cannot toggle likes. ', error))
-        // }
+    return async () => {
         const diff = isLike ? constsService.LIKE : constsService.UNLIKE
         await dbService.updateFieldInCollection(postId, constsService.LIKES_FIELD, dbService.POSTS_DB_COLLECTION, diff)
     }

@@ -19,6 +19,7 @@ export function AppCenterDynamicCmp(props: AppProps) {
             <Sidebar onOptionChange={handleOptionChange} />
             <DynamicComponent topBarOption={topBarOption} />
             {topBarOption !== 'Playlists' ? <TrendingIndex /> : <FrequentSongsModal />}
+            <div id="player"></div>
         </section>
     )
 }

@@ -23,12 +23,13 @@ async function _getSongByTitle(title: string) {
                 type: 'video'
             }
         })
-        console.log('response')
         return response.data.items[0]
     } catch (err) {
         throw err
     }
 }
+
+// Define the global function
 
 player = new window.YT.Player('player', {
     height: '0',
@@ -43,7 +44,6 @@ player = new window.YT.Player('player', {
             }
         },
         onStateChange: (event: any) => {
-            if (!player) return
             if (event.data === window.YT.PlayerState.ENDED) {
                 player.stopVideo()
             }
@@ -57,7 +57,6 @@ const waitForPlayerReady = () => {
     }
     return new Promise<void>((resolve) => {
         playerReadyPromiseResolve = resolve
-        console.log('not ready')
     })
 }
 
@@ -65,14 +64,11 @@ export const youtubeService = {
     playSong: async (songTitle: string | undefined) => {
         try {
             const video = await _getSongByTitle(songTitle || '')
-            console.log('Song Title:', songTitle)
             if (!video) {
                 console.error('Song not found')
                 return
             }
-
             await waitForPlayerReady()
-            console.log('Player:', player)
             player.loadVideoById(video.id.videoId)
             player.playVideo()
 
@@ -81,4 +77,11 @@ export const youtubeService = {
             console.error('Error playing song:', error)
         }
     }
+}
+
+const tag = document.createElement('script')
+tag.src = 'https://www.youtube.com/iframe_api'
+const firstScriptTag = document.getElementsByTagName('script')[0]
+if (firstScriptTag && firstScriptTag.parentNode) {
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
 }
