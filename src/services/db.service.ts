@@ -83,6 +83,7 @@ async function updateItemInCollection(updatedItem: object, itemId: string, col: 
 
 async function pushStringToArrayField(itemId: string, col: string, field: string, val: string) {
     try {
+        console.log('itemId,col,field,val', itemId, col, field, val)
         const colRef = doc(db, col, itemId)
         const updatedItem = {
             [field]: arrayUnion(val)

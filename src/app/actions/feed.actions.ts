@@ -53,7 +53,7 @@ function addFeedPost(loggedInUser: User, postContent: string, file: File | null,
             const newPost = feedService.getEmptyPost(loggedInUser, postContent)
             newPost.imgUrl = file ? await cloudinaryService.uploadImgToCloud(file) : gifUrl !== EMPTY_STR ? gifUrl : null
             await dbService.addItemToCollection(newPost, newPost.id, dbService.POSTS_DB_COLLECTION)
-            await dbService.pushStringToArrayField(loggedInUser.id, dbService.USER_DB_COLLECTION, dbService.POSTS_ID_FIELD, newPost.id)
+            // await dbService.pushStringToArrayField(loggedInUser.id, dbService.USER_DB_COLLECTION, dbService.POSTS_ID_FIELD, newPost.id)
             dispatch(feedReducers.addFeedPostSuccess(newPost))
             // ! backend DONT DELETE!
             // const { data } = await httpService.post('/posts', () => utilService.objectAssignExact(newPost, { ...feedService.getEmptyCreatePostDto(), userId: loggedInUser.id }), true)

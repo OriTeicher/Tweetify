@@ -23,6 +23,7 @@ async function _getSongByTitle(title: string) {
                 type: 'video'
             }
         })
+        console.log('response')
         return response.data.items[0]
     } catch (err) {
         throw err
@@ -42,7 +43,7 @@ player = new window.YT.Player('player', {
             }
         },
         onStateChange: (event: any) => {
-            console.log('event.data', event.data)
+            if (!player) return
             if (event.data === window.YT.PlayerState.ENDED) {
                 player.stopVideo()
             }
