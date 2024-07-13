@@ -1,15 +1,13 @@
 .playlist-preview {
-    width: 96%;
+    width: 100%;
     margin: auto;
-    margin: 3px 0px;
-    border-radius: 3px;
+    margin: 0px 0px;
     text-align: center;
     font-size: 20px;
-    background: linear-gradient($mainColor3, #141517);
     box-sizing: border-box;
     transition: scale 0.2s ease-in-out;
-
     &:hover {
+        border-radius: 10px;
         scale: 1.02;
         cursor: pointer;
         background: linear-gradient($mainColor3, $mainColor1);

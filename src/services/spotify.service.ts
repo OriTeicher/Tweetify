@@ -17,7 +17,6 @@ const getSpotifyToken = async (): Promise<string> => {
 const getAlbumDetails = async (artistId: string | undefined): Promise<any[] | any> => {
     try {
         const accessToken = await getSpotifyToken()
-        console.log('token', accessToken)
         const response = await axios.get(`https://api.spotify.com/v1/albums/${artistId}`, {
             headers: {
                 Authorization: `Bearer ${accessToken}`
@@ -33,7 +32,6 @@ const getAlbumDetails = async (artistId: string | undefined): Promise<any[] | an
 const searchAlbum = async (albumName: string, artistName: string): Promise<string> => {
     try {
         const accessToken = await getSpotifyToken()
-        console.log('Access token:', accessToken)
 
         const response = await axios.get(`https://api.spotify.com/v1/search`, {
             headers: {
@@ -46,7 +44,6 @@ const searchAlbum = async (albumName: string, artistName: string): Promise<strin
         })
 
         const album = response.data.albums.items[0]
-        console.log('Album data:', album.id)
         return album.id
     } catch (error: any) {
         console.error('Error searching album on Spotify:', error.response ? error.response.data : error.message)
@@ -58,7 +55,6 @@ const getTracks = async (albumId: string | undefined): Promise<any[]> => {
     try {
         if (!albumId) Promise.reject('no id found')
         const accessToken = await getSpotifyToken()
-        console.log('Access token:', accessToken)
 
         const response = await axios.get(`https://api.spotify.com/v1/albums/${albumId}/tracks`, {
             headers: {

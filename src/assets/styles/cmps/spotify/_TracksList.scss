@@ -8,18 +8,18 @@
         display: grid;
         align-items: center;
         grid-template-columns: auto 1fr auto;
-        border-bottom: 1px solid $mainColor3;
+        border-bottom: 1px solid $mainColor5;
         padding-inline: 20px;
         position: relative;
         &:hover {
-            background-color: #1ed75f65;
+            background-color: black;
         }
         img {
             grid-column: 1;
         }
         cursor: pointer;
         padding: 10px;
-        background-color: $hoverClr3;
+        background-color: $mainColor1;
         .track-header {
             grid-column: 2;
             font-weight: 200;
@@ -33,7 +33,7 @@
         }
         svg {
             grid-column: 3;
-            background-color: $logoColor;
+            background-color: white;
             border-radius: 50%;
             color: black;
         }
