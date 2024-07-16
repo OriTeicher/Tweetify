@@ -16,10 +16,11 @@ export function AppCenterDynamicCmp(props: AppProps) {
 
     return (
         <section className="app-container">
+            <div id="player"></div>
+
             <Sidebar onOptionChange={handleOptionChange} />
             <DynamicComponent topBarOption={topBarOption} />
             {topBarOption !== 'Playlists' ? <TrendingIndex /> : <FrequentSongsModal />}
-            <div id="player"></div>
         </section>
     )
 }

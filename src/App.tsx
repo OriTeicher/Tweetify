@@ -5,12 +5,12 @@ import CreateProfilePage from './views/CreateProfilePage'
 import ReplySqueakPage from './views/ReplySqueakPage'
 import PlaylistsIndex from './views/PlaylistsIndex'
 import { AppCenterDynamicCmp } from './views/AppCenterDynamicCmp'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import PlaylistPage from './views/PlaylistPage'
 
 function App() {
     return (
-        <BrowserRouter>
+        <HashRouter>
             <Routes>
                 <Route path="/*" element={<AppCenterDynamicCmp cmp={FeedIndex} />} />
                 <Route path="/home" element={<AppCenterDynamicCmp cmp={FeedIndex} />} />
@@ -21,7 +21,7 @@ function App() {
                 <Route path="/playlists" element={<AppCenterDynamicCmp cmp={PlaylistsIndex} />} />
                 <Route path="/playlists/:albumId" element={<AppCenterDynamicCmp cmp={PlaylistPage} />} />
             </Routes>
-        </BrowserRouter>
+        </HashRouter>
     )
 }
 

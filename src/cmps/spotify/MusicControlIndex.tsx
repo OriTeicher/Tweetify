@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import MusicControlIcons from './MusicControlIcons'
 import SongContainer from './SongContainer'
 import VolumeBar from './VolumeBar'

@@ -36,25 +36,35 @@
     }
 }
 
+@media (max-width: 768px) {
+    .left-menu {
+        bottom: 0;
+        height: 100%;
+    }
+}
 .sidebar-container.mobile {
-    background-color: #333;
-    width: 100%;
-    height: auto;
     position: fixed;
     bottom: 0;
+    justify-content: center;
+    background-color: #333;
+    width: 100%;
+    height: 50px;
+    display: flex;
     flex-direction: row;
-    justify-content: start;
-    border-top: 1px solid $mainColor2;
-    padding: 5px 5px;
-    margin: 0px;
-    top: unset;
-
+    .sidebar-option:first-child {
+        position: absolute;
+        left: 0;
+        top: -7px;
+    }
     .sidebar-option {
         font-size: 16px;
         margin: 0px;
         &:nth-child(6),
         &:nth-child(4) {
             display: none;
+        }
+        &:hover {
+            background-color: unset;
         }
     }
 }
