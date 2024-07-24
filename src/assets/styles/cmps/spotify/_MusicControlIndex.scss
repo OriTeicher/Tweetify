@@ -8,6 +8,7 @@
     position: sticky;
     bottom: 0;
     gap: 15px;
+    justify-content: center;
     svg {
         cursor: pointer;
         &:hover {
@@ -72,6 +73,7 @@
         display: none;
     }
     .tweetify-player-container {
+        justify-content: end;
         position: fixed;
         background-color: #333;
         z-index: 100;
@@ -93,10 +95,13 @@
                 width: 80px;
                 margin: 0px 0px;
                 h3 {
-                    font-size: 11px;
+                    width: 250px;
+                    font-size: 14px;
                 }
                 h4 {
-                    font-size: 9px;
+                    font-size: 13px;
+                    width: 250px;
+
                     color: $logoColor;
                 }
             }

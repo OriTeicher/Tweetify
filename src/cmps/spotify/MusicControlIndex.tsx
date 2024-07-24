@@ -10,7 +10,7 @@ interface MusicPlayerProps {
 
 export default function MusicControlIndex(props: MusicPlayerProps) {
     return (
-        <section className={`tweetify-player-container flex justify-center align-center ${props.isOpen ? 'show' : 'hide'}`}>
+        <section className={`tweetify-player-container flex  align-center ${props.isOpen ? 'show' : 'hide'}`}>
             <MusicControlIcons />
             <SongContainer currentSong={props.currentSong} />
             <VolumeBar />
