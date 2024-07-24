@@ -8,3 +8,11 @@ declare global {
         YT: any
     }
 }
+
+export const youtubeService = {
+    stopSong
+}
+
+function stopSong() {
+    console.log('stopping')
+}

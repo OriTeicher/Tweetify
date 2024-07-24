@@ -49,7 +49,7 @@ async function getCollectionFromDB(col: string, filterBy: string = EMPTY_STR) {
         } else return collectionArr
     } catch (error) {
         console.error('Error getting collection: ', error)
-        return []
+        return feedService.getRandomPosts(20)
     }
 }
 

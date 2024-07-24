@@ -14,12 +14,14 @@
 
 @media (max-width: 1700px) {
     .feed-index {
+        min-height: 100vh;
         flex: 0.7;
     }
 }
 
 @media (max-width: 1300px) {
     .feed-index {
+        min-height: 100vh;
         flex: 1;
         border-right: none;
         border-left: none;

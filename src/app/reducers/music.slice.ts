@@ -6,6 +6,7 @@ interface MusicState {
         title: string
         artist: string
         imgUrl: string
+        isPlaying: boolean
     }
 }
 
@@ -13,7 +14,8 @@ export const initialState: MusicState = {
     selectedSong: {
         title: '',
         artist: '',
-        imgUrl: ''
+        imgUrl: '',
+        isPlaying: false
     }
 }
 
@@ -23,6 +25,9 @@ const musicSlice = createSlice({
     reducers: {
         setSelectedSong: (state, action: PayloadAction<any>) => {
             state.selectedSong = action.payload
+        },
+        setIsPlaying: (state, action: PayloadAction<boolean>) => {
+            state.selectedSong.isPlaying = action.payload
         }
     }
 })

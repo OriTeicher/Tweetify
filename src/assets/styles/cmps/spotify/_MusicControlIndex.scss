@@ -63,6 +63,10 @@
     color: $mainColor1;
 }
 
+.play-btn.icon-circle {
+    background-color: $logoColor;
+}
+
 @media (max-width: 1000px) {
     .squeak-btn {
         display: none;
