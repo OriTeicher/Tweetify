@@ -8,9 +8,9 @@
 - **Tracklist Page**: Displays tracks within a selected playlist.
 - **Music Player**: Plays music from YouTube and using Spotify for developers API's data.
 <div style="display: grid">
-  <img src="https://github.com/user-attachments/assets/b46161a8-0738-43bc-a4f2-54b80607356a" width="300" margin-right="10px">
-  <img src="https://github.com/user-attachments/assets/55bc0009-f6ec-4a96-b7c4-0c1d601fcefe" width="300" margin-right="10px">
-  <img src="https://github.com/user-attachments/assets/1794f262-8439-4c4f-ad07-0b9f680176e8" width="300">
+  <img src="https://github.com/user-attachments/assets/b46161a8-0738-43bc-a4f2-54b80607356a" width="180" margin-right="10px"> ___
+  <img src="https://github.com/user-attachments/assets/55bc0009-f6ec-4a96-b7c4-0c1d601fcefe" width="180" margin-right="10px"> ___
+  <img src="https://github.com/user-attachments/assets/1794f262-8439-4c4f-ad07-0b9f680176e8" width="180">
 </div>
 
 ## Technologies Used
