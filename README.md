@@ -20,4 +20,4 @@
 - Spotify API: Fetches and plays Spotify tracks.
 
 ## See how it goes: [Tweetify Demo](https://oriteicher.github.io/Tweetify/)
-  <img src="https://github.com/user-attachments/assets/02eedeb7-918c-431b-95ce-b7f729f43533" width="1200">
+  <img src="https://github.com/user-attachments/assets/75c246c0-a00e-4bef-a526-3bf84217ede7" width="1200">
