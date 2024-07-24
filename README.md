@@ -1,8 +1,23 @@
-# Twitter & Spotify combination clone (In Development...)
-#### React, Nest.js, Firebase, Redux, MUI
+## Tweetify - [Tweetify Demo](https://oriteicher.github.io/Tweetify/)
+- Tweetify is a Twitter and Spotify clone that allows users to view posts, manage playlists, view tracklists, and play music.
+- The project is built using React TSX, Firebase, and integrates with YouTube and Spotify APIs.
 
-<p>See how it goes: <a href="https://oriteicher.github.io/Tweetify/">Tweetify Demo</a>  </p> 
+## Features
+- **Feed**: Displays posts fetched from Firebase.
+- **Playlist Page**: Allows users to create and manage playlists.
+- **Tracklist Page**: Displays tracks within a selected playlist.
+- **Music Player**: Plays music from YouTube and using Spotify for developers API's data.
+<div style="display: grid">
+  <img src="https://github.com/user-attachments/assets/b46161a8-0738-43bc-a4f2-54b80607356a" width="300" margin-right="10px">
+  <img src="https://github.com/user-attachments/assets/55bc0009-f6ec-4a96-b7c4-0c1d601fcefe" width="300" margin-right="10px">
+  <img src="https://github.com/user-attachments/assets/1794f262-8439-4c4f-ad07-0b9f680176e8" width="300">
+</div>
 
+## Technologies Used
+- React TSX, SCSS, MUI, Redux: Frontend framework for building the user interface.
+- Firebase: Backend service for storing posts and other data.
+- YouTube API: Fetches and plays YouTube videos.
+- Spotify API: Fetches and plays Spotify tracks.
 
-<img src="https://github.com/OriTeicher/Tweetify/assets/101281765/65622f08-5239-45f7-83ab-95b4908f688b" style="height:50vh;"/>
-<img src="https://github.com/OriTeicher/Tweetify/assets/101281765/df8127cf-6216-423a-8a45-e5aa49de1d0a" style="height:50vh;"/>
+## See how it goes: [Tweetify Demo](https://oriteicher.github.io/Tweetify/)
+  <img src="https://github.com/user-attachments/assets/02eedeb7-918c-431b-95ce-b7f729f43533" width="1200">
