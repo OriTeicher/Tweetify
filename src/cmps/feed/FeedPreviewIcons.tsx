@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Loop from '@mui/icons-material/Loop'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
@@ -23,6 +23,10 @@ export default function FeedPreviewIcons(props: FeedPreviewIconProps) {
     const [isBookmarked, setIsBookmarked] = useState(props.isBookmarked)
     const [likesCounter, setLikesCounter] = useState(props.likesNum)
     const logoColor = '#1ed760'
+
+    useEffect(() => {
+        setLikesCounter(props.likesNum)
+    }, [props.likesNum])
 
     // TODO: handle comment click prop function
     const handleCommentClick = () => {
