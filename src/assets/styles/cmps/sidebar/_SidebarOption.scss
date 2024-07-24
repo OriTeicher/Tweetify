@@ -19,9 +19,6 @@
 
 .mobile .sidebar-option {
     padding: 10px;
-    &:hover {
-        background-color: #333;
-    }
 }
 
 .logo {
@@ -31,4 +28,10 @@
     color: $logoColor;
     background-color: $hoverClr2;
     border-radius: 30px;
+}
+
+@media (max-width: 800px) {
+    .active {
+        border-radius: 0;
+    }
 }

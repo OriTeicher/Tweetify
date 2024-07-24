@@ -143,7 +143,7 @@ export default function PlaylistPage() {
     }
 
     return (
-        <section className="feed-index">
+        <section className="feed-index track-list">
             {isLoading ? (
                 <Loader />
             ) : (
