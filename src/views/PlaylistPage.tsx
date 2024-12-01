@@ -7,7 +7,6 @@ import { musicActions } from '../app/actions/music.actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { Action, ThunkDispatch } from '@reduxjs/toolkit'
 import { RootState } from '../app/store'
-import { EMPTY_STR } from '../services/consts.service'
 import { YOUTUBE_API_KEY } from '../services/api.service'
 import axios from 'axios'
 import { eventBus } from '../services/event.bus.service'
@@ -120,8 +119,21 @@ export default function PlaylistPage() {
         }
     }
 
-    async function handlePauseSong() {}
-
+async function handlePauseSong() {
+    debugger
+    console.log('222',222)
+    try {
+        console.log('222',222)
+        await waitForPlayerReady(); 
+        if (player) {
+            player.pauseVideo();
+            console.log('Song paused');
+            await musicActions.setIsPlaying(false); 
+        }
+    } catch (error) {
+        console.error('Error pausing song:', error);
+    }
+}
     async function setAlbumTracks() {
         try {
             const tracks = await spotifyService.getTracks(albumId)

@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import MusicControlIndex from '../cmps/spotify/MusicControlIndex'
 import PlaylistsList from '../cmps/spotify/PlaylistsList'
-import { spotifyService } from '../services/spotify.service'
 import { useSelector } from 'react-redux'
 import { RootState } from '../app/store'
 export default function PlaylistsIndex() {
